@@ -80,7 +80,7 @@ The gateway must remain running because it owns cron execution.
 
 ```bash
 cd ~/systemscraft-leads
-hermes chat -q "/transitioned-owner-leads Run one small test cycle. Inspect no more than 20 sources, qualify no more than 5 leads, write out/latest.json, then run python3 scripts/submit_batch.py out/latest.json."
+hermes chat -q "/transitioned-owner-leads Run one small test cycle. Inspect no more than 20 sources, qualify no more than 5 leads, write out/latest.json, then run uv run --no-project python scripts/submit_batch.py out/latest.json."
 ```
 
 Inspect:
@@ -143,7 +143,7 @@ Start conservatively with one run per day:
 
 ```bash
 hermes cron create "every 1d" \
-  "Run one bounded transitioned-owner research cycle. Use varied queries, inspect no more than 100 sources, write out/latest.json, then run python3 scripts/submit_batch.py out/latest.json. Return only counts and errors." \
+  "Run one bounded transitioned-owner research cycle. Use varied queries, inspect no more than 100 sources, write out/latest.json, then run uv run --no-project python scripts/submit_batch.py out/latest.json. Return only counts and errors." \
   --skill transitioned-owner-leads \
   --workdir "$HOME/systemscraft-leads" \
   --name "SystemsCraft owner leads"

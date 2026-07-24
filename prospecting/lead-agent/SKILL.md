@@ -172,7 +172,7 @@ For each candidate:
 8. Score the lead.
 9. Write the complete batch to out/latest.json.
 10. Run:
-   python3 scripts/submit_batch.py out/latest.json
+   uv run --no-project python scripts/submit_batch.py out/latest.json
 11. Return only a terse count of searched sources, qualified leads, sent leads, duplicates, and errors.
 
 ## Scoring
