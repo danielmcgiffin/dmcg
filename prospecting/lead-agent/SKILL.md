@@ -27,11 +27,43 @@ Accept:
 - New owner-operator
 - Family-business successor
 - Second- or third-generation owner
-- Newly appointed president or CEO after a transition
-- Operating partner directly responsible for the acquired business
-- General manager installed after an acquisition
+- Non-owner executive with an explicit operational or transformation mandate and a concrete current constraint
+- Operating partner directly responsible for the acquired business, with an explicit operational mandate and a concrete current constraint
 
 The person must have meaningful responsibility for operating the business.
+
+## Buying authority and false-positive controls
+
+The primary lead should normally be:
+- The acquiring owner
+- A searcher who closed an acquisition
+- A family-business successor
+- An owner-operator
+- A non-owner executive with an explicit operational or transformation mandate and a concrete current constraint
+
+Acquiring owners, closed searchers, family-business successors, and owner-operators are presumed to have buying authority.
+
+An appointed CEO, president, or general manager without ownership qualifies only when the source provides explicit evidence of an operational or transformation mandate, a concrete current constraint, and a company plausibly within the target SMB or lower-middle-market profile. Do not require public proof that a non-owner executive can hire an outside advisor.
+
+Require a concrete operational condition, not merely transaction language or role responsibilities.
+
+Generic executive responsibilities do not count as operational signals. Reject statements limited to:
+- Ensuring continuity
+- Driving performance
+- Improving safety
+- Supporting growth
+- Maintaining customer service
+- Leading the company
+- Overseeing integration
+
+A retained seller or former owner after a platform acquisition is not normally the target lead. When a retained seller is found:
+1. Identify the acquiring platform's integration, operations, or portfolio leader.
+2. Qualify that person only when they have an explicit operational or transformation mandate and a concrete integration or systematization constraint.
+3. Otherwise reject the candidate.
+
+For platform or private-equity acquisitions, do not emit the local company president merely because they remain in place. The likely buyer is the operating partner, integration leader, platform COO, or acquiring owner.
+
+Reject companies clearly outside the target SMB profile unless the lead operates a distinct SMB subsidiary and has local purchasing authority.
 
 ## Target company
 
@@ -114,6 +146,11 @@ Reject:
 - Companies clearly outside the target, unless an SMB subsidiary has a named operator
 
 An intermediary may reveal a lead, but the emitted lead must be the operator.
+
+## Calibration examples
+
+- Kyle Cooper / ACT Power Services: reject — appointed professional CEO, no ownership, no specific constraint, generic executive duties, and the company is likely too large.
+- Bill Detillion / Superior Building Services: reject — retained seller-president after a platform acquisition; the likely buyer is the platform integration or operations leader.
 
 ## Sources
 
