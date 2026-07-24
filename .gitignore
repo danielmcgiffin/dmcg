@@ -22,3 +22,14 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Prospecting lead agent runtime
+prospecting/lead-agent/.env
+prospecting/lead-agent/out/*
+!prospecting/lead-agent/out/.gitkeep
+prospecting/lead-agent/state/*
+!prospecting/lead-agent/state/.gitkeep
+prospecting/lead-agent/*.db
+prospecting/lead-agent/*.db-shm
+prospecting/lead-agent/*.db-wal
+prospecting/lead-agent/__pycache__/
