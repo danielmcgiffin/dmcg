@@ -131,6 +131,15 @@ Use:
 
 Respect login restrictions, robots.txt, rate limits, paywalls, and technical access controls. Do not bypass CAPTCHAs or authentication.
 
+## Source access and fallback
+
+- Prefer structured `web_search` and `web_extract` tools when available. Do not use browser navigation for search-engine result pages unless no structured search tool is available.
+- A search-results page is discovery, not an inspected source. Increment `sources_inspected` only after opening an underlying page that contains candidate evidence.
+- When a search provider returns a CAPTCHA, consent wall, login wall, or block page, record one access error and stop using that provider for the rest of the run. Do not retry equivalent queries against the same blocked provider.
+- Switch source families instead of increasing volume. Try at least three accessible source families within the existing cap before ending with no candidates, such as company newsrooms, holdco or search-fund portfolio pages, ETA podcast episode pages or transcripts, local business news, and trade publications.
+- Open promising direct sources and corroborating pages individually. Never qualify from a search snippet alone.
+- If access failures prevent a usable evidence sample, return zero leads honestly and identify the blocked providers and untried fallback source families. Do not describe blocked result pages as inspected sources.
+
 ## Search query rotation
 
 Rotate phrases, industries, titles, recency terms, and source domains. Examples:
