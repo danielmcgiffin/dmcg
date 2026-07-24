@@ -67,7 +67,6 @@
 					<p>What should be confirmed before making a larger investment.</p>
 				</div>
 			</article>
-			<figcaption>Illustrative sample.</figcaption>
 		</figure>
 	</section>
 
@@ -404,12 +403,6 @@
 
 	.memo-body p:first-child {
 		margin-top: 0;
-	}
-
-	figcaption {
-		margin-top: 0.65rem;
-		font-family: "Courier Prime", "Courier New", monospace;
-		font-size: 0.67rem;
 	}
 
 	.terms {
