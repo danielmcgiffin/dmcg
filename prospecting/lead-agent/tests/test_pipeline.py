@@ -36,7 +36,10 @@ from pipeline_core import (  # noqa: E402
     screen_metadata,
     upsert_candidate,
 )
-from run_research import _suppress_previously_reviewed  # noqa: E402
+from run_research import (  # noqa: E402
+    _observed_candidate_urls,
+    _suppress_previously_reviewed,
+)
 
 
 def load_submitter():
@@ -334,6 +337,39 @@ class ReviewedLeadSuppressionTests(unittest.TestCase):
         ):
             self.assertIn(key, report)
             self.assertEqual(report[key], 0)
+
+    def test_reviewed_cache_duplicate_is_observed_and_suppressed(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            conn = connect_state(Path(directory) / "state.db")
+            url = self._insert_candidate(conn, url=self.PATRICK.source_url)
+            upsert_candidate(
+                conn,
+                url=f"{self.PATRICK.source_url}?utm_source=weekly",
+                source_family="acquiring_minds",
+                title="Weekly index result",
+                snippet="Previously seen operator story.",
+                publication_date="2026-07-20",
+                run_id="weekly-run",
+            )
+            conn.commit()
+            observed = _observed_candidate_urls(conn, "weekly-run")
+            self.assertEqual(observed, [url])
+            report = new_report(
+                "weekly-run",
+                "2026-07-25T00:00:00+00:00",
+                budget(),
+            )
+            allowed = _suppress_previously_reviewed(
+                conn,
+                observed,
+                [self.PATRICK],
+                run_id="weekly-run",
+                report=report,
+            )
+            self.assertEqual(allowed, [])
+            self.assertEqual(report["previously_reviewed_suppressed"], 1)
+            self.assertEqual(report["candidates_skipped_as_duplicates"], 0)
+            conn.close()
 
 
 class ScreeningTests(unittest.TestCase):

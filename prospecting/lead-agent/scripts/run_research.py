@@ -164,6 +164,27 @@ def _decision_for_existing(candidate: sqlite3.Row) -> ScreeningDecision:
     return screen_metadata(candidate, borderline_enabled=True)
 
 
+def _observed_candidate_urls(
+    conn: sqlite3.Connection,
+    run_id: str,
+) -> list[str]:
+    """Return URLs seen by this run, including persistent-cache duplicates."""
+    return [
+        row["normalized_url"]
+        for row in conn.execute(
+            """
+            SELECT normalized_url
+            FROM candidate_events
+            WHERE run_id = ?
+              AND event_type IN ('discovered', 'seen')
+            GROUP BY normalized_url
+            ORDER BY MIN(id)
+            """,
+            (run_id,),
+        )
+    ]
+
+
 def _suppress_previously_reviewed(
     conn: sqlite3.Connection,
     survivor_urls: list[str],
@@ -216,7 +237,6 @@ def _suppress_previously_reviewed(
             else "previously_rejected_suppressed"
         )
         report[counter] += 1
-        report["candidates_skipped_as_duplicates"] += 1
         rejection_counter(report, "previously_reviewed")
         conn.execute(
             """
@@ -490,13 +510,20 @@ def main() -> int:
             budget=budget,
             report=report,
         )
-        survivor_urls = _suppress_previously_reviewed(
+        observed_urls = _observed_candidate_urls(conn, run_id)
+        suppression_candidates = list(dict.fromkeys(observed_urls + survivor_urls))
+        allowed_after_review = set(_suppress_previously_reviewed(
             conn,
-            survivor_urls,
+            suppression_candidates,
             reviewed_leads,
             run_id=run_id,
             report=report,
-        )
+        ))
+        survivor_urls = [
+            normalized
+            for normalized in survivor_urls
+            if normalized in allowed_after_review
+        ]
 
         report["phase"] = "C_extract"
         packets, _ = _extract_survivors(
