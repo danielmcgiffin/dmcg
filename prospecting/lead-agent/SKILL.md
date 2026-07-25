@@ -1,313 +1,191 @@
 ---
 name: transitioned-owner-leads
-description: Find and validate newly transitioned SMB owner-operators
-version: 1.0.0
+description: Adjudicate bounded evidence packets for newly transitioned SMB owner-operators
+version: 2.0.0
 metadata:
   hermes:
-    tags: [lead-research, eta, smb, operations]
+    tags: [lead-research, eta, smb, operations, bounded-research]
     category: research
 ---
 
-# SystemsCraft Transitioned-Owner Lead Research
+# SystemsCraft Transitioned-Owner Qualification
 
-## Mission
+## Role
 
-Find newly transitioned owner-operators who may need strategic operations and systematization support.
+Qualify promising owner-operator candidates from evidence gathered by the local
+pipeline. Do not autonomously wander the web. Do not rediscover facts already in a
+packet. Never perform broad query rotation.
 
-Do not collect generic transaction announcements. Find people who acquired, inherited, succeeded into, or were appointed to operate a small or midsized business and who have real operating responsibility.
+Run one bounded cycle per invocation. Recurrence, outreach, and production delivery
+are outside this skill.
 
-Run one bounded research cycle per invocation. The external scheduler owns recurrence.
+## Required phases
 
-## Target person
+1. Phase A: run `scripts/harvest_candidates.py` to harvest new candidate URLs.
+2. Phase B: pre-screen title, snippet, date, and source metadata locally.
+3. Phase C: extract only survivors with the configured waterfall.
+4. Phase D: receive concise evidence packets.
+5. Phase E: qualify and score using only packet evidence.
+6. Phase F: write the compatible batch to `out/latest.json`.
+7. Phase G: run `uv run --no-project python scripts/submit_batch.py out/latest.json`.
+8. Stop for human review.
 
-Accept:
-- Acquiring entrepreneur
-- Search fund entrepreneur
-- Self-funded searcher after close
-- New owner-operator
-- Family-business successor
-- Second- or third-generation owner
-- Non-owner executive with an explicit operational or transformation mandate and a concrete current constraint
-- Operating partner directly responsible for the acquired business, with an explicit operational mandate and a concrete current constraint
+`config/research-budget.json` is authoritative. Stop at any reached limit.
 
-The person must have meaningful responsibility for operating the business.
+Never issue a follow-up search merely because the prior search produced no qualified
+lead. A follow-up search requires a specific named person, business, or unresolved
+fact discovered in the prior result.
 
-## Buying authority and false-positive controls
+## Evidence packet contract
 
-The primary lead should normally be:
-- The acquiring owner
-- A searcher who closed an acquisition
-- A family-business successor
-- An owner-operator
-- A non-owner executive with an explicit operational or transformation mandate and a concrete current constraint
+Use only:
 
-Acquiring owners, closed searchers, family-business successors, and owner-operators are presumed to have buying authority.
+- candidate name, when known
+- business name, when known
+- source family
+- transition or publication date
+- title and snippet
+- extracted evidence
+- source URLs
+- corroborating evidence
+- known rejection flags
 
-An appointed CEO, president, or general manager without ownership qualifies only when the source provides explicit evidence of an operational or transformation mandate, a concrete current constraint, and a company plausibly within the target SMB or lower-middle-market profile. Do not require public proof that a non-owner executive can hire an outside advisor.
+Do not ask Hermes to search for information already present. Never invent missing
+facts, dates, titles, quotes, contact data, transactions, company size, or revenue.
 
-Require a concrete operational condition, not merely transaction language or role responsibilities.
+## Target
 
-Generic executive responsibilities do not count as operational signals. Reject statements limited to:
-- Ensuring continuity
-- Driving performance
-- Improving safety
-- Supporting growth
-- Maintaining customer service
-- Leading the company
-- Overseeing integration
+Normally accept:
 
-A retained seller or former owner after a platform acquisition is not normally the target lead. When a retained seller is found:
-1. Identify the acquiring platform's integration, operations, or portfolio leader.
-2. Qualify that person only when they have an explicit operational or transformation mandate and a concrete integration or systematization constraint.
-3. Otherwise reject the candidate.
+- an acquiring entrepreneur or self-funded searcher after close
+- a new owner-operator
+- a family-business successor
+- a second- or third-generation owner
 
-For platform or private-equity acquisitions, do not emit the local company president merely because they remain in place. The likely buyer is the operating partner, integration leader, platform COO, or acquiring owner.
+An appointed CEO, president, general manager, or operating partner qualifies only
+with an explicit operational/transformation mandate, a concrete current constraint,
+and plausible purchasing responsibility in a target-sized company.
 
-Reject companies clearly outside the target SMB profile unless the lead operates a distinct SMB subsidiary and has local purchasing authority.
+Prioritize roughly 5-200 employees, $1M-$50M revenue when verifiable, repeatable
+operations, multiple crews/branches/roles/handoffs, and founder- or family-led
+histories. Strong industries include field services, facilities services, logistics,
+distribution, light manufacturing, commercial contractors, managed IT, and other
+operationally complex SMBs.
 
-## Target company
+## Required evidence
 
-Prioritize:
-- 5–200 employees
-- Roughly $1M–$50M revenue when verifiable
-- Recurring or repeatable operational work
-- Multiple crews, branches, roles, systems, or customer handoffs
-- Founder-led or family-led history
+Confirm:
 
-Priority industries:
-- HVAC, plumbing, electrical, landscaping, pest control
-- Roofing, restoration, cleaning, facilities services
-- Logistics, transportation, warehousing, distribution
-- Light manufacturing, commercial contractors
-- Property services, managed IT, B2B field services
-- Professional services and family-owned industrial businesses
+1. a completed acquisition, inheritance, succession, or qualifying appointment
+2. a named person with direct operating responsibility
+3. a recent transition, normally within 180 days, or a specific newer trigger
+4. a concrete operating condition rather than generic transaction or job language
 
-Do not reject another industry when the operational fit is strong.
+High-value conditions include key-person dependence, undocumented knowledge,
+manual/disconnected systems, owner escalation, inventory or scheduling problems,
+reporting/visibility gaps, integration, hiring, branch expansion, turnaround, and
+management-team buildout.
 
-## Recency
+Generic duties such as "drive performance," "ensure continuity," "lead the company,"
+or "oversee integration" do not establish operational need.
 
-Normally accept transitions within the last 180 days.
+## Reject
 
-An older transition qualifies only when there is a new trigger, such as:
-- First-year reflection
-- New location or add-on acquisition
-- Major hiring push
-- ERP, CRM, or system replacement
-- Publicly stated operating problem
-- Management-team buildout
+- brokers, M&A advisors, investment bankers, lenders, bankers, lawyers, accountants
+- recruiters, job postings, franchise sales, courses, consultants, and service
+  providers commenting on someone else's acquisition
+- passive investors and generic fund announcements
+- startup funding and real-estate transactions
+- unclosed or proposed acquisitions
+- retained sellers or local presidents after a platform acquisition when they are
+  not the purchasing operator
+- generic appointed executives without a concrete constraint
+- companies clearly outside the target profile
+- stale transitions with no newer operating trigger
+- unchanged URLs already extracted or qualified
 
-## High-value signals
+Kyle Cooper / ACT Power Services is rejected: appointed professional CEO, generic
+duties, no concrete constraint, and likely outside the target profile.
 
-Transition:
-- "I acquired"
-- "we acquired"
-- "closed on"
-- "first 100 days"
-- "first year as owner"
-- "took over the family business"
-- "second-generation owner"
-- "third-generation owner"
-- "ownership transition"
-- "management transition"
-- "search fund acquisition"
-- "self-funded search"
-- "entrepreneurship through acquisition"
+Bill Detillion / Superior Building Services is rejected: retained seller-president
+after a platform acquisition rather than the likely integration buyer.
 
-Operational need:
-- Previous owner remains involved
-- Knowledge lives in one person's head
-- Processes are undocumented
-- Delegation problems
-- Key-person dependence
-- Manual spreadsheets
-- Disconnected software
-- Decisions escalate to the owner
-- Scaling, hiring, branch expansion, or integration
-- Lack of visibility or reporting
-- Standardization or professionalization
-- "drinking from a firehose"
-- "tribal knowledge"
-- "institutional knowledge"
+## Source policy
 
-## Anti-target
+Primary evidence sources:
 
-Reject:
-- Brokers, M&A advisors, investment bankers
-- SBA lenders, bankers, lawyers, accountants
-- Recruiters and job postings
-- Franchise sales pitches
-- PE or fund announcements without a named operator
-- Passive investors
-- Consultants commenting on another person's acquisition
-- Startup funding announcements
-- Real-estate transactions
-- Unclosed or merely proposed acquisitions
-- Courses, communities, and service providers selling to searchers
-- Companies clearly outside the target, unless an SMB subsidiary has a named operator
+1. Acquiring Minds and detailed operator post-mortems
+2. Operator podcasts and interviews
+3. Family-business succession publications
+4. Trade publications with substantive operator stories
+5. Company or holdco pages containing concrete operating details
 
-An intermediary may reveal a lead, but the emitted lead must be the operator.
+Secondary discovery-only sources:
 
-## Calibration examples
+- PR Newswire
+- Business Wire
+- GlobeNewswire
+- generic transaction announcements
+- generic Searchfunder result pages
 
-- Kyle Cooper / ACT Power Services: reject — appointed professional CEO, no ownership, no specific constraint, generic executive duties, and the company is likely too large.
-- Bill Detillion / Superior Building Services: reject — retained seller-president after a platform acquisition; the likely buyer is the platform integration or operations leader.
+Press releases may identify a person or business but normally must not be extracted
+and qualified as evidence. Use cheap search only for a named candidate to find a
+substantive interview, operating update, company page, or post-acquisition account.
+Do not qualify from generic transaction language alone.
 
-## Sources
-
-Use:
-- Search engines
-- Public LinkedIn posts and profiles indexed by search engines
-- Searchfunder and public ETA ecosystem pages
-- Acquiring Minds and ETA podcasts
-- Search fund and holdco portfolio pages
-- Company newsrooms
-- Local business journals and newspapers
-- Trade publications and industry associations
-- Chamber announcements
-- Public podcast descriptions and transcripts
-
-Respect login restrictions, robots.txt, rate limits, paywalls, and technical access controls. Do not bypass CAPTCHAs or authentication.
-
-## Source access and fallback
-
-- Prefer structured `web_search` and `web_extract` tools when available. Do not use browser navigation for search-engine result pages unless no structured search tool is available.
-- A search-results page is discovery, not an inspected source. Increment `sources_inspected` only after opening an underlying page that contains candidate evidence.
-- When a search provider returns a CAPTCHA, consent wall, login wall, or block page, record one access error and stop using that provider for the rest of the run. Do not retry equivalent queries against the same blocked provider.
-- Switch source families instead of increasing volume. Try at least three accessible source families within the existing cap before ending with no candidates, such as company newsrooms, holdco or search-fund portfolio pages, ETA podcast episode pages or transcripts, local business news, and trade publications.
-- Open promising direct sources and corroborating pages individually. Never qualify from a search snippet alone.
-- If access failures prevent a usable evidence sample, return zero leads honestly and identify the blocked providers and untried fallback source families. Do not describe blocked result pages as inspected sources.
-
-## Search query rotation
-
-Rotate phrases, industries, titles, recency terms, and source domains. Examples:
-- site:linkedin.com/posts "I acquired" HVAC
-- site:linkedin.com/posts "first 100 days" business owner
-- site:linkedin.com/posts "took over the family business"
-- site:searchfunder.com acquired landscaping
-- site:acquiringminds.co plumbing acquisition
-- "search fund acquisition" pest control
-- "second-generation owner" logistics
-- "new president" "family-owned" distributor
-- "acquired business" "previous owner"
-- "acquired company" integration
-- "new owner" standardize
-- "family business" "institutional knowledge"
-
-Do not run the exact same query set every cycle. Check state/query_history.jsonl when present.
-
-## Procedure
-
-For each candidate:
-
-1. Confirm a completed acquisition, succession, inheritance, or appointment.
-2. Confirm the event date or publication date.
-3. Confirm the named person is an owner or direct operator.
-4. Verify the company, domain, industry, and location when possible.
-5. Find explicit evidence of operational relevance. Do not invent pain.
-6. Find only public professional contact paths.
-7. Check state/leads.db or existing output for duplicates.
-8. Score the lead.
-9. Write the complete batch to out/latest.json.
-10. Run:
-   uv run --no-project python scripts/submit_batch.py out/latest.json
-11. Return only a terse count of searched sources, qualified leads, sent leads, duplicates, and errors.
+Do not attempt LinkedIn extraction when the configured extraction path does not
+support it. Respect robots.txt, login restrictions, paywalls, CAPTCHAs, rate limits,
+and technical controls.
 
 ## Scoring
 
-Transition recency, max 25:
-- 0–30 days: 25
-- 31–60 days: 20
-- 61–120 days: 15
-- 121–180 days: 10
-- Older with a new trigger: 5
+Transition recency, maximum 25:
 
-Operator certainty, max 20:
-- Confirmed owner-operator or president: 20
-- Confirmed CEO or general manager: 15
-- Probable but not explicit: 5
-- Passive investor or intermediary: reject
+- 0-30 days: 25
+- 31-60 days: 20
+- 61-120 days: 15
+- 121-180 days: 10
+- older with a specific new trigger: 5
 
-Operational need, max 25:
-- Explicit operating pain or system problem: 25
-- Clear integration or transition complexity: 20
-- Growth, hiring, or location complexity: 15
-- Structural fit only: 5
+Operator certainty, maximum 20:
 
-Company fit, max 20:
-- Strong target industry and SMB size: 20
-- Strong operational complexity in secondary industry: 15
-- Size or industry uncertain: 5
-- Clearly outside target: reject
+- confirmed owner-operator: 20
+- confirmed qualifying operator: 15
+- probable but not explicit: 5
+- passive investor or intermediary: reject
 
-Contactability, max 10:
-- Professional email and LinkedIn: 10
-- LinkedIn and company website: 7
-- Company website only: 3
-- No practical path: 0
+Operational need, maximum 25:
 
-Only emit scores of 55 or more.
-- high: 80–100
-- medium: 65–79
-- low: 55–64
+- explicit operating pain or system problem: 25
+- clear integration/transition complexity: 20
+- growth, hiring, location, or management complexity: 15
+- structural fit only: 5
 
-## Integrity rules
+Company fit, maximum 20:
 
-- Never invent facts, dates, titles, quotes, contact data, or transactions.
-- Open the underlying source; do not rely on an AI search summary alone.
-- Prefer first-party sources.
-- Otherwise corroborate with two independent sources.
-- Use null for unknown values.
-- Do not fabricate revenue or employee estimates.
-- Collect only public professional contact information.
-- Keep source excerpts short.
-- Distinguish fact from inference.
+- strong target industry and SMB size: 20
+- strong complexity in another industry: 15
+- size/industry uncertain: 5
+- clearly outside target: reject
 
-## Required JSON
+Public professional contactability, maximum 10:
 
-Write a valid JSON object to out/latest.json:
+- professional email plus public profile: 10
+- public profile plus company website: 7
+- company website only: 3
+- no practical path: 0
 
-{
-  "run": {
-    "run_id": "string",
-    "started_at": "ISO-8601 timestamp",
-    "completed_at": "ISO-8601 timestamp",
-    "queries_run": 0,
-    "sources_inspected": 0,
-    "qualified_leads": 0
-  },
-  "leads": [
-    {
-      "owner_name": "string",
-      "owner_title": "string or null",
-      "linkedin_url": "string or null",
-      "professional_email": "string or null",
-      "business_name": "string",
-      "business_domain": "string or null",
-      "business_location": "string or null",
-      "industry": "string",
-      "transition_type": "acquired | inherited | succeeded | appointed_operator | other",
-      "transition_date": "YYYY-MM-DD or null",
-      "trigger_event": "concise factual summary",
-      "operational_signal": "concise factual summary or null",
-      "source_quote": "short supporting excerpt or null",
-      "primary_source_url": "string",
-      "supporting_source_urls": ["string"],
-      "lead_score": 0,
-      "lead_priority": "high | medium | low",
-      "score_reason": "one-sentence explanation",
-      "is_existing_lead": false,
-      "discovered_at": "ISO-8601 timestamp"
-    }
-  ],
-  "rejected_summary": {
-    "duplicate": 0,
-    "intermediary": 0,
-    "too_old": 0,
-    "unconfirmed_transition": 0,
-    "no_operating_role": 0,
-    "outside_target": 0,
-    "insufficient_evidence": 0
-  }
-}
+Only emit scores of at least 55:
 
-The file must parse with JSON.parse() and Python json.load().
+- high: 80-100
+- medium: 65-79
+- low: 55-64
+
+## Integrity and output
+
+Use null for unknown values. Keep source excerpts short. Distinguish fact from
+inference. Collect only public professional contact paths. Do not include secrets.
+
+Keep the existing `out/latest.json` schema documented in `README.md` and validated by
+`scripts/submit_batch.py`. Never mark a lead sent. `DRY_RUN=true` and human review are
+mandatory.

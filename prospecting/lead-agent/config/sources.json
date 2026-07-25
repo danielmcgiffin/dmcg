@@ -1,0 +1,63 @@
+{
+  "borderline_queue": true,
+  "sources": [
+    {
+      "family": "acquiring_minds",
+      "name": "Acquiring Minds episodes",
+      "index_urls": [
+        "https://acquiringminds.co/",
+        "https://acquiringminds.co/episodes"
+      ],
+      "allowed_hosts": [
+        "acquiringminds.co"
+      ],
+      "include_path_prefixes": [
+        "/articles/"
+      ],
+      "priority": "primary"
+    },
+    {
+      "family": "family_business_alliance",
+      "name": "Family Business Alliance feature stories",
+      "index_urls": [
+        "https://fbagr.org/resources/family-business-feature-stories/"
+      ],
+      "allowed_hosts": [
+        "fbagr.org"
+      ],
+      "include_path_prefixes": [
+        "/"
+      ],
+      "exclude_path_fragments": [
+        "family-business-feature-stories",
+        "/about/",
+        "/membership/",
+        "/resources/",
+        "/contact/",
+        "/peer-group/",
+        "/privacy-policy/",
+        "/testimonials/"
+      ],
+      "minimum_slug_words": 5,
+      "priority": "primary"
+    },
+    {
+      "family": "insead_eta_podcast",
+      "name": "INSEAD ETA podcast index",
+      "index_urls": [
+        "https://www.insead.edu/insead-centre-entrepreneurship/entrepreneurship-through-acquisition/podcasts"
+      ],
+      "allowed_hosts": [
+        "insead.edu",
+        "www.insead.edu"
+      ],
+      "include_path_prefixes": [
+        "/"
+      ],
+      "exclude_path_fragments": [
+        "/podcasts"
+      ],
+      "priority": "primary"
+    }
+  ]
+}
