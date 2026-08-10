@@ -1,0 +1,11 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "dmcg",
+	"compatibility_date": "2026-08-10",
+	"assets": {
+		"directory": "./dist"
+	},
+	"observability": {
+		"enabled": true
+	}
+}
