@@ -1,0 +1,27 @@
+---
+import { Picture } from 'astro:assets';
+import { BOOKING_URL } from '../config';
+
+interface Props {
+	image: ImageMetadata;
+}
+
+const { image } = Astro.props;
+---
+
+<section class="closing section-dark" id="contact" aria-labelledby="closing-title">
+	<div class="closing-media" aria-hidden="true">
+		<Picture src={image} formats={['avif']} fallbackFormat="webp" alt="" width={image.width} height={image.height} widths={[768, 1440, 1920]} sizes="100vw" loading="lazy" />
+	</div>
+	<div class="media-grain" aria-hidden="true"></div>
+	<div class="visual-grid" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+	<div class="closing-copy shell reveal">
+		<p class="eyebrow">Ready when you are/</p>
+		<h2 id="closing-title" class="display">Let’s build the<br /><em>better workflow.</em></h2>
+		<p>Start with the work that costs too much. Leave with a clearer process and a practical path to automation.</p>
+		<div class="closing-actions">
+			<a class="button button--primary" href={BOOKING_URL}>Book a call <span aria-hidden="true">↗</span></a>
+			<a class="text-link" href="/workflow-review/">Workflow Review ↗</a>
+		</div>
+	</div>
+</section>

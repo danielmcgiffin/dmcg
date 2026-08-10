@@ -1,48 +1,67 @@
 ---
 import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { BOOKING_URL } from '../config';
 
-const bookingUrl = 'https://cal.com/danny-cursus/90min-constraint';
+const details = [
+	{
+		label: 'Scope',
+		value: 'Two to four workflows, picked with you. I interview the people who actually do the work, map how it runs today, and cost it out — hours, handoffs, rework, and the delay it creates downstream. Nothing is purchased or installed during the review.'
+	},
+	{
+		label: 'Timeline',
+		value: 'Two weeks from kickoff. One kickoff call, interviews in week one, findings delivered in week two.'
+	},
+	{
+		label: 'Deliverable',
+		value: 'A written Workflow Report: how the process actually runs today, where the cost sits, a redesigned process, and a build plan scoped to it — with a fixed implementation price. Yours to keep and use, whether or not I build it.'
+	},
+	{
+		label: 'Price',
+		value: '$5,000. Fixed. Invoiced at kickoff.'
+	},
+	{
+		label: 'Credit',
+		value: "The full $5,000 credits toward implementation if you decide to build. If you don't, you still keep the report."
+	}
+] as const;
+
+const emptyDetail = details.find(({ label, value }) => label.trim().length === 0 || value.trim().length === 0);
+if (emptyDetail) throw new Error('[workflow-review] Detail page contains an empty label/value pair.');
+
+const offerSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Offer',
+	name: 'Workflow Review',
+	price: 5000,
+	priceCurrency: 'USD',
+	priceValidUntil: '2027-01-01',
+	url: 'https://dannymcgiffin.com/workflow-review/',
+	seller: { '@id': 'https://dannymcgiffin.com/#service' }
+};
 ---
 
-<BaseLayout title="Workflow Review — Danny McGiffin" description="A fixed-price, two-week Workflow Review.">
+<BaseLayout title="Workflow Review — Danny McGiffin" description="A fixed-price, two-week Workflow Review." structuredData={offerSchema}>
 	<SiteHeader />
 	<main id="main-content">
 		<header class="offer-hero section-dark">
 			<div class="shell">
 				<p class="eyebrow">Workflow Review/</p>
 				<h1 class="display">Workflow<br /><em>Review.</em></h1>
-				<p>Two weeks.</p>
-				{/* TODO: Supply introductory copy. */}
+				<p class="offer-deck">Before anyone automates anything, someone has to find the work that costs too much and put a number on it. That is what this is.</p>
 			</div>
 		</header>
 		<section class="offer-page section-light shell" aria-label="Workflow Review details">
-			<div>
-				<p class="eyebrow">Scope/</p>
-				{/* TODO: Supply scope copy. */}
-			</div>
-			<div>
-				<p class="eyebrow">Timeline/</p>
-				<p>Two weeks.</p>
-				{/* TODO: Supply timeline copy. */}
-			</div>
-			<div>
-				<p class="eyebrow">Deliverable/</p>
-				{/* TODO: Supply named deliverable copy. */}
-			</div>
-			<div>
-				<p class="eyebrow">Price/</p>
-				{/* TODO: Supply price copy. */}
-			</div>
-			<div>
-				<p class="eyebrow">Credit/</p>
-				{/* TODO: Supply credit-toward-future-work copy. */}
-			</div>
+			{details.map(({ label, value }) => (
+				<div>
+					<p class="eyebrow">{label}/</p>
+					<p>{value}</p>
+				</div>
+			))}
 		</section>
 		<section class="offer-page-cta section-dark">
 			<div class="shell">
-				{/* TODO: Supply CTA copy. */}
-				<a class="button button--primary" href={bookingUrl}>Book a call <span aria-hidden="true">↗</span></a>
+				<a class="button button--primary" href={BOOKING_URL}>Book a call <span aria-hidden="true">↗</span></a>
 			</div>
 		</section>
 	</main>

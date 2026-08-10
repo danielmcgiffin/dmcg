@@ -69,7 +69,7 @@ tags:
   - workflow design
 ```
 
-The current MDX entries contain explicit TODO comments instead of invented article copy. Add approved prose beneath those comments.
+Published articles are stored as MDX with validated titles, descriptions, publication dates, and tags.
 
 Verified evidence lives in `src/content/proof/`. Every entry requires `metric_line`, `context`, and `attribution`; the collection is intentionally empty. The section renders only when verified entries exist and both `SHOW_PROOF=true` and `PROOF_HEADLINE` are present at build time. It is off by default, and an incomplete setup emits a build warning rather than shipping placeholder proof.
 

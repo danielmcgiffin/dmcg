@@ -12,19 +12,23 @@ interface Props {
 	description: string;
 	canonical?: URL;
 	image?: string;
+	structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
 	title,
 	description,
 	canonical = Astro.url,
-	image = '/og-image.png'
+	image = '/og-image.png',
+	structuredData = []
 } = Astro.props;
 
+const additionalSchema = Array.isArray(structuredData) ? structuredData : [structuredData];
 const schema = [
 	{
 		'@context': 'https://schema.org',
 		'@type': 'ProfessionalService',
+		'@id': 'https://dannymcgiffin.com/#service',
 		name: 'Danny McGiffin',
 		url: 'https://dannymcgiffin.com',
 		description,
@@ -47,7 +51,8 @@ const schema = [
 			addressCountry: 'US'
 		},
 		sameAs: ['https://www.linkedin.com/in/danny-mcgiffin/']
-	}
+	},
+	...additionalSchema
 ];
 ---
 

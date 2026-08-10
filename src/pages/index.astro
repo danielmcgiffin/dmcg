@@ -1,14 +1,14 @@
 ---
 import { Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
+import ClosingCta from '../components/ClosingCta.astro';
 import OfferSection from '../components/OfferSection.astro';
 import ProofSection from '../components/ProofSection.astro';
 import SiteHeader from '../components/SiteHeader.astro';
+import { BOOKING_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import heroImage from '../assets/constraint-hero.png';
-import portraitPlaceholder from '../assets/portrait-placeholder.png';
 
-const bookingUrl = 'https://cal.com/danny-cursus/90min-constraint';
 const description = 'I help growing companies redesign expensive manual workflows and build the systems and AI to run them better.';
 
 const services = [
@@ -82,7 +82,7 @@ if (!showProof) {
 				<p>{description}</p>
 				<div class="hero-actions">
 					<a class="button button--ghost" href="/workflow-review/">Workflow Review <span aria-hidden="true">↗</span></a>
-					<a class="button button--primary" href={bookingUrl}>Book a call <span aria-hidden="true">↗</span></a>
+					<a class="button button--primary" href={BOOKING_URL}>Book a call <span aria-hidden="true">↗</span></a>
 				</div>
 			</div>
 		</section>
@@ -108,12 +108,11 @@ if (!showProof) {
 			</div>
 			<div class="process-list shell reveal">
 				{services.map((service, index) => (
-					<a class="process-row" href={bookingUrl}>
+					<div class="process-row">
 						<span class="index">{String(index + 1).padStart(2, '0')}//05</span>
 						<h3>{service[0]}</h3>
 						<p>{service[1]}</p>
-						<span class="round-arrow" aria-hidden="true">↗</span>
-					</a>
+					</div>
 				))}
 			</div>
 		</section>
@@ -141,20 +140,6 @@ if (!showProof) {
 		</section>
 
 		<section class="about section-dark" id="about" aria-labelledby="about-title">
-			<div class="about-media">
-				<Picture
-					src={portraitPlaceholder}
-					formats={['avif']}
-					fallbackFormat="webp"
-					alt="Temporary anonymous portrait placeholder"
-					width={portraitPlaceholder.width}
-					height={portraitPlaceholder.height}
-					widths={[480, 720, 960, 1122]}
-					sizes="(max-width: 767px) 100vw, 50vw"
-					loading="lazy"
-				/>
-				<p class="portrait-placeholder-label">Portrait forthcoming</p>
-			</div>
 			<div class="about-copy reveal">
 				<p class="eyebrow">About Danny/</p>
 				<h2 id="about-title" class="display">Operator first.<br /><em>Technologist second.</em></h2>
@@ -184,32 +169,7 @@ if (!showProof) {
 			</div>
 		</section>
 
-		<section class="closing section-dark" id="contact" aria-labelledby="closing-title">
-			<div class="closing-media" aria-hidden="true">
-				<Picture
-					src={heroImage}
-					formats={['avif']}
-					fallbackFormat="webp"
-					alt=""
-					width={heroImage.width}
-					height={heroImage.height}
-					widths={[768, 1440, 1920]}
-					sizes="100vw"
-					loading="lazy"
-				/>
-			</div>
-			<div class="media-grain" aria-hidden="true"></div>
-			<div class="visual-grid" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-			<div class="closing-copy shell reveal">
-				<p class="eyebrow">Ready when you are/</p>
-				<h2 id="closing-title" class="display">Let’s build the<br /><em>better workflow.</em></h2>
-				<p>Start with the work that costs too much. Leave with a clearer process and a practical path to automation.</p>
-				<div class="closing-actions">
-					<a class="button button--primary" href={bookingUrl}>Book a call <span aria-hidden="true">↗</span></a>
-					<a class="text-link" href="/workflow-review/">Workflow Review ↗</a>
-				</div>
-			</div>
-		</section>
+		<ClosingCta image={heroImage} />
 	</main>
 
 	<footer class="site-footer section-dark">

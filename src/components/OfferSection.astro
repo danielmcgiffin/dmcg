@@ -1,20 +1,28 @@
+---
+const details = [
+	{ label: 'Timeline', value: 'Two weeks' },
+	{ label: 'Price', value: '$5,000, fixed' },
+	{
+		label: 'Deliverable',
+		value: 'A written report: the process as it runs today, what it costs, a redesigned process, and a build plan with a fixed implementation price.'
+	}
+] as const;
+
+const emptyDetail = details.find(({ label, value }) => label.trim().length === 0 || value.trim().length === 0);
+if (emptyDetail) throw new Error('[workflow-review] Homepage offer contains an empty label/value pair.');
+---
+
 <section class="offer section-light section-grid" id="workflow-review-offer" aria-labelledby="offer-title">
 	<p class="eyebrow reveal">Workflow Review/</p>
 	<div class="offer-content reveal">
 		<h2 id="offer-title" class="display">A fixed-price<br /><em>Workflow Review.</em></h2>
 		<dl class="offer-details">
-			<div>
-				<dt>Timeline</dt>
-				<dd>Two weeks</dd>
-			</div>
-			<div>
-				<dt>Price</dt>
-				<dd>{/* TODO: Supply price copy. */}</dd>
-			</div>
-			<div>
-				<dt>Deliverable</dt>
-				<dd>{/* TODO: Supply named deliverable copy. */}</dd>
-			</div>
+			{details.map(({ label, value }) => (
+				<div>
+					<dt>{label}</dt>
+					<dd>{value}</dd>
+				</div>
+			))}
 		</dl>
 		<a class="text-link" href="/workflow-review/">Workflow Review ↗</a>
 	</div>
