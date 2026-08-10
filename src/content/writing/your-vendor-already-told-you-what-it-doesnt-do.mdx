@@ -1,0 +1,94 @@
+---
+title: Your vendor already told you what it doesn't do
+description: How to read a requirements matrix against a change order log, and why almost nobody does.
+publishedAt: 2026-08-10
+draft: false
+---
+
+Every enterprise software implementation produces a document that nobody reads twice.
+
+It goes by different names — requirements traceability matrix, fit-gap analysis, requirements disposition log. The shape is always the same. On the left, every capability the company said it needed. On the right, the vendor's answer for each one. Standard. Configuration. Customization. Gap.
+
+That document is built during the sale, by the people running the sale. Then it goes in a folder.
+
+Eighteen months later the same company is arguing about change orders, and the two conversations never touch.
+
+## Two documents, two owners
+
+The requirements matrix belongs to the selection process. A committee assembles it, a vendor responds to it, someone signs, and the committee dissolves.
+
+The change order log belongs to the project. A project manager opens it in month three, finance watches it, and it grows.
+
+Different people, different phases, different systems of record. The matrix usually lives in a shared drive as a spreadsheet attached to a proposal. The change order log lives in the PSA tool, or in accounting, or in an email thread. Neither person has a reason to open the other's file, and neither is doing anything wrong.
+
+This is the ordinary anatomy of the problem. It is not a conspiracy. It is a join that nobody performs.
+
+## Why "standard" is the interesting word
+
+Look at how the four dispositions map to money.
+
+**Standard** means the platform does this out of the box. Included. No line item.
+
+**Configuration** means setup work, usually inside the implementation fee.
+
+**Customization** means development, usually priced separately.
+
+**Gap** means it doesn't do this, and everyone knows it going in.
+
+Only one of those four costs nothing and threatens nothing. So during a competitive sale, there is steady pressure — not always dishonest, often just optimistic — toward marking things standard. Standard makes the proposal cheaper and the platform look stronger. A requirement marked standard also disappears from the conversation, because nothing has to be planned for it.
+
+The result is a document where the most consequential answers are the ones that got the least scrutiny.
+
+## The join
+
+Here is the whole method. It takes an afternoon.
+
+Take the change order log. For every change order, answer one question: **which original requirement does this serve?**
+
+Not "what is this change order for" — the description will tell you that and it won't help. Trace it back. A change order to build a custom approval routing exists because someone, eighteen months earlier, wrote down that they needed approval routing.
+
+Then look up how that requirement was dispositioned during the sale.
+
+Now sort by disposition. You are looking for one category: **change orders that trace back to requirements marked standard.**
+
+Every item in that stack is one of three things.
+
+It might be genuine scope growth — the requirement was answered correctly, and the company later asked for something beyond it. That happens, and it is nobody's fault.
+
+It might be a definitional problem — the vendor and the company meant different things by the same word. This is the most common one. "Standard reporting" covered it, in the sense that the platform has reports.
+
+Or it might be a billing question. Something certified as included was later invoiced as extra.
+
+You cannot tell which from the spreadsheet. That is fine. The spreadsheet's job is to produce the list. A conversation resolves the list.
+
+## What to do before you sign
+
+If you are still in selection, three questions cost you nothing and change the incentives:
+
+**Ask for the disposition definitions in writing.** What exactly does this vendor mean by standard? Get it in a sentence, in the contract, not in a slide.
+
+**Ask what happens when a standard answer turns out to be wrong.** Not if. When. Every implementation of any size discovers at least a few. The question is whether discovering one produces a fix or an invoice. Vendors who are confident in their matrix will answer this easily.
+
+**Ask who owns the matrix after signature.** If the answer is nobody, you have just learned that the document is going in a folder.
+
+## What to do if you are already mid-project
+
+Run the join monthly instead of never.
+
+It is a small standing exercise: new change orders this month, traced to originating requirements, sorted by original disposition. Ten minutes once the mapping exists. The value is not the report. The value is that someone is now reading two documents against each other on a schedule, which means definitional drift surfaces in weeks rather than at the end.
+
+Do it in front of the vendor, not behind them. A monthly reconciliation that both parties can see is a governance practice. The same reconciliation produced silently at month twenty is an accusation, and it will be received as one.
+
+## The general shape
+
+I keep meeting this pattern outside software procurement entirely.
+
+A company has the information. It is written down, in documents the company owns, produced by its own people. The failure is not that nobody knew. The failure is that the two halves of the knowledge lived in different files, held by different people, at different times, and nothing in the operating rhythm ever put them on the same page.
+
+This is why I am skeptical of buying a tool as the first move. A tool acts on information that is already legible. Most of what looks like a technology problem is a legibility problem — work that no one has ever laid out end to end, in one place, where the seams are visible.
+
+The seams are usually where the money is. They are also usually free to find. You already own both documents.
+
+---
+
+*I run a two-week, fixed-price [Workflow Review](/workflow-review/) that does this kind of reading across the workflows that cost you the most.*
