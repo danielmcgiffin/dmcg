@@ -2,12 +2,13 @@ node_modules
 .direnv
 
 # Output
+.astro
+dist
+/.svelte-kit
 .output
 .vercel
 .netlify
 .wrangler
-/.svelte-kit
-/build
 
 # OS
 .DS_Store

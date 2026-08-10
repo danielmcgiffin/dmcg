@@ -1,24 +1,27 @@
 {
 	"name": "dannymcgiffin",
 	"private": true,
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''"
+		"dev": "astro dev",
+		"build": "astro check && astro build",
+		"preview": "astro preview",
+		"check": "astro check"
+	},
+	"dependencies": {
+		"@astrojs/mdx": "^7.0.5",
+		"@astrojs/rss": "^4.0.19",
+		"@astrojs/sitemap": "^3.7.3",
+		"@fontsource/geist": "^5.3.0",
+		"@fontsource/newsreader": "^5.3.0",
+		"astro": "^7.2.0"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-cloudflare": "^7.2.0",
-		"@sveltejs/kit": "^2.48.5",
-		"@sveltejs/vite-plugin-svelte": "^6.2.1",
-		"@tailwindcss/forms": "^0.5.10",
-		"@tailwindcss/typography": "^0.5.19",
+		"@astrojs/check": "^0.9.6",
 		"@tailwindcss/vite": "^4.1.17",
-		"svelte": "^5.43.8",
+		"sharp": "^0.34.5",
 		"tailwindcss": "^4.1.17",
-		"vite": "^7.2.2",
-		"wrangler": "^4.113.0"
+		"typescript": "^5.9.3"
 	}
 }

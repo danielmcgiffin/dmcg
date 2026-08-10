@@ -1,0 +1,36 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import SiteHeader from '../../components/SiteHeader.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+	const entries = await getCollection('writing', ({ data }) => !data.draft);
+	return entries.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+interface Props { entry: CollectionEntry<'writing'>; }
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={`${entry.data.title} — Danny McGiffin`} description={entry.data.description}>
+	<SiteHeader />
+	<main id="main-content">
+		<article>
+			<header class="article-hero section-dark">
+				<div class="shell">
+					<a class="eyebrow" href="/writing/">← Writing/</a>
+					<h1 class="display">{entry.data.title}</h1>
+					<p>{entry.data.description}</p>
+					<time datetime={entry.data.publishedAt.toISOString()}>{entry.data.publishedAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time>
+				</div>
+			</header>
+			<div class="prose shell"><Content /></div>
+		</article>
+	</main>
+	<footer class="site-footer section-dark">
+		<a class="footer-brand" href="/"><span class="monogram" aria-hidden="true"><span>D</span></span> Danny McGiffin</a>
+		<p>Workflow systems and AI for growing companies.</p>
+		<div><a href="https://www.linkedin.com/in/danny-mcgiffin/">LinkedIn ↗</a><span>© 2026</span></div>
+	</footer>
+</BaseLayout>

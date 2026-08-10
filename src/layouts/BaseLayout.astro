@@ -1,0 +1,83 @@
+---
+import '@fontsource/newsreader/latin-300.css';
+import '@fontsource/newsreader/latin-300-italic.css';
+import '@fontsource/geist/latin-400.css';
+import '@fontsource/geist/latin-600.css';
+import newsreaderRoman from '@fontsource/newsreader/files/newsreader-latin-300-normal.woff2?url';
+import newsreaderItalic from '@fontsource/newsreader/files/newsreader-latin-300-italic.woff2?url';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description: string;
+	canonical?: URL;
+	image?: string;
+}
+
+const {
+	title,
+	description,
+	canonical = Astro.url,
+	image = '/og-image.png'
+} = Astro.props;
+
+const schema = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'ProfessionalService',
+		name: 'Danny McGiffin',
+		url: 'https://dannymcgiffin.com',
+		description,
+		areaServed: {
+			'@type': 'AdministrativeArea',
+			name: 'Northern Virginia'
+		},
+		founder: { '@id': 'https://dannymcgiffin.com/#person' }
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'Person',
+		'@id': 'https://dannymcgiffin.com/#person',
+		name: 'Danny McGiffin',
+		url: 'https://dannymcgiffin.com',
+		jobTitle: 'Independent operations and AI consultant',
+		address: {
+			'@type': 'PostalAddress',
+			addressRegion: 'Virginia',
+			addressCountry: 'US'
+		},
+		sameAs: ['https://www.linkedin.com/in/danny-mcgiffin/']
+	}
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" content="#0f1b14" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		<link rel="preload" href={newsreaderRoman} as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href={newsreaderItalic} as="font" type="font/woff2" crossorigin />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="alternate" type="application/rss+xml" title="Danny McGiffin writing" href="/rss.xml" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={new URL(image, Astro.site)} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL(image, Astro.site)} />
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+	</head>
+	<body>
+		<a class="skip-link" href="#main-content">Skip to main content</a>
+		<slot />
+	</body>
+</html>

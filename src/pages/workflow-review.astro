@@ -1,0 +1,49 @@
+---
+import SiteHeader from '../components/SiteHeader.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const bookingUrl = 'https://cal.com/danny-cursus/90min-constraint';
+---
+
+<BaseLayout title="Workflow Review — Danny McGiffin" description="A fixed-price, two-week Workflow Review.">
+	<SiteHeader />
+	<main id="main-content">
+		<header class="offer-hero section-dark">
+			<div class="shell">
+				<p class="eyebrow">Workflow Review/</p>
+				<h1 class="display">Workflow<br /><em>Review.</em></h1>
+				<p>Two weeks.</p>
+				{/* TODO: Supply introductory copy. */}
+			</div>
+		</header>
+		<section class="offer-page section-light shell" aria-label="Workflow Review details">
+			<div>
+				<p class="eyebrow">Scope/</p>
+				{/* TODO: Supply scope copy. */}
+			</div>
+			<div>
+				<p class="eyebrow">Timeline/</p>
+				<p>Two weeks.</p>
+				{/* TODO: Supply timeline copy. */}
+			</div>
+			<div>
+				<p class="eyebrow">Deliverable/</p>
+				{/* TODO: Supply named deliverable copy. */}
+			</div>
+			<div>
+				<p class="eyebrow">Price/</p>
+				{/* TODO: Supply price copy. */}
+			</div>
+			<div>
+				<p class="eyebrow">Credit/</p>
+				{/* TODO: Supply credit-toward-future-work copy. */}
+			</div>
+		</section>
+		<section class="offer-page-cta section-dark">
+			<div class="shell">
+				{/* TODO: Supply CTA copy. */}
+				<a class="button button--primary" href={bookingUrl}>Book a call <span aria-hidden="true">↗</span></a>
+			</div>
+		</section>
+	</main>
+</BaseLayout>

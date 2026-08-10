@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	entries: CollectionEntry<'proof'>[];
+	headline: string;
+}
+
+const { entries, headline } = Astro.props;
+---
+
+<section class="proof section-dark" aria-labelledby="proof-title">
+	<div class="section-grid section-heading">
+		<p class="eyebrow reveal">Evidence/</p>
+		<h2 id="proof-title" class="display reveal">{headline}</h2>
+	</div>
+	<div class="proof-grid shell reveal">
+		{entries.map(({ data }) => (
+			<article>
+				<p class="proof-metric">{data.metric_line}</p>
+				<p class="proof-context">{data.context}</p>
+				<p class="proof-attribution">{data.attribution}</p>
+			</article>
+		))}
+	</div>
+</section>
