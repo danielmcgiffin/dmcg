@@ -1,8 +1,0 @@
-{
-  "max_search_calls": 15,
-  "max_firecrawl_extractions": 15,
-  "max_firecrawl_credits_estimated": 25,
-  "max_candidates_screened": 30,
-  "max_evidence_pages": 30,
-  "max_qualified_leads": 5
-}
