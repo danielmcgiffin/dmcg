@@ -1,6 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import { getCollection } from 'astro:content';
+import ArrowUpRight from '../components/ArrowUpRight.astro';
 import ClosingCta from '../components/ClosingCta.astro';
 import OfferSection from '../components/OfferSection.astro';
 import ProofSection from '../components/ProofSection.astro';
@@ -81,8 +82,8 @@ if (!showProof) {
 			<div class="hero-bar shell">
 				<p>{description}</p>
 				<div class="hero-actions">
-					<a class="button button--ghost" href="/workflow-review/">Workflow Review <span aria-hidden="true">↗</span></a>
-					<a class="button button--primary" href={BOOKING_URL}>Book a call <span aria-hidden="true">↗</span></a>
+					<a class="button button--ghost" href="/workflow-review/">Workflow Review <ArrowUpRight /></a>
+					<a class="button button--primary" href={BOOKING_URL}>Book a call <ArrowUpRight /></a>
 				</div>
 			</div>
 		</section>
@@ -162,7 +163,7 @@ if (!showProof) {
 						<a href={`/writing/${article.id}/`}>
 							<h3>{article.data.title}</h3>
 							<p>{article.data.description}</p>
-							<span>Read note ↗</span>
+							<span>Read note <ArrowUpRight /></span>
 						</a>
 					))}
 				</div>
@@ -175,7 +176,7 @@ if (!showProof) {
 	<footer class="site-footer section-dark">
 		<a class="footer-brand" href="/"><span class="monogram" aria-hidden="true"><span>D</span></span> Danny McGiffin</a>
 		<p>Workflow systems and AI for growing companies.</p>
-		<div><a href="https://www.linkedin.com/in/danny-mcgiffin/">LinkedIn ↗</a><span>© 2026</span></div>
+		<div><a href="https://www.linkedin.com/in/danny-mcgiffin/">LinkedIn <ArrowUpRight /></a><span>© 2026</span></div>
 	</footer>
 
 	<script is:inline>

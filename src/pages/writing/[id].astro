@@ -1,5 +1,6 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
+import ArrowUpRight from '../../components/ArrowUpRight.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
@@ -31,6 +32,6 @@ const { Content } = await render(entry);
 	<footer class="site-footer section-dark">
 		<a class="footer-brand" href="/"><span class="monogram" aria-hidden="true"><span>D</span></span> Danny McGiffin</a>
 		<p>Workflow systems and AI for growing companies.</p>
-		<div><a href="https://www.linkedin.com/in/danny-mcgiffin/">LinkedIn ↗</a><span>© 2026</span></div>
+		<div><a href="https://www.linkedin.com/in/danny-mcgiffin/">LinkedIn <ArrowUpRight /></a><span>© 2026</span></div>
 	</footer>
 </BaseLayout>

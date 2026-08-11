@@ -2,6 +2,7 @@
 import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { BOOKING_URL } from '../config';
+import ArrowUpRight from '../components/ArrowUpRight.astro';
 import { assertDetails } from '../details';
 
 const details = [
@@ -65,7 +66,7 @@ const offerSchema = {
 		</section>
 		<section class="offer-page-cta section-dark">
 			<div class="shell">
-				<a class="button button--primary" href={BOOKING_URL}>Book a call <span aria-hidden="true">↗</span></a>
+				<a class="button button--primary" href={BOOKING_URL}>Book a call <ArrowUpRight /></a>
 			</div>
 		</section>
 	</main>

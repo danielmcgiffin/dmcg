@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import ArrowUpRight from '../../components/ArrowUpRight.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
@@ -22,7 +23,7 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
 					<span class="index">{String(index + 1).padStart(2, '0')}</span>
 					<div><h2>{article.data.title}</h2><p>{article.data.description}</p></div>
 					<time datetime={article.data.publishedAt.toISOString()}>{article.data.publishedAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
-					<span class="round-arrow" aria-hidden="true">↗</span>
+					<span class="round-arrow" aria-hidden="true"><ArrowUpRight /></span>
 				</a>
 			))}
 		</section>
@@ -30,6 +31,6 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
 	<footer class="site-footer section-dark">
 		<a class="footer-brand" href="/"><span class="monogram" aria-hidden="true"><span>D</span></span> Danny McGiffin</a>
 		<p>Workflow systems and AI for growing companies.</p>
-		<div><a href="https://www.linkedin.com/in/danny-mcgiffin/">LinkedIn ↗</a><span>© 2026</span></div>
+		<div><a href="https://www.linkedin.com/in/danny-mcgiffin/">LinkedIn <ArrowUpRight /></a><span>© 2026</span></div>
 	</footer>
 </BaseLayout>
