@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="D">
   <rect width="64" height="64" rx="32" fill="#0f1b14"/>
   <circle cx="32" cy="32" r="24" fill="none" stroke="#efeee8" stroke-width="2"/>
-  <text x="32" y="42" fill="#efeee8" font-family="Georgia, 'Times New Roman', serif" font-size="30" text-anchor="middle">D</text>
+  <path fill="#efeee8" fill-rule="evenodd" d="M21.974 42.5L21.974 41.941L24.676 41.382L24.676 22.618L21.974 22.044L21.974 21.5L30.066 21.5Q33.996 21.5 36.652 22.642Q39.308 23.783 40.667 26.036Q42.026 28.288 42.026 31.627Q42.026 35.2 40.481 37.623Q38.935 40.046 36.248 41.273Q33.561 42.5 30.144 42.5L21.974 42.5ZM40.162 31.767Q40.162 27.123 37.32 24.855Q34.477 22.587 29.305 22.587L26.416 22.587L26.416 41.413L29.709 41.413Q32.924 41.413 35.27 40.426Q37.615 39.44 38.889 37.312Q40.162 35.184 40.162 31.767Z"/>
 </svg>

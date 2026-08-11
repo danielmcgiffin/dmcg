@@ -47,8 +47,8 @@ p, li { line-height: 1.6; }
 .section-dark { color: var(--bone); background: var(--dark); }
 .section-light { color: var(--ink); background: var(--bone); }
 .section-grid { display: grid; grid-template-columns: 18% 1fr; gap: 3%; padding: 120px 6.7vw; }
-.display { font-family: var(--display); font-size: clamp(4rem, 7vw, 6.75rem); font-weight: 300; font-optical-sizing: auto; letter-spacing: -0.055em; line-height: .92; text-wrap: balance; }
-.display em { color: var(--accent); font-style: italic; font-weight: 300; }
+.display { font-family: var(--display); font-size: clamp(4rem, 7vw, 6.75rem); font-weight: 300; font-optical-sizing: auto; letter-spacing: -0.02em; line-height: .92; text-wrap: balance; }
+.display em { color: var(--accent); font-style: italic; font-weight: 300; letter-spacing: -0.01em; }
 .section-dark .display em { color: var(--accent-on-dark); }
 .eyebrow, .overline, .index { font-size: .75rem; font-weight: 500; letter-spacing: .11em; line-height: 1.3; text-transform: uppercase; }
 .eyebrow { color: var(--accent); }
@@ -82,14 +82,17 @@ p, li { line-height: 1.6; }
 .visual-grid i { border-right: 1px solid rgb(255 255 255 / 8%); }
 .hero-copy { position: absolute; z-index: 3; bottom: 24%; left: 50%; transform: translateX(-50%); }
 .overline { margin-bottom: 14px; color: var(--bone); }
-.display--hero { max-width: 900px; font-size: clamp(4.25rem, 7.5vw, 7rem); line-height: .8; }
+/* Flex column so the clip boxes' negative margins cannot collapse into each other. */
+.display--hero { display: flex; flex-direction: column; max-width: 900px; font-size: clamp(4.25rem, 7.5vw, 7rem); line-height: .8; }
 .display--hero > span { display: block; }
 .display--hero em { display: block; }
-.reveal-clip { overflow: hidden; }
+/* line-height .8 leaves .1em of glyph outside the line box on each side, which
+   overflow: hidden would shear off. Pad the clip box and cancel it with margin. */
+.reveal-clip { overflow: hidden; padding-block: .14em; margin-block: -.14em; }
 .reveal-line { animation: line-rise 320ms var(--ease-out) both; }
 .reveal-clip:nth-child(2) .reveal-line { animation-delay: 70ms; }
 .reveal-clip:nth-child(3) .reveal-line { animation-delay: 140ms; }
-@keyframes line-rise { from { transform: translateY(105%); } }
+@keyframes line-rise { from { transform: translateY(125%); } }
 .hero-bar { position: absolute; z-index: 3; inset: auto 0 0; display: flex; align-items: center; justify-content: space-between; min-height: 112px; border-top: 1px solid rgb(255 255 255 / 32%); }
 .hero-bar > p { max-width: 68ch; line-height: 1.6; }
 .hero-actions { display: flex; gap: 12px; }
