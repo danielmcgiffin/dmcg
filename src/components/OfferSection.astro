@@ -1,4 +1,6 @@
 ---
+import { assertDetails } from '../details';
+
 const details = [
 	{ label: 'Timeline', value: 'Two weeks' },
 	{ label: 'Price', value: '$5,000, fixed' },
@@ -9,8 +11,7 @@ const details = [
 	}
 ] as const;
 
-const emptyDetail = details.find(({ label, value }) => label.trim().length === 0 || value.trim().length === 0);
-if (emptyDetail) throw new Error('[workflow-review] Homepage offer contains an empty label/value pair.');
+assertDetails('src/components/OfferSection.astro', details);
 ---
 
 <section class="offer section-light section-grid" id="workflow-review-offer" aria-labelledby="offer-title">

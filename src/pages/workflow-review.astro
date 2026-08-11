@@ -2,6 +2,7 @@
 import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { BOOKING_URL } from '../config';
+import { assertDetails } from '../details';
 
 const details = [
 	{
@@ -30,8 +31,7 @@ const details = [
 	}
 ] as const;
 
-const emptyDetail = details.find(({ label, value }) => label.trim().length === 0 || value.trim().length === 0);
-if (emptyDetail) throw new Error('[workflow-review] Detail page contains an empty label/value pair.');
+assertDetails('src/pages/workflow-review.astro', details);
 
 const offerSchema = {
 	'@context': 'https://schema.org',
