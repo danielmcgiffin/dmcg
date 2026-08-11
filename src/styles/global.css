@@ -84,7 +84,7 @@ p, li { line-height: 1.6; }
 .visual-grid { position: absolute; z-index: 2; inset: 0 5.5%; display: grid; grid-template-columns: repeat(4, 1fr); pointer-events: none; border-inline: 1px dashed rgb(255 255 255 / 15%); }
 .visual-grid i { border-right: 1px solid rgb(255 255 255 / 8%); }
 .hero-copy { position: absolute; z-index: 3; bottom: 24%; left: 50%; transform: translateX(-50%); }
-.overline { margin-bottom: 14px; color: var(--bone); }
+.overline { margin-bottom: 24px; color: var(--bone); }
 /* Flex column so the clip boxes' negative margins cannot collapse into each other. */
 .display--hero { display: flex; flex-direction: column; max-width: 900px; font-size: clamp(4.25rem, 7.5vw, 7rem); line-height: .8; }
 .display--hero > span { display: block; }
