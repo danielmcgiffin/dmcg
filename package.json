@@ -8,7 +8,8 @@
 		"build": "astro check && astro build",
 		"preview": "astro preview",
 		"check": "astro check",
-		"indexnow": "node scripts/submit-indexnow.mjs"
+		"indexnow": "node scripts/submit-indexnow.mjs",
+		"deploy": "astro check && astro build && npx wrangler deploy"
 	},
 	"dependencies": {
 		"@astrojs/mdx": "^7.0.5",
