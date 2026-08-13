@@ -1,0 +1,180 @@
+---
+import ArrowUpRight from '../components/ArrowUpRight.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { BOOKING_URL } from '../config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbList, serviceNode } from '../lib/schema';
+import { ENTITY_STATEMENT, SERVICE_AREA_PLACES, SITE_URL } from '../site';
+
+const title = 'AI & Workflow Automation Consultant in Northern Virginia | Danny McGiffin';
+const description =
+	'Workflow automation and AI consulting for businesses in Herndon, Northern Virginia, and the Washington, DC area. Diagnose expensive manual work, redesign the process, then automate what should not require a person.';
+const pageUrl = `${SITE_URL}/northern-virginia-ai-workflow-automation/`;
+
+const structuredData = [
+	breadcrumbList([
+		{ name: 'Home', url: `${SITE_URL}/` },
+		{ name: 'Northern Virginia consulting', url: pageUrl }
+	]),
+	serviceNode({
+		id: `${pageUrl}#service`,
+		name: 'AI & Workflow Automation Consulting',
+		description,
+		url: pageUrl,
+		areaServed: SERVICE_AREA_PLACES
+	})
+];
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+	<SiteHeader />
+	<main id="main-content">
+		<header class="offer-hero section-dark">
+			<div class="shell">
+				<p class="eyebrow">Herndon, Virginia /</p>
+				<h1 class="display">AI &amp; Workflow Automation<br />Consulting in<br /><em>Northern Virginia</em></h1>
+				<p class="offer-deck">
+					Understand the work. Improve the system. Automate what should not require human effort.
+				</p>
+			</div>
+		</header>
+
+		<article class="prose service-prose shell">
+			<p>
+				{ENTITY_STATEMENT} I help small and midsize businesses find expensive manual work, redesign the
+				process around it, and then decide whether AI, automation, an integration, or a simpler operating
+				change is the right fix.
+			</p>
+			<p>
+				Most companies do not have an AI problem first. They have a work problem: too many handoffs, too
+				much re-entry, too much delay, and too many capable people doing machine work. Software gets
+				blamed. Headcount gets added. A tool gets purchased. The underlying process stays the same.
+			</p>
+
+			<h2>What I do</h2>
+			<p>
+				I work at the join between operations and software. I sit with the people who actually do the
+				work, map how a process runs today, put numbers on the cost, and redesign the workflow before
+				anyone picks a tool. Then I can build the automation, agents, or integrations the new process
+				needs, put them into the real workflow, and measure whether they changed the business.
+			</p>
+			<p>
+				The sequence matters. You cannot automate a process you have not understood. AI will not fix a
+				broken handoff, a missing decision rule, or a system that cannot share the information the next
+				person needs. Those are operating problems. Treat them as operating problems.
+			</p>
+
+			<h2>The problems this is for</h2>
+			<p>Owners usually come to this work when something concrete is going wrong:</p>
+			<ul>
+				<li>A quote, intake, or approval sits in a queue while revenue waits.</li>
+				<li>The same information is typed into two or three systems because nothing talks to anything else.</li>
+				<li>A senior person is the process: if they are out, the work stops.</li>
+				<li>Rework is normal. Files come back incomplete. Status lives in email.</li>
+				<li>An AI initiative produced demos and meeting summaries, but no change in time, cost, or throughput.</li>
+			</ul>
+			<p>
+				Those are not vague transformation problems. They are expensive, repeatable, and measurable. That
+				is the only kind of work I take on.
+			</p>
+
+			<h2>How the diagnostic works</h2>
+			<p>
+				I start with an <a href="/ai-opportunity-sprint/">AI Opportunity Sprint</a>: a fixed-price,
+				two-week review of two to four workflows you choose with me. I interview the people who do the
+				work, map how it actually runs, and cost it out — hours, handoffs, rework, and the delay it
+				creates downstream. Nothing is purchased or installed during the review.
+			</p>
+			<p>
+				The point of the diagnostic is not to produce a slide about AI. It is to find the work that costs
+				too much and put a number on it. If there is no real opportunity, you get the money back and keep
+				the report.
+			</p>
+			<p>What I am looking for is operational friction that has a business cost:</p>
+			<ul>
+				<li>Work that is frequent, standardized, and currently done by a person because no one redesigned it.</li>
+				<li>Handoffs that drop context, so the next person has to reconstruct the file.</li>
+				<li>Judgment that is real, mixed in with gathering, classifying, drafting, and routing that is not.</li>
+				<li>Tools that already exist but do not carry the work forward without a human acting as glue.</li>
+			</ul>
+
+			<h2>Redesign the work before you automate it</h2>
+			<p>
+				Once the current process is on paper, the next question is not “which tool?” It is whether this
+				workflow should exist in this shape at all. Some steps should disappear. Some should be done
+				earlier. Some should stop requiring a senior person. Some should stay human because they require
+				judgment, a relationship, or a decision the business is not willing to automate.
+			</p>
+			<p>
+				Only after that redesign do I look at the mechanism. Sometimes the answer is a clearer process and
+				a better checklist. Sometimes it is an integration between systems you already pay for. Sometimes
+				it is automation of a narrow, well-bounded task. Sometimes AI belongs in the workflow — drafting,
+				classifying, extracting, watching a queue — with a person still responsible for the result.
+			</p>
+			<p>
+				I will tell you which of those it is. I will not invent an AI project because that is what you
+				asked for on the intake form.
+			</p>
+
+			<h2>Implementation and measurement</h2>
+			<p>
+				If we decide to build, I implement against the redesigned process, not against a feature list. The
+				work goes into the actual workflow. The team is trained on how to use it. Then we measure the
+				thing we said we would change: time, cost, throughput, error rate, or owner hours returned to the
+				business.
+			</p>
+			<p>
+				If it cannot be measured, it is not finished. A working demo is not a working system.
+			</p>
+
+			<h2>Who this is for</h2>
+			<p>
+				This is for an owner or operator of a small or midsize business who can point at a workflow and
+				say it costs too much — in hours, delay, rework, or dependence on one person. You need to be
+				willing to let me talk to the people who do the work and look at how it actually runs. I cannot
+				diagnose a process I am not allowed to see.
+			</p>
+			<p>
+				It is a good fit if you want the operating system improved, not a tool tour. You are open to the
+				answer being “fix the process” rather than “buy AI.”
+			</p>
+
+			<h2>Who this is not for</h2>
+			<p>This is not a fit if you want a chatbot on the website, a generic AI workshop, or a vendor to implement a tool you have already chosen without examining the work. It is also not a fit if you need a staff-augmentation team, a same-week software install, or a guarantee that AI is the answer before anyone has looked at the process.</p>
+			<p>
+				If you are looking for a technology partner first and an operating diagnosis second, I am the
+				wrong person.
+			</p>
+
+			<h2>Based in Herndon, working across the region</h2>
+			<p>
+				I am based in Herndon, Virginia. I work with businesses across Northern Virginia and the
+				Washington, DC area, including Reston, Chantilly, Fairfax, Tysons, McLean, Vienna, Ashburn,
+				Leesburg, Arlington, Alexandria, Loudoun County, and Fairfax County. Some of the work is on site.
+				Some of it is remote. The location that matters is where the work happens, not where a slide deck
+				is delivered.
+			</p>
+			<p>
+				I do not have offices in each of those places, and I will not pretend to. Herndon is home base.
+				The region is the working area.
+			</p>
+		</article>
+
+		<section class="offer-page-cta section-dark" aria-labelledby="service-cta-title">
+			<div class="shell">
+				<p class="eyebrow">Start with the work/</p>
+				<h2 id="service-cta-title" class="display">If a workflow is costing you, <em>let’s look at it.</em></h2>
+				<p class="offer-deck">
+					Bring the process that is slow, expensive, or stuck on one person. We will decide whether it is
+					worth a full review.
+				</p>
+				<div class="closing-actions">
+					<a class="button button--primary" href={BOOKING_URL}>Book a call <ArrowUpRight /></a>
+					<a class="text-link" href="/ai-opportunity-sprint/">AI Opportunity Sprint <ArrowUpRight /></a>
+				</div>
+			</div>
+		</section>
+	</main>
+	<SiteFooter />
+</BaseLayout>

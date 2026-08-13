@@ -1,0 +1,19 @@
+---
+import { ENTITY_STATEMENT, LINKEDIN_URL, X_URL } from '../site';
+import ArrowUpRight from './ArrowUpRight.astro';
+---
+
+<footer class="site-footer section-dark">
+	<a class="footer-brand" href="/">
+		<span class="monogram" aria-hidden="true"><span>D</span></span>
+		Danny McGiffin
+	</a>
+	<p class="footer-entity">{ENTITY_STATEMENT}</p>
+	<div class="footer-meta">
+		<a href="/northern-virginia-ai-workflow-automation/">Northern Virginia</a>
+		<a href="/contact/">Contact</a>
+		<a href={LINKEDIN_URL} rel="me">LinkedIn <ArrowUpRight /></a>
+		<a href={X_URL} rel="me">X <ArrowUpRight /></a>
+		<span>© 2026</span>
+	</div>
+</footer>

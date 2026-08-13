@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import ArrowUpRight from '../../components/ArrowUpRight.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
@@ -8,7 +9,7 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
 	.sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
 ---
 
-<BaseLayout title="Writing — Danny McGiffin" description="Notes on work, systems, automation, and leverage.">
+<BaseLayout title="Writing — Danny McGiffin" description="Notes on work, systems, automation, and leverage." pageType="CollectionPage">
 	<SiteHeader />
 	<main id="main-content">
 		<header class="writing-hero section-dark">
@@ -28,9 +29,5 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
 			))}
 		</section>
 	</main>
-	<footer class="site-footer section-dark">
-		<a class="footer-brand" href="/"><span class="monogram" aria-hidden="true"><span>D</span></span> Danny McGiffin</a>
-		<p>Workflow systems and AI for growing companies.</p>
-		<div><a href="https://www.linkedin.com/in/danny-mcgiffin/">LinkedIn <ArrowUpRight /></a><span>© 2026</span></div>
-	</footer>
+	<SiteFooter />
 </BaseLayout>

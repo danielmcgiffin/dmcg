@@ -1,8 +1,10 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
-import ArrowUpRight from '../../components/ArrowUpRight.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { articleNode } from '../../lib/schema';
+import { SITE_URL } from '../../site';
 
 export async function getStaticPaths() {
 	const entries = await getCollection('writing', ({ data }) => !data.draft);
@@ -12,9 +14,21 @@ export async function getStaticPaths() {
 interface Props { entry: CollectionEntry<'writing'>; }
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+const pageUrl = `${SITE_URL}/writing/${entry.id}/`;
 ---
 
-<BaseLayout title={`${entry.data.title} — Danny McGiffin`} description={entry.data.description}>
+<BaseLayout
+	title={`${entry.data.title} — Danny McGiffin`}
+	description={entry.data.description}
+	ogType="article"
+	publishedAt={entry.data.publishedAt}
+	structuredData={articleNode({
+		url: pageUrl,
+		headline: entry.data.title,
+		description: entry.data.description,
+		datePublished: entry.data.publishedAt
+	})}
+>
 	<SiteHeader />
 	<main id="main-content">
 		<article>
@@ -29,9 +43,5 @@ const { Content } = await render(entry);
 			<div class="prose shell"><Content /></div>
 		</article>
 	</main>
-	<footer class="site-footer section-dark">
-		<a class="footer-brand" href="/"><span class="monogram" aria-hidden="true"><span>D</span></span> Danny McGiffin</a>
-		<p>Workflow systems and AI for growing companies.</p>
-		<div><a href="https://www.linkedin.com/in/danny-mcgiffin/">LinkedIn <ArrowUpRight /></a><span>© 2026</span></div>
-	</footer>
+	<SiteFooter />
 </BaseLayout>

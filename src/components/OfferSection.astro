@@ -4,21 +4,21 @@ import { assertDetails } from '../details';
 
 const details = [
 	{ label: 'Timeline', value: 'Two weeks' },
-	{ label: 'Price', value: '$5,000, fixed' },
-	{ label: 'Guarantee', value: "Full refund if you don't think it was worth it." },
+	{ label: 'Price', value: '$5,000, credited towards the build.' },
+	{ label: 'Guarantee', value: "If there's no real opportunity, you get your money back." },
 	{
 		label: 'Deliverable',
-		value: 'A written report: the process as it runs today, what it costs, a redesigned process, and a build plan with a fixed implementation price.'
+		value: 'A plan, including: the process as it runs today, what it costs, a redesigned process, and a build plan with a fixed implementation price.'
 	}
 ] as const;
 
 assertDetails('src/components/OfferSection.astro', details);
 ---
 
-<section class="offer section-light section-grid" id="workflow-review-offer" aria-labelledby="offer-title">
-	<p class="eyebrow reveal">Workflow Review/</p>
+<section class="offer section-light section-grid" id="ai-opportunity-sprint-offer" aria-labelledby="offer-title">
+	<p class="eyebrow reveal">AI Opportunity Sprint</p>
 	<div class="offer-content reveal">
-		<h2 id="offer-title" class="display">A fixed-price<br /><em>Workflow Review.</em></h2>
+		<h2 id="offer-title" class="display">A fixed-price<br /><em>AI Opportunity Sprint.</em></h2>
 		<dl class="offer-details">
 			{details.map(({ label, value }) => (
 				<div>
@@ -27,6 +27,6 @@ assertDetails('src/components/OfferSection.astro', details);
 				</div>
 			))}
 		</dl>
-		<a class="text-link" href="/workflow-review/">Workflow Review <ArrowUpRight /></a>
+		<a class="text-link" href="/ai-opportunity-sprint/">Learn More <ArrowUpRight /></a>
 	</div>
 </section>

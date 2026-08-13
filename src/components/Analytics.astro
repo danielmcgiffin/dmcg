@@ -1,0 +1,52 @@
+---
+const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID?.trim() ?? '';
+---
+
+{
+	gaId && (
+		<>
+			<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+			<script is:inline define:vars={{ gaId }}>
+				window.dataLayer = window.dataLayer || [];
+				function gtag() {
+					dataLayer.push(arguments);
+				}
+				gtag('js', new Date());
+				gtag('config', gaId);
+			</script>
+		</>
+	)
+}
+
+<script is:inline>
+	(function () {
+		const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+		const params = new URLSearchParams(location.search);
+		const found = {};
+		let has = false;
+		keys.forEach((key) => {
+			const value = params.get(key);
+			if (value) {
+				found[key] = value;
+				has = true;
+			}
+		});
+		if (has) sessionStorage.setItem('utm', JSON.stringify(found));
+		let stored = found;
+		if (!has) {
+			try {
+				stored = JSON.parse(sessionStorage.getItem('utm') || '{}');
+			} catch {
+				stored = {};
+			}
+		}
+		if (!stored.utm_source) return;
+		document.querySelectorAll('a[href*="cal.com"]').forEach((anchor) => {
+			const url = new URL(anchor.href);
+			Object.entries(stored).forEach(([key, value]) => {
+				if (!url.searchParams.has(key)) url.searchParams.set(key, String(value));
+			});
+			anchor.href = url.toString();
+		});
+	})();
+</script>

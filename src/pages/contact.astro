@@ -1,0 +1,74 @@
+---
+import ArrowUpRight from '../components/ArrowUpRight.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { BOOKING_URL } from '../config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbList } from '../lib/schema';
+import { ENTITY_STATEMENT, LINKEDIN_URL, SITE_URL, X_URL } from '../site';
+
+const title = 'Contact Danny McGiffin | Herndon, Virginia';
+const description =
+	'Contact Danny McGiffin, a workflow automation and AI consultant based in Herndon, Virginia, serving businesses across Northern Virginia and Washington, DC.';
+const pageUrl = `${SITE_URL}/contact/`;
+
+const details = [
+	{
+		label: 'Location',
+		value: 'Based in Herndon, Virginia. Work is with businesses across Northern Virginia and the Washington, DC area.'
+	},
+	{
+		label: 'How to start',
+		value: 'Book a call and bring the workflow that is costing you time, money, or owner attention. The first conversation is to decide whether a review is worth doing.'
+	},
+	{
+		label: 'What helps',
+		value: 'A specific process, not a general interest in AI. Who does the work today. Where it gets stuck. What “better” would mean in hours, cost, or throughput.'
+	},
+	{
+		label: 'Also',
+		value: 'LinkedIn is the public professional profile. There is no published phone number or general inbox on this site.'
+	}
+] as const;
+
+const structuredData = [
+	breadcrumbList([
+		{ name: 'Home', url: `${SITE_URL}/` },
+		{ name: 'Contact', url: pageUrl }
+	])
+];
+---
+
+<BaseLayout title={title} description={description} pageType="ContactPage" structuredData={structuredData}>
+	<SiteHeader />
+	<main id="main-content">
+		<header class="offer-hero section-dark">
+			<div class="shell">
+				<p class="eyebrow">Contact/</p>
+				<h1 class="display">Talk about the <em>work.</em></h1>
+				<p class="offer-deck">{ENTITY_STATEMENT}</p>
+			</div>
+		</header>
+		<section class="offer-page section-light shell" aria-label="How to get in touch">
+			{details.map(({ label, value }) => (
+				<div>
+					<p class="eyebrow">{label}/</p>
+					<p>{value}</p>
+				</div>
+			))}
+		</section>
+		<section class="offer-page-cta section-dark">
+			<div class="shell">
+				<div class="closing-actions">
+					<a class="button button--primary" href={BOOKING_URL}>Book a call <ArrowUpRight /></a>
+					<a class="text-link" href={LINKEDIN_URL} rel="me">LinkedIn <ArrowUpRight /></a>
+					<a class="text-link" href={X_URL} rel="me">X <ArrowUpRight /></a>
+					<a class="text-link" href="/northern-virginia-ai-workflow-automation/">
+						Northern Virginia <ArrowUpRight />
+					</a>
+				</div>
+			</div>
+		</section>
+	</main>
+	<SiteFooter />
+</BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { reviewNode } from '../lib/schema';
 
 interface Props {
 	entries: CollectionEntry<'proof'>[];
@@ -7,7 +8,27 @@ interface Props {
 }
 
 const { entries, headline } = Astro.props;
+const reviews = entries
+	.filter((entry) => entry.data.name)
+	.map((entry) =>
+		reviewNode({
+			reviewBody: `${entry.data.metric_line} ${entry.data.context}`.trim(),
+			authorName: entry.data.name!,
+			authorJobTitle: entry.data.jobTitle,
+			organization: entry.data.organization
+		})
+	);
 ---
+
+{
+	reviews.length > 0 && (
+		<script
+			is:inline
+			type="application/ld+json"
+			set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': reviews })}
+		/>
+	)
+}
 
 <section class="proof section-dark" aria-labelledby="proof-title">
 	<div class="section-grid section-heading">
@@ -19,7 +40,9 @@ const { entries, headline } = Astro.props;
 			<article>
 				<p class="proof-metric">{data.metric_line}</p>
 				<p class="proof-context">{data.context}</p>
-				<p class="proof-attribution">{data.attribution}</p>
+				<p class="proof-attribution">
+					{data.name ? [data.name, data.jobTitle, data.organization].filter(Boolean).join(' · ') : data.attribution}
+				</p>
 			</article>
 		))}
 	</div>

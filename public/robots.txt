@@ -1,3 +1,22 @@
-# allow crawling everything by default
+# Public pages are open to search and retrieval crawlers.
+# Do not add Disallow rules here without checking OAI-SearchBot.
+
 User-agent: *
-Disallow:
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+Sitemap: https://dannymcgiffin.com/sitemap-index.xml

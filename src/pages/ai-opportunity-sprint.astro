@@ -1,9 +1,12 @@
 ---
+import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { BOOKING_URL } from '../config';
 import ArrowUpRight from '../components/ArrowUpRight.astro';
 import { assertDetails } from '../details';
+import { breadcrumbList, serviceNode } from '../lib/schema';
+import { SITE_URL } from '../site';
 
 const details = [
 	{
@@ -32,31 +35,46 @@ const details = [
 	}
 ] as const;
 
-assertDetails('src/pages/workflow-review.astro', details);
+assertDetails('src/pages/ai-opportunity-sprint.astro', details);
 
-const offerSchema = {
-	'@context': 'https://schema.org',
-	'@type': 'Offer',
-	name: 'Workflow Review',
-	price: 5000,
-	priceCurrency: 'USD',
-	priceValidUntil: '2027-01-01',
-	url: 'https://dannymcgiffin.com/workflow-review/',
-	seller: { '@id': 'https://dannymcgiffin.com/#service' }
-};
+const pageUrl = `${SITE_URL}/ai-opportunity-sprint/`;
+const description =
+	'A fixed-price, two-week AI Opportunity Sprint from Danny McGiffin in Herndon, Virginia. $5,000, credited toward implementation, refundable if it is not worth it.';
+
+const structuredData = [
+	breadcrumbList([
+		{ name: 'Home', url: `${SITE_URL}/` },
+		{ name: 'AI Opportunity Sprint', url: pageUrl }
+	]),
+	serviceNode({
+		id: `${pageUrl}#service`,
+		name: 'AI Opportunity Sprint',
+		description,
+		url: pageUrl
+	}),
+	{
+		'@type': 'Offer',
+		name: 'AI Opportunity Sprint',
+		price: 5000,
+		priceCurrency: 'USD',
+		priceValidUntil: '2027-01-01',
+		url: pageUrl,
+		seller: { '@id': `${SITE_URL}/#service` }
+	}
+];
 ---
 
-<BaseLayout title="Workflow Review — Danny McGiffin" description="A fixed-price, two-week Workflow Review. $5,000, credited toward implementation, refundable if it isn't worth it." structuredData={offerSchema}>
+<BaseLayout title="AI Opportunity Sprint — Danny McGiffin" description={description} structuredData={structuredData}>
 	<SiteHeader />
 	<main id="main-content">
 		<header class="offer-hero section-dark">
 			<div class="shell">
-				<p class="eyebrow">Workflow Review/</p>
-				<h1 class="display">Workflow<br /><em>Review.</em></h1>
-				<p class="offer-deck">Before anyone automates anything, someone has to find the work that costs too much and put a number on it. That is what this is.</p>
+				<p class="eyebrow">AI Opportunity Sprint/</p>
+				<h1 class="display">AI Opportunity<br /><em>Sprint.</em></h1>
+				<p class="offer-deck">Before anyone automates anything, someone has to find the work that costs too much and put a number on it. That is what this is. I work from Herndon with businesses across Northern Virginia and Washington, DC.</p>
 			</div>
 		</header>
-		<section class="offer-page section-light shell" aria-label="Workflow Review details">
+		<section class="offer-page section-light shell" aria-label="AI Opportunity Sprint details">
 			{details.map(({ label, value }) => (
 				<div>
 					<p class="eyebrow">{label}/</p>
@@ -70,4 +88,5 @@ const offerSchema = {
 			</div>
 		</section>
 	</main>
+	<SiteFooter />
 </BaseLayout>

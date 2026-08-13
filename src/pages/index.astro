@@ -8,23 +8,19 @@ import ProofSection from '../components/ProofSection.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import { BOOKING_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { ABOUT_LOCATION, HOME_DESCRIPTION, HOME_TITLE } from '../site';
 import heroImage from '../assets/constraint-hero.png';
 
-const description = 'I help growing companies redesign expensive manual workflows and build the systems and AI to run them better.';
+const description = HOME_DESCRIPTION;
+const heroLine = 'I help growing companies redesign expensive manual workflows and build the systems and AI to run them better.';
 
 const services = [
-	['Workflow Review', 'Find the expensive manual work and put numbers on it.'],
-	['Workflow Design', 'Redesign the process before automating it.'],
-	['AI & Automation', 'Build the tools, agents, and integrations.'],
-	['Implementation', 'Put them into the actual workflow.'],
+	['AI Opportunity Sprint', 'Find the expensive, time-consuming, manual work and put numbers on it.'],
+	['Workflow Design', 'Redesign the process before picking out any tooling for it.'],
+	['AI & Automation', 'Build the tools, agents, and integrations to supercharge your operations.'],
+	['Implementation', 'Put them into the actual workflow and train the team on their use.'],
 	['Measurement', 'Measure time, cost, throughput, and ROI.']
-] as const;
-
-const capabilities = [
-	['Workflow intelligence', 'Turn scattered operating knowledge into a system people can navigate and use.'],
-	['AI-assisted operations', 'Give repetitive research, drafting, and coordination work to well-governed agents.'],
-	['Process integration', 'Connect the tools already in use so information moves without manual re-entry.'],
-	['Decision systems', 'Make important operating signals visible early enough for a person to act.']
 ] as const;
 
 const articles = (await getCollection('writing', ({ data }) => !data.draft))
@@ -46,7 +42,7 @@ if (!showProof) {
 }
 ---
 
-<BaseLayout title="Danny McGiffin — Workflow Systems & AI" description={description}>
+<BaseLayout title={HOME_TITLE} description={description} pageType="ProfilePage">
 	<SiteHeader />
 
 	<main id="main-content">
@@ -73,44 +69,44 @@ if (!showProof) {
 			<div class="hero-copy shell">
 				<p class="overline">Workflow systems & AI</p>
 				<h1 id="hero-title" class="display display--hero">
-					<span class="reveal-clip"><span class="reveal-line">Your people</span></span>
+					<span class="reveal-clip"><span class="reveal-line">Your best people</span></span>
 					<span class="reveal-clip"><span class="reveal-line">should not be doing</span></span>
 					<span class="reveal-clip"><em class="reveal-line">machine work.</em></span>
 				</h1>
 			</div>
 
 			<div class="hero-bar shell">
-				<p>{description}</p>
+				<p>{heroLine}</p>
 				<div class="hero-actions">
-					<a class="button button--ghost" href="/workflow-review/">Workflow Review <ArrowUpRight /></a>
+					<a class="button button--ghost" href="/ai-opportunity-sprint/">AI Opportunity Sprint <ArrowUpRight /></a>
 					<a class="button button--primary" href={BOOKING_URL}>Book a call <ArrowUpRight /></a>
 				</div>
 			</div>
 		</section>
 
 		<section class="thesis section-light section-grid" id="thesis" aria-labelledby="thesis-title">
-			<p class="eyebrow reveal">Thesis/</p>
+			<p class="eyebrow reveal">Thesis</p>
 			<div class="thesis-content">
-				<h2 id="thesis-title" class="display reveal">I fix the work<br />around the<br /><em>software.</em></h2>
+				<h2 id="thesis-title" class="display reveal">I fix the work<br /><em>around</em> the<br />software <em>first...</em></h2>
 				<div class="thesis-notes reveal">
-					<p>Most companies do not need another AI tool.</p>
-					<p>They need to find the work that costs too much, understand why, redesign it, and automate what should never have required a person.</p>
+					<p>...by building AI-powered, human-centered operations. <br /><br />You can't put a turbo on a car with a bad transmission, and AI won't fix your company. Not unless you redesign the work first. </p>
+					<p>I start with your goals and strategy, and work with you to find out if the workflow as it exists today is how it should exist <em>in an AI future</em>.<br /><br />We'll find opportunities to get your people focused on the things humans do best, like using their judgement and finding creative solutions.<br /><br />And we'll do this by redesigning the workflow to make the most of computers where they can handle the <em>machine work</em>.</p>
 				</div>
 			</div>
 		</section>
 
 		<section class="process section-dark" id="process" aria-labelledby="process-title">
 			<div class="section-grid section-heading">
-				<p class="eyebrow reveal">Process/</p>
+				<p class="eyebrow reveal">Process</p>
 				<div>
 					<h2 id="process-title" class="display reveal">From expensive work<br />to <em>working systems.</em></h2>
-					<p class="section-intro reveal">I diagnose the workflow, redesign it, build what it needs, put it into operation, and measure whether it worked.</p>
+					<p class="section-intro reveal">I take you from strategy to value with clarity and speed. I work with you and your team to examine the workflow, redesign the work, build what it needs to supercharge it, and measure whether it worked.</p>
 				</div>
 			</div>
 			<div class="process-list shell reveal">
-				{services.map((service, index) => (
+				{services.map((service) => (
 					<div class="process-row">
-						<span class="index">{String(index + 1).padStart(2, '0')}//05</span>
+						<span class="index"></span>
 						<h3>{service[0]}</h3>
 						<p>{service[1]}</p>
 					</div>
@@ -121,41 +117,24 @@ if (!showProof) {
 		{showProof && <ProofSection entries={proofEntries} headline={proofHeadline} />}
 		<OfferSection />
 
-		<section class="work section-light section-grid" id="work" aria-labelledby="work-title">
-			<p class="eyebrow reveal">Selected Work/</p>
-			<div class="work-content">
-				<div class="work-heading reveal">
-					<h2 id="work-title" class="display">Systems built for<br /><em>real work.</em></h2>
-					<p>A selection of the operating problems I work on—from fragmented handoffs to decision support and AI-assisted execution.</p>
-				</div>
-				<div class="capability-grid reveal">
-					{capabilities.map((capability, index) => (
-						<article>
-							<span class="index">{String(index + 1).padStart(2, '0')}</span>
-							<h3>{capability[0]}</h3>
-							<p>{capability[1]}</p>
-						</article>
-					))}
-				</div>
-			</div>
-		</section>
 
 		<section class="about section-dark" id="about" aria-labelledby="about-title">
 			<div class="about-copy reveal">
-				<p class="eyebrow">About Danny/</p>
+				<p class="eyebrow">About Danny</p>
 				<h2 id="about-title" class="display">Operator first.<br /><em>Technologist second.</em></h2>
-				<p>I work at the seam between operations and software: understanding how a business actually runs, redesigning the work, and building practical systems that make the new process stick.</p>
+				<p>I work at the join between operations and software: understanding the business' strategy, deciphering how a business actually runs, redesigning the work around technology, and building practical systems that make the new process stick.</p>
+				<p>{ABOUT_LOCATION}</p>
 				<ol>
 					<li><span>01</span>Workflow and constraint analysis</li>
 					<li><span>02</span>Systems and AI implementation</li>
 					<li><span>03</span>Plain-language operating design</li>
-					<li><span>04</span>Measured business outcomes</li>
+					<li><span>04</span>Measurable and measured business outcomes</li>
 				</ol>
 			</div>
 		</section>
 
 		<section class="writing section-light section-grid" id="writing" aria-labelledby="writing-title">
-			<p class="eyebrow reveal">Writing/</p>
+			<p class="eyebrow reveal">Writing</p>
 			<div class="writing-content">
 				<h2 id="writing-title" class="display reveal">Notes on work,<br />systems, and <em>leverage.</em></h2>
 				<div class="article-grid reveal">
@@ -167,17 +146,14 @@ if (!showProof) {
 						</a>
 					))}
 				</div>
+				<a class="text-link writing-more reveal" href="/writing/">Read More <ArrowUpRight /></a>
 			</div>
 		</section>
 
 		<ClosingCta image={heroImage} />
 	</main>
 
-	<footer class="site-footer section-dark">
-		<a class="footer-brand" href="/"><span class="monogram" aria-hidden="true"><span>D</span></span> Danny McGiffin</a>
-		<p>Workflow systems and AI for growing companies.</p>
-		<div><a href="https://www.linkedin.com/in/danny-mcgiffin/">LinkedIn <ArrowUpRight /></a><span>© 2026</span></div>
-	</footer>
+	<SiteFooter />
 
 	<script is:inline>
 		if(!CSS.supports('animation-timeline:scroll()')){let o=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('is-visible');o.unobserve(x.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>o.observe(e))}

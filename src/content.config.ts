@@ -18,7 +18,10 @@ const proof = defineCollection({
 	schema: z.object({
 		metric_line: z.string().min(1),
 		context: z.string().min(1),
-		attribution: z.string().min(1)
+		attribution: z.string().min(1),
+		name: z.string().min(1).optional(),
+		jobTitle: z.string().min(1).optional(),
+		organization: z.string().min(1).optional()
 	})
 });
 
