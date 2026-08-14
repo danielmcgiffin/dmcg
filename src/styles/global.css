@@ -649,12 +649,6 @@ li {
 	margin-top: 30px;
 }
 
-/* .section-light .hero-note would put muted-light on the dark panel. */
-.teardown-panel .hero-note {
-	margin-top: 14px;
-	color: var(--muted-dark);
-}
-
 .rule {
 	padding: 120px 0 128px;
 }
