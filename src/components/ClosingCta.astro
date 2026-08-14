@@ -1,7 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import ArrowUpRight from './ArrowUpRight.astro';
-import { BOOKING_URL } from '../config';
+import { bookingUrl } from '../config';
 
 interface Props {
 	image: ImageMetadata;
@@ -21,7 +21,7 @@ const { image } = Astro.props;
 		<h2 id="closing-title" class="display">Let’s build the<br /><em>better workflow.</em></h2>
 		<p>If you run a business in Northern Virginia or Washington, DC and have a workflow that costs too much, start with the work. Leave with a clearer process and a practical path to automation.</p>
 		<div class="closing-actions">
-			<a class="button button--primary" href={BOOKING_URL}>Book a call <ArrowUpRight /></a>
+			<a class="button button--primary" href={bookingUrl('closing-cta')}>Book a call <ArrowUpRight /></a>
 			<a class="text-link" href="/ai-opportunity-sprint/">AI Opportunity Sprint <ArrowUpRight /></a>
 		</div>
 	</div>

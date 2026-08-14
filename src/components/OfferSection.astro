@@ -1,6 +1,6 @@
 ---
 import ArrowUpRight from './ArrowUpRight.astro';
-import { BOOKING_URL } from '../config';
+import { bookingUrl } from '../config';
 
 const outcomes = [
 	'Which work is consuming the most capacity',
@@ -13,31 +13,28 @@ const outcomes = [
 <section class="offer section-light" id="offer" aria-labelledby="offer-title">
 	<div class="shell">
 		<p class="eyebrow reveal">The Workflow Teardown</p>
+		<h2 id="offer-title" class="display reveal">Find out what your manual work is actually costing you.</h2>
 		<div class="teardown reveal">
-			<div>
-				<h2 id="offer-title" class="display">Find out what your manual work is actually costing you.</h2>
-				<p class="teardown-price">$5,000</p>
-				<p class="teardown-meta">Two weeks. Credited toward the build.</p>
-				<p class="teardown-refund">
-					If you read the report and do not think it was worth $5,000, tell me within two weeks of delivery. I
-					refund it in full. You keep the report. You decide.
-				</p>
-			</div>
 			<div class="page-copy">
 				<p>
-					I will dig into the parts of your operation where manual work, delays, or headcount appear to be
-					limiting growth. You do not need to know what should be automated.
+					I will dig into the parts of your operation where manual work, delays, or systems issues are hindering growth. Then we'll identify what should be redesigned and what should be automated.
 				</p>
-				<p>At the end, you will know:</p>
+				<p>By the end, you will know:</p>
 				<ul>
 					{outcomes.map((item) => (
 						<li>{item}</li>
 					))}
 				</ul>
-				<p class="teardown-candor">If there is nothing worth automating, I will tell you.</p>
-				<p>No giant transformation program. No AI strategy deck. No technology looking for a problem.</p>
-				<a class="button button--primary" href={BOOKING_URL}>Show me the work <ArrowUpRight /></a>
-				<p class="hero-note">Bring one ugly, manual, expensive process.</p>
+				<p class="teardown-candor">If there is nothing worth automating, then I'll say that.</p>
+				<p>No giant transformation program. No AI strategy deck. No technology in search of a problem.</p>
+			</div>
+			<div class="teardown-panel">
+				<p class="teardown-price">$5,000</p>
+				<p class="teardown-meta">Two weeks. Credited toward any subsequent build.</p>
+				<p class="teardown-refund">
+					If we don't find anything to streamline, or you feel your report wasn't worth $5,000, tell me within two weeks of delivery and I'll	refund it in full. You can still keep the report.
+				</p>
+				<a class="button button--primary" href={bookingUrl('offer')}>Show me the work <ArrowUpRight /></a>
 			</div>
 		</div>
 	</div>

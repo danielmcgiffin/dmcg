@@ -2,7 +2,7 @@
 import ArrowUpRight from '../components/ArrowUpRight.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
-import { BOOKING_URL } from '../config';
+import { bookingUrl } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { breadcrumbList, serviceNode } from '../lib/schema';
 import { ENTITY_STATEMENT, SERVICE_AREA_PLACES, SITE_URL } from '../site';
@@ -170,7 +170,7 @@ const structuredData = [
 					worth a full review.
 				</p>
 				<div class="closing-actions">
-					<a class="button button--primary" href={BOOKING_URL}>Book a call <ArrowUpRight /></a>
+					<a class="button button--primary" href={bookingUrl('nova')}>Book a call <ArrowUpRight /></a>
 					<a class="text-link" href="/ai-opportunity-sprint/">AI Opportunity Sprint <ArrowUpRight /></a>
 				</div>
 			</div>

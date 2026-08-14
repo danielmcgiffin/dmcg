@@ -2,7 +2,7 @@
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { BOOKING_URL } from '../config';
+import { bookingUrl } from '../config';
 import ArrowUpRight from '../components/ArrowUpRight.astro';
 import { assertDetails } from '../details';
 import { breadcrumbList, serviceNode } from '../lib/schema';
@@ -84,7 +84,7 @@ const structuredData = [
 		</section>
 		<section class="offer-page-cta section-dark">
 			<div class="shell">
-				<a class="button button--primary" href={BOOKING_URL}>Book a call <ArrowUpRight /></a>
+				<a class="button button--primary" href={bookingUrl('sprint')}>Book a call <ArrowUpRight /></a>
 			</div>
 		</section>
 	</main>

@@ -132,7 +132,9 @@ li {
 	font-weight: 300;
 	font-optical-sizing: auto;
 	letter-spacing: -0.02em;
-	line-height: .92;
+	/* Newsreader ascenders reach .715em and descenders .2595em, so a descender
+	   stacked over an ascender needs .9745em of leading before the ink touches. */
+	line-height: .98;
 	text-wrap: balance;
 }
 
@@ -543,38 +545,48 @@ li {
 	margin-top: 64px;
 }
 
+/* Wider measure than the argument sections: the headline runs the full shell so it
+   lands on two lines and stays larger than the price. */
+.offer .display {
+	max-width: 26ch;
+	margin-top: 28px;
+	font-size: clamp(3rem, 5.2vw, 4.75rem);
+}
+
+/* Reading column left, transaction panel right. */
 .teardown {
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
+	grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
 	gap: clamp(40px, 6vw, 96px);
 	align-items: start;
 	margin-top: 54px;
 }
 
-.teardown .display {
-	max-width: 14ch;
+/* The one place on the page where money changes hands, so it is built as an object
+   rather than a column: the same dark fill the page already alternates into. */
+.teardown-panel {
+	padding: clamp(28px, 2.6vw, 44px);
+	color: var(--bone);
+	background: var(--dark);
 }
 
 .teardown-price {
-	margin-top: 28px;
 	font-family: var(--display);
 	font-size: clamp(2.75rem, 4.5vw, 4.5rem);
 	font-weight: 300;
 	letter-spacing: -.04em;
 	line-height: 1;
-	color: var(--ink);
+	color: var(--bone);
 }
 
 .teardown-meta {
-	margin-top: 14px;
-	color: var(--ink);
-	font-size: 1.05rem;
+	margin-top: 12px;
+	color: var(--muted-dark);
+	font-size: .9375rem;
 }
 
 .teardown-candor {
 	margin-top: 2em;
-	padding-top: 1.4em;
-	border-top: 1px solid var(--line-light);
 }
 
 .closer {
@@ -633,8 +645,14 @@ li {
 	width: 10rem;
 }
 
-.teardown .button {
-	margin-top: 36px;
+.teardown-panel .button {
+	margin-top: 30px;
+}
+
+/* .section-light .hero-note would put muted-light on the dark panel. */
+.teardown-panel .hero-note {
+	margin-top: 14px;
+	color: var(--muted-dark);
 }
 
 .rule {
@@ -653,10 +671,14 @@ li {
 	margin-top: 28px;
 }
 
+/* Second in the panel's hierarchy, after the price: raised by size and weight. */
 .teardown-refund {
-	max-width: 42ch;
-	margin-top: 18px;
-	color: var(--muted-light);
+	max-width: 34ch;
+	margin-top: 26px;
+	color: var(--bone);
+	font-size: 1.125rem;
+	font-weight: 600;
+	line-height: 1.5;
 }
 
 .thesis {
@@ -1461,10 +1483,13 @@ li {
 		animation: none;
 	}
 
-	.display--hero {
+	/* Doubled class so this wins over the later .display rule regardless of order.
+	   .9 is what the hero has actually been rendering here; the .83 written below
+	   .display never applied. Changing it needs its own .reveal-clip check. */
+	.display.display--hero {
 		max-width: 94%;
 		font-size: clamp(3.65rem, 16vw, 5.4rem);
-		line-height: .83;
+		line-height: .9;
 	}
 
 	.hero-bar {
@@ -1496,7 +1521,7 @@ li {
 
 	.display {
 		font-size: clamp(3.4rem, 15vw, 4.7rem);
-		line-height: .9;
+		line-height: .98;
 	}
 
 	.thesis {

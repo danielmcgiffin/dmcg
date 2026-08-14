@@ -1,6 +1,6 @@
 ---
 import ArrowUpRight from './ArrowUpRight.astro';
-import { BOOKING_URL } from '../config';
+import { bookingUrl } from '../config';
 ---
 
 <header class="site-header" data-site-header>
@@ -12,7 +12,7 @@ import { BOOKING_URL } from '../config';
 		<span class="monogram" aria-hidden="true"><span>D</span></span>
 		<span>Danny McGiffin</span>
 	</a>
-	<a class="button button--header" href={BOOKING_URL}>Book a call <ArrowUpRight /></a>
+	<a class="button button--header" href={bookingUrl('nav')}>Book a call <ArrowUpRight /></a>
 </header>
 
 <script is:inline>

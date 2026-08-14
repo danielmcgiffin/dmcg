@@ -4,7 +4,7 @@ import ArrowUpRight from '../components/ArrowUpRight.astro';
 import OfferSection from '../components/OfferSection.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
-import { BOOKING_URL } from '../config';
+import { bookingUrl } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { HOME_DESCRIPTION, HOME_TITLE } from '../site';
 import heroImage from '../assets/constraint-hero.png';
@@ -43,7 +43,7 @@ const findings = [
 			<div class="visual-grid" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
 			<div class="hero-copy shell">
-				<p class="overline">Operations, AI &amp; automation</p>
+				<p class="overline">AI &amp; workflow automation</p>
 				<h1 id="hero-title" class="display display--hero">
 					<span class="reveal-clip"><span class="reveal-line">Grow the business.</span></span>
 					<span class="reveal-clip"><em class="reveal-line">Not the back office.</em></span>
@@ -52,11 +52,11 @@ const findings = [
 
 			<div class="hero-bar shell">
 				<p>
-					<strong>So your existing team can handle more.</strong>
+					<strong>Supercharge the team you have today.</strong>
 					<span class="hero-note">30 minutes. No pitch deck. Bring me whatever's your current heartburn.</span>
 				</p>
 				<div class="hero-actions">
-					<a class="button button--primary" href={BOOKING_URL}>Show me the work <ArrowUpRight /></a>
+					<a class="button button--primary" href={bookingUrl('hero')}>Show me the work <ArrowUpRight /></a>
 				</div>
 			</div>
 		</section>
@@ -82,20 +82,18 @@ const findings = [
 					<h2 id="rule-title" class="display reveal">Do not hire a person to solve a problem a machine can solve.</h2>
 				</div>
 				<div class="page-copy reveal">
-					<p>Sometimes another hire is exactly the right answer.</p>
+					<p>Sometimes another hire is actually the right answer.</p>
 					<p>
-						But before you add $70,000, $100,000, or $150,000 of annual overhead, it is worth knowing whether the
-						work itself needs to exist.
+						But before you add $70,000, $100,000, or $150,000+ of annual overhead, it is worth figuring out if there's a better way to do more with who you've got, thanks to AI.
 					</p>
 					<p>
-						Most companies do not have an AI problem. They have expensive people spending expensive hours moving
-						information between systems, rebuilding reports, chasing approvals, copying data, checking work, and
-						keeping processes alive through sheer institutional knowledge.
+						Most companies do not have a technology problem. They have workflow problems, and expensive people spending expensive hours moving information between systems, rebuilding reports, chasing approvals, copying data, checking work, and
+						keeping things moving through sheer willpower.
 					</p>
 					<p>
-						<strong>What work can we move (or remove) before we add another person?</strong>
+						<strong>How can we use AI to get the best out of our people AND our tech.</strong>
 					</p>
-					<p>That is the question I help answer.</p>
+					<p>That's the question I help answer.</p>
 				</div>
 			</div>
 		</section>
@@ -104,9 +102,9 @@ const findings = [
 			<div class="section-grid section-heading">
 				<p class="eyebrow reveal">The work</p>
 				<div>
-					<h2 id="find-title" class="display reveal">The real process is not the one in the SOP.</h2>
+					<h2 id="find-title" class="display reveal">The way things work isn't what's written down.</h2>
 					<p class="section-intro reveal">
-						I work with your team to see how the work actually happens, not how the SOP says it happens.
+						I work with your team to see how the work actually happens, not how the SOP says it's supposed to happen. That way we can build solutions that actually stick.
 					</p>
 				</div>
 			</div>
@@ -119,8 +117,6 @@ const findings = [
 				))}
 			</div>
 		</section>
-
-		<OfferSection />
 
 		<section class="about section-light" id="why" aria-labelledby="why-title">
 			<div class="about-copy reveal">
@@ -139,10 +135,12 @@ const findings = [
 			</div>
 		</section>
 
+		<OfferSection />
+		
 		<section class="closer section-dark" id="contact" aria-labelledby="closing-title">
 			<div class="shell closer-inner reveal">
 				<h2 id="closing-title" class="display">
-					<a class="closer-ask" href={BOOKING_URL}
+					<a class="closer-ask" href={bookingUrl('closer')}
 						><span>Before you hire another person, show me the work.</span></a>
 				</h2>
 				<p class="hero-note">No sales presentation required.</p>

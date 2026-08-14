@@ -2,7 +2,7 @@
 import ArrowUpRight from '../components/ArrowUpRight.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
-import { BOOKING_URL } from '../config';
+import { bookingUrl } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { breadcrumbList } from '../lib/schema';
 import { ENTITY_STATEMENT, LINKEDIN_URL, SITE_URL, X_URL } from '../site';
@@ -60,7 +60,7 @@ const structuredData = [
 		<section class="offer-page-cta section-dark">
 			<div class="shell">
 				<div class="closing-actions">
-					<a class="button button--primary" href={BOOKING_URL}>Book a call <ArrowUpRight /></a>
+					<a class="button button--primary" href={bookingUrl('contact')}>Book a call <ArrowUpRight /></a>
 					<a class="text-link" href={LINKEDIN_URL} rel="me">LinkedIn <ArrowUpRight /></a>
 					<a class="text-link" href={X_URL} rel="me">X <ArrowUpRight /></a>
 					<a class="text-link" href="/northern-virginia-ai-workflow-automation/">
