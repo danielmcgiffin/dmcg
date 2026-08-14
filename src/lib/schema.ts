@@ -71,11 +71,13 @@ export function professionalServiceNode(): JsonLd {
 		sameAs: [...SAME_AS],
 		makesOffer: {
 			'@type': 'Offer',
-			url: `${SITE_URL}/ai-opportunity-sprint/`,
+			url: `${SITE_URL}/#offer`,
+			price: '5000',
+			priceCurrency: 'USD',
 			itemOffered: {
 				'@type': 'Service',
-				name: 'AI Opportunity Sprint',
-				url: `${SITE_URL}/ai-opportunity-sprint/`
+				name: 'Workflow Teardown',
+				url: `${SITE_URL}/#offer`
 			}
 		}
 	};

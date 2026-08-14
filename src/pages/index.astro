@@ -1,48 +1,24 @@
 ---
 import { Picture } from 'astro:assets';
-import { getCollection } from 'astro:content';
 import ArrowUpRight from '../components/ArrowUpRight.astro';
-import ClosingCta from '../components/ClosingCta.astro';
 import OfferSection from '../components/OfferSection.astro';
-import ProofSection from '../components/ProofSection.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import { BOOKING_URL } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SiteFooter from '../components/SiteFooter.astro';
-import { ABOUT_LOCATION, HOME_DESCRIPTION, HOME_TITLE } from '../site';
+import { HOME_DESCRIPTION, HOME_TITLE } from '../site';
 import heroImage from '../assets/constraint-hero.png';
 
-const description = HOME_DESCRIPTION;
-const heroLine = 'I help growing companies redesign expensive manual workflows and build the systems and AI to run them better.';
-
-const services = [
-	['AI Opportunity Sprint', 'Find the expensive, time-consuming, manual work and put numbers on it.'],
-	['Workflow Design', 'Redesign the process before picking out any tooling for it.'],
-	['AI & Automation', 'Build the tools, agents, and integrations to supercharge your operations.'],
-	['Implementation', 'Put them into the actual workflow and train the team on their use.'],
-	['Measurement', 'Measure time, cost, throughput, and ROI.']
+const findings = [
+	['How it breaks.', 'Fat-finger errors, missed forms, and the "just some quick fixes" you do every time to make it work.'],
+	['Where time disappears.', 'Manual steps, duplicate work, waiting, rework, and unnecessary handoffs.'],
+	['What it costs.', 'Hours, headcount, delay, errors, and capacity you cannot use somewhere else.'],
+	['What should change.', 'Streamline and simplify the process first. Then automate what makes sense.'],
+	['What machines can take over.', 'AI, automation, integrations, agents, or deterministic code, whatever solves the problem.']
 ] as const;
-
-const articles = (await getCollection('writing', ({ data }) => !data.draft))
-	.sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
-	.slice(0, 2);
-
-const proofEntries = await getCollection('proof');
-const proofHeadline = import.meta.env.PROOF_HEADLINE?.trim() ?? '';
-const proofEnabled = import.meta.env.SHOW_PROOF === 'true';
-const showProof = proofEnabled && proofEntries.length > 0 && proofHeadline.length > 0;
-
-if (!showProof) {
-	const missing = [
-		...(!proofEnabled ? ['SHOW_PROOF=true'] : []),
-		...(proofHeadline.length === 0 ? ['PROOF_HEADLINE'] : []),
-		...(proofEntries.length === 0 ? ['at least one verified entry containing metric_line, context, and attribution'] : [])
-	];
-	console.warn(`[proof] Evidence section not rendered. Missing: ${missing.join('; ')}.`);
-}
 ---
 
-<BaseLayout title={HOME_TITLE} description={description} pageType="ProfilePage">
+<BaseLayout title={HOME_TITLE} description={HOME_DESCRIPTION} pageType="ProfilePage">
 	<SiteHeader />
 
 	<main id="main-content">
@@ -67,90 +43,111 @@ if (!showProof) {
 			<div class="visual-grid" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
 			<div class="hero-copy shell">
-				<p class="overline">Workflow systems & AI</p>
+				<p class="overline">Operations, AI &amp; automation</p>
 				<h1 id="hero-title" class="display display--hero">
-					<span class="reveal-clip"><span class="reveal-line">Your best people</span></span>
-					<span class="reveal-clip"><span class="reveal-line">should not be doing</span></span>
-					<span class="reveal-clip"><em class="reveal-line">machine work.</em></span>
+					<span class="reveal-clip"><span class="reveal-line">Grow the business.</span></span>
+					<span class="reveal-clip"><em class="reveal-line">Not the back office.</em></span>
 				</h1>
 			</div>
 
 			<div class="hero-bar shell">
-				<p>{heroLine}</p>
+				<p>
+					<strong>So your existing team can handle more.</strong>
+					<span class="hero-note">30 minutes. No pitch deck. Bring me whatever's your current heartburn.</span>
+				</p>
 				<div class="hero-actions">
-					<a class="button button--ghost" href="/ai-opportunity-sprint/">AI Opportunity Sprint <ArrowUpRight /></a>
-					<a class="button button--primary" href={BOOKING_URL}>Book a call <ArrowUpRight /></a>
+					<a class="button button--primary" href={BOOKING_URL}>Show me the work <ArrowUpRight /></a>
 				</div>
 			</div>
 		</section>
 
-		<section class="thesis section-light section-grid" id="thesis" aria-labelledby="thesis-title">
-			<p class="eyebrow reveal">Thesis</p>
-			<div class="thesis-content">
-				<h2 id="thesis-title" class="display reveal">I fix the work<br /><em>around</em> the<br />software <em>first...</em></h2>
-				<div class="thesis-notes reveal">
-					<p>...by building AI-powered, human-centered operations. <br /><br />You can't put a turbo on a car with a bad transmission, and AI won't fix your company. Not unless you redesign the work first. </p>
-					<p>I start with your goals and strategy, and work with you to find out if the workflow as it exists today is how it should exist <em>in an AI future</em>.<br /><br />We'll find opportunities to get your people focused on the things humans do best, like using their judgement and finding creative solutions.<br /><br />And we'll do this by redesigning the workflow to make the most of computers where they can handle the <em>machine work</em>.</p>
-				</div>
+		<section class="hero-deck section-dark" aria-label="What more work looks like">
+			<div class="shell page-copy">
+				<p>
+					Every new client, every new contract, creates more work. More onboarding. More reporting. More data
+					entry. More approvals. More spreadsheets. More things your experienced people end up tracking,
+					managing, checking, and doing by hand.
+				</p>
+				<p>
+					I find the work that is eating your time and margin, redesign it, and automate what should not require a
+					person.
+				</p>
 			</div>
 		</section>
 
-		<section class="process section-dark" id="process" aria-labelledby="process-title">
-			<div class="section-grid section-heading">
-				<p class="eyebrow reveal">Process</p>
+		<section class="rule section-light" id="rule" aria-labelledby="rule-title">
+			<div class="shell rule-row">
 				<div>
-					<h2 id="process-title" class="display reveal">From expensive work<br />to <em>working systems.</em></h2>
-					<p class="section-intro reveal">I take you from strategy to value with clarity and speed. I work with you and your team to examine the workflow, redesign the work, build what it needs to supercharge it, and measure whether it worked.</p>
+					<p class="eyebrow reveal">A simple rule</p>
+					<h2 id="rule-title" class="display reveal">Do not hire a person to solve a problem a machine can solve.</h2>
+				</div>
+				<div class="page-copy reveal">
+					<p>Sometimes another hire is exactly the right answer.</p>
+					<p>
+						But before you add $70,000, $100,000, or $150,000 of annual overhead, it is worth knowing whether the
+						work itself needs to exist.
+					</p>
+					<p>
+						Most companies do not have an AI problem. They have expensive people spending expensive hours moving
+						information between systems, rebuilding reports, chasing approvals, copying data, checking work, and
+						keeping processes alive through sheer institutional knowledge.
+					</p>
+					<p>
+						<strong>What work can we move (or remove) before we add another person?</strong>
+					</p>
+					<p>That is the question I help answer.</p>
 				</div>
 			</div>
-			<div class="process-list shell reveal">
-				{services.map((service) => (
-					<div class="process-row">
-						<span class="index"></span>
-						<h3>{service[0]}</h3>
-						<p>{service[1]}</p>
+		</section>
+
+		<section class="find section-dark" id="work" aria-labelledby="find-title">
+			<div class="section-grid section-heading">
+				<p class="eyebrow reveal">The work</p>
+				<div>
+					<h2 id="find-title" class="display reveal">The real process is not the one in the SOP.</h2>
+					<p class="section-intro reveal">
+						I work with your team to see how the work actually happens, not how the SOP says it happens.
+					</p>
+				</div>
+			</div>
+			<div class="find-list shell reveal">
+				{findings.map(([title, body]) => (
+					<div class="find-row">
+						<h3>{title}</h3>
+						<p>{body}</p>
 					</div>
 				))}
 			</div>
 		</section>
 
-		{showProof && <ProofSection entries={proofEntries} headline={proofHeadline} />}
 		<OfferSection />
 
-
-		<section class="about section-dark" id="about" aria-labelledby="about-title">
+		<section class="about section-light" id="why" aria-labelledby="why-title">
 			<div class="about-copy reveal">
-				<p class="eyebrow">About Danny</p>
-				<h2 id="about-title" class="display">Operator first.<br /><em>Technologist second.</em></h2>
-				<p>I work at the join between operations and software: understanding the business' strategy, deciphering how a business actually runs, redesigning the work around technology, and building practical systems that make the new process stick.</p>
-				<p>{ABOUT_LOCATION}</p>
-				<ol>
-					<li><span>01</span>Workflow and constraint analysis</li>
-					<li><span>02</span>Systems and AI implementation</li>
-					<li><span>03</span>Plain-language operating design</li>
-					<li><span>04</span>Measurable and measured business outcomes</li>
-				</ol>
+				<p class="eyebrow">Why me</p>
+				<h2 id="why-title" class="display">Operator first.<br />Technologist second.</h2>
+				<p>
+					I have spent my career inside operations: running teams, fixing broken processes, implementing
+					enterprise systems, and dealing with the messy reality between what a system was supposed to do and
+					what people actually have to do to make the business run.
+				</p>
+				<p>
+					Now I use AI and automation as operating tools. Because sometimes
+					<strong> ten hours of work should become ten minutes of work.</strong>
+					{' '}You do not just save ten hours, you remove a constraint on the business.
+				</p>
 			</div>
 		</section>
 
-		<section class="writing section-light section-grid" id="writing" aria-labelledby="writing-title">
-			<p class="eyebrow reveal">Writing</p>
-			<div class="writing-content">
-				<h2 id="writing-title" class="display reveal">Notes on work,<br />systems, and <em>leverage.</em></h2>
-				<div class="article-grid reveal">
-					{articles.map((article) => (
-						<a href={`/writing/${article.id}/`}>
-							<h3>{article.data.title}</h3>
-							<p>{article.data.description}</p>
-							<span>Read note <ArrowUpRight /></span>
-						</a>
-					))}
-				</div>
-				<a class="text-link writing-more reveal" href="/writing/">Read More <ArrowUpRight /></a>
+		<section class="closer section-dark" id="contact" aria-labelledby="closing-title">
+			<div class="shell closer-inner reveal">
+				<h2 id="closing-title" class="display">
+					<a class="closer-ask" href={BOOKING_URL}
+						><span>Before you hire another person, show me the work.</span></a>
+				</h2>
+				<p class="hero-note">No sales presentation required.</p>
 			</div>
 		</section>
-
-		<ClosingCta image={heroImage} />
 	</main>
 
 	<SiteFooter />

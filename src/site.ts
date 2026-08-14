@@ -18,9 +18,9 @@ export const ABOUT_LOCATION =
 	"I'm a workflow automation and AI consultant based in Herndon, Virginia. I work with small and midsize businesses across Northern Virginia and the Washington, DC area.";
 
 export const HOME_DESCRIPTION =
-	'Danny McGiffin is a workflow automation and AI consultant in Herndon, Virginia. He helps small and midsize businesses across Northern Virginia and Washington, DC improve workflows, automate manual work, and implement AI.';
+	'I find the work that is eating your time and margin, redesign it, and automate what should not require a person, so your existing team can handle more.';
 
-export const HOME_TITLE = 'Danny McGiffin — Workflow Automation & AI Consultant';
+export const HOME_TITLE = 'Danny McGiffin: Grow the Business, Not the Back Office';
 
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/danny-mcgiffin/';
 export const X_URL = 'https://x.com/therealmcgiffin';
