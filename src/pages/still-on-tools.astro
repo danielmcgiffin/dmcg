@@ -1,0 +1,244 @@
+---
+import ArrowUpRight from '../components/ArrowUpRight.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbList } from '../lib/schema';
+import { SITE_URL } from '../site';
+
+const title = "You're Not Late. You're Still on Tools. | Danny McGiffin";
+const description =
+	'Most $5–50M companies already use AI. Almost none have redesigned how the core work gets done. Score one real workflow.';
+const pageUrl = `${SITE_URL}/still-on-tools/`;
+
+const structuredData = [
+	breadcrumbList([
+		{ name: 'Home', url: `${SITE_URL}/` },
+		{ name: "You're not late. You're still on tools.", url: pageUrl }
+	])
+];
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+	<SiteHeader />
+	<main id="main-content">
+		<header class="offer-hero section-dark">
+			<div class="shell">
+				<p class="eyebrow">Research briefing for $5–50M founders and operators</p>
+				<h1 class="display">You're not late.<br /><em>You're still on tools.</em></h1>
+				<p class="offer-deck">
+					Most mid-market companies already use AI. Almost none have changed how the core work gets done. That
+					gap is still small. It will not stay small.
+				</p>
+				<p>
+					<a class="button button--primary" href="/score-one-workflow/"
+						>Score one workflow <ArrowUpRight /></a
+					>
+				</p>
+				<p class="offer-deck">Ten short questions. One real workflow. Not a company-wide AI score.</p>
+			</div>
+		</header>
+
+		<article class="prose service-prose shell">
+			<p>
+				If your company is using ChatGPT, Copilot, or the AI features inside software you already pay for, you
+				are not behind.
+			</p>
+			<p>You are in the main body of the market.</p>
+			<p>
+				The mid-market surveys from 2025–2026 say the same thing in different words. Tools are everywhere.
+				Meeting notes, document drafts, a first pass on marketing. The work is faster in spots. The process
+				underneath is mostly the same.
+			</p>
+			<p>
+				That is a legitimate place to start. The cheap path — a person opens a browser tool and gets a draft back
+				— is how almost everyone entered. Kaufman Rossin’s 2026 US mid-market survey put it plainly: generative
+				AI “requires no process redesign.”
+			</p>
+			<p>The next gap is different.</p>
+			<p>
+				A small group of companies is not adding another copilot. They are changing how the work actually moves:
+				the SOP, the handoff, the system of record. If you took the AI out, the process would break or have to be
+				redesigned. That is rare — and where a measurable gap starts to open.
+			</p>
+			<p>For a $5–50M company, this is still early. It will not stay that way.</p>
+
+			<h2>What the research actually shows</h2>
+			<p>
+				Seven locked sources from 2025–2026 sit behind this briefing. None isolate $5–50M revenue. Closest cuts:
+				Kaufman Rossin’s 20–99 employee group, McKinsey’s global firms under $100M, RSM’s $30M–$10B AI users.
+				Those numbers are not averaged.
+			</p>
+			<p>Two levels matter.</p>
+			<p>
+				<strong>Assisted steps.</strong> AI helps a discrete task inside a process that is still basically the
+				same. A person still runs the process. If you turned the tool off, the work would slow down. It would not
+				be redesigned.
+			</p>
+			<p>
+				<strong>Redesigned work.</strong> The process was reworked so AI is load-bearing. Adjacent steps changed.
+				The SOP, the handoff, or the system of record changed. If you turned the AI off, you would have a
+				different process.
+			</p>
+			<p>Most companies that “use AI” are in the first group. The second is the scarce one.</p>
+
+			<h3>1. Tools are common. Operational maturity is not.</h3>
+			<p>
+				In Kaufman Rossin’s US sample of 100 mid-market decision-makers ($5M to under $1B, 20 to under 1,000
+				employees), 94% have AI tools. Generative AI leads at 70%. The top uses are meeting notes (77%), data
+				analysis (73%), document processing (67%), marketing (65%), and knowledge search (64%) — help bolted onto
+				existing work.
+			</p>
+			<p>
+				The same survey’s “AI iceberg” is the operational tell. Tools sit at 94%. Integration / iPaaS sits at
+				33%. RPA sits at 31%. Without that connective tissue, the typical path is copy-paste: the model produces
+				something useful, and a person still carries it into the system of record.
+			</p>
+			<p>
+				Kaufman Rossin calls this the “messy middle.” 52% are Testers. 31% are Builders — AI in at least one core
+				process, an upper bound on redesigned work, not a count of it. Fully embedded Operators: 2%. Separately,
+				73% say their processes are still early or foundational.
+			</p>
+			<p>
+				Larger mid-market samples look louder and land in the same place. RSM’s 1,030 AI-using firms
+				($30M–$10B, non-adopters excluded) say 86% have “integrated AI into operations.” RSM’s own reading:
+				without a shift in how work gets done, AI remains “a layer of productivity tooling.”
+			</p>
+
+			<h3>2. The scarce thing is redesigned work, not another assistant.</h3>
+			<p>Assisted steps are not scarce. Redesigned workflows are.</p>
+			<p>
+				McKinsey’s 2025 global survey is the cleanest measure we have, and it is not a $5–50M sample. Among
+				AI-using respondents, 20% of the non-high-performers said they had “fundamentally redesigned individual
+				workflows.” Among the high-performer tail — roughly 6% of the sample, defined by more than 5% of EBIT
+				from AI plus “significant value” — that figure was 55%. Workflow redesign was among the strongest
+				correlates of impact of the 31 factors tested.
+			</p>
+			<p>
+				Even in Deloitte’s 2026 “leading-edge” global sample of companies that already have AI in daily use, 37%
+				report little or no change to existing processes. 30% say they are redesigning key processes.
+				Larger-firm, often AI-user-only numbers — and already a minority. True redesigned work in $5–50M
+				companies is not measured here. Expect it well below those rates.
+			</p>
+			<p>
+				Agentic AI does not change the picture. McKinsey found 62% experimenting with agents and 23% scaling an
+				agentic system somewhere — no more than 10% in any one function. An agent on an unchanged process is
+				still an assisted step.
+			</p>
+
+			<h3>3. The smaller-firm evidence is thin. It still points earlier.</h3>
+			<p>
+				Kaufman Rossin’s 20–99 employee cut is the closest small-firm signal in this set. It is not a $5–50M
+				revenue cut. It sits inside a 100-person US sample that runs from $5M to under $1B, so the cell is small
+				and directional only.
+			</p>
+			<p>
+				Inside that sample, 60% of 20–99 employee firms had reached Tester or Builder, versus 83% overall, 88%
+				at 100–499 employees, and 96% at 500–999. More of the smallest firms were still in unofficial, individual
+				use.
+			</p>
+			<p>
+				McKinsey’s global size cut — a different sample, and a looser test — points the same way. 29% of firms
+				under $100M had reached the “scaling” phase, versus nearly half of firms above $5 billion. Scaling there
+				means breadth of deployment, not redesigned work.
+			</p>
+			<p>
+				Do not read those as a $5–50M prevalence rate. Do read the direction: the smaller cuts we have look
+				earlier than an already-messy mid-market average. That is mostly capacity — IT benches, data platforms,
+				slack — not a verdict on intent. The useful implication is the reverse of “you are behind.” If companies
+				at your scale are still mostly on tools, the ones who redesign one load-bearing workflow now are doing it
+				against a field that has not moved yet.
+			</p>
+
+			<h3>4. The companies pulling ahead changed the process, not the tool count.</h3>
+			<p>
+				No source runs a causal study of $5–50M firms. The same differentiators show up anyway.
+			</p>
+			<p>
+				They change the next step in the chain. McKinsey’s manifesto test is the cleanest version: a model that
+				predicts equipment failures does nothing if maintenance still follows the calendar. The prediction is an
+				assisted step. Changing how work is scheduled is redesigned work. McKinsey’s high performers are 2.8×
+				more likely to have fundamentally redesigned workflows (55% vs 20%).
+			</p>
+			<p>
+				They pick one or two load-bearing workflows instead of a long use-case list. They build the stack that
+				lets an AI output <em>act</em> — data, integration, a rule for when a person has to touch the work.
+				Human-in-the-loop validation: 65% of McKinsey high performers vs 23% of others.
+			</p>
+			<p>
+				They measure whether the business moved, not whether the pilot felt good. RSM’s AI users report 97%
+				satisfaction, mostly on time and efficiency. Only 44% of Kaufman Rossin’s sample track financial ROI,
+				even though 95% agree AI saves time. Time saved is real. It is not a redesigned process.
+			</p>
+			<p>
+				The barriers are not mysterious. Kaufman Rossin: cybersecurity (43%), talent (42%), legacy integration
+				(41%). Executive sponsorship is last, at 12%. Mid-market firms are not waiting for the CEO to care. They
+				are stuck on the foundations that let a tool become a process.
+			</p>
+
+			<h2>Why the next year matters</h2>
+			<p>
+				Do not import the headlines. RSM’s 36% “fully embedded,” Netrio’s 26% “scaled and governed,” and
+				Deloitte’s 30% “redesigning key processes” come from larger, often AI-user-only samples. They are not
+				your base rate. The installed base is already copilots and document help. Another tool of that type is
+				how you stay in the messy middle with better software.
+			</p>
+			<p>
+				The urgency is not that you missed AI. You did not. The urgency is that spend and expectations are
+				already moving, and most of that motion is still buying help for unchanged work.
+			</p>
+			<p>
+				Kaufman Rossin: 93% plan to increase AI spending in the next 12 months. RSM: 84% expect spend to rise
+				next year. Among RSM respondents increasing that spend, 41% are cutting cybersecurity and 40% are
+				cutting external consulting. That is how a company can feel busy on AI and be in the same place a year
+				from now: more tools, same process, a slightly faster messy middle.
+			</p>
+			<p>
+				The companies that will look different in twelve months are not the ones with the most licenses. They
+				are the ones who pick one workflow that binds the business and change the adjacent steps. That work takes
+				months, not a Friday afternoon. Starting it while most peers are still on unofficial tools is the open
+				window. Waiting for a cleaner average is how you arrive after the people who changed the process have
+				already begun to pull away.
+			</p>
+			<p>
+				You do not need to become an AI-native company this year. Almost nobody is. You do need to know, for one
+				real workflow, whether you are still on tools.
+			</p>
+
+			<h2>Score one workflow</h2>
+			<p>
+				Take one workflow you actually care about — invoice-to-cash, onboarding, quote-to-fulfillment, the weekly
+				close — and run the free assessment. Ten short questions. Same process-change test as this research. A
+				plain label: Shadow, Assisted, or Redesigned.
+			</p>
+			<p>
+				If that workflow binds cash, delivery, or a customer, the paid diagnostic is a $5,000 Workflow Teardown.
+				It maps and costs the real work, redesigns the workflow, and defines what should be built. The full fee is
+				credited toward an approved Fixed-Price Workflow Build.
+			</p>
+			<p>
+				<a href="/score-one-workflow/">Score one workflow →</a>
+			</p>
+
+			<h2>A reading, not a deck</h2>
+			<p>
+				The seams are usually where the money is, and they are usually already written down — in two files
+				nobody ever puts on the same page. How to do that join is
+				<a href="/writing/your-vendor-already-told-you-what-it-doesnt-do/">here</a>. It is not a strategy deck.
+			</p>
+
+			<h2>From score to build</h2>
+			<p><strong>Score one workflow</strong> — Free. A label for one workflow.</p>
+			<p><strong>Workflow Teardown</strong> — $5,000. A two-week operational diagnostic.</p>
+			<p>
+				If the workflow is worth redesigning and we agree on the implementation, the next step is a Fixed-Price
+				Workflow Build.
+			</p>
+			<p>
+				If there is nothing worth building, the Teardown says so. You keep the findings and are not pushed into
+				unnecessary implementation work.
+			</p>
+		</article>
+	</main>
+	<SiteFooter />
+</BaseLayout>

@@ -1,0 +1,52 @@
+---
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbList } from '../lib/schema';
+import { SITE_URL } from '../site';
+
+const title = 'Score One Workflow | Danny McGiffin';
+const description =
+	'Ten short questions. One real workflow. A Shadow, Assisted, or Redesigned label — not a company-wide AI score.';
+const pageUrl = `${SITE_URL}/score-one-workflow/`;
+
+const structuredData = [
+	breadcrumbList([
+		{ name: 'Home', url: `${SITE_URL}/` },
+		{ name: 'Score one workflow', url: pageUrl }
+	])
+];
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+	<SiteHeader />
+	<main id="main-content">
+		<header class="offer-hero section-dark">
+			<div class="shell">
+				<p class="eyebrow"><a href="/still-on-tools/">← Read the briefing</a></p>
+				<h1 class="display">Score one<br /><em>workflow.</em></h1>
+				<p class="offer-deck">
+					Ten short questions. One real workflow. You get Shadow, Assisted, or Redesigned — for that
+					workflow, not for the company.
+				</p>
+			</div>
+		</header>
+		<section class="offer-page section-light shell" aria-label="Self-assessment">
+			<p>
+				Pick one workflow a new hire would recognize: invoice to cash, quote to fulfillment, new-client
+				onboarding, the weekly close. Answer for how the work actually runs.
+			</p>
+			<p>
+				“We use Copilot,” “AI is in production,” and “we’re experimenting with agents” are not enough to
+				score Redesigned.
+			</p>
+			<p>
+				<strong>This form is not live yet.</strong> Scoring, email capture, and storage ship in the next
+				deploy. If you want the label now, <a href="/contact/">book a call</a> and bring the workflow
+				name.
+			</p>
+			<p><a href="/still-on-tools/">Read the briefing →</a></p>
+		</section>
+	</main>
+	<SiteFooter />
+</BaseLayout>

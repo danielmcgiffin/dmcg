@@ -789,8 +789,94 @@ li {
 	color: var(--accent-on-dark);
 }
 
+.proof-result {
+	max-width: 68ch;
+	margin-top: 36px;
+	color: var(--accent-on-dark);
+	font-weight: 600;
+}
+
+.proof-grid article .eyebrow {
+	color: var(--accent-on-dark);
+}
+
+.proof-grid article .proof-context {
+	margin-top: 40px;
+}
+
+.proof-quote {
+	margin-top: 64px;
+	padding-left: clamp(24px, 4vw, 64px);
+	border-left: 1px solid var(--accent-on-dark);
+}
+
+.proof-quote p {
+	max-width: 58ch;
+	font-family: var(--display);
+	font-size: clamp(1.6rem, 2.6vw, 2.5rem);
+	font-weight: 300;
+	line-height: 1.2;
+}
+
+.proof-quote p + p {
+	margin-top: .75em;
+}
+
+.proof-quote footer {
+	margin-top: 28px;
+	color: var(--accent-on-dark);
+	font-size: .875rem;
+}
+
 .offer {
 	padding-block: 128px 144px;
+}
+
+.build-path {
+	display: grid;
+	grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
+	gap: clamp(40px, 6vw, 96px);
+	margin-top: 96px;
+	padding-block: 48px;
+	border-block: 1px solid var(--line-light);
+}
+
+.build-path h3 {
+	margin-top: 24px;
+	font-family: var(--display);
+	font-size: clamp(2.5rem, 4.5vw, 4rem);
+	font-weight: 300;
+	letter-spacing: -.035em;
+	line-height: 1;
+}
+
+.build-path div > p:last-child {
+	max-width: 68ch;
+	margin-top: 28px;
+	color: var(--muted-light);
+}
+
+.build-path ul,
+.fit-grid ul {
+	margin: 0;
+	padding-left: 1.25em;
+	color: var(--muted-light);
+}
+
+.build-path li + li,
+.fit-grid li + li {
+	margin-top: .65em;
+}
+
+.fit-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: clamp(40px, 6vw, 96px);
+	margin-top: 72px;
+}
+
+.fit-grid ul {
+	margin-top: 24px;
 }
 
 .offer-content {
@@ -940,9 +1026,28 @@ li {
 }
 
 .about-copy li span {
-	color: var(--accent-on-dark);
+	color: var(--accent);
 	font-size: .75rem;
 	letter-spacing: .1em;
+}
+
+.about-copy li strong {
+	display: block;
+}
+
+.about-copy li p {
+	margin-top: 6px;
+	color: var(--muted-light);
+}
+
+.founder {
+	padding-block: 120px 128px;
+}
+
+.founder .display {
+	max-width: 14ch;
+	margin-top: 28px;
+	font-size: clamp(3rem, 5.2vw, 4.75rem);
 }
 
 .writing {
@@ -1394,6 +1499,7 @@ li {
 
 	.offer-content,
 	.teardown,
+	.build-path,
 	.machine-row,
 	.rule-row {
 		grid-template-columns: 1fr;
@@ -1561,6 +1667,14 @@ li {
 		padding-block: 94px 112px;
 	}
 
+	.build-path {
+		margin-top: 72px;
+	}
+
+	.fit-grid {
+		grid-template-columns: 1fr;
+	}
+
 	.work-heading {
 		gap: 36px;
 	}
@@ -1604,7 +1718,8 @@ li {
 	.hero-deck,
 	.machine,
 	.find,
-	.rule {
+	.rule,
+	.founder {
 		padding-block: 84px 96px;
 	}
 

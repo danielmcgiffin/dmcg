@@ -1,7 +1,7 @@
 export const SITE_URL = 'https://dannymcgiffin.com';
 export const SITE_NAME = 'Danny McGiffin';
 export const PERSON_NAME = 'Danny McGiffin';
-export const JOB_TITLE = 'Workflow automation and AI consultant';
+export const JOB_TITLE = 'Operations engineer';
 
 export const LOCATION = {
 	locality: 'Herndon',
@@ -12,15 +12,15 @@ export const LOCATION = {
 } as const;
 
 export const ENTITY_STATEMENT =
-	'Danny McGiffin is a workflow automation and AI consultant based in Herndon, Virginia, serving businesses across Northern Virginia and the Washington, DC area.';
+	'Danny McGiffin — Operations Engineering is a founder-led operations engineering firm based in Herndon, Virginia, serving growing companies across Northern Virginia and the Washington, DC area.';
 
 export const ABOUT_LOCATION =
-	"I'm a workflow automation and AI consultant based in Herndon, Virginia. I work with small and midsize businesses across Northern Virginia and the Washington, DC area.";
+	"I'm an operations engineer based in Herndon, Virginia. I work with growing companies across Northern Virginia and the Washington, DC area.";
 
 export const HOME_DESCRIPTION =
-	'I find the work that is eating your time and margin, redesign it, and automate what should not require a person, so your existing team can handle more.';
+	"I find the operational work consuming your team's time and margin, redesign it, and build the systems that give that capacity back.";
 
-export const HOME_TITLE = 'Danny McGiffin: Grow the Business, Not the Back Office';
+export const HOME_TITLE = 'Danny McGiffin — Operations Engineering';
 
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/danny-mcgiffin/';
 export const X_URL = 'https://x.com/therealmcgiffin';
@@ -31,9 +31,12 @@ export const IMAGE_PATH = '/og-image.png';
 export const LOGO_PATH = '/og-image.png';
 
 export const KNOWS_ABOUT = [
-	'Workflow automation',
+	'Operations engineering',
+	'Workflow redesign',
 	'Business process improvement',
 	'Systems integration',
+	'Internal software tools',
+	'Workflow automation',
 	'Artificial intelligence implementation'
 ] as const;
 

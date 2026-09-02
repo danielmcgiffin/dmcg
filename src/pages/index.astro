@@ -10,12 +10,22 @@ import { HOME_DESCRIPTION, HOME_TITLE } from '../site';
 import heroImage from '../assets/constraint-hero.png';
 
 const findings = [
-	['How it breaks.', 'Fat-finger errors, missed forms, and the "just some quick fixes" you do every time to make it work.'],
-	['Where time disappears.', 'Manual steps, duplicate work, waiting, rework, and unnecessary handoffs.'],
-	['What it costs.', 'Hours, headcount, delay, errors, and capacity you cannot use somewhere else.'],
-	['What should change.', 'Streamline and simplify the process first. Then automate what makes sense.'],
-	['What machines can take over.', 'AI, automation, integrations, agents, or deterministic code, whatever solves the problem.']
+	['What should disappear.', 'Duplicate work, unnecessary approvals, repeated checks, and steps that exist only because the workflow grew around them.'],
+	['Where work gets stuck.', 'Broken handoffs, missing information, manual lookups, waiting, re-entry, and avoidable rework.'],
+	['What it costs.', 'Hours, delay, errors, margin, and capacity you cannot use somewhere else.'],
+	['What should stay human.', 'Judgment, relationships, accountability, and decisions the business should not delegate to a system.'],
+	['What should be built.', 'Software, integrations, internal tools, deterministic automation, or AI-assisted steps that make the redesigned workflow real.']
 ] as const;
+
+const method = [
+	['Observe the real work', 'Follow the workflow from trigger to finished outcome with the people who actually do it.'],
+	['Quantify the constraint', 'Measure the labor, delay, error, rework, and capacity tied up in the current process.'],
+	['Eliminate unnecessary work', 'Remove steps that create no value, reduce no risk, and enable nothing necessary.'],
+	['Simplify and redesign the workflow', 'Clarify handoffs, decisions, inputs, and ownership before choosing technology.'],
+	['Build the solution', 'Implement the software, integrations, internal tools, automation, or AI the better workflow requires.'],
+	['Measure the result', 'Check whether the operation actually uses less labor, creates fewer errors, and returns capacity.']
+] as const;
+
 ---
 
 <BaseLayout title={HOME_TITLE} description={HOME_DESCRIPTION} pageType="ProfilePage">
@@ -43,7 +53,7 @@ const findings = [
 			<div class="visual-grid" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
 			<div class="hero-copy shell">
-				<p class="overline">AI &amp; workflow automation</p>
+				<p class="overline">Operations design & engineering</p>
 				<h1 id="hero-title" class="display display--hero">
 					<span class="reveal-clip"><span class="reveal-line">Grow the business.</span></span>
 					<span class="reveal-clip"><em class="reveal-line">Not the back office.</em></span>
@@ -52,8 +62,7 @@ const findings = [
 
 			<div class="hero-bar shell">
 				<p>
-					<strong>Supercharge the team you have today.</strong>
-					<span class="hero-note">30 minutes. No pitch deck. Bring me whatever's your current heartburn.</span>
+					<strong>I find the operational work consuming your team's time and margin, redesign it, and build the systems that give that capacity back.</strong>
 				</p>
 				<div class="hero-actions">
 					<a class="button button--primary" href={bookingUrl('hero')}>Show me the work <ArrowUpRight /></a>
@@ -64,13 +73,13 @@ const findings = [
 		<section class="hero-deck section-dark" aria-label="What more work looks like">
 			<div class="shell page-copy">
 				<p>
-					Every new client, every new contract, creates more work. More onboarding. More reporting. More data
-					entry. More approvals. More spreadsheets. More things your experienced people end up tracking,
-					managing, checking, and doing by hand.
+					Every new client and every new contract creates more work.
 				</p>
 				<p>
-					I find the work that is eating your time and margin, redesign it, and automate what should not require a
-					person.
+					More onboarding. More reporting. More data entry. More approvals. More spreadsheets. More things your experienced people end up tracking, managing, checking, and doing by hand.
+				</p>
+				<p>
+					I study how the work actually happens, remove what should not exist, simplify what remains, and build	the integrations, software, automation, internal tools, or AI-assisted steps the better workflow needs.
 				</p>
 			</div>
 		</section>
@@ -79,21 +88,19 @@ const findings = [
 			<div class="shell rule-row">
 				<div>
 					<p class="eyebrow reveal">A simple rule</p>
-					<h2 id="rule-title" class="display reveal">Do not hire a person to solve a problem a machine can solve.</h2>
+					<h2 id="rule-title" class="display reveal">Technology is not the starting point.</h2>
 				</div>
 				<div class="page-copy reveal">
 					<p>Sometimes another hire is actually the right answer.</p>
-					<p>
-						But before you add $70,000, $100,000, or $150,000+ of annual overhead, it is worth figuring out if there's a better way to do more with who you've got, thanks to AI.
-					</p>
+					<p>Before you hire another person, show me the work.</p>
 					<p>
 						Most companies do not have a technology problem. They have workflow problems, and expensive people spending expensive hours moving information between systems, rebuilding reports, chasing approvals, copying data, checking work, and
 						keeping things moving through sheer willpower.
 					</p>
 					<p>
-						<strong>How can we use AI to get the best out of our people AND our tech.</strong>
+						I do not begin with "Where can we add AI?" I begin with <strong>"Why did we start doing the work this way?"</strong>
 					</p>
-					<p>That's the question I help answer.</p>
+					<p>Streamline and simplify the process first. Then automate what makes sense.</p>
 				</div>
 			</div>
 		</section>
@@ -104,7 +111,7 @@ const findings = [
 				<div>
 					<h2 id="find-title" class="display reveal">The way things work isn't what's written down.</h2>
 					<p class="section-intro reveal">
-						I work with your team to see how the work actually happens, not how the SOP says it's supposed to happen. That way we can build solutions that actually stick.
+						I work with your team to see how the work actually happens, not how the SOP says it is supposed to happen: what starts it, who touches it, where they look something up or make a judgment, where it fails, and what finished actually means. That is how we build solutions that stick.
 					</p>
 				</div>
 			</div>
@@ -120,22 +127,66 @@ const findings = [
 
 		<section class="about section-light" id="why" aria-labelledby="why-title">
 			<div class="about-copy reveal">
-				<p class="eyebrow">Why me</p>
-				<h2 id="why-title" class="display">Operator first.<br />Technologist second.</h2>
+				<p class="eyebrow">Why this works</p>
+				<h2 id="why-title" class="display">Observe. Measure. Eliminate. Simplify. Build. Measure again.</h2>
 				<p>
-					I have spent my career inside operations: running teams, fixing broken processes, implementing
-					enterprise systems, and dealing with the messy reality between what a system was supposed to do and
-					what people actually have to do to make the business run.
+					Operations are unique because they connect what a company sells, the people it has, the systems it uses,
+					and the strategy it wants to pursue. The method for understanding and improving them can still be systematic.
 				</p>
-				<p>
-					Now I use AI and automation as operating tools. Because sometimes
-					<strong> ten hours of work should become ten minutes of work.</strong>
-					{' '}You do not just save ten hours, you remove a constraint on the business.
-				</p>
+				<ol>
+					{method.map(([title, body], index) => (
+						<li>
+							<span>{String(index + 1).padStart(2, '0')}</span>
+							<div><strong>{title}</strong><p>{body}</p></div>
+						</li>
+					))}
+				</ol>
 			</div>
 		</section>
 
+		<section class="proof section-dark" aria-labelledby="client-proof-title">
+			<div class="section-grid section-heading">
+				<p class="eyebrow reveal">Client result / sanitized case study</p>
+				<div>
+					<h2 id="client-proof-title" class="display reveal">From a fragile multi-step process to two uploads and "Generate".</h2>
+					<p class="proof-result reveal">From 100 hours/year to 15  ·  85% less manual effort  ·  85 hours of capacity reclaimed</p>
+				</div>
+			</div>
+			<div class="proof-grid shell reveal">
+				<article>
+					<p class="eyebrow">Before</p>
+					<p class="proof-context">A messy, time-consuming process to generate documents that took too long, had too many manual fixes that needed to happen every time, and caused a lot of friction in the day-to-day.</p>
+				</article>
+				<article>
+					<p class="eyebrow">What changed</p>
+					<p class="proof-context">We mapped the actual workflow, questioned why each step existed, removed unnecessary work, simplified the inputs, and built the generation system.</p>
+				</article>
+				<article>
+					<p class="eyebrow">After</p>
+					<p class="proof-context">A simple applet that does the tricky work for them, is simple to maintain and update, and just plain works.</p>
+				</article>
+			</div>
+			<blockquote class="proof-quote shell reveal">
+				<p>“Danny took a fragile process that required significant manual checking and rebuilt it into something simple and reliable. We went from a multi-step process involving our database, spreadsheets, Word mail merge, manual lookups, and individual document cleanup to uploading two files and clicking Generate. He didn't just come in and automate what we had. He actually eliminated the steps that shouldn’t have existed in the first place.”</p>
+				<footer>Roger Porres · Director of Ancillary Services</footer>
+			</blockquote>
+		</section>
+
 		<OfferSection />
+
+		<section class="founder section-light" aria-labelledby="founder-title">
+			<div class="shell rule-row reveal">
+				<div>
+					<p class="eyebrow">Founder-led</p>
+					<h2 id="founder-title" class="display">Danny McGiffin: Operations Engineering</h2>
+				</div>
+				<div class="page-copy">
+					<p><strong>Every engagement is led by Danny McGiffin.</strong></p>
+					<p>I have spent my career inside operations: running teams, fixing broken processes, implementing enterprise systems, and dealing with the gap between what a system was supposed to do and what people actually do to make the business run.</p>
+					<p>You work directly with me from observation and diagnosis through workflow redesign, technical implementation, and measurement.</p>
+				</div>
+			</div>
+		</section>
 		
 		<section class="closer section-dark" id="contact" aria-labelledby="closing-title">
 			<div class="shell closer-inner reveal">
