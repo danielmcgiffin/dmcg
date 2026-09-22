@@ -4,6 +4,7 @@ import '@fontsource/libre-franklin/latin-300.css';
 import '@fontsource/libre-franklin/latin-400.css';
 import '@fontsource/libre-franklin/latin-700.css';
 import { HOME_TITLE, HOME_DESCRIPTION } from '../site';
+import { elsewhereLinks } from '../elsewhere-links';
 import { bookingUrl } from '../config';
 
 const navigation = [
@@ -64,13 +65,17 @@ const projects = [
     </div>
     <nav class="consulting-desktop-nav" aria-label="Primary navigation">
       <a href="/" aria-current="page">Home</a>
-      {navigation.map(({ href, label }) => <a href={href}>{label}</a>)}
+      {navigation.map(({ href, label }) => href === '/elsewhere/' ? (
+        <div class="nav-elsewhere"><a href={href}>{label}</a><ul class="elsewhere-sublinks">{elsewhereLinks.map(link => <li><a href={link.href}>{link.label}</a></li>)}</ul></div>
+      ) : <a href={href}>{label}</a>)}
     </nav>
     <details class="consulting-mobile-menu">
       <summary>Menu <span aria-hidden="true">+</span></summary>
       <nav aria-label="Mobile navigation">
         <a href="/" aria-current="page">Home</a>
-        {navigation.map(({ href, label }) => <a href={href}>{label}</a>)}
+        {navigation.map(({ href, label }) => href === '/elsewhere/' ? (
+        <div class="nav-elsewhere"><a href={href}>{label}</a><ul class="elsewhere-sublinks">{elsewhereLinks.map(link => <li><a href={link.href}>{link.label}</a></li>)}</ul></div>
+      ) : <a href={href}>{label}</a>)}
       </nav>
     </details>
   </header>
@@ -182,7 +187,7 @@ const projects = [
   }
   .consulting-desktop-nav { margin-top: 40px; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
   .consulting-desktop-nav a { display: block; padding: 10px 0; font-size: 12px; text-transform: uppercase; }
-  .consulting-desktop-nav a:last-of-type { margin-top: 24px; color: var(--consulting-green); }
+  .consulting-desktop-nav > .nav-elsewhere > a { display: block; margin-top: 24px; color: var(--consulting-green); }
   .consulting-desktop-nav a:hover, .consulting-home a:not(.consulting-button):hover { text-decoration: underline; text-underline-offset: 4px; }
   .consulting-desktop-nav p { color: var(--consulting-green); font-size: 12px; margin: 30px 0 6px; }
   .consulting-mobile-menu { display: none; }

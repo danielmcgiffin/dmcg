@@ -2,19 +2,10 @@
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { bookingUrl } from '../config';
 import { breadcrumbList } from '../lib/schema';
-import { SITE_URL, LINKEDIN_URL, X_URL, CONTACT_EMAIL } from '../site';
+import { SITE_URL } from '../site';
+import { elsewhereLinks } from '../elsewhere-links';
 
-const links = [
-  { label: 'Talk through a decision', detail: 'Book a conversation', href: bookingUrl('contact'), external: true },
-  { label: 'Email', detail: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}`, external: false },
-  { label: 'LinkedIn', detail: 'Work and updates', href: LINKEDIN_URL, external: true },
-  { label: 'Substack', detail: 'Writing and notes', href: 'https://substack.com/@dannymcgiffin', external: true },
-  { label: 'X.com', detail: '@therealmcgiffin', href: X_URL, external: true },
-  { label: 'Meet locally', detail: 'Arrange a conversation in Northern Virginia', href: bookingUrl('local'), external: true },
-  { label: 'Writing', detail: 'Essays on this site', href: '/writing/', external: false },
-];
 ---
 <BaseLayout title="Elsewhere — Danny McGiffin" description="Email Danny McGiffin, find him on LinkedIn, Substack, and X, or arrange a conversation." pageType="WebPage" structuredData={breadcrumbList([{name:'Home',url:`${SITE_URL}/`},{name:'Elsewhere',url:`${SITE_URL}/elsewhere/`}])}>
   <SiteHeader />
@@ -25,7 +16,7 @@ const links = [
       <p class="contact-hub-location">Herndon, Virginia</p>
       <p class="contact-hub-intro">Independent advice before a consequential systems decision. Find me here, or start a conversation.</p>
       <nav class="contact-hub-links" aria-label="Ways to connect">
-        {links.map(({ label, detail, href, external }) => (
+        {elsewhereLinks.map(({ label, detail, href, external }) => (
           <a href={href} rel={external ? 'noopener noreferrer' : undefined} target={external ? '_blank' : undefined}>
             <span><strong>{label}</strong><small>{detail}</small></span><span class="contact-hub-arrow" aria-hidden="true">↗</span>
           </a>
