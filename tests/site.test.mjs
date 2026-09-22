@@ -23,7 +23,7 @@ test('built pages have coherent metadata and entity graphs without retired posit
   const meta=name=>attr(p.nodes.find(n=>n.tagName==='meta'&&(attr(n,'name')===name||attr(n,'property')===name)),'content');
   assert.ok(meta('description')?.length>25,p.route);assert.equal(meta('og:title'),title);assert.equal(meta('og:description'),meta('description'));
   assert.equal(attr(p.nodes.find(n=>n.tagName==='link'&&attr(n,'rel')==='canonical'),'href'),origin+p.route);
-  assert.equal(meta('og:url'),origin+p.route);assert.equal(meta('og:image'),origin+'/og-image.png');
+  assert.equal(meta('og:url'),origin+p.route);assert.equal(meta('og:image'),origin+'/og-systems-decision.png');
   const graph=p.nodes.filter(n=>n.tagName==='script'&&attr(n,'type')==='application/ld+json').flatMap(n=>{const data=JSON.parse((n.childNodes??[]).map(n=>n.value??'').join(''));assert.equal(data['@context'],'https://schema.org');return data['@graph']??[data];});
   const person=graph.find(n=>n['@type']==='Person');const service=graph.find(n=>n['@type']==='ProfessionalService');
   assert.equal(person.jobTitle,'Independent business advisor and designer');assert.equal(person['@id'],origin+'/#person');assert.equal(person.image,undefined);assert.equal(service.makesOffer,undefined);assert.equal(service.logo,origin+'/favicon.svg');assert.ok(person.knowsAbout.includes('Organizational design'));

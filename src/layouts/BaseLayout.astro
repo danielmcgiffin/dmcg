@@ -28,7 +28,7 @@ const {
 	description,
 	bodyClass,
 	canonical = new URL(Astro.url.pathname, Astro.site),
-	image = '/og-image.png',
+	image = '/og-systems-decision.png',
 	ogType = 'website',
 	pageType = 'WebPage',
 	publishedAt,
@@ -69,11 +69,12 @@ const ogImage = new URL(image, Astro.site);
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
 		<meta property="og:image" content={ogImage} />
-		<meta property="og:image:alt" content="Danny McGiffin — Independent business advisor and designer" />
+		<meta property="og:image:alt" content="Before you buy a new system, get a second opinion. Danny McGiffin — independent advice for owners and executives." />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImage} />
+		<meta name="twitter:image:alt" content="Before you buy a new system, get a second opinion. Danny McGiffin — independent advice for owners and executives." />
 		{ogType === 'article' && publishedAt && (
 			<meta property="article:published_time" content={publishedAt.toISOString()} />
 		)}

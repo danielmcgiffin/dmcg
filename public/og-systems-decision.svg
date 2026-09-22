@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0f1b14"/>
+  <g font-family="Georgia, 'Noto Serif', serif" fill="#efeee8">
+    <text x="64" y="78" font-size="32">Danny McGiffin</text>
+    <text x="64" y="218" font-size="76">Before you buy</text>
+    <text x="64" y="312" font-size="76">a new system,</text>
+    <text x="64" y="406" font-size="76" font-style="italic" fill="#a4d392">get a second opinion.</text>
+  </g>
+  <g font-family="Arial, 'Noto Sans', sans-serif">
+    <text x="1136" y="74" text-anchor="end" font-size="14" letter-spacing="1" fill="#a4d392">INDEPENDENT ADVICE FOR OWNERS &amp; EXECUTIVES</text>
+    <path d="M64 536H1136" stroke="#465047"/>
+    <text x="64" y="573" font-size="18" fill="#c7cec5">Figure out what actually needs to change before you commit.</text>
+    <text x="1136" y="573" text-anchor="end" font-size="17" fill="#c7cec5">dannymcgiffin.com</text>
+  </g>
+</svg>

@@ -27,7 +27,7 @@ export const X_URL = 'https://x.com/therealmcgiffin';
 
 export const SAME_AS = [LINKEDIN_URL, X_URL] as const;
 
-export const IMAGE_PATH = '/og-image.png';
+export const IMAGE_PATH = '/og-systems-decision.png';
 export const LOGO_PATH = '/favicon.svg';
 
 export const KNOWS_ABOUT = [
