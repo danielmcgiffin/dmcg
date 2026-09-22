@@ -24,6 +24,7 @@ export const HOME_TITLE = 'Danny McGiffin — Before You Buy a New System';
 
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/danny-mcgiffin/';
 export const X_URL = 'https://x.com/therealmcgiffin';
+export const CONTACT_EMAIL = 'danny@dannymcgiffin.com';
 
 export const SAME_AS = [LINKEDIN_URL, X_URL] as const;
 

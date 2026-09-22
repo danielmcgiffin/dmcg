@@ -11,6 +11,7 @@ His advice does not depend on a technology sale. The answer may be software, int
 - Home: https://dannymcgiffin.com/
 - About and selected experience: https://dannymcgiffin.com/about/
 - Contact: https://dannymcgiffin.com/contact/
+- Elsewhere: https://dannymcgiffin.com/elsewhere/
 - Northern Virginia: https://dannymcgiffin.com/northern-virginia-ai-workflow-automation/
 - Writing: https://dannymcgiffin.com/writing/
 - Research briefing on AI tools and work: https://dannymcgiffin.com/still-on-tools/

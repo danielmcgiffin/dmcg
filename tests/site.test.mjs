@@ -50,6 +50,18 @@ test('homepage provides consulting navigation, expandable evidence, and independ
  assert.match(content(parse(home.html)),/A clear decision not to buy or build anything can be the whole result/);
  for(const href of ['/about/','/writing/','/contact/'])assert.ok(attrs(home,'a','href').includes(href));
 });
+test('contact and elsewhere have distinct jobs and a working email destination',()=>{
+ const contact=normal.find(p=>p.route==='/contact/');
+ const elsewhere=normal.find(p=>p.route==='/elsewhere/');
+ assert.ok(contact && elsewhere);
+ const email='mailto:danny@dannymcgiffin.com';
+ assert.ok(attrs(contact,'a','href').some(href=>href?.startsWith(email)));
+ assert.ok(attrs(elsewhere,'a','href').includes(email));
+ for(const p of normal) {
+  if(['/','/about/'].includes(p.route)) continue;
+  assert.ok(attrs(p,'a','href').includes('/elsewhere/'),p.route);
+ }
+});
 test('case claims retain role and measurement boundaries',()=>{
  const about=normal.find(p=>p.route==='/about/');const text=content(parse(about.html));
  for(const fragment of ['erp','collaboration','growth','navy'])assert.ok(about.nodes.some(n=>attr(n,'id')===fragment));

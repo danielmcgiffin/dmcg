@@ -1,25 +1,24 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { breadcrumbList } from '../lib/schema';
-import { SITE_URL, LINKEDIN_URL } from '../site';
+import { SITE_URL } from '../site';
 import { bookingUrl } from '../config';
 ---
 <BaseLayout title="About Danny McGiffin — Business Advisor & Designer" description="Independent judgment before an expensive systems decision. Experience across strategy, operations, organization, data, and enterprise systems." bodyClass="about-timeline-page" pageType="AboutPage" structuredData={breadcrumbList([{name:'Home',url:`${SITE_URL}/`},{name:'About',url:`${SITE_URL}/about/`}])}>
   <header class="about-sidebar">
-    <a class="about-name" href="/" aria-label="Danny McGiffin — Home">Danny McGiffin</a>
+    <div><a class="about-name" href="/" aria-label="Danny McGiffin — Home">Danny McGiffin</a><p class="about-availability"><span aria-hidden="true"></span>Open for new clients</p></div>
     <nav class="about-desktop-nav" aria-label="Primary navigation">
       <a href="/">Home</a>
       <a href="/#work">Selected work</a>
       <a href="/about/" aria-current="page">About me</a>
       <a href="/writing/">Writing</a>
       <a href="/contact/">Get in touch</a>
-      <p>Elsewhere</p>
-      <a href={LINKEDIN_URL} rel="me">LinkedIn ↗</a>
+      <a href="/elsewhere/">Elsewhere</a>
     </nav>
     <details class="about-mobile-menu">
       <summary>Menu <span aria-hidden="true">+</span></summary>
       <nav aria-label="Mobile navigation">
-        <a href="/">Home</a><a href="/#work">Selected work</a><a href="/about/" aria-current="page">About me</a><a href="/writing/">Writing</a><a href="/contact/">Get in touch</a><a href={LINKEDIN_URL} rel="me">LinkedIn ↗</a>
+        <a href="/">Home</a><a href="/#work">Selected work</a><a href="/about/" aria-current="page">About me</a><a href="/writing/">Writing</a><a href="/contact/">Get in touch</a><a href="/elsewhere/">Elsewhere</a>
       </nav>
     </details>
   </header>
@@ -44,7 +43,7 @@ import { bookingUrl } from '../config';
     <section class="about-background" aria-labelledby="background-title"><h2 id="background-title" class="eyebrow">What connects the work</h2><p>My path has taken me from the Army into consulting, operations, enterprise systems, organizational redesign, and strategy. That experience helps me follow a problem across the business and work out what actually needs to change.</p><p>I’m based in Herndon, Virginia. I work directly with owners and leaders who need to see the situation clearly, make a consequential decision, and design a better way for the business to work.</p></section>
       <section class="about-contact" aria-labelledby="conversation-title"><h2 id="conversation-title">About to make an expensive systems decision?</h2><p>You don’t need to have the problem neatly framed. In fact, that’s often the point.</p><a href={bookingUrl('closing')}>Get a second opinion ↗</a></section>
     </div>
-    <footer class="about-footer"><span>© {new Date().getFullYear()} Danny McGiffin</span><a href={LINKEDIN_URL} rel="me">LinkedIn ↗</a></footer>
+    <footer class="about-footer"><span>© {new Date().getFullYear()} Danny McGiffin</span><a href="/elsewhere/">Elsewhere ↗</a></footer>
   </main>
 </BaseLayout>
 <script>
@@ -64,8 +63,11 @@ import { bookingUrl } from '../config';
   .about-timeline-page :focus-visible { outline: 2px solid #214d38; outline-offset: 4px; }
   .about-sidebar { position: fixed; inset: 0 auto 0 0; width: 223px; padding: 28px 24px; background: #ece7d9; border-right: 1px solid #e0e1d5; overflow-y: auto; }
   .about-name { display: inline-block; color: #214d38; font-size: 14px; font-weight: 700; text-transform: uppercase; }
+  .about-availability { display: flex; align-items: baseline; gap: 7px; margin-top: 12px; color: #596154; font-size: 11px; }
+  .about-availability span { flex: none; width: 6px; height: 6px; border-radius: 50%; background: #214d38; }
   .about-desktop-nav { margin-top: 40px; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
   .about-desktop-nav a { display: block; padding: 10px 0; font-size: 12px; text-transform: uppercase; }
+  .about-desktop-nav a:last-child { margin-top: 24px; color: #214d38; }
   .about-desktop-nav a[aria-current="page"] { color: #214d38; font-weight: 700; }
   .about-desktop-nav a:hover, .about-main a:hover { text-decoration: underline; text-underline-offset: 4px; }
   .about-desktop-nav p { color: #214d38; font-size: 12px; margin: 30px 0 6px; }

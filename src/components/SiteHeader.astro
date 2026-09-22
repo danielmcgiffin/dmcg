@@ -1,20 +1,22 @@
 ---
 const path = Astro.url.pathname;
 const links = [
+  { href: '/', label: 'Home' },
   { href: '/#work', label: 'Selected work' },
-  { href: '/about/', label: 'About' },
+  { href: '/about/', label: 'About me' },
   { href: '/writing/', label: 'Writing' },
-  { href: '/contact/', label: 'Let’s talk' },
+  { href: '/contact/', label: 'Get in touch' },
+  { href: '/elsewhere/', label: 'Elsewhere' },
 ];
 ---
 <header class="site-header">
-  <a class="wordmark" href="/" aria-label="Danny McGiffin — Home"><span class="monogram" aria-hidden="true">D</span><span>Danny McGiffin</span></a>
+  <div class="site-identity"><a class="wordmark" href="/" aria-label="Danny McGiffin — Home">Danny McGiffin</a><p class="site-availability"><span aria-hidden="true"></span>Open for new clients</p></div>
   <nav class="header-nav" aria-label="Primary navigation">
-    {links.map(({ href, label }) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}{href === '/contact/' && <span aria-hidden="true"> ↗</span>}</a>)}
+    {links.map(({ href, label }) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
   </nav>
   <details class="mobile-navigation">
     <summary>Menu <span aria-hidden="true">+</span></summary>
-    <nav aria-label="Mobile navigation">{links.map(({ href, label }) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}<span aria-hidden="true">↗</span></a>)}</nav>
+    <nav aria-label="Mobile navigation">{links.map(({ href, label }) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}</nav>
   </details>
 </header>
 <script>

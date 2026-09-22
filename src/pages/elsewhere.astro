@@ -1,0 +1,61 @@
+---
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { bookingUrl } from '../config';
+import { breadcrumbList } from '../lib/schema';
+import { SITE_URL, LINKEDIN_URL, X_URL, CONTACT_EMAIL } from '../site';
+
+const links = [
+  { label: 'Talk through a decision', detail: 'Book a conversation', href: bookingUrl('contact'), external: true },
+  { label: 'Email', detail: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}`, external: false },
+  { label: 'LinkedIn', detail: 'Work and updates', href: LINKEDIN_URL, external: true },
+  { label: 'Substack', detail: 'Writing and notes', href: 'https://substack.com/@dannymcgiffin', external: true },
+  { label: 'X.com', detail: '@therealmcgiffin', href: X_URL, external: true },
+  { label: 'Meet locally', detail: 'Arrange a conversation in Northern Virginia', href: bookingUrl('local'), external: true },
+  { label: 'Writing', detail: 'Essays on this site', href: '/writing/', external: false },
+];
+---
+<BaseLayout title="Elsewhere — Danny McGiffin" description="Email Danny McGiffin, find him on LinkedIn, Substack, and X, or arrange a conversation." pageType="WebPage" structuredData={breadcrumbList([{name:'Home',url:`${SITE_URL}/`},{name:'Elsewhere',url:`${SITE_URL}/elsewhere/`}])}>
+  <SiteHeader />
+  <main id="main-content" class="contact-hub">
+    <div class="contact-hub-inner">
+      <img class="contact-hub-portrait" src="/danny-mcgiffin.jpg" width="112" height="112" alt="" />
+      <h1>Danny McGiffin</h1>
+      <p class="contact-hub-location">Herndon, Virginia</p>
+      <p class="contact-hub-intro">Independent advice before a consequential systems decision. Find me here, or start a conversation.</p>
+      <nav class="contact-hub-links" aria-label="Ways to connect">
+        {links.map(({ label, detail, href, external }) => (
+          <a href={href} rel={external ? 'noopener noreferrer' : undefined} target={external ? '_blank' : undefined}>
+            <span><strong>{label}</strong><small>{detail}</small></span><span class="contact-hub-arrow" aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </nav>
+      <p class="contact-hub-note">Based in Herndon, Virginia.</p>
+    </div>
+  </main>
+  <SiteFooter />
+</BaseLayout>
+<style is:global>
+  .contact-hub { min-height: 80vh; background: #fff; padding: 72px 24px 96px; color: #303a32; }
+  .contact-hub-inner { max-width: 620px; margin: 0 auto; text-align: center; }
+  .contact-hub-portrait { width: 112px; height: 112px; object-fit: cover; border-radius: 50%; margin: 0 auto 20px; border: 3px solid #fff; box-shadow: 0 2px 12px #0f1b141a; }
+  .contact-hub h1 { font-family: "Geist", Arial, sans-serif; font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 600; line-height: 1.08; letter-spacing: -.035em; }
+  .contact-hub-location { margin-top: 8px; color: #596154; font-size: .9rem; }
+  .contact-hub-intro { max-width: 44ch; margin: 20px auto 0; font-size: 1.04rem; line-height: 1.5; }
+  .contact-hub-links { display: grid; gap: 12px; margin-top: 34px; text-align: left; }
+  .contact-hub-links a { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 15px 22px; border: 1px solid #d9dfd3; border-radius: 5px; background: #fff; box-shadow: 0 2px 4px #0f1b140a; transition: background .15s ease, transform .15s ease; }
+  .contact-hub-links a:first-child { background: #214d38; border-color: #214d38; color: #fffdf5; }
+  .contact-hub-links a:hover { background: #e9eee6; transform: translateY(-2px); }
+  .contact-hub-links a:first-child:hover { background: #173a29; }
+  .contact-hub-links strong, .contact-hub-links small { display: block; }
+  .contact-hub-links strong { font-size: 1.05rem; line-height: 1.25; }
+  .contact-hub-links small { margin-top: 3px; color: #596154; font-size: .79rem; }
+  .contact-hub-links a:first-child small { color: #d7e4d7; }
+  .contact-hub-arrow { flex: none; font-size: 1.35rem; color: #214d38; }
+  .contact-hub-links a:first-child .contact-hub-arrow { color: #d7e4d7; }
+  .contact-hub-note { max-width: 52ch; margin: 28px auto 0; color: #596154; font-size: .86rem; line-height: 1.5; }
+  .contact-hub-note a { color: #214d38; text-decoration: underline; text-underline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { .contact-hub-links a { transition: none; } .contact-hub-links a:hover { transform: none; } }
+  @media (max-width: 600px) { .contact-hub { padding: 42px 20px 64px; } .contact-hub-links a { min-height: 72px; padding: 13px 18px; } }
+</style>
