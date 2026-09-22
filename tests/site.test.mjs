@@ -65,7 +65,7 @@ test('contact and elsewhere have distinct jobs and a working email destination',
 test('case claims retain role and measurement boundaries',()=>{
  const about=normal.find(p=>p.route==='/about/');const text=content(parse(about.html));
  for(const fragment of ['erp','collaboration','growth','navy'])assert.ok(about.nodes.some(n=>attr(n,'id')===fragment));
- assert.match(text,/design estimates, not measured implementation results/);assert.match(text,/recognized revenue/);assert.match(text,/program-level results from a collaborative effort/);assert.match(text,/not a claim of \$250 million in recovered cash/);
+ assert.match(text,/alternative was estimated at roughly 2–5%/);assert.match(text,/recognized revenue/);assert.match(text,/program-level results/);assert.match(text,/not a claim that I personally “saved the Navy \$250 million\.”/);
  assert.doesNotMatch(text,/70%|50% faster|60%|Roger Porres|\$64M/);
 });
 test('RSS, llms, and the custom 404 remain usable',async()=>{
