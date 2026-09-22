@@ -1,20 +1,124 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SiteHeader from '../components/SiteHeader.astro';
-import SiteFooter from '../components/SiteFooter.astro';
-import ClosingCta from '../components/ClosingCta.astro';
 import { breadcrumbList } from '../lib/schema';
-import { SITE_URL } from '../site';
+import { SITE_URL, LINKEDIN_URL } from '../site';
+import { bookingUrl } from '../config';
 ---
-<BaseLayout title="About Danny McGiffin — Business Advisor & Designer" description="Independent judgment before an expensive systems decision. Experience across strategy, operations, organization, data, and enterprise systems." pageType="AboutPage" structuredData={breadcrumbList([{name:'Home',url:`${SITE_URL}/`},{name:'About',url:`${SITE_URL}/about/`}])}>
-  <SiteHeader /><main id="main-content">
-    <header class="page-intro section-dark"><div class="shell"><p class="eyebrow">About / Danny McGiffin</p><h1>Everyone sees a piece.<br />My job is to understand<br /><em>the business problem.</em></h1><p class="intro-deck">Before you commit to a new system, it helps to know whether the system is what needs to change.</p></div></header>
-    <div class="about-opening shell"><p class="eyebrow">A recurring pattern</p><div class="reading-copy"><p>Finance sees reporting. Operations sees workarounds. IT sees systems. The vendor sees implementation. Leadership sees the cost. I tend to get handed problems where everyone is seeing a different piece.</p><p>I follow the problem into the business: how it makes money, what people are responsible for, what the systems can represent, and what happens when the normal way of doing things stops working.</p><p>My job is often to step far enough back to understand the problem before everyone spends more money solving their version of it. Sometimes the answer is technology. Sometimes it is process, organization, information, or a clearer decision.</p></div></div>
-    <section class="case-story shell" id="erp" aria-labelledby="erp-title"><p class="eyebrow">01 / The investment decision</p><div class="story-body"><h2 id="erp-title">The $2.5M ERP we decided not to implement.</h2><p>A PE-backed distributor needed a faster monthly close, cleaner data, and financial reporting its board and new owners could trust. It had already purchased an enterprise ERP when I joined the project.</p><p>The integrator’s sales team believed our requirements were workable. In implementation, a more fundamental problem emerged. The software treated commercial relationships as simple contracts between two parties. The distributor’s deals often involved multiple parties, and those relationships mattered to its reporting and forecasting.</p><p>I kept pressing on how the system would represent those deals. Eventually, the implementation team reached the same conclusion: it didn’t naturally support the business model.</p><p>We documented the gaps. The integrator estimated more than $1 million in additional customization and remediation for the things that could be fixed. Even then, the company would be left with manual workarounds and a heavily customized system.</p><p>Once we made that tradeoff clear to the CEO, we canceled the implementation. I went back to the original need: trustworthy data.</p><p>I designed an alternative around QuickBooks, the existing CPQ and sales-order tools, and the other systems where the work already happened. Exports would be cleaned and normalized automatically, flow into a governed data layer, and give the analytics team a data mart for financial and management reporting.</p><p class="evidence-note">I estimated the alternative at roughly 2–5% of the ERP path’s cost and one-fifth of its timeline. Those were design estimates, not measured implementation results or realized savings.</p><p class="story-principle">The important question changed from “How do we finish implementing this?” to “Should we be implementing it at all?”</p></div></section>
-    <section class="case-story shell" id="collaboration" aria-labelledby="collaboration-title"><p class="eyebrow">02 / The operating model</p><div class="story-body"><h2 id="collaboration-title">Redesigning an operating model that made collaboration irrational.</h2><p>A major professional-services firm wanted to grow in the federal market by bringing together the expertise of its commercial practices. The strategy made sense. The operating model made cooperation a bad deal.</p><p>Federal had business development, contracts, administration, and some program-management capability. Delivery depended on specialists in the commercial practices. Those leaders faced slower payment, rigid staffing rules, extra overhead, and arguments over who got credit for the revenue.</p><p>Leadership didn’t need another appeal to collaborate. It needed to change what made the existing behavior rational.</p><p>I redesigned the model so the commercial practice owned the client relationship. Federal became the enabling layer: opportunity identification, contracting expertise, administration, tools, guidance, and program-management support where needed.</p><p>We interviewed the people who would have to work inside the model, prototyped the structure, and clarified client ownership, delivery responsibility, decision rights, shared costs, and support. I worked through the design with leaders across the business until they could recognize it as workable.</p><p>The executive team approved the model. Leadership also approved it as a potential model for broader changes across related businesses.</p><p class="story-principle">If you want people to collaborate differently, change the responsibilities and economics that make their current behavior rational.</p></div></section>
-    <section class="case-story shell" id="growth" aria-labelledby="growth-title"><p class="eyebrow">03 / The growing business</p><div class="story-body"><h2 id="growth-title">Building the company underneath 10× growth.</h2><p>I was the first full-time person brought in to help build a professional-services firm. The founder had created the opportunity and remained the primary commercial relationship. My job was to run operations and help design the company underneath it.</p><p>Within a month, we inherited most of the team supporting our principal client and grew to eight or nine people almost overnight. We expanded the work inside the account and the services we could provide.</p><p>Across the firm, recognized revenue grew from about $200K to $2M in roughly a year. The team grew from one to 15. My focus was making that growth survivable:</p><ul><li>A PMO and a consistent delivery cadence.</li><li>Management structure across client teams.</li><li>Hiring and onboarding processes.</li><li>Reporting systems and automations.</li><li>Operating routines that reduced what the founder had to personally carry.</li></ul><p>One system mattered particularly to me: a monthly one-to-one conversation between the CEO and every employee. No status agenda. A chance for people to stay known as the business grew.</p><p>We retained 100% of the team during that rapid-growth period. The monthly conversations were still going when I left, with the company growing toward 20 people.</p><p class="evidence-note">Revenue and retention are firm-wide outcomes during this period. The founder, client relationships, and team all contributed; the figures are not a claim of individual causation.</p><p class="story-principle">A business needs to grow without destroying the things that made it worth growing in the first place.</p></div></section>
-    <section class="case-story shell" id="navy" aria-labelledby="navy-title"><p class="eyebrow">04 / The visibility problem</p><div class="story-body"><h2 id="navy-title">Turning an unmeasurable $250M problem into a controllable system.</h2><p>When I began working on the Navy’s improper-payments program, it lacked a reliable way to estimate the problem. Before it could credibly reduce improper payments, it needed to know where they were happening, how often, and why.</p><p>Working with finance and payment experts, we built the program almost from scratch: statistical estimation models, risk assessments, sampling and review methods, pre-payment controls, training, local review activity, and reporting for leadership.</p><p>That gave us a way to target controls at the points of leverage and see whether they were working. Over the course of the work, reported improper payments fell by roughly $250 million. Underlying error rates declined by roughly 45% two years after we started.</p><p>The Office of the Secretary of Defense CFO repeatedly pointed to the Navy’s program as a model and asked us to work with other military services to share the approach.</p><p class="evidence-note">These are program-level results from a collaborative effort. The reported-payment reduction is not a claim of $250 million in recovered cash or savings attributable solely to my work.</p><p class="story-principle">An enormous problem becomes more tractable when you can measure it, find the causes, and put controls where they matter.</p></div></section>
-    <section class="about-background shell" aria-labelledby="background-title"><h2 id="background-title" class="eyebrow">What connects the work</h2><p>My path has taken me from the Army into consulting, operations, enterprise systems, organizational redesign, and strategy. That experience helps me follow a problem across the business and work out what actually needs to change.</p><p>I’m based in Herndon, Virginia. I work directly with owners and leaders who need to see the situation clearly, make a consequential decision, and design a better way for the business to work.</p></section>
-    <ClosingCta />
-  </main><SiteFooter />
+<BaseLayout title="About Danny McGiffin — Business Advisor & Designer" description="Independent judgment before an expensive systems decision. Experience across strategy, operations, organization, data, and enterprise systems." bodyClass="about-timeline-page" pageType="AboutPage" structuredData={breadcrumbList([{name:'Home',url:`${SITE_URL}/`},{name:'About',url:`${SITE_URL}/about/`}])}>
+  <header class="about-sidebar">
+    <a class="about-name" href="/" aria-label="Danny McGiffin — Home">Danny McGiffin</a>
+    <nav class="about-desktop-nav" aria-label="Primary navigation">
+      <a href="/">Home</a>
+      <a href="/#work">Selected work</a>
+      <a href="/about/" aria-current="page">About me</a>
+      <a href="/writing/">Writing</a>
+      <a href="/contact/">Get in touch</a>
+      <p>Elsewhere</p>
+      <a href={LINKEDIN_URL} rel="me">LinkedIn ↗</a>
+    </nav>
+    <details class="about-mobile-menu">
+      <summary>Menu <span aria-hidden="true">+</span></summary>
+      <nav aria-label="Mobile navigation">
+        <a href="/">Home</a><a href="/#work">Selected work</a><a href="/about/" aria-current="page">About me</a><a href="/writing/">Writing</a><a href="/contact/">Get in touch</a><a href={LINKEDIN_URL} rel="me">LinkedIn ↗</a>
+      </nav>
+    </details>
+  </header>
+  <main id="main-content" class="about-main">
+    <div class="about-column">
+      <section class="about-intro" aria-labelledby="about-title">
+        <h1 id="about-title">About me</h1>
+        <p class="about-lead">Everyone sees a piece. My job is to understand the business problem.</p>
+        <p>Before you commit to a new system, it helps to know whether the system is what needs to change.</p>
+        <p><a href={bookingUrl('about')}>Get a second opinion ↗</a></p>
+      </section>
+      <section class="about-opening" aria-labelledby="pattern-title">
+        <h2 id="pattern-title">A recurring pattern</h2>
+        <div class="reading-copy"><p>Finance sees reporting. Operations sees workarounds. IT sees systems. The vendor sees implementation. Leadership sees the cost. I tend to get handed problems where everyone is seeing a different piece.</p><p>I follow the problem into the business: how it makes money, what people are responsible for, what the systems can represent, and what happens when the normal way of doing things stops working.</p><p>My job is often to step far enough back to understand the problem before everyone spends more money solving their version of it. Sometimes the answer is technology. Sometimes it is process, organization, information, or a clearer decision.</p></div>
+      </section>
+      <section class="about-work" aria-labelledby="work-title"><h2 id="work-title">Selected work</h2>
+    <section class="case-story" id="erp" aria-labelledby="erp-title"><p class="eyebrow">The investment decision</p><div class="story-body"><h2 id="erp-title">The $2.5M ERP we decided not to implement.</h2><p>A PE-backed distributor needed a faster monthly close, cleaner data, and financial reporting its board and new owners could trust. It had already purchased an enterprise ERP when I joined the project.</p><p>The integrator’s sales team believed our requirements were workable. In implementation, a more fundamental problem emerged. The software treated commercial relationships as simple contracts between two parties. The distributor’s deals often involved multiple parties, and those relationships mattered to its reporting and forecasting.</p><p>I kept pressing on how the system would represent those deals. Eventually, the implementation team reached the same conclusion: it didn’t naturally support the business model.</p><p>We documented the gaps. The integrator estimated more than $1 million in additional customization and remediation for the things that could be fixed. Even then, the company would be left with manual workarounds and a heavily customized system.</p><p>Once we made that tradeoff clear to the CEO, we canceled the implementation. I went back to the original need: trustworthy data.</p><p>I designed an alternative around QuickBooks, the existing CPQ and sales-order tools, and the other systems where the work already happened. Exports would be cleaned and normalized automatically, flow into a governed data layer, and give the analytics team a data mart for financial and management reporting.</p><p class="evidence-note">I estimated the alternative at roughly 2–5% of the ERP path’s cost and one-fifth of its timeline. Those were design estimates, not measured implementation results or realized savings.</p><p class="story-principle">The important question changed from “How do we finish implementing this?” to “Should we be implementing it at all?”</p></div></section>
+    <section class="case-story" id="collaboration" aria-labelledby="collaboration-title"><p class="eyebrow">The operating model</p><div class="story-body"><h2 id="collaboration-title">Redesigning an operating model that made collaboration irrational.</h2><p>A major professional-services firm wanted to grow in the federal market by bringing together the expertise of its commercial practices. The strategy made sense. The operating model made cooperation a bad deal.</p><p>Federal had business development, contracts, administration, and some program-management capability. Delivery depended on specialists in the commercial practices. Those leaders faced slower payment, rigid staffing rules, extra overhead, and arguments over who got credit for the revenue.</p><p>Leadership didn’t need another appeal to collaborate. It needed to change what made the existing behavior rational.</p><p>I redesigned the model so the commercial practice owned the client relationship. Federal became the enabling layer: opportunity identification, contracting expertise, administration, tools, guidance, and program-management support where needed.</p><p>We interviewed the people who would have to work inside the model, prototyped the structure, and clarified client ownership, delivery responsibility, decision rights, shared costs, and support. I worked through the design with leaders across the business until they could recognize it as workable.</p><p>The executive team approved the model. Leadership also approved it as a potential model for broader changes across related businesses.</p><p class="story-principle">If you want people to collaborate differently, change the responsibilities and economics that make their current behavior rational.</p></div></section>
+    <section class="case-story" id="growth" aria-labelledby="growth-title"><p class="eyebrow">The growing business</p><div class="story-body"><h2 id="growth-title">Building the company underneath 10× growth.</h2><p>I was the first full-time person brought in to help build a professional-services firm. The founder had created the opportunity and remained the primary commercial relationship. My job was to run operations and help design the company underneath it.</p><p>Within a month, we inherited most of the team supporting our principal client and grew to eight or nine people almost overnight. We expanded the work inside the account and the services we could provide.</p><p>Across the firm, recognized revenue grew from about $200K to $2M in roughly a year. The team grew from one to 15. My focus was making that growth survivable:</p><ul><li>A PMO and a consistent delivery cadence.</li><li>Management structure across client teams.</li><li>Hiring and onboarding processes.</li><li>Reporting systems and automations.</li><li>Operating routines that reduced what the founder had to personally carry.</li></ul><p>One system mattered particularly to me: a monthly one-to-one conversation between the CEO and every employee. No status agenda. A chance for people to stay known as the business grew.</p><p>We retained 100% of the team during that rapid-growth period. The monthly conversations were still going when I left, with the company growing toward 20 people.</p><p class="evidence-note">Revenue and retention are firm-wide outcomes during this period. The founder, client relationships, and team all contributed; the figures are not a claim of individual causation.</p><p class="story-principle">A business needs to grow without destroying the things that made it worth growing in the first place.</p></div></section>
+    <section class="case-story" id="navy" aria-labelledby="navy-title"><p class="eyebrow">The visibility problem</p><div class="story-body"><h2 id="navy-title">Turning an unmeasurable $250M problem into a controllable system.</h2><p>When I began working on the Navy’s improper-payments program, it lacked a reliable way to estimate the problem. Before it could credibly reduce improper payments, it needed to know where they were happening, how often, and why.</p><p>Working with finance and payment experts, we built the program almost from scratch: statistical estimation models, risk assessments, sampling and review methods, pre-payment controls, training, local review activity, and reporting for leadership.</p><p>That gave us a way to target controls at the points of leverage and see whether they were working. Over the course of the work, reported improper payments fell by roughly $250 million. Underlying error rates declined by roughly 45% two years after we started.</p><p>The Office of the Secretary of Defense CFO repeatedly pointed to the Navy’s program as a model and asked us to work with other military services to share the approach.</p><p class="evidence-note">These are program-level results from a collaborative effort. The reported-payment reduction is not a claim of $250 million in recovered cash or savings attributable solely to my work.</p><p class="story-principle">An enormous problem becomes more tractable when you can measure it, find the causes, and put controls where they matter.</p></div></section>
+      </section>
+    <section class="about-background" aria-labelledby="background-title"><h2 id="background-title" class="eyebrow">What connects the work</h2><p>My path has taken me from the Army into consulting, operations, enterprise systems, organizational redesign, and strategy. That experience helps me follow a problem across the business and work out what actually needs to change.</p><p>I’m based in Herndon, Virginia. I work directly with owners and leaders who need to see the situation clearly, make a consequential decision, and design a better way for the business to work.</p></section>
+      <section class="about-contact" aria-labelledby="conversation-title"><h2 id="conversation-title">About to make an expensive systems decision?</h2><p>You don’t need to have the problem neatly framed. In fact, that’s often the point.</p><a href={bookingUrl('closing')}>Get a second opinion ↗</a></section>
+    </div>
+    <footer class="about-footer"><span>© {new Date().getFullYear()} Danny McGiffin</span><a href={LINKEDIN_URL} rel="me">LinkedIn ↗</a></footer>
+  </main>
 </BaseLayout>
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('.about-mobile-menu');
+  menu?.addEventListener('click', event => {
+    if ((event.target as Element).closest('a')) menu.open = false;
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && menu?.open) {
+      menu.open = false;
+      menu.querySelector('summary')?.focus();
+    }
+  });
+</script>
+<style is:global>
+  body.about-timeline-page { background: #fff; color: #303a32; font-family: "Geist", Arial, sans-serif; font-size: 17px; line-height: 1.55; }
+  .about-timeline-page :focus-visible { outline: 2px solid #214d38; outline-offset: 4px; }
+  .about-sidebar { position: fixed; inset: 0 auto 0 0; width: 223px; padding: 28px 24px; background: #ece7d9; border-right: 1px solid #e0e1d5; overflow-y: auto; }
+  .about-name { display: inline-block; color: #214d38; font-size: 14px; font-weight: 700; text-transform: uppercase; }
+  .about-desktop-nav { margin-top: 40px; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+  .about-desktop-nav a { display: block; padding: 10px 0; font-size: 12px; text-transform: uppercase; }
+  .about-desktop-nav a[aria-current="page"] { color: #214d38; font-weight: 700; }
+  .about-desktop-nav a:hover, .about-main a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .about-desktop-nav p { color: #214d38; font-size: 12px; margin: 30px 0 6px; }
+  .about-mobile-menu { display: none; }
+  .about-main { margin-left: 223px; min-height: 100vh; padding: 64px 54px 24px; background: #fff; }
+  .about-column { max-width: 720px; margin-inline: auto; }
+  .about-column p { margin: 0; }
+  .about-column p + p { margin-top: 20px; }
+  .about-intro { border-bottom: 1px solid #bfc9bd; padding-bottom: 32px; }
+  .about-intro h1 { font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 600; line-height: 1.1; letter-spacing: -.035em; margin: 0 0 20px; }
+  .about-intro .about-lead { font-size: 1.3rem; line-height: 1.4; }
+  .about-intro a, .about-contact a { color: #214d38; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+  .about-opening { display: block; padding: 36px 0 52px; }
+  .about-opening h2, .about-work > h2, .about-background h2 { color: #214d38; font-size: 15px; font-weight: 700; letter-spacing: .08em; line-height: 1.4; margin: 0 0 18px; text-transform: uppercase; }
+  .about-opening .reading-copy { max-width: none; }
+  .about-opening .reading-copy p { color: #303a32; }
+  .about-work { padding-top: 8px; }
+  .about-work > h2 { margin-bottom: 28px; }
+  .about-work .case-story { position: relative; display: block; border: 0; border-left: 2px solid #bfc9bd; padding: 0 0 48px 36px; margin-left: 13px; scroll-margin-top: 32px; }
+  .about-work .case-story:last-child { padding-bottom: 0; }
+  .about-work .case-story::before { content: ""; position: absolute; left: -14px; top: 0; width: 26px; height: 26px; border: 3px solid #fff; border-radius: 50%; background: #214d38; box-shadow: 0 0 0 1px #bfc9bd; }
+  .about-work .case-story > .eyebrow { margin: 0 0 5px; color: #657267; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+  .about-work .case-story .story-body { max-width: none; }
+  .about-work .case-story h2 { font-family: "Geist", Arial, sans-serif; font-size: clamp(1.3rem, 2.2vw, 1.65rem); font-weight: 600; line-height: 1.28; letter-spacing: -.02em; margin: 0 0 16px; }
+  .about-work .case-story p { color: #303a32; margin-top: 16px; font-size: 16px; }
+  .about-work .case-story .evidence-note { color: #596154; font-size: 14px; }
+  .about-work .case-story .story-principle { color: #214d38; border-left: 2px solid #214d38; padding-left: 18px; margin-top: 24px; }
+  .about-work .case-story ul { margin-top: 16px; color: #303a32; }
+  .about-background { border-top: 1px solid #bfc9bd; margin-top: 52px; padding: 42px 0 36px; }
+  .about-background p { max-width: none; margin: 0 0 18px; color: #303a32; }
+  .about-contact { border-top: 1px solid #bfc9bd; padding: 40px 0 54px; }
+  .about-contact h2 { font-size: 1.6rem; font-weight: 600; line-height: 1.3; margin: 0 0 12px; }
+  .about-contact a { display: inline-block; margin-top: 18px; }
+  .about-footer { max-width: 720px; margin: 0 auto; border-top: 1px solid #dce1d3; padding-top: 20px; display: flex; justify-content: space-between; gap: 20px; font-size: 12px; color: #596154; }
+  @media (min-width: 1600px) { .about-main { margin-left: calc(223px + (100vw - 1600px) / 2); } }
+  @media (max-width: 1024px) {
+    .about-sidebar { position: relative; width: 100%; padding: 18px 28px; overflow: visible; display: flex; justify-content: space-between; align-items: center; border-right: 0; border-bottom: 1px solid #e0e1d5; z-index: 2; }
+    .about-desktop-nav { display: none; }
+    .about-mobile-menu { display: block; }
+    .about-mobile-menu summary { display: flex; align-items: center; gap: 14px; min-height: 44px; font-size: 14px; list-style: none; cursor: pointer; }
+    .about-mobile-menu summary::-webkit-details-marker { display: none; }
+    .about-mobile-menu[open] summary span { transform: rotate(45deg); }
+    .about-mobile-menu nav { position: absolute; top: 100%; left: 0; right: 0; background: #ece7d9; padding: 12px 28px 24px; border-bottom: 1px solid #bcc8b9; box-shadow: 0 8px 12px #283c2410; }
+    .about-mobile-menu nav a { display: block; padding: 12px 0; font-size: 15px; }
+    .about-main { margin-left: 0; padding: 48px 36px 24px; }
+  }
+  @media (max-width: 600px) {
+    .about-sidebar { padding: 10px 22px; }
+    .about-name { font-size: 13px; }
+    .about-main { padding: 34px 24px 20px; }
+    .about-intro .about-lead { font-size: 1.16rem; }
+    .about-work .case-story { padding-left: 25px; margin-left: 10px; }
+    .about-work .case-story::before { left: -12px; width: 22px; height: 22px; }
+    .about-work .case-story h2 { font-size: 1.3rem; }
+  }
+</style>
