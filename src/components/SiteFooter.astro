@@ -1,19 +1,7 @@
 ---
-import { ENTITY_STATEMENT, LINKEDIN_URL, X_URL } from '../site';
-import ArrowUpRight from './ArrowUpRight.astro';
+import { LINKEDIN_URL, X_URL } from '../site';
 ---
-
 <footer class="site-footer section-dark">
-	<a class="footer-brand" href="/">
-		<span class="monogram" aria-hidden="true"><span>D</span></span>
-		Danny McGiffin
-	</a>
-	<p class="footer-entity">{ENTITY_STATEMENT}</p>
-	<div class="footer-meta">
-		<a href="/northern-virginia-ai-workflow-automation/">NoVA</a>
-		<a href="/contact/">Contact</a>
-		<a href={LINKEDIN_URL} rel="me">LinkedIn <ArrowUpRight /></a>
-		<a href={X_URL} rel="me">X <ArrowUpRight /></a>
-		<span>© 2026</span>
-	</div>
+  <div class="shell footer-top"><a class="footer-brand" href="/">Danny McGiffin</a><p>Independent business advisor & designer.<br />Based in Herndon, Virginia.</p></div>
+  <div class="shell footer-bottom"><span>© {new Date().getFullYear()} Danny McGiffin</span><nav aria-label="Footer navigation"><a href="/about/">About</a><a href="/writing/">Writing</a><a href="/northern-virginia-ai-workflow-automation/">Northern Virginia</a><a href="/contact/">Contact</a><a href={LINKEDIN_URL} rel="me">LinkedIn ↗</a><a href={X_URL} rel="me">X ↗</a></nav></div>
 </footer>

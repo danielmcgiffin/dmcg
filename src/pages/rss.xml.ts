@@ -8,7 +8,7 @@ export async function GET(context: APIContext) {
 
 	return rss({
 		title: 'Danny McGiffin — Writing',
-		description: 'Notes on work, systems, automation, and leverage.',
+		description: 'Essays on ownership, decisions, systems, and how businesses work.',
 		site: context.site!,
 		items: entries.map((entry) => ({
 			title: entry.data.title,

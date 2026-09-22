@@ -11,6 +11,7 @@ import { SITE_NAME } from '../site';
 import '../styles/global.css';
 
 interface Props {
+	bodyClass?: string;
 	title: string;
 	description: string;
 	canonical?: URL;
@@ -18,17 +19,20 @@ interface Props {
 	ogType?: 'website' | 'article';
 	pageType?: 'WebPage' | 'ProfilePage' | 'ContactPage' | 'CollectionPage' | 'AboutPage';
 	publishedAt?: Date;
+	noindex?: boolean;
 	structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
 	title,
 	description,
-	canonical = Astro.url,
+	bodyClass,
+	canonical = new URL(Astro.url.pathname, Astro.site),
 	image = '/og-image.png',
 	ogType = 'website',
 	pageType = 'WebPage',
 	publishedAt,
+	noindex = false,
 	structuredData = []
 } = Astro.props;
 
@@ -52,6 +56,7 @@ const ogImage = new URL(image, Astro.site);
 		<meta name="theme-color" content="#0f1b14" />
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		{noindex && <meta name="robots" content="noindex" />}
 		<link rel="canonical" href={canonical} />
 		<link rel="preload" href={newsreaderRoman} as="font" type="font/woff2" crossorigin />
 		<link rel="preload" href={newsreaderItalic} as="font" type="font/woff2" crossorigin />
@@ -64,6 +69,7 @@ const ogImage = new URL(image, Astro.site);
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
 		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:alt" content="Danny McGiffin — Independent business advisor and designer" />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
@@ -74,7 +80,7 @@ const ogImage = new URL(image, Astro.site);
 		{ogType === 'article' && <meta property="article:author" content={SITE_NAME} />}
 		<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
 	</head>
-	<body>
+	<body class={bodyClass}>
 		<a class="skip-link" href="#main-content">Skip to main content</a>
 		<slot />
 		<Analytics />

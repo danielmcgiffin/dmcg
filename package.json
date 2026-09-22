@@ -1,29 +1,32 @@
 {
-	"name": "dannymcgiffin",
-	"private": true,
-	"version": "1.0.0",
-	"type": "module",
-	"scripts": {
-		"dev": "astro dev",
-		"build": "astro check && astro build",
-		"preview": "astro preview",
-		"check": "astro check",
-		"indexnow": "node scripts/submit-indexnow.mjs",
-		"deploy": "astro check && astro build && npx wrangler deploy"
-	},
-	"dependencies": {
-		"@astrojs/mdx": "^7.0.5",
-		"@astrojs/rss": "^4.0.19",
-		"@astrojs/sitemap": "^3.7.3",
-		"@fontsource/geist": "^5.3.0",
-		"@fontsource/newsreader": "^5.3.0",
-		"astro": "^7.2.0"
-	},
-	"devDependencies": {
-		"@astrojs/check": "^0.9.6",
-		"@tailwindcss/vite": "^4.1.17",
-		"sharp": "^0.34.5",
-		"tailwindcss": "^4.1.17",
-		"typescript": "^5.9.3"
-	}
+  "name": "dannymcgiffin",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "indexnow": "node scripts/submit-indexnow.mjs",
+    "deploy": "astro check && astro build && npx wrangler deploy",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^7.0.5",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.3",
+    "@fontsource/geist": "^5.3.0",
+    "@fontsource/libre-franklin": "^5.3.0",
+    "@fontsource/newsreader": "^5.3.0",
+    "astro": "^7.2.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@tailwindcss/vite": "^4.1.17",
+    "parse5": "^8.0.1",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3"
+  }
 }

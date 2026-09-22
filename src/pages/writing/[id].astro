@@ -37,7 +37,7 @@ const pageUrl = `${SITE_URL}/writing/${entry.id}/`;
 					<a class="eyebrow" href="/writing/">← Writing/</a>
 					<h1 class="display">{entry.data.title}</h1>
 					<p>{entry.data.description}</p>
-					<time datetime={entry.data.publishedAt.toISOString()}>{entry.data.publishedAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time>
+					<time datetime={entry.data.publishedAt.toISOString()}>{entry.data.publishedAt.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' })}</time>
 				</div>
 			</header>
 			<div class="prose shell"><Content /></div>

@@ -1,7 +1,7 @@
 import {
 	ENTITY_STATEMENT,
 	HOME_DESCRIPTION,
-	IMAGE_PATH,
+	LOGO_PATH,
 	JOB_TITLE,
 	KNOWS_ABOUT,
 	LOCATION,
@@ -44,7 +44,6 @@ export function personNode(): JsonLd {
 		'@id': PERSON_ID,
 		name: PERSON_NAME,
 		url: SITE_URL,
-		image: absoluteUrl(IMAGE_PATH),
 		jobTitle: JOB_TITLE,
 		description: ENTITY_STATEMENT,
 		address: postalAddress(),
@@ -60,26 +59,14 @@ export function professionalServiceNode(): JsonLd {
 		'@id': SERVICE_ID,
 		name: SITE_NAME,
 		url: SITE_URL,
-		image: absoluteUrl(IMAGE_PATH),
-		logo: absoluteUrl(IMAGE_PATH),
+		logo: absoluteUrl(LOGO_PATH),
 		description: HOME_DESCRIPTION,
 		founder: { '@id': PERSON_ID },
 		employee: { '@id': PERSON_ID },
 		address: postalAddress(),
 		areaServed: areaServed(),
 		knowsAbout: [...KNOWS_ABOUT],
-		sameAs: [...SAME_AS],
-		makesOffer: {
-			'@type': 'Offer',
-			url: `${SITE_URL}/#offer`,
-			price: '5000',
-			priceCurrency: 'USD',
-			itemOffered: {
-				'@type': 'Service',
-				name: 'Workflow Teardown',
-				url: `${SITE_URL}/#offer`
-			}
-		}
+		sameAs: [...SAME_AS]
 	};
 }
 
@@ -119,7 +106,7 @@ export function pageGraph({
 		description,
 		isPartOf: { '@id': WEBSITE_ID },
 		about: { '@id': PERSON_ID },
-		mainEntity: type === 'ProfilePage' ? { '@id': PERSON_ID } : { '@id': SERVICE_ID }
+		mainEntity: (type === 'ProfilePage' || type === 'AboutPage') ? { '@id': PERSON_ID } : { '@id': SERVICE_ID }
 	};
 
 	return {

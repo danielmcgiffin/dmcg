@@ -1,7 +1,7 @@
 export const SITE_URL = 'https://dannymcgiffin.com';
 export const SITE_NAME = 'Danny McGiffin';
 export const PERSON_NAME = 'Danny McGiffin';
-export const JOB_TITLE = 'Operations engineer';
+export const JOB_TITLE = 'Independent business advisor and designer';
 
 export const LOCATION = {
 	locality: 'Herndon',
@@ -12,15 +12,15 @@ export const LOCATION = {
 } as const;
 
 export const ENTITY_STATEMENT =
-	'Danny McGiffin — Operations Engineering is a founder-led operations engineering firm based in Herndon, Virginia, serving growing companies across Northern Virginia and the Washington, DC area.';
+  'Danny McGiffin is an independent business advisor and designer based in Herndon, Virginia. He helps owners and executives decide what actually needs to change before a major technology or systems commitment.';
 
 export const ABOUT_LOCATION =
-	"I'm an operations engineer based in Herndon, Virginia. I work with growing companies across Northern Virginia and the Washington, DC area.";
+  'Based in Herndon, Virginia, working with businesses across Northern Virginia and the Washington, DC area.';
 
 export const HOME_DESCRIPTION =
-	"I find the operational work consuming your team's time and margin, redesign it, and build the systems that give that capacity back.";
+  'Before you spend a bunch of money on a new system, make sure you actually need it. Independent advice for owners and executives from Danny McGiffin.';
 
-export const HOME_TITLE = 'Danny McGiffin — Operations Engineering';
+export const HOME_TITLE = 'Danny McGiffin — Before You Buy a New System';
 
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/danny-mcgiffin/';
 export const X_URL = 'https://x.com/therealmcgiffin';
@@ -28,16 +28,13 @@ export const X_URL = 'https://x.com/therealmcgiffin';
 export const SAME_AS = [LINKEDIN_URL, X_URL] as const;
 
 export const IMAGE_PATH = '/og-image.png';
-export const LOGO_PATH = '/og-image.png';
+export const LOGO_PATH = '/favicon.svg';
 
 export const KNOWS_ABOUT = [
-	'Operations engineering',
-	'Workflow redesign',
-	'Business process improvement',
-	'Systems integration',
-	'Internal software tools',
-	'Workflow automation',
-	'Artificial intelligence implementation'
+  'Business strategy', 'Operating-model design', 'Organizational design',
+  'Decision-making', 'Ownership and accountability', 'Business systems',
+  'Customer experience', 'Employee experience', 'Workflow design',
+  'Systems integration', 'AI and automation'
 ] as const;
 
 /** Regions named on the homepage and in the sitewide footer. */

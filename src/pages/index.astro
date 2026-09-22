@@ -1,207 +1,269 @@
 ---
-import { Picture } from 'astro:assets';
-import ArrowUpRight from '../components/ArrowUpRight.astro';
-import OfferSection from '../components/OfferSection.astro';
-import SiteFooter from '../components/SiteFooter.astro';
-import SiteHeader from '../components/SiteHeader.astro';
-import { bookingUrl } from '../config';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { HOME_DESCRIPTION, HOME_TITLE } from '../site';
-import heroImage from '../assets/constraint-hero.png';
+import '@fontsource/libre-franklin/latin-300.css';
+import '@fontsource/libre-franklin/latin-400.css';
+import '@fontsource/libre-franklin/latin-700.css';
+import { HOME_TITLE, HOME_DESCRIPTION, LINKEDIN_URL } from '../site';
+import { bookingUrl } from '../config';
 
-const findings = [
-	['What should disappear.', 'Duplicate work, unnecessary approvals, repeated checks, and steps that exist only because the workflow grew around them.'],
-	['Where work gets stuck.', 'Broken handoffs, missing information, manual lookups, waiting, re-entry, and avoidable rework.'],
-	['What it costs.', 'Hours, delay, errors, margin, and capacity you cannot use somewhere else.'],
-	['What should stay human.', 'Judgment, relationships, accountability, and decisions the business should not delegate to a system.'],
-	['What should be built.', 'Software, integrations, internal tools, deterministic automation, or AI-assisted steps that make the redesigned workflow real.']
-] as const;
-
-const method = [
-	['Observe the real work', 'Follow the workflow from trigger to finished outcome with the people who actually do it.'],
-	['Quantify the constraint', 'Measure the labor, delay, error, rework, and capacity tied up in the current process.'],
-	['Eliminate unnecessary work', 'Remove steps that create no value, reduce no risk, and enable nothing necessary.'],
-	['Simplify and redesign the workflow', 'Clarify handoffs, decisions, inputs, and ownership before choosing technology.'],
-	['Build the solution', 'Implement the software, integrations, internal tools, automation, or AI the better workflow requires.'],
-	['Measure the result', 'Check whether the operation actually uses less labor, creates fewer errors, and returns capacity.']
-] as const;
-
+const navigation = [
+  { href: '/#work', label: 'Selected work' },
+  { href: '/about/', label: 'About me' },
+  { href: '/writing/', label: 'Writing' },
+  { href: '/contact/', label: 'Get in touch' },
+];
+const focusAreas = [
+  ['Technology decisions', 'Major software, ERP, CRM, data, architecture, vendor, and AI decisions—before you commit.'],
+  ['Management information', 'When leaders cannot get trustworthy answers from the systems they already have.'],
+  ['Operating model', 'When structure, incentives, ownership, or decision rights are producing the wrong behavior.'],
+  ['Systems & architecture', 'When the tools work individually but the business does not work coherently across them.'],
+  ['Business design', 'When the problem crosses strategy, organization, operations, customer experience, and technology.'],
+  ['Complex initiatives', 'When a consequential problem crosses functions and nobody clearly owns the whole thing.'],
+];
+const triggers = [
+  '“We need an ERP.”',
+  '“None of our systems talk to each other.”',
+  '“We can’t trust our numbers.”',
+  '“We’ve already spent too much for this not to work.”',
+  '“What could we actually use AI for?”',
+  '“The vendor says this is just how the system works.”',
+];
+const projects = [
+  {
+    title: 'The $2.5M ERP we decided not to implement', context: 'PE-backed distributor', anchor: 'erp',
+    situation: 'The company had purchased a roughly $2.5M ERP implementation. During implementation, I found that the software could not represent how the business actually made money.',
+    work: 'Closing the gaps would have required more than $1M in additional customization and still left workarounds and a fragile system. We stopped the implementation. I designed an alternative around the systems the company already had.',
+    outcome: 'I estimated the alternative at roughly 2–5% of the ERP path’s cost and one-fifth of its timeline. These were design estimates, not realized savings. The question was whether to implement this ERP at all.',
+  },
+  {
+    title: 'Redesigning an operating model that made collaboration irrational', context: 'Professional services', anchor: 'collaboration',
+    situation: 'A professional-services firm wanted its practices to work together in the federal market. Their incentives made that a bad deal.',
+    work: 'I redesigned the model so commercial practices owned the client relationship and Federal supplied the contracting, administration, and delivery support.',
+    outcome: 'The executive team approved the model and its potential use across related businesses.',
+  },
+  {
+    title: 'Building the company underneath 10× growth', context: 'First full-time operator', anchor: 'growth',
+    situation: 'A growing professional-services firm needed management, delivery, hiring, and reporting systems to support a rapidly expanding team.',
+    work: 'As the first full-time operator, I built those systems and operating routines, including monthly conversations between the CEO and every employee.',
+    outcome: 'Firm-wide recognized revenue grew from about $200K to $2M in roughly a year. The team retained every employee during that growth period. These were shared outcomes, not results attributable to me alone.',
+  },
+  {
+    title: 'Turning an unmeasurable $250M problem into a controllable system', context: 'U.S. Navy', anchor: 'navy',
+    situation: 'The Navy needed a reliable way to estimate improper payments before it could credibly reduce them.',
+    work: 'Working with finance and payment experts, I helped build statistical models, risk assessments, review methods, controls, training, and leadership reporting.',
+    outcome: 'The OSD CFO pointed to the program as a model for other services. Reported improper payments fell by roughly $250M over the work; this was a collaborative program result, not recovered cash or individual savings.',
+  },
+];
 ---
+<BaseLayout title={HOME_TITLE} description={HOME_DESCRIPTION} bodyClass="consulting-home">
+  <header class="consulting-sidebar">
+    <div class="consulting-identity">
+      <a class="consulting-name" href="/" aria-label="Danny McGiffin — Home">Danny McGiffin</a>
+      <p class="consulting-availability"><span aria-hidden="true"></span>Open for new clients</p>
+    </div>
+    <nav class="consulting-desktop-nav" aria-label="Primary navigation">
+      <a href="/" aria-current="page">Home</a>
+      {navigation.map(({ href, label }) => <a href={href}>{label}</a>)}
+      <p>Elsewhere</p>
+      <a href={LINKEDIN_URL} rel="me">LinkedIn <span aria-hidden="true">↗</span></a>
+    </nav>
+    <details class="consulting-mobile-menu">
+      <summary>Menu <span aria-hidden="true">+</span></summary>
+      <nav aria-label="Mobile navigation">
+        <a href="/" aria-current="page">Home</a>
+        {navigation.map(({ href, label }) => <a href={href}>{label}</a>)}
+        <a href={LINKEDIN_URL} rel="me">LinkedIn ↗</a>
+      </nav>
+    </details>
+  </header>
+  <main id="main-content" class="consulting-main">
+    <section class="consulting-intro" aria-labelledby="hero-title">
+      <div>
+        <p class="consulting-label">Before you commit</p>
+        <h1 id="hero-title">Before you spend a bunch of money on a new system, make sure it's actually what you need.</h1>
+        <p class="consulting-deck">I work with owners and executives on major system decisions to make sure you're getting the results you need... often for a lot less than you were about to spend.</p>
+        <p class="consulting-button-note">I'm not saying you can't trust salespeople, but</p>
+        <a class="consulting-button" href={bookingUrl('hero')}>get your second opinion</a>
+      </div>
+      <img class="consulting-portrait" src="/danny-mcgiffin.jpg" width="400" height="400" alt="Danny McGiffin" fetchpriority="high" />
+    </section>
 
-<BaseLayout title={HOME_TITLE} description={HOME_DESCRIPTION} pageType="ProfilePage">
-	<SiteHeader />
+    <section class="consulting-section" aria-labelledby="triggers-title">
+      <h2 class="consulting-label" id="triggers-title">When you hear yourself saying…</h2>
+      <div class="consulting-engagements">{triggers.map(trigger => <article><h3>{trigger}</h3></article>)}</div>
+      <p class="consulting-note">it’s worth getting an independent view before you go further.</p>
+    </section>
 
-	<main id="main-content">
-		<section class="hero section-dark" aria-labelledby="hero-title">
-			<div class="hero-media" aria-hidden="true">
-				<Picture
-					src={heroImage}
-					formats={['avif']}
-					fallbackFormat="webp"
-					alt=""
-					width={heroImage.width}
-					height={heroImage.height}
-					widths={[768, 1024, 1440, 1920]}
-					sizes="100vw"
-					loading="eager"
-					decoding="sync"
-					fetchpriority="high"
-					priority
-				/>
-			</div>
-			<div class="media-grain" aria-hidden="true"></div>
-			<div class="visual-grid" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <figure class="consulting-testimonial">
+      <blockquote><p>“Working with Danny was excellent. He didn't just come in and automate what we had. He studied the problem, stripped away the noise, and eliminated work that shouldn’t have existed in the first place.”</p></blockquote>
+      <figcaption><strong>Roger Porres</strong><span>Director of Ancillary Services</span></figcaption>
+    </figure>
 
-			<div class="hero-copy shell">
-				<p class="overline">Operations design & engineering</p>
-				<h1 id="hero-title" class="display display--hero">
-					<span class="reveal-clip"><span class="reveal-line">Grow the business.</span></span>
-					<span class="reveal-clip"><em class="reveal-line">Not the back office.</em></span>
-				</h1>
-			</div>
+    <section class="consulting-section consulting-about" aria-labelledby="decision-title">
+      <h2 class="consulting-label" id="decision-title">The $2.5M ERP we decided not to implement</h2>
+      <p>A PE-backed distributor had already purchased a roughly $1.5M ERP license and implementation, but during the implementation, I found that the software could not represent how the company made money. More than $1M in additional customization would still have left workarounds and a fragile system.</p>
+      <p>We stopped the implementation. I designed an alternative around the systems they already had, estimated at roughly 2–5% of the ERP path’s cost and one-fifth of the time. Those were design estimates, not realized savings.</p>
+      <p>I helped them see the question wasn’t “How do we finish implementing this ERP?” but “Should we be implementing it at all?”</p>
+      <p>And if they had brought me in before the implementation, we could've saved the company even more.</p>
+      <a class="consulting-inline-link" href="/about/#erp">Read the full account ↗</a>
+    </section>
 
-			<div class="hero-bar shell">
-				<p>
-					<strong>I find the operational work consuming your team's time and margin, redesign it, and build the systems that give that capacity back.</strong>
-				</p>
-				<div class="hero-actions">
-					<a class="button button--primary" href={bookingUrl('hero')}>Show me the work <ArrowUpRight /></a>
-				</div>
-			</div>
-		</section>
+    <section class="consulting-section" aria-labelledby="engagement-title">
+      <h2 class="consulting-label" id="engagement-title">How we can work together</h2>
+      <div class="consulting-engagements">
+        <article><h3>Advisory</h3><p>Independent judgment on a consequential decision. Think through what’s happening, test assumptions, compare options, and determine what actually needs to change.</p></article>
+        <article><h3>Design</h3><p>Turn the decision into a coherent future state. Work out how processes, roles, information, systems, vendors, and responsibilities should fit together.</p></article>
+        <article><h3>Build</h3><p>Make the change real where hands-on help is appropriate: systems, integrations, software, automation, implementation oversight, or program & vendor management.</p></article>
+      </div>
+      <p class="consulting-note">I have no financial ties or incentives to any framework, software, platform, or firm. Your results are the only thing I care about, whether the answer might be new software, integration, better data, clearer ownership, a different process or vendor... or no major purchase at all.</p>
+      <p class="consulting-note">You work directly with me. An advisory engagement does not usually lead to a build. A clear decision not to buy or build anything can be the whole result.</p>
+    </section>
 
-		<section class="hero-deck section-dark" aria-label="What more work looks like">
-			<div class="shell page-copy">
-				<p>
-					Every new client and every new contract creates more work.
-				</p>
-				<p>
-					More onboarding. More reporting. More data entry. More approvals. More spreadsheets. More things your experienced people end up tracking, managing, checking, and doing by hand.
-				</p>
-				<p>
-					I study how the work actually happens, remove what should not exist, simplify what remains, and build	the integrations, software, automation, internal tools, or AI-assisted steps the better workflow needs.
-				</p>
-			</div>
-		</section>
+    <section class="consulting-section" aria-labelledby="expertise-title">
+      <h2 class="consulting-label" id="expertise-title">Focus areas</h2>
+      <div class="consulting-focus">{focusAreas.map(([title, description]) => <article><h3>{title}</h3><p>{description}</p></article>)}</div>
+    </section>
 
-		<section class="rule section-light" id="rule" aria-labelledby="rule-title">
-			<div class="shell rule-row">
-				<div>
-					<p class="eyebrow reveal">A simple rule</p>
-					<h2 id="rule-title" class="display reveal">Technology is not the starting point.</h2>
-				</div>
-				<div class="page-copy reveal">
-					<p>Sometimes another hire is actually the right answer.</p>
-					<p>Before you hire another person, show me the work.</p>
-					<p>
-						Most companies do not have a technology problem. They have workflow problems, and expensive people spending expensive hours moving information between systems, rebuilding reports, chasing approvals, copying data, checking work, and
-						keeping things moving through sheer willpower.
-					</p>
-					<p>
-						I do not begin with "Where can we add AI?" I begin with <strong>"Why did we start doing the work this way?"</strong>
-					</p>
-					<p>Streamline and simplify the process first. Then automate what makes sense.</p>
-				</div>
-			</div>
-		</section>
+    <section class="consulting-section" id="work" aria-labelledby="work-title">
+      <h2 class="consulting-label" id="work-title">Selected work</h2>
+      <div class="consulting-projects">
+        {projects.map(project => <details>
+          <summary><span>{project.title} <strong>{project.context}</strong></span><span class="project-toggle" aria-hidden="true">+</span></summary>
+          <div class="consulting-project-body">
+            <p>{project.situation}</p><p>{project.work}</p><p>{project.outcome}</p>
+            <a href={`/about/#${project.anchor}`}>Read the full account <span aria-hidden="true">↗</span></a>
+          </div>
+        </details>)}
+      </div>
+      <p class="consulting-note">Selected experience across internal leadership, advisory, and hands-on delivery.</p>
+    </section>
 
-		<section class="find section-dark" id="work" aria-labelledby="find-title">
-			<div class="section-grid section-heading">
-				<p class="eyebrow reveal">The work</p>
-				<div>
-					<h2 id="find-title" class="display reveal">The way things work isn't what's written down.</h2>
-					<p class="section-intro reveal">
-						I work with your team to see how the work actually happens, not how the SOP says it is supposed to happen: what starts it, who touches it, where they look something up or make a judgment, where it fails, and what finished actually means. That is how we build solutions that stick.
-					</p>
-				</div>
-			</div>
-			<div class="find-list shell reveal">
-				{findings.map(([title, body]) => (
-					<div class="find-row">
-						<h3>{title}</h3>
-						<p>{body}</p>
-					</div>
-				))}
-			</div>
-		</section>
+    <section class="consulting-section consulting-about" aria-labelledby="about-title">
+      <h2 class="consulting-label" id="about-title">About me</h2>
+      <p>I work on the problems where everyone is seeing a different piece. Finance sees reporting. Operations sees workarounds. IT sees systems. The vendor sees implementation. Leadership sees cost.</p>
+      <p>My role is to step far enough back to figure out what root problem the business actually has, before everyone spends more money solving their version of the symptoms.</p>
+      <p>My path has taken me from the Army into consulting, operations, enterprise systems, organizational redesign, and strategy. I’m based in Herndon, Virginia, and work directly with owners and executives.</p>
+      <a class="consulting-inline-link" href="/about/">More about me and the work ↗</a>
+    </section>
 
-		<section class="about section-light" id="why" aria-labelledby="why-title">
-			<div class="about-copy reveal">
-				<p class="eyebrow">Why this works</p>
-				<h2 id="why-title" class="display">Observe. Measure. Eliminate. Simplify. Build. Measure again.</h2>
-				<p>
-					Operations are unique because they connect what a company sells, the people it has, the systems it uses,
-					and the strategy it wants to pursue. The method for understanding and improving them can still be systematic.
-				</p>
-				<ol>
-					{method.map(([title, body], index) => (
-						<li>
-							<span>{String(index + 1).padStart(2, '0')}</span>
-							<div><strong>{title}</strong><p>{body}</p></div>
-						</li>
-					))}
-				</ol>
-			</div>
-		</section>
-
-		<section class="proof section-dark" aria-labelledby="client-proof-title">
-			<div class="section-grid section-heading">
-				<p class="eyebrow reveal">Client result / sanitized case study</p>
-				<div>
-					<h2 id="client-proof-title" class="display reveal">From a fragile multi-step process to two uploads and "Generate".</h2>
-					<p class="proof-result reveal">From 100 hours/year to 15  ·  85% less manual effort  ·  85 hours of capacity reclaimed</p>
-				</div>
-			</div>
-			<div class="proof-grid shell reveal">
-				<article>
-					<p class="eyebrow">Before</p>
-					<p class="proof-context">A messy, time-consuming process to generate documents that took too long, had too many manual fixes that needed to happen every time, and caused a lot of friction in the day-to-day.</p>
-				</article>
-				<article>
-					<p class="eyebrow">What changed</p>
-					<p class="proof-context">We mapped the actual workflow, questioned why each step existed, removed unnecessary work, simplified the inputs, and built the generation system.</p>
-				</article>
-				<article>
-					<p class="eyebrow">After</p>
-					<p class="proof-context">A simple applet that does the tricky work for them, is simple to maintain and update, and just plain works.</p>
-				</article>
-			</div>
-			<blockquote class="proof-quote shell reveal">
-				<p>“Danny took a fragile process that required significant manual checking and rebuilt it into something simple and reliable. We went from a multi-step process involving our database, spreadsheets, Word mail merge, manual lookups, and individual document cleanup to uploading two files and clicking Generate. He didn't just come in and automate what we had. He actually eliminated the steps that shouldn’t have existed in the first place.”</p>
-				<footer>Roger Porres · Director of Ancillary Services</footer>
-			</blockquote>
-		</section>
-
-		<OfferSection />
-
-		<section class="founder section-light" aria-labelledby="founder-title">
-			<div class="shell rule-row reveal">
-				<div>
-					<p class="eyebrow">Founder-led</p>
-					<h2 id="founder-title" class="display">Danny McGiffin: Operations Engineering</h2>
-				</div>
-				<div class="page-copy">
-					<p><strong>Every engagement is led by Danny McGiffin.</strong></p>
-					<p>I have spent my career inside operations: running teams, fixing broken processes, implementing enterprise systems, and dealing with the gap between what a system was supposed to do and what people actually do to make the business run.</p>
-					<p>You work directly with me from observation and diagnosis through workflow redesign, technical implementation, and measurement.</p>
-				</div>
-			</div>
-		</section>
-		
-		<section class="closer section-dark" id="contact" aria-labelledby="closing-title">
-			<div class="shell closer-inner reveal">
-				<h2 id="closing-title" class="display">
-					<a class="closer-ask" href={bookingUrl('closer')}
-						><span>Before you hire another person, show me the work.</span></a>
-				</h2>
-				<p class="hero-note">No sales presentation required.</p>
-			</div>
-		</section>
-	</main>
-
-	<SiteFooter />
-
-	<script is:inline>
-		if(!CSS.supports('animation-timeline:scroll()')){let o=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('is-visible');o.unobserve(x.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>o.observe(e))}
-	</script>
+    <section class="consulting-close" aria-labelledby="conversation-title">
+      <h2 id="conversation-title">About to make an expensive systems decision?</h2>
+      <p>You don’t need to have the problem neatly framed. In fact, that’s usually the point.</p>
+      <a class="consulting-button" href={bookingUrl('closing')}>Get a second opinion</a>
+      <a class="consulting-inline-link" href="/contact/">Or get in touch ↗</a>
+    </section>
+    <footer class="consulting-footer"><span>© {new Date().getFullYear()} Danny McGiffin</span><a href={LINKEDIN_URL}>LinkedIn ↗</a></footer>
+  </main>
 </BaseLayout>
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('.consulting-mobile-menu');
+  menu?.addEventListener('click', (event) => {
+    if ((event.target as Element).closest('a')) menu.open = false;
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu?.open) {
+      menu.open = false;
+      menu.querySelector('summary')?.focus();
+    }
+  });
+</script>
+<style is:global>
+  body.consulting-home { background: #ffffff; color: #303a32; font-family: "Libre Franklin", Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 1.5; --consulting-green: #214d38; --consulting-line: #bcc8b9; }
+  .consulting-home p { line-height: 1.55; }
+  .consulting-home :focus-visible { outline-color: var(--consulting-green); outline-offset: 5px; }
+  .consulting-sidebar { position: fixed; inset: 0 auto 0 0; width: 223px; padding: 28px 24px; background: #ece7d9; border-right: 1px solid #e0e1d5; overflow-y: auto; }
+  .consulting-name { display: inline-block; color: var(--consulting-green); font-size: 14px; font-weight: 700; text-transform: uppercase; }
+  .consulting-availability { display: flex; align-items: baseline; gap: 7px; margin-top: 12px; font-size: 11px; color: #596154; max-width: 170px; }
+  .consulting-availability span { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--consulting-green); animation: availability-pulse 1.2s ease-out infinite; }
+  @keyframes availability-pulse {
+    0% { box-shadow: 0 0 0 0 rgb(33 77 56 / 35%); }
+    70%, 100% { box-shadow: 0 0 0 6px rgb(33 77 56 / 0%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .consulting-availability span { animation: none; }
+  }
+  .consulting-desktop-nav { margin-top: 40px; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+  .consulting-desktop-nav a { display: block; padding: 10px 0; font-size: 12px; text-transform: uppercase; }
+  .consulting-desktop-nav a:hover, .consulting-home a:not(.consulting-button):hover { text-decoration: underline; text-underline-offset: 4px; }
+  .consulting-desktop-nav p { color: var(--consulting-green); font-size: 12px; margin: 30px 0 6px; }
+  .consulting-mobile-menu { display: none; }
+  .consulting-main { background: #ffffff; max-width: 1183px; padding: 56px 64px 24px; margin-left: 223px; }
+  .consulting-intro { display: grid; grid-template-columns: 1.5fr 1fr; gap: 52px; align-items: center; padding-bottom: 42px; }
+  .consulting-label { font-size: 14px; font-weight: 700; text-transform: uppercase; line-height: 1.4; color: var(--consulting-green); letter-spacing: .025em; }
+  .consulting-intro h1 { font-family: "Libre Franklin", Arial, sans-serif; font-size: clamp(29px, 2.65vw, 39px); font-weight: 300; line-height: 1.23; letter-spacing: -.02em; margin: 28px 0 20px; }
+  .consulting-deck { font-size: 16px; max-width: 48ch; }
+  .consulting-button { display: inline-block; background: var(--consulting-green); color: #fffdf5; padding: 14px 18px; font-size: 14px; line-height: 1.4; font-weight: 700; border-radius: 3px; margin-top: 26px; }
+  .consulting-button-note { font-size: 12px; margin-top: 26px; }
+  .consulting-button-note + .consulting-button { margin-top: 6px; }
+  .consulting-button:hover { background: #173a29; }
+  .consulting-portrait { width: 100%; height: auto; max-width: 340px; justify-self: center; }
+  .consulting-section { padding: 38px 0; scroll-margin-top: 24px; }
+  .consulting-section > h2 { margin-bottom: 25px; }
+  .consulting-engagements { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .consulting-home h3 { font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 6px; }
+  .consulting-note { font-size: 13px; color: #596154; max-width: 85ch; margin-top: 24px; }
+  .consulting-testimonial { margin: 20px 0; padding: 30px 32px; background: #f3f2e9; border-left: 3px solid var(--consulting-green); }
+  .consulting-testimonial blockquote { margin: 0; }
+  .consulting-testimonial blockquote p { font-size: 19px; line-height: 1.65; color: #303a32; }
+  .consulting-testimonial figcaption { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 20px; font-size: 13px; color: #596154; }
+  .consulting-testimonial figcaption strong { color: var(--consulting-green); font-weight: 700; }
+  @media (max-width: 600px) {
+    .consulting-testimonial { padding: 24px 20px; }
+    .consulting-testimonial blockquote p { font-size: 17px; }
+  }
+  .consulting-focus { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .consulting-focus article { padding: 20px; background: #fffdf7; border: 1px solid #e6e5d9; border-radius: 3px; box-shadow: 2px 3px 7px #283c2410; }
+  .consulting-focus p { font-size: 15px; }
+  .consulting-projects { display: grid; gap: 10px; }
+  .consulting-projects details { border: 1px solid var(--consulting-line); border-radius: 3px; }
+  .consulting-projects summary { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 19px 22px; cursor: pointer; list-style: none; font-size: 15px; }
+  .consulting-projects summary::-webkit-details-marker { display: none; }
+  .consulting-projects summary strong { display: inline; font-weight: 700; color: var(--consulting-green); margin-left: 8px; }
+  .consulting-projects summary:hover { background: #eeeee1; }
+  .project-toggle { flex: none; font-size: 24px; line-height: 1; color: var(--consulting-green); }
+  .consulting-projects details[open] .project-toggle { transform: rotate(45deg); }
+  .consulting-project-body { border-top: 1px solid #dce1d3; padding: 22px; max-width: 78ch; }
+  .consulting-project-body p + p { margin-top: 16px; }
+  .consulting-project-body a { display: inline-block; font-size: 14px; color: var(--consulting-green); text-decoration: underline; text-underline-offset: 4px; margin-top: 20px; }
+  .consulting-about > p { max-width: 76ch; margin-bottom: 18px; }
+  .consulting-inline-link { color: var(--consulting-green); font-weight: 700; font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
+  .consulting-close { padding: 30px 0 55px; }
+  .consulting-close h2 { font-family: "Libre Franklin", Arial, sans-serif; font-size: 25px; font-weight: 400; line-height: 1.3; margin-bottom: 12px; letter-spacing: -.02em; }
+  .consulting-close .consulting-inline-link { margin-left: 24px; }
+  .consulting-footer { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid #dce1d3; padding: 24px 0 8px; color: #596154; font-size: 12px; }
+  @media (min-width: 1600px) { .consulting-main { margin-left: calc(223px + (100vw - 1600px) / 2); } }
+  @media (max-width: 1100px) {
+    .consulting-main { padding: 40px 36px 24px; }
+    .consulting-intro { gap: 30px; }
+    .consulting-engagements { gap: 20px; }
+    .consulting-focus { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 1024px) {
+    .consulting-sidebar { position: relative; width: 100%; padding: 18px 28px; overflow: visible; display: flex; justify-content: space-between; align-items: center; border-right: 0; border-bottom: 1px solid #e0e1d5; z-index: 2; }
+    .consulting-desktop-nav { display: none; }
+    .consulting-mobile-menu { display: block; }
+    .consulting-mobile-menu summary { display: flex; align-items: center; gap: 14px; min-height: 44px; font-size: 14px; list-style: none; cursor: pointer; }
+    .consulting-mobile-menu summary::-webkit-details-marker { display: none; }
+    .consulting-mobile-menu[open] summary span { transform: rotate(45deg); }
+    .consulting-mobile-menu nav { position: absolute; top: 100%; left: 0; right: 0; background: #ece7d9; padding: 12px 28px 24px; border-bottom: 1px solid #bcc8b9; box-shadow: 0 8px 12px #283c2410; }
+    .consulting-mobile-menu nav a { display: block; padding: 12px 0; font-size: 15px; }
+    .consulting-main { margin-left: 0; max-width: 1000px; margin-inline: auto; }
+    .consulting-intro h1 { font-size: 34px; }
+  }
+  @media (max-width: 600px) {
+    .consulting-sidebar { padding: 10px 22px; }
+    .consulting-name { font-size: 13px; }
+    .consulting-main { padding: 34px 24px 16px; }
+    .consulting-intro { grid-template-columns: 1fr; gap: 32px; padding-bottom: 12px; }
+    .consulting-intro h1 { font-size: 30px; margin-top: 22px; }
+    .consulting-portrait { width: 220px; justify-self: start; }
+    .consulting-section { padding: 30px 0; }
+    .consulting-engagements, .consulting-focus { grid-template-columns: 1fr; gap: 22px; }
+    .consulting-focus { gap: 12px; }
+    .consulting-projects summary { padding: 16px; gap: 16px; }
+    .consulting-projects summary strong { display: block; margin: 5px 0 0; font-size: 13px; }
+    .consulting-project-body { padding: 16px; }
+    .consulting-close { padding: 24px 0 40px; }
+    .consulting-close .consulting-inline-link { display: inline-block; margin-left: 20px; }
+  }
+</style>

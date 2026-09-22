@@ -9,7 +9,7 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
 	.sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
 ---
 
-<BaseLayout title="Writing — Danny McGiffin" description="Notes on work, systems, automation, and leverage." pageType="CollectionPage">
+<BaseLayout title="Writing — Danny McGiffin" description="Essays on how businesses work: ownership, decisions, systems, and technology." pageType="CollectionPage">
 	<SiteHeader />
 	<main id="main-content">
 		<header class="writing-hero section-dark">
@@ -23,7 +23,7 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
 				<a href={`/writing/${article.id}/`}>
 					<span class="index">{String(index + 1).padStart(2, '0')}</span>
 					<div><h2>{article.data.title}</h2><p>{article.data.description}</p></div>
-					<time datetime={article.data.publishedAt.toISOString()}>{article.data.publishedAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
+					<time datetime={article.data.publishedAt.toISOString()}>{article.data.publishedAt.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'short', day: 'numeric', year: 'numeric' })}</time>
 					<span class="round-arrow" aria-hidden="true"><ArrowUpRight /></span>
 				</a>
 			))}

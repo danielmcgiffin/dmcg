@@ -13,11 +13,13 @@ export default defineConfig({
 	integrations: [
 		mdx(),
 		sitemap({
-			filter: (page) => !page.includes('/workflow-review')
+			filter: (page) => !['/workflow-review/', '/ai-opportunity-sprint/', '/score-one-workflow/', '/404/'].some((route) => new URL(page).pathname === route)
 		})
 	],
 	redirects: {
-		'/workflow-review': '/ai-opportunity-sprint'
+		'/workflow-review': '/still-on-tools/',
+		'/ai-opportunity-sprint': '/still-on-tools/',
+		'/score-one-workflow': '/still-on-tools/'
 	},
 	vite: {
 		plugins: [tailwindcss()]

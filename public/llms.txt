@@ -1,16 +1,19 @@
 # Danny McGiffin
 
-Danny McGiffin is a workflow automation and AI consultant based in Herndon, Virginia, serving businesses across Northern Virginia and the Washington, DC area.
+Danny McGiffin is an independent business advisor and designer based in Herndon, Virginia. He works with owners and executives of established companies before consequential technology and systems commitments.
 
-He helps small and midsize businesses improve workflows, automate manual work, integrate systems, and implement AI. The working method is: understand the work, improve the system, then automate what should not require human effort.
+Before an owner spends a bunch of money on a new system, he figures out whether they actually need it. Often, they need less than they were about to buy. Buying moments include ERP replacement, disconnected systems, unreliable reporting, major software proposals, and decisions about AI.
+
+His advice does not depend on a technology sale. The answer may be software, integration, better data, process redesign, clearer ownership, a smaller tool, a different vendor, or no major purchase. Advisory, Design, and Build are independent ways to engage. His work spans strategy, operations, organization, information, and business design; an advisory engagement need not lead to implementation.
 
 ## Site
 
 - Home: https://dannymcgiffin.com/
-- Northern Virginia consulting: https://dannymcgiffin.com/northern-virginia-ai-workflow-automation/
-- AI Opportunity Sprint: https://dannymcgiffin.com/ai-opportunity-sprint/
+- About and selected experience: https://dannymcgiffin.com/about/
 - Contact: https://dannymcgiffin.com/contact/
+- Northern Virginia: https://dannymcgiffin.com/northern-virginia-ai-workflow-automation/
 - Writing: https://dannymcgiffin.com/writing/
+- Research briefing on AI tools and work: https://dannymcgiffin.com/still-on-tools/
 - RSS: https://dannymcgiffin.com/rss.xml
 
 ## Profiles
@@ -20,4 +23,8 @@ He helps small and midsize businesses improve workflows, automate manual work, i
 
 ## Location
 
-Based in Herndon, Virginia. Works with businesses in Northern Virginia and the Washington, DC area, including Reston, Chantilly, Fairfax, Tysons, McLean, Vienna, Ashburn, Leesburg, Arlington, Alexandria, Loudoun County, and Fairfax County.
+Based in Herndon. Works with businesses across Northern Virginia and the Washington, DC area. Service locations are not separate offices.
+
+## Experience
+
+Experience includes internal leadership and advisory work. The About page distinguishes Danny's role from team and organization-level results. Estimated alternative ERP costs and timelines are estimates, not measured savings. No standard engagement price or guaranteed outcome is offered on the site.

@@ -1,74 +1,15 @@
 ---
-import ArrowUpRight from '../components/ArrowUpRight.astro';
-import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
-import { bookingUrl } from '../config';
+import SiteFooter from '../components/SiteFooter.astro';
+import ArrowUpRight from '../components/ArrowUpRight.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { bookingUrl } from '../config';
 import { breadcrumbList } from '../lib/schema';
-import { ENTITY_STATEMENT, LINKEDIN_URL, SITE_URL, X_URL } from '../site';
-
-const title = 'Contact Danny McGiffin | Herndon, Virginia';
-const description =
-	'Contact Danny McGiffin, an operations engineer serving growing companies across Northern Virginia and Washington, DC.';
-const pageUrl = `${SITE_URL}/contact/`;
-
-const details = [
-	{
-		label: 'Location',
-		value: 'Based in Herndon, Virginia. Work is with businesses across Northern Virginia and the Washington, DC area.'
-	},
-	{
-		label: 'How to start',
-		value: 'Show me the workflow that is costing you time, money, or owner attention. The first conversation is to decide whether a $5,000 Workflow Teardown is justified.'
-	},
-	{
-		label: 'Come prepared',
-		value: 'What process is creating the problem? How often does it occur? Who is involved? Approximately how much time does it consume? What triggered the need to address it now?'
-	},
-	{
-		label: 'Also',
-		value: 'LinkedIn is the public professional profile. There is no published phone number or general inbox on this site.'
-	}
-] as const;
-
-const structuredData = [
-	breadcrumbList([
-		{ name: 'Home', url: `${SITE_URL}/` },
-		{ name: 'Contact', url: pageUrl }
-	])
-];
+import { SITE_URL, LINKEDIN_URL } from '../site';
 ---
-
-<BaseLayout title={title} description={description} pageType="ContactPage" structuredData={structuredData}>
-	<SiteHeader />
-	<main id="main-content">
-		<header class="offer-hero section-dark">
-			<div class="shell">
-				<p class="eyebrow">Contact/</p>
-				<h1 class="display">Talk about the <em>work.</em></h1>
-				<p class="offer-deck">{ENTITY_STATEMENT}</p>
-			</div>
-		</header>
-		<section class="offer-page section-light shell" aria-label="How to get in touch">
-			{details.map(({ label, value }) => (
-				<div>
-					<p class="eyebrow">{label}/</p>
-					<p>{value}</p>
-				</div>
-			))}
-		</section>
-		<section class="offer-page-cta section-dark">
-			<div class="shell">
-				<div class="closing-actions">
-					<a class="button button--primary" href={bookingUrl('contact')}>Show me the work <ArrowUpRight /></a>
-					<a class="text-link" href={LINKEDIN_URL} rel="me">LinkedIn <ArrowUpRight /></a>
-					<a class="text-link" href={X_URL} rel="me">X <ArrowUpRight /></a>
-					<a class="text-link" href="/northern-virginia-ai-workflow-automation/">
-						Northern Virginia <ArrowUpRight />
-					</a>
-				</div>
-			</div>
-		</section>
-	</main>
-	<SiteFooter />
+<BaseLayout title="Get a Second Opinion — Danny McGiffin" description="Before a major technology or systems commitment, talk through what actually needs to change with independent advisor Danny McGiffin." pageType="ContactPage" structuredData={breadcrumbList([{name:'Home',url:`${SITE_URL}/`},{name:'Contact',url:`${SITE_URL}/contact/`}])}>
+  <SiteHeader /><main id="main-content">
+    <header class="page-intro section-dark"><div class="shell"><p class="eyebrow">Let’s talk</p><h1>Before you commit,<br /><em>let’s talk it through.</em></h1><p class="intro-deck">You don’t need a polished brief or a problem that already has a name. Start with the thing that needs figuring out.</p><a class="button button--primary" href={bookingUrl('contact')}>Get a second opinion <ArrowUpRight /></a></div></header>
+    <section class="contact-layout shell" aria-labelledby="bring-title"><div><h2 id="bring-title">Bring the actual situation.</h2><p>An ERP replacement. A major software proposal. Numbers nobody trusts. A system you’ve spent a fortune on that still doesn’t work. Or competing explanations for what needs to change.</p><ul class="contact-prompts"><li>What’s happening?</li><li>What’s at stake?</li><li>What have you tried?</li><li>What’s still unclear?</li></ul><p>These are starting points for a conversation, not homework.</p></div><aside class="contact-practical" aria-label="What to expect"><p class="eyebrow">The first conversation</p><p>We’ll talk through the situation and whether I can help. If there’s a useful next step, we’ll work out what it should be. You don’t need to arrive knowing whether you need advice, design, or implementation.</p><p class="eyebrow">Working together</p><p>You work directly with me. The scope depends on the question we need to answer and the people and information we need to understand it.</p><p class="eyebrow">Based in Herndon, Virginia</p><p>I work with businesses across <a href="/northern-virginia-ai-workflow-automation/">Northern Virginia and the Washington, DC area</a>. Work can be on site or remote, depending on the situation.</p><p><a href={LINKEDIN_URL} rel="me">Find me on LinkedIn ↗</a></p></aside></section>
+  </main><SiteFooter />
 </BaseLayout>
