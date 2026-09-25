@@ -43,7 +43,7 @@ body.consulting-home { background: #ffffff; color: var(--advisor-ink); font-fami
 .consulting-projects details[open] .project-toggle { transform: rotate(45deg); }
 .consulting-project-body { border-top: 1px solid var(--advisor-line-soft); padding: 22px; max-width: 78ch; }
 .consulting-project-body p + p { margin-top: 16px; }
-.consulting-project-footer { display: flex; align-items: center; padding: 14px 22px 18px; }
+.consulting-project-footer { display: flex; align-items: center; justify-content: flex-end; padding: 14px 22px 18px; }
 .consulting-project-card .project-link { display: inline-flex; align-items: center; color: var(--advisor-green); font-size: 13px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
 .consulting-about > p { max-width: 76ch; margin-bottom: 18px; }
 .consulting-inline-link { color: var(--advisor-green); font-weight: 700; font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
