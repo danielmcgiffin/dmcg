@@ -1,0 +1,41 @@
+---
+import { bookingUrl } from '../config';
+import { primaryLinks } from '../navigation';
+
+interface Props {
+  current: '/' | '/about/';
+}
+
+const { current } = Astro.props;
+const mobileLinks = current === '/' ? primaryLinks.slice(1) : primaryLinks;
+---
+<header class:list={['advisor-sidebar', { 'advisor-sidebar--home': current === '/' }]}>
+  <div class="advisor-identity">
+    <a class="advisor-name" href="/" aria-label="Danny McGiffin — Home">Danny McGiffin</a>
+    <p class="advisor-availability"><span aria-hidden="true"></span>Open for new clients</p>
+  </div>
+  <nav class="advisor-desktop-nav" aria-label="Primary navigation">
+    {primaryLinks.map(({ href, label }) => <a href={href} aria-current={current === href ? 'page' : undefined}>{label}</a>)}
+    <a class="nav-booking" href={bookingUrl('navigation')}>Get a second opinion</a>
+  </nav>
+  <details class="advisor-mobile-menu">
+    <summary>Menu <span aria-hidden="true">+</span></summary>
+    <nav aria-label="Mobile navigation">
+      {current === '/' && <a href="/" aria-current="page">Home</a>}
+      <a class="nav-booking" href={bookingUrl('navigation')}>Get a second opinion</a>
+      {mobileLinks.map(({ href, label }) => <a href={href} aria-current={current === href ? 'page' : undefined}>{label}</a>)}
+    </nav>
+  </details>
+</header>
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('.advisor-mobile-menu');
+  menu?.addEventListener('click', (event) => {
+    if ((event.target as Element).closest('a')) menu.open = false;
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu?.open) {
+      menu.open = false;
+      menu.querySelector('summary')?.focus();
+    }
+  });
+</script>

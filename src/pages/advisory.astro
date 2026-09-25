@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import PageIntro from '../components/PageIntro.astro';
+import { bookingUrl } from '../config';
+import { breadcrumbList } from '../lib/schema';
+import { SITE_URL, CONTACT_EMAIL } from '../site';
+
+const pageUrl = `${SITE_URL}/advisory/`;
+import '../styles/pages/advisory.css';
+---
+<BaseLayout
+  title="Independent Advice Before a Major Systems Decision | Danny McGiffin"
+  description="An independent review of an ERP, CRM, reporting, AI, or other consequential systems decision. Understand the business problem, options, and tradeoffs before you commit."
+  structuredData={breadcrumbList([{ name: 'Home', url: `${SITE_URL}/` }, { name: 'Advisory', url: pageUrl }])}
+>
+  <SiteHeader />
+  <main id="main-content">
+    <PageIntro eyebrow="Independent advisory" title="Before you commit, make sure you are solving the right problem." deck="A software proposal can look like the answer when the real constraint is somewhere else: how decisions get made, what the numbers mean, who owns the work, or how the business actually earns its money.">
+      <Fragment slot="after">
+        <a class="advisory-hero-link" href={bookingUrl('advisory-hero')}>Get a second opinion ↗</a>
+        <p class="advisory-hero-note">The first step is a free 30-minute introduction.</p>
+      </Fragment>
+    </PageIntro>
+
+    <article class="prose service-prose shell advisory-content">
+      <h2>When to get a second opinion</h2>
+      <p>You may be weighing an ERP or CRM purchase, trying to rescue an implementation, deciding what to do with unreliable reporting, or wondering whether an AI proposal addresses a real operating problem. This is also useful when several leaders see different causes and the next commitment is expensive or hard to reverse.</p>
+      <p>I work directly with owners and executives to clarify the decision and examine the parts of the business that affect it. Technology is often the reason we start talking; the answer may involve strategy, responsibilities, information, operations, customer experience, or no purchase at all.</p>
+
+      <h2>What happens first</h2>
+      <ol>
+        <li><strong>Start with a free 30-minute introduction.</strong> We will talk about your business, the main pain points, and what seems to be behind them. Bring a proposal, requirements document, or a few examples if they help; you do not need a finished brief.</li>
+        <li><strong>Decide whether to dig deeper.</strong> By the end, we should know whether a separate review would be useful and what question it would need to answer.</li>
+        <li><strong>Agree the work before it starts.</strong> For a paid review, we would define the question, who and what I need to examine, the output, timing, and fee together. The scope depends on the stakes and the evidence available.</li>
+      </ol>
+      <p><a class="advisory-button" href={bookingUrl('advisory')}>Get a second opinion ↗</a> <a class="advisory-secondary" href={`mailto:${CONTACT_EMAIL}`}>Or email me the situation ↗</a></p>
+
+      <h2>What a review can examine</h2>
+      <p>We can trace the business result you need back through the current work, responsibilities, decisions, data, systems, and vendor assumptions. Depending on the question, that may mean reading a proposal and requirements matrix, talking with the people doing the work, testing whether a system can represent the business, or comparing an implementation with a smaller alternative.</p>
+      <p>The useful output is a clearer decision and the reasons behind it. If the work calls for a written recommendation, design, or implementation oversight, we will agree on that output before paid work begins.</p>
+
+      <h2>Evidence from the work</h2>
+      <p>At a PE-backed distributor, I found that an ERP being implemented could not represent the commercial relationships at the center of the business. The implementation estimate rose from $600K to at least $1.2M after custom code was proposed. I recommended stopping and designed an alternative using systems the company already had. <a href="/work/erp-second-opinion/">Read how that decision was made.</a></p>
+      <p>At a professional-services firm, the issue was incentives and ownership, not software. I redesigned the federal-market operating model; the executive team approved it. <a href="/about/#collaboration">Read the operating-model account.</a></p>
+
+      <h2>Common questions</h2>
+      <div class="advisory-faq">
+        <section><h3>What happens in the first call?</h3><p>It is a free 30-minute introduction. We talk through the business and its main pain points, explore what may be going on, and decide together whether to dig into it further. No preparation is required.</p></section>
+        <section><h3>Can you assess an implementation already underway?</h3><p>Yes. The first question is whether the remaining work still serves the business result. We can examine requirements, gaps, change orders, workarounds, and the cost of continuing versus changing course.</p></section>
+        <section><h3>Can the advice end without a build?</h3><p>Yes. A decision to keep the current tools, change the process, renegotiate a proposal, or stop a project can be the whole result. Advisory, design, and build are separate ways to work together.</p></section>
+        <section><h3>Do you receive vendor commissions?</h3><p>No. I have no vendor compensation or affiliations. I do not receive commissions, referral fees, or resale margins for recommending a product or provider.</p></section>
+        <section><h3>How are scope and price decided?</h3><p>The decision at stake, access to people and documents, depth of analysis, timing, and the output we agree on determine the scope. I would agree the fee before paid work begins rather than imply a standard review fits every situation.</p></section>
+      </div>
+      <p>Have a more complicated situation? <a href="/contact/">Tell me what you are deciding.</a></p>
+    </article>
+  </main>
+  <SiteFooter />
+</BaseLayout>

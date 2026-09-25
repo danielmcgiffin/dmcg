@@ -1,0 +1,4 @@
+body:has(> .site-header) .research-byline { margin: 0 0 18px; color: var(--advisor-muted); font-size: 14px; }
+body:has(> .site-header) .research-sources { padding-left: 20px; }
+body:has(> .site-header) .research-sources li { margin-bottom: 18px; color: var(--advisor-ink); font-size: 14px; line-height: 1.55; }
+body:has(> .site-header) .research-sources li::marker { color: var(--advisor-green); font-weight: 700; }

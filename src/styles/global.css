@@ -27,6 +27,18 @@
 	--display: "Newsreader", Georgia, serif;
 	--ui: "Geist", Arial, sans-serif;
 	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+	/* Advisor pages and shared sidebar */
+	--advisor-sidebar-width: 223px;
+	--advisor-green: #214d38;
+	--advisor-green-hover: #173a29;
+	--advisor-ink: #303a32;
+	--advisor-muted: #596154;
+	--advisor-line: #bcc8b9;
+	--advisor-line-strong: #bfc9bd;
+	--advisor-surface: #f3f2e9;
+	--advisor-line-soft: #dce1d3;
+	--advisor-sidebar-bg: #ece7d9;
+	--advisor-sidebar-line: #e0e1d5;
 }
 
 *,
@@ -593,7 +605,7 @@ body:has(> .site-header) { background: #fff; color: #303a32; font-family: "Geist
 .site-header .wordmark { display: inline-block; color: #214d38; font-family: "Geist", Arial, sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; white-space: normal; }
 .site-header .header-nav { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-top: 40px; font-size: 12px; }
 .site-header .header-nav a { display: block; padding: 10px 0; text-transform: uppercase; }
-.site-header .header-nav > .nav-elsewhere > a { margin: 24px 0 0; color: #214d38; }
+.site-header .header-nav .nav-booking { margin-top: 24px; padding-top: 16px; color: #214d38; font-weight: 700; border-top: 1px solid #bcc8b9; }
 .site-header .header-nav a[aria-current="page"] { color: #214d38; font-weight: 700; }
 body:has(> .site-header) > main { margin-left: 223px; min-height: 75vh; background: #fff; }
 body:has(> .site-header) .site-footer { margin-left: 223px; padding: 24px 40px; display: flex; justify-content: space-between; gap: 20px; background: #fff; color: #596154; border-top: 1px solid #dce1d3; font-size: 12px; }
@@ -644,10 +656,45 @@ body:has(> .site-header) .writing-index time { grid-column: 1; grid-row: 2; }
 @media (max-width: 1024px) { .site-header .site-availability { display: none; } }
 html { background: #fff; }
 
-/* The same Elsewhere destinations are visible beneath the sidebar entry. */
-.elsewhere-sublinks { list-style: none; margin: 0 0 0 10px; padding: 1px 0 0 13px; border-left: 1px solid #bcc8b9; }
-:is(.consulting-desktop-nav, .about-desktop-nav, .site-header .header-nav) .elsewhere-sublinks a { display: block; margin: 0; padding: 5px 0; color: #596154; font-family: "Geist", Arial, sans-serif; font-size: 12px; font-weight: 400; line-height: 1.3; text-transform: none; }
-:is(.consulting-desktop-nav, .about-desktop-nav, .site-header .header-nav) .elsewhere-sublinks a:hover { color: #214d38; text-decoration: underline; text-underline-offset: 3px; }
-:is(.consulting-mobile-menu, .about-mobile-menu, .site-header .mobile-navigation) .elsewhere-sublinks { margin: 0 0 0 10px; padding: 0 0 0 14px; }
-:is(.consulting-mobile-menu, .about-mobile-menu, .site-header .mobile-navigation) .elsewhere-sublinks a { display: block; min-height: 36px; padding: 8px 0; color: #596154; font-family: "Geist", Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 1.3; text-transform: none; border: 0; }
+:is(.consulting-mobile-menu, .about-mobile-menu, .site-header .mobile-navigation) nav .nav-booking { color: #214d38; font-weight: 700; border-bottom: 1px solid #bcc8b9; }
 :is(.consulting-mobile-menu, .about-mobile-menu, .site-header .mobile-navigation) nav { max-height: calc(100dvh - 64px); overflow-y: auto; }
+
+/* Shared advisor sidebar and footer */
+.advisor-sidebar { position: fixed; inset: 0 auto 0 0; width: var(--advisor-sidebar-width); padding: 28px 24px; background: var(--advisor-sidebar-bg); border-right: 1px solid var(--advisor-sidebar-line); overflow-y: auto; }
+.advisor-name { display: inline-block; color: var(--advisor-green); font-size: 14px; font-weight: 700; text-transform: uppercase; }
+.advisor-availability { display: flex; align-items: baseline; gap: 7px; margin-top: 12px; color: var(--advisor-muted); font-size: 11px; }
+.advisor-sidebar--home .advisor-availability { max-width: 170px; }
+.advisor-availability span { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--advisor-green); }
+.advisor-sidebar--home .advisor-availability span { animation: availability-pulse 1.2s ease-out infinite; }
+@keyframes availability-pulse {
+  0% { box-shadow: 0 0 0 0 rgb(33 77 56 / 35%); }
+  70%, 100% { box-shadow: 0 0 0 6px rgb(33 77 56 / 0%); }
+}
+.advisor-desktop-nav { margin-top: 40px; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.advisor-desktop-nav a { display: block; padding: 10px 0; font-size: 12px; text-transform: uppercase; }
+.advisor-desktop-nav .nav-booking { margin-top: 24px; color: var(--advisor-green); font-weight: 700; border-top: 1px solid var(--advisor-line); }
+.about-timeline-page .advisor-desktop-nav .nav-booking { padding-top: 16px; }
+.about-timeline-page .advisor-desktop-nav a[aria-current="page"] { color: var(--advisor-green); font-weight: 700; }
+.advisor-desktop-nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.about-main a:hover, .consulting-home a:not(.consulting-button):hover { text-decoration: underline; text-underline-offset: 4px; }
+.advisor-mobile-menu { display: none; }
+.advisor-footer { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--advisor-line-soft); padding: 24px 0 8px; color: var(--advisor-muted); font-size: 12px; }
+.advisor-footer--about { max-width: 720px; margin: 0 auto; padding-top: 20px; }
+@media (prefers-reduced-motion: reduce) {
+  .advisor-sidebar--home .advisor-availability span { animation: none; }
+}
+@media (max-width: 1024px) {
+  .advisor-sidebar { position: relative; width: 100%; padding: 18px 28px; overflow: visible; display: flex; justify-content: space-between; align-items: center; border-right: 0; border-bottom: 1px solid var(--advisor-sidebar-line); z-index: 2; }
+  .advisor-desktop-nav { display: none; }
+  .advisor-mobile-menu { display: block; }
+  .advisor-mobile-menu summary { display: flex; align-items: center; gap: 14px; min-height: 44px; font-size: 14px; list-style: none; cursor: pointer; }
+  .advisor-mobile-menu summary::-webkit-details-marker { display: none; }
+  .advisor-mobile-menu[open] summary span { transform: rotate(45deg); }
+  .advisor-mobile-menu nav { position: absolute; top: 100%; left: 0; right: 0; background: var(--advisor-sidebar-bg); padding: 12px 28px 24px; border-bottom: 1px solid var(--advisor-line); box-shadow: 0 8px 12px #283c2410; }
+  .advisor-mobile-menu nav a { display: block; padding: 12px 0; font-size: 15px; }
+  .advisor-sidebar--home .advisor-mobile-menu nav .nav-booking { color: var(--advisor-green); font-weight: 700; border-bottom: 1px solid var(--advisor-line); }
+}
+@media (max-width: 600px) {
+  .advisor-sidebar { padding: 10px 22px; }
+  .advisor-name { font-size: 13px; }
+}

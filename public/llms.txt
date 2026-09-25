@@ -9,6 +9,8 @@ His advice does not depend on a technology sale. The answer may be software, int
 ## Site
 
 - Home: https://dannymcgiffin.com/
+- Independent advisory before a systems decision: https://dannymcgiffin.com/advisory/
+- ERP second-opinion case: https://dannymcgiffin.com/work/erp-second-opinion/
 - About and selected experience: https://dannymcgiffin.com/about/
 - Contact: https://dannymcgiffin.com/contact/
 - Elsewhere: https://dannymcgiffin.com/elsewhere/
@@ -28,4 +30,4 @@ Based in Herndon. Works with businesses across Northern Virginia and the Washing
 
 ## Experience
 
-Experience includes internal leadership and advisory work. The About page distinguishes Danny's role from team and organization-level results. Estimated alternative ERP costs and timelines are estimates, not measured savings. No standard engagement price or guaranteed outcome is offered on the site.
+Experience includes internal leadership and advisory work. The About and ERP case pages distinguish Danny's role from team and organization-level results. The alternative ERP design's cost and timeline are estimates, not measured savings. No standard engagement price or guaranteed outcome is offered on the site.

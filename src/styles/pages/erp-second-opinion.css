@@ -1,0 +1,6 @@
+.case-detail .case-facts { padding: 16px 22px; background: var(--advisor-surface); border-left: 3px solid var(--advisor-green); }
+.case-detail .case-facts p { display: grid; grid-template-columns: 110px 1fr; gap: 12px; margin: 10px 0; font-size: 14px; }
+.case-detail .case-facts strong { color: var(--advisor-green); }
+.case-detail .case-next { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--advisor-line); }
+.case-detail .case-next a { display: inline-block; margin: 0 18px 12px 0; font-weight: 600; }
+@media (max-width: 600px) { .case-detail .case-facts p { display: block; } .case-detail .case-facts span { display: block; margin-top: 2px; } }

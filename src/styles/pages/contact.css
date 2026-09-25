@@ -1,0 +1,13 @@
+.direct-contact { display: flex; align-items: flex-start; }
+.direct-contact .direct-contact-inner { padding: 64px 0 96px; }
+.direct-contact .eyebrow { color: var(--advisor-green); }
+.direct-contact h1 { max-width: 14ch; margin: 20px 0; font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 600; line-height: 1.13; letter-spacing: -.035em; }
+.direct-contact p:not(.eyebrow) { max-width: 43ch; line-height: 1.55; }
+.direct-contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 30px; }
+.direct-contact-button { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; padding: 15px 20px; border-radius: 3px; background: var(--advisor-green); color: #fff; font-weight: 600; font-size: 15px; }
+.direct-contact-button:hover { background: var(--advisor-green-hover); }
+.direct-contact-secondary { color: var(--advisor-green); text-decoration: underline; text-underline-offset: 4px; font-size: 14px; font-weight: 600; }
+.direct-contact-inner p a { color: var(--advisor-green); text-decoration: underline; text-underline-offset: 3px; }
+.direct-contact .direct-contact-email { margin-top: 22px; font-size: 14px; }
+.direct-contact .direct-contact-location { margin-top: 48px; color: var(--advisor-muted); font-size: 14px; }
+@media (max-width: 600px) { .direct-contact .direct-contact-inner { padding: 34px 0 72px; } }

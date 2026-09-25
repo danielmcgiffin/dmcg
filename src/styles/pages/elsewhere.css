@@ -1,0 +1,21 @@
+.contact-hub { min-height: 80vh; background: #fff; padding: 72px 24px 96px; color: var(--advisor-ink); }
+.contact-hub-inner { max-width: 620px; margin: 0 auto; text-align: center; }
+.contact-hub-portrait { width: 112px; height: 112px; object-fit: cover; border-radius: 50%; margin: 0 auto 20px; border: 3px solid #fff; box-shadow: 0 2px 12px #0f1b141a; }
+.contact-hub h1 { font-family: "Geist", Arial, sans-serif; font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 600; line-height: 1.08; letter-spacing: -.035em; }
+.contact-hub-location { margin-top: 8px; color: var(--advisor-muted); font-size: .9rem; }
+.contact-hub-intro { max-width: 44ch; margin: 20px auto 0; font-size: 1.04rem; line-height: 1.5; }
+.contact-hub-links { display: grid; gap: 12px; margin-top: 34px; text-align: left; }
+.contact-hub-links a { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 15px 22px; border: 1px solid #d9dfd3; border-radius: 5px; background: #fff; box-shadow: 0 2px 4px #0f1b140a; transition: background .15s ease, transform .15s ease; }
+.contact-hub-links a:first-child { background: var(--advisor-green); border-color: var(--advisor-green); color: #fffdf5; }
+.contact-hub-links a:hover { background: #e9eee6; transform: translateY(-2px); }
+.contact-hub-links a:first-child:hover { background: var(--advisor-green-hover); }
+.contact-hub-links strong, .contact-hub-links small { display: block; }
+.contact-hub-links strong { font-size: 1.05rem; line-height: 1.25; }
+.contact-hub-links small { margin-top: 3px; color: var(--advisor-muted); font-size: .79rem; }
+.contact-hub-links a:first-child small { color: #d7e4d7; }
+.contact-hub-arrow { flex: none; font-size: 1.35rem; color: var(--advisor-green); }
+.contact-hub-links a:first-child .contact-hub-arrow { color: #d7e4d7; }
+.contact-hub-note { max-width: 52ch; margin: 28px auto 0; color: var(--advisor-muted); font-size: .86rem; line-height: 1.5; }
+.contact-hub-note a { color: var(--advisor-green); text-decoration: underline; text-underline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .contact-hub-links a { transition: none; } .contact-hub-links a:hover { transform: none; } }
+@media (max-width: 600px) { .contact-hub { padding: 42px 20px 64px; } .contact-hub-links a { min-height: 72px; padding: 13px 18px; } }

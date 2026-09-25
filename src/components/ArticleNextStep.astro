@@ -1,0 +1,43 @@
+---
+import { bookingUrl, subscribeUrl } from '../config';
+
+interface Props { id: string; }
+const { id } = Astro.props;
+const nextSteps: Record<string, { title: string; description: string; primary: { href: string; label: string }; secondary: { href: string; label: string } }> = {
+  'your-vendor-already-told-you-what-it-doesnt-do': {
+    title: 'Questioning a vendor proposal?',
+    description: 'The ERP case shows what happened when we tested a system against the business it was meant to serve.',
+    primary: { href: '/work/erp-second-opinion/', label: 'Read the ERP case' },
+    secondary: { href: '/advisory/', label: 'See how an independent review works' }
+  },
+  'your-company-keeps-books-on-the-money-and-nothing-else': {
+    title: 'Where does your operational knowledge live?',
+    description: 'If a cutover, AI pilot, or key departure depends on rules no one has written down, start with the decision and the work behind it.',
+    primary: { href: bookingUrl('article-books'), label: 'Get a second opinion' },
+    secondary: { href: '/advisory/', label: 'See how the review works' }
+  },
+  'why-your-ai-initiative-is-a-failure': {
+    title: 'More ideas than results?',
+    description: 'We can look at the work you want to improve and whether AI belongs in the answer at all.',
+    primary: { href: bookingUrl('article-ai'), label: 'Get a second opinion' },
+    secondary: { href: '/still-on-tools/', label: 'Read the research briefing' }
+  },
+  'the-300000-lesson': {
+    title: 'Before the next operations hire',
+    description: 'Clarify who owns the work, what decisions the role can make, and what needs to change around it.',
+    primary: { href: '/advisory/', label: 'See how we could work together' },
+    secondary: { href: bookingUrl('article-ops-hire'), label: 'Get a second opinion' }
+  }
+};
+const step = nextSteps[id];
+import '../styles/components/article-next-step.css';
+---
+{step && <aside class="article-next-step shell" aria-label="Next step">
+  <h2>{step.title}</h2>
+  <p>{step.description}</p>
+  <div class="article-next-actions">
+    <a href={step.primary.href}>{step.primary.label} ↗</a>
+    <a href={step.secondary.href}>{step.secondary.label} ↗</a>
+  </div>
+  <p class="article-subscribe">For more essays on business decisions and designing work, <a href={subscribeUrl(`article-${id}`)} data-subscribe-link data-cta-placement={`article-${id}`}>subscribe on Substack ↗</a>. I do not publish on a fixed schedule.</p>
+</aside>}

@@ -1,0 +1,10 @@
+.advisory-hero-link { display: inline-block; margin-top: 20px; padding: 12px 16px; border-radius: 3px; background: var(--advisor-green); color: #fff; font-size: 14px; font-weight: 600; }
+.advisory-hero-link:hover { background: var(--advisor-green-hover); }
+.advisory-hero-note { margin-top: 12px; color: var(--advisor-muted); font-size: 14px; }
+.advisory-content .advisory-button { display: inline-block; margin: 8px 18px 8px 0; padding: 12px 16px; border-radius: 3px; background: var(--advisor-green); color: #fff; font-size: 14px; font-weight: 600; text-decoration: none; }
+.advisory-content .advisory-button:hover { background: var(--advisor-green-hover); }
+.advisory-content .advisory-secondary { display: inline-block; font-size: 14px; font-weight: 600; }
+.advisory-faq { border-top: 1px solid var(--advisor-line); }
+.advisory-faq section { padding: 20px 0; border-bottom: 1px solid var(--advisor-line-soft); }
+.advisory-faq h3 { margin: 0 0 8px; }
+.advisory-faq p { margin: 0; }

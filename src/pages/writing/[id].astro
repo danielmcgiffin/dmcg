@@ -3,6 +3,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import SiteFooter from '../../components/SiteFooter.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleNextStep from '../../components/ArticleNextStep.astro';
 import { articleNode } from '../../lib/schema';
 import { SITE_URL } from '../../site';
 
@@ -15,6 +16,7 @@ interface Props { entry: CollectionEntry<'writing'>; }
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const pageUrl = `${SITE_URL}/writing/${entry.id}/`;
+import '../../styles/pages/writing-article.css';
 ---
 
 <BaseLayout
@@ -37,10 +39,11 @@ const pageUrl = `${SITE_URL}/writing/${entry.id}/`;
 					<a class="eyebrow" href="/writing/">← Writing/</a>
 					<h1 class="display">{entry.data.title}</h1>
 					<p>{entry.data.description}</p>
-					<time datetime={entry.data.publishedAt.toISOString()}>{entry.data.publishedAt.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' })}</time>
+					<p class="article-byline">By <a href="/about/">Danny McGiffin</a> · <time datetime={entry.data.publishedAt.toISOString()}>{entry.data.publishedAt.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' })}</time></p>
 				</div>
 			</header>
 			<div class="prose shell"><Content /></div>
+			<ArticleNextStep id={entry.id} />
 		</article>
 	</main>
 	<SiteFooter />

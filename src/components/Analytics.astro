@@ -1,5 +1,7 @@
 ---
-const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID?.trim() ?? '';
+import { GA_MEASUREMENT_ID } from '../config';
+
+const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID?.trim() || (import.meta.env.PROD ? GA_MEASUREMENT_ID : '');
 ---
 
 {
@@ -8,11 +10,11 @@ const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID?.trim() ?? '';
 			<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
 			<script is:inline define:vars={{ gaId }}>
 				window.dataLayer = window.dataLayer || [];
-				function gtag() {
-					dataLayer.push(arguments);
-				}
-				gtag('js', new Date());
-				gtag('config', gaId);
+				window.gtag = function gtag() {
+					window.dataLayer.push(arguments);
+				};
+				window.gtag('js', new Date());
+				window.gtag('config', gaId);
 			</script>
 		</>
 	)
@@ -31,7 +33,9 @@ const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID?.trim() ?? '';
 				has = true;
 			}
 		});
-		if (has) sessionStorage.setItem('utm', JSON.stringify(found));
+		if (has) {
+			try { sessionStorage.setItem('utm', JSON.stringify(found)); } catch { /* Storage can be unavailable. */ }
+		}
 		let stored = found;
 		if (!has) {
 			try {
@@ -40,13 +44,29 @@ const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID?.trim() ?? '';
 				stored = {};
 			}
 		}
-		if (!stored.utm_source) return;
-		document.querySelectorAll('a[href*="cal.com"]').forEach((anchor) => {
-			const url = new URL(anchor.href);
-			Object.entries(stored).forEach(([key, value]) => {
-				if (!url.searchParams.has(key)) url.searchParams.set(key, String(value));
+		if (stored.utm_source) {
+			document.querySelectorAll('a[href*="cal.com"]').forEach((anchor) => {
+				const url = new URL(anchor.href);
+				Object.entries(stored).forEach(([key, value]) => {
+					if (!url.searchParams.has(key)) url.searchParams.set(key, String(value));
+				});
+				anchor.href = url.toString();
 			});
-			anchor.href = url.toString();
+		}
+		document.addEventListener('click', (event) => {
+			const anchor = event.target instanceof Element ? event.target.closest('a[href]') : null;
+			if (!anchor || typeof window.gtag !== 'function') return;
+			const destination = new URL(anchor.href, location.href);
+			const booking = destination.hostname === 'cal.com' && destination.pathname.startsWith('/dannymcgiffin/');
+			const email = destination.protocol === 'mailto:';
+			const subscription = anchor.hasAttribute('data-subscribe-link') ||
+				(destination.hostname === 'therealmcgiffin.substack.com' && destination.pathname === '/subscribe');
+			if (!booking && !email && !subscription) return;
+			window.gtag('event', booking ? 'booking_click' : email ? 'email_click' : 'subscription_click', {
+				page_path: location.pathname,
+				cta_placement: destination.searchParams.get('src') || destination.searchParams.get('utm_content') || anchor.dataset.ctaPlacement || 'content',
+				link_text: anchor.textContent?.trim().slice(0, 80) || ''
+			});
 		});
 	})();
 </script>

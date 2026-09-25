@@ -4,9 +4,11 @@ import ArrowUpRight from '../../components/ArrowUpRight.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { subscribeUrl } from '../../config';
 
 const articles = (await getCollection('writing', ({ data }) => !data.draft))
 	.sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+import '../../styles/pages/writing-index.css';
 ---
 
 <BaseLayout title="Writing — Danny McGiffin" description="Essays on how businesses work: ownership, decisions, systems, and technology." pageType="CollectionPage">
@@ -18,6 +20,11 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
 				<h1 class="display">Notes on work,<br />systems, and <em>leverage.</em></h1>
 			</div>
 		</header>
+		<section class="writing-briefing shell" aria-labelledby="briefing-title">
+			<p class="eyebrow">Research briefing</p>
+			<h2 id="briefing-title"><a href="/still-on-tools/">You're Not Late. You're Still on Tools. ↗</a></h2>
+			<p>What four surveys can—and cannot—tell a smaller business about AI tools, workflow redesign, and the work between them.</p>
+		</section>
 		<section class="writing-index section-light shell" aria-label="All writing">
 			{articles.map((article, index) => (
 				<a href={`/writing/${article.id}/`}>
@@ -28,6 +35,12 @@ const articles = (await getCollection('writing', ({ data }) => !data.draft))
 				</a>
 			))}
 		</section>
+		<aside class="writing-subscribe shell" aria-labelledby="subscribe-title">
+			<p class="eyebrow">Keep reading</p>
+			<h2 id="subscribe-title">Writing on how work gets designed.</h2>
+			<p>Subscribe on Substack for writing on business decisions, operating systems, and the way work is organized. A paid tier is available for deeper business teardowns and longer essays on designing work. I do not publish on a fixed schedule.</p>
+			<a href={subscribeUrl('writing-index')} data-subscribe-link data-cta-placement="writing-index">Subscribe on Substack ↗</a>
+		</aside>
 	</main>
 	<SiteFooter />
 </BaseLayout>

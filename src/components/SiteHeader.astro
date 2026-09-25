@@ -1,27 +1,18 @@
 ---
-import { elsewhereLinks } from '../elsewhere-links';
+import { bookingUrl } from '../config';
+import { primaryLinks } from '../navigation';
 const path = Astro.url.pathname;
-const links = [
-  { href: '/', label: 'Home' },
-  { href: '/#work', label: 'Selected work' },
-  { href: '/about/', label: 'About me' },
-  { href: '/writing/', label: 'Writing' },
-  { href: '/contact/', label: 'Get in touch' },
-  { href: '/elsewhere/', label: 'Elsewhere' },
-];
+const links = primaryLinks;
 ---
 <header class="site-header">
   <div class="site-identity"><a class="wordmark" href="/" aria-label="Danny McGiffin — Home">Danny McGiffin</a><p class="site-availability"><span aria-hidden="true"></span>Open for new clients</p></div>
   <nav class="header-nav" aria-label="Primary navigation">
-    {links.map(({ href, label }) => href === '/elsewhere/' ? (
-      <div class="nav-elsewhere"><a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a><ul class="elsewhere-sublinks">{elsewhereLinks.map(link => <li><a href={link.href}>{link.label}</a></li>)}</ul></div>
-    ) : <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
+    {links.map(({ href, label }) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
+    <a class="nav-booking" href={bookingUrl('navigation')}>Get a second opinion</a>
   </nav>
   <details class="mobile-navigation">
     <summary>Menu <span aria-hidden="true">+</span></summary>
-    <nav aria-label="Mobile navigation">{links.map(({ href, label }) => href === '/elsewhere/' ? (
-      <div class="nav-elsewhere"><a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a><ul class="elsewhere-sublinks">{elsewhereLinks.map(link => <li><a href={link.href}>{link.label}</a></li>)}</ul></div>
-    ) : <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}</nav>
+    <nav aria-label="Mobile navigation"><a class="nav-booking" href={bookingUrl('navigation')}>Get a second opinion</a>{links.map(({ href, label }) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}</nav>
   </details>
 </header>
 <script>

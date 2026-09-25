@@ -1,0 +1,43 @@
+body.about-timeline-page { background: #fff; color: var(--advisor-ink); font-family: "Geist", Arial, sans-serif; font-size: 17px; line-height: 1.55; }
+.about-timeline-page :focus-visible { outline: 2px solid var(--advisor-green); outline-offset: 4px; }
+.about-main { margin-left: var(--advisor-sidebar-width); min-height: 100vh; padding: 64px 54px 24px; background: #fff; }
+.about-column { max-width: 720px; margin-inline: auto; }
+.about-column p { margin: 0; }
+.about-column p + p { margin-top: 20px; }
+.about-intro { border-bottom: 1px solid var(--advisor-line-strong); padding-bottom: 32px; }
+.about-intro h1 { font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 600; line-height: 1.1; letter-spacing: -.035em; margin: 0 0 20px; }
+.about-intro .about-lead { font-size: 1.3rem; line-height: 1.4; }
+.about-intro a, .about-contact a { color: var(--advisor-green); font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.about-opening { display: block; padding: 36px 0 52px; }
+.about-opening h2, .about-work > h2, .about-background h2 { color: var(--advisor-green); font-size: 15px; font-weight: 700; letter-spacing: .08em; line-height: 1.4; margin: 0 0 18px; text-transform: uppercase; }
+.about-opening .reading-copy { max-width: none; }
+.about-opening .reading-copy p { color: var(--advisor-ink); }
+.about-work { padding-top: 8px; }
+.about-work > h2 { margin-bottom: 28px; }
+.about-work .case-story { position: relative; display: block; border: 0; border-left: 2px solid var(--advisor-line-strong); padding: 0 0 48px 36px; margin-left: 13px; scroll-margin-top: 32px; }
+.about-work .case-story:last-child { padding-bottom: 0; }
+.about-work .case-story::before { content: ""; position: absolute; left: -14px; top: 0; width: 26px; height: 26px; border: 3px solid #fff; border-radius: 50%; background: var(--advisor-green); box-shadow: 0 0 0 1px var(--advisor-line-strong); }
+.about-work .case-story > .eyebrow { margin: 0 0 5px; color: #657267; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.about-work .case-story .story-body { max-width: none; }
+.about-work .case-story h2 { font-family: "Geist", Arial, sans-serif; font-size: clamp(1.3rem, 2.2vw, 1.65rem); font-weight: 600; line-height: 1.28; letter-spacing: -.02em; margin: 0 0 16px; }
+.about-work .case-story p { color: var(--advisor-ink); margin-top: 16px; font-size: 16px; }
+.about-work .case-story .case-summary { margin: 0 0 18px; color: var(--advisor-muted); font-size: 14px; line-height: 1.5; }
+.about-work .case-story .evidence-note { color: var(--advisor-muted); font-size: 14px; }
+.about-work .case-story .story-principle { color: var(--advisor-green); border-left: 2px solid var(--advisor-green); padding-left: 18px; margin-top: 24px; }
+.about-work .case-story ul { margin-top: 16px; color: var(--advisor-ink); }
+.about-background { border-top: 1px solid var(--advisor-line-strong); margin-top: 52px; padding: 42px 0 36px; }
+.about-background p { max-width: none; margin: 0 0 18px; color: var(--advisor-ink); }
+.about-contact { border-top: 1px solid var(--advisor-line-strong); padding: 40px 0 54px; }
+.about-contact h2 { font-size: 1.6rem; font-weight: 600; line-height: 1.3; margin: 0 0 12px; }
+.about-contact a { display: inline-block; margin-top: 18px; }
+@media (min-width: 1600px) { .about-main { margin-left: calc(var(--advisor-sidebar-width) + (100vw - 1600px) / 2); } }
+@media (max-width: 1024px) {
+  .about-main { margin-left: 0; padding: 48px 36px 24px; }
+}
+@media (max-width: 600px) {
+  .about-main { padding: 34px 24px 20px; }
+  .about-intro .about-lead { font-size: 1.16rem; }
+  .about-work .case-story { padding-left: 25px; margin-left: 10px; }
+  .about-work .case-story::before { left: -12px; width: 22px; height: 22px; }
+  .about-work .case-story h2 { font-size: 1.3rem; }
+}

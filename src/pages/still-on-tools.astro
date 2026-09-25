@@ -2,6 +2,7 @@
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { subscribeUrl } from '../config';
 import { breadcrumbList } from '../lib/schema';
 import { SITE_URL } from '../site';
 
@@ -9,6 +10,12 @@ const title = "You're Not Late. You're Still on Tools. | Danny McGiffin";
 const description =
 	'A research briefing on the difference between using AI tools and redesigning work, with the limits of the available mid-market evidence.';
 const pageUrl = `${SITE_URL}/still-on-tools/`;
+const sourceUrls = {
+  kaufman: 'https://storage.googleapis.com/kaufman/1/2026/05/KR-The-State-of-AI-in-the-Middle-Market-2026.pdf',
+  rsm: 'https://rsmus.com/insights/services/digital-transformation/rsm-middle-market-ai-survey/introduction.html',
+  mckinsey: 'https://www.mckinsey.com/~/media/mckinsey/business%20functions/quantumblack/our%20insights/the%20state%20of%20ai/november%202025/the-state-of-ai-2025-agents-innovation_cmyk-v1.pdf',
+  deloitte: 'https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html'
+};
 
 const structuredData = [
 	breadcrumbList([
@@ -16,6 +23,7 @@ const structuredData = [
 		{ name: "You're not late. You're still on tools.", url: pageUrl }
 	])
 ];
+import '../styles/pages/still-on-tools.css';
 ---
 
 <BaseLayout title={title} description={description} structuredData={structuredData}>
@@ -30,13 +38,14 @@ const structuredData = [
 		</header>
 
 		<article class="prose service-prose shell">
+            <p class="research-byline">By <a href="/about/">Danny McGiffin</a></p>
             <p>A tool can make one task faster while leaving the surrounding process unchanged. That distinction is useful when deciding what to change in a business.</p>
             <p>This briefing examines evidence from several differently defined business populations. Treat it as a way to frame questions, not a score for your company or proof that it is behind.</p>
 
 			<h2>What the research actually shows</h2>
 			<p>
 				The surveys discussed here cover different populations. None isolate $5–50M revenue. Closest cuts:
-				Kaufman Rossin’s 20–99 employee group, McKinsey’s global firms under $100M, RSM’s $30M–$10B AI users.
+				Kaufman Rossin’s 20–99 employee group, McKinsey’s global firms under $100M, RSM’s $30M–$10B U.S. AI users.
 				Those numbers are not averaged.
 			</p>
 			<p>Two levels matter.</p>
@@ -54,8 +63,8 @@ const structuredData = [
 
 			<h3>1. Tools are common. Operational maturity is not.</h3>
 			<p>
-				In Kaufman Rossin’s US sample of 100 mid-market decision-makers ($5M to under $1B, 20 to under 1,000
-				employees), 94% have AI tools. Generative AI leads at 70%. The top uses are meeting notes (77%), data
+				In <a href="#source-kaufman">Kaufman Rossin’s U.S. sample</a> of 100 mid-market decision-makers ($5M to under $1B, 20 to under 1,000
+				employees), 94% reported using generative AI tools. The top uses are meeting notes (77%), data
 				analysis (73%), document processing (67%), marketing (65%), and knowledge search (64%) — help bolted onto
 				existing work.
 			</p>
@@ -70,7 +79,7 @@ const structuredData = [
 				73% say their processes are still early or foundational.
 			</p>
 			<p>
-				Larger mid-market samples look louder and land in the same place. RSM’s 1,030 AI-using firms
+				Larger mid-market samples look louder and land in the same place. <a href="#source-rsm">RSM’s 1,030 AI-using firms</a>
 				($30M–$10B, non-adopters excluded) say 86% have “integrated AI into operations.” RSM’s own reading:
 				without a shift in how work gets done, AI remains “a layer of productivity tooling.”
 			</p>
@@ -78,14 +87,14 @@ const structuredData = [
 			<h3>2. The scarce thing is redesigned work, not another assistant.</h3>
 			<p>Assisted steps are not scarce. Redesigned workflows are.</p>
 			<p>
-				McKinsey’s 2025 global survey is the cleanest measure we have, and it is not a $5–50M sample. Among
+				<a href="#source-mckinsey">McKinsey’s 2025 global survey</a> offers a direct comparison, and it is not a $5–50M sample. Among
 				AI-using respondents, 20% of the non-high-performers said they had “fundamentally redesigned individual
 				workflows.” Among the high-performer tail — roughly 6% of the sample, defined by more than 5% of EBIT
 				from AI plus “significant value” — that figure was 55%. Workflow redesign was among the strongest
-				correlates of impact of the 31 factors tested.
+				correlates of reported impact in the survey. The association does not establish causation.
 			</p>
 			<p>
-				Even in Deloitte’s 2026 “leading-edge” global sample of companies that already have AI in daily use, 37%
+				Even in <a href="#source-deloitte">Deloitte’s 2026 “leading-edge” global sample</a> of companies already using AI, 37%
 				report little or no change to existing processes. 30% say they are redesigning key processes.
 				Larger-firm, often AI-user-only numbers — and already a minority. True redesigned work in $5–50M
 				companies is not measured here; these rates cannot be transferred to that group.
@@ -124,7 +133,7 @@ const structuredData = [
 				No source runs a causal study of $5–50M firms. The same differentiators show up anyway.
 			</p>
 			<p>
-				They change the next step in the chain. McKinsey’s manifesto test is the cleanest version: a model that
+				They change the next step in the chain. McKinsey gives an example: a model that
 				predicts equipment failures does nothing if maintenance still follows the calendar. The prediction is an
 				assisted step. Changing how work is scheduled is redesigned work. McKinsey’s high performers are 2.8×
 				more likely to have fundamentally redesigned workflows (55% vs 20%).
@@ -145,12 +154,22 @@ const structuredData = [
 				are stuck on the foundations that let a tool become a process.
 			</p>
 
+            <h2 id="research-sources">Sources and definitions</h2>
+            <p>These studies ask different questions of different populations. Figures in the briefing refer to the named study, not to all $5–50M businesses.</p>
+            <ol class="research-sources">
+              <li id="source-kaufman"><strong><a href={sourceUrls.kaufman}>Kaufman Rossin, <em>The State of Artificial Intelligence in the Mid-Market</em></a> (May 2026).</strong> NewtonX surveyed 100 U.S. decision-makers in December 2025 at firms with $5M to under $1B revenue and 20 to under 1,000 employees. Used above for tool use, maturity cohorts, small-firm cuts, process readiness, ROI tracking, and barriers. The 20–99 employee group is a small subgroup, not a revenue-matched $5–50M sample.</li>
+              <li id="source-rsm"><strong><a href={sourceUrls.rsm}>RSM, <em>Middle Market AI Survey 2026: U.S. and Canada</em></a> (2026).</strong> Surveyed 1,030 managers and leaders March 5–16, 2026. All represented organizations already using AI; the U.S. revenue range was $30M–$10B and the Canadian range $30M–$1B, with a separate U.S. financial-institution definition. Used for self-reported integration (86%) and satisfaction (97%). Neither percentage measures redesign across all middle-market companies.</li>
+              <li id="source-mckinsey"><strong><a href={sourceUrls.mckinsey}>McKinsey, <em>The State of AI in 2025: Agents, Innovation, and Transformation</em></a> (November 2025).</strong> Global survey of 1,993 respondents June 25–July 29, 2025. Among AI-using respondents, 55% of high performers (n=109) versus 20% of others (n=1,644) reported fundamental workflow redesign. Used also for agent adoption, human validation, and the under-$100M scaling cut. These are self-reports and associations.</li>
+              <li id="source-deloitte"><strong><a href={sourceUrls.deloitte}>Deloitte, <em>The State of AI in the Enterprise: The Untapped Edge</em></a> (2026).</strong> Surveyed 3,235 senior leaders in 24 countries in August–September 2025, selected for involvement in AI. Used for the 37% reporting little or no process change and 30% redesigning key processes. This leading-edge sample does not establish a rate for smaller U.S. firms.</li>
+            </ol>
+
             <h2>What to do with the distinction</h2>
             <p>These surveys do not establish that a particular business is behind or needs an AI project. The useful question is what would have to change for a tool to produce a better business result.</p>
             <p>Choose a consequential piece of work. Examine who owns it, how information reaches the next person, where decisions get made, and what happens when something goes wrong. Then decide what needs changing and whether technology has a useful role.</p>
             <p>For a practical example of examining the gap between two parts of a business, read <a href="/writing/your-vendor-already-told-you-what-it-doesnt-do/">Your Vendor Already Told You What It Doesn't Do</a>.</p>
             <h2>Start with the situation</h2>
             <p>If something important is stuck and the right answer is unclear, <a href="/contact/">tell me what's going on</a>. It does not have to arrive as an AI or workflow project.</p>
+            <p>For more writing on business decisions and designing work, <a href={subscribeUrl('research-briefing')} data-subscribe-link data-cta-placement="research-briefing">subscribe on Substack</a>. I do not publish on a fixed schedule.</p>
         </article>
     </main>
     <SiteFooter />

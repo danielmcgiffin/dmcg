@@ -5,6 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { bookingUrl } from '../config';
 import { breadcrumbList } from '../lib/schema';
 import { SITE_URL, CONTACT_EMAIL } from '../site';
+import '../styles/pages/contact.css';
 ---
 <BaseLayout title="Get in touch — Danny McGiffin" description="Get in touch with Danny McGiffin before a consequential systems decision." pageType="ContactPage" structuredData={breadcrumbList([{name:'Home',url:`${SITE_URL}/`},{name:'Contact',url:`${SITE_URL}/contact/`}])}>
   <SiteHeader />
@@ -12,26 +13,14 @@ import { SITE_URL, CONTACT_EMAIL } from '../site';
     <div class="shell direct-contact-inner">
       <p class="eyebrow">Get in touch</p>
       <h1>Tell me what you’re deciding.</h1>
-      <p>You don’t need a polished brief. Email me what’s happening, what’s at stake, and what still feels unclear.</p>
+      <p>You don’t need a polished brief. The first 30-minute video call is free: we talk about your business and main pain points, then decide whether to dig deeper. <a href="/advisory/">See how an independent review works.</a></p>
       <div class="direct-contact-actions">
-        <a class="direct-contact-button" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("A decision worth talking through")}`}>Send me an email <span aria-hidden="true">↗</span></a>
-        <a class="direct-contact-secondary" href={bookingUrl('contact')}>Or find a time to talk <span aria-hidden="true">↗</span></a>
+        <a class="direct-contact-button" href={bookingUrl('contact')}>Get a second opinion <span aria-hidden="true">↗</span></a>
+        <a class="direct-contact-secondary" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("A decision worth talking through")}`}>Or send an email <span aria-hidden="true">↗</span></a>
       </div>
-      <p class="direct-contact-location">Based in Herndon, Virginia. Conversations can be remote or in person in Northern Virginia.</p>
+      <p class="direct-contact-email">Email directly: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
+      <p class="direct-contact-location">Based in Herndon, Virginia. The booked first call is by video; <a href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Meet locally in Northern Virginia')}`}>email me to arrange an in-person conversation</a>. Learn more about <a href="/northern-virginia-ai-workflow-automation/">working together in Northern Virginia</a>.</p>
     </div>
   </main>
   <SiteFooter />
 </BaseLayout>
-<style is:global>
-  .direct-contact { display: flex; align-items: flex-start; }
-  .direct-contact .direct-contact-inner { padding: 64px 0 96px; }
-  .direct-contact .eyebrow { color: #214d38; }
-  .direct-contact h1 { max-width: 14ch; margin: 20px 0; font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 600; line-height: 1.13; letter-spacing: -.035em; }
-  .direct-contact p:not(.eyebrow) { max-width: 43ch; line-height: 1.55; }
-  .direct-contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 30px; }
-  .direct-contact-button { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; padding: 15px 20px; border-radius: 3px; background: #214d38; color: #fff; font-weight: 600; font-size: 15px; }
-  .direct-contact-button:hover { background: #173a29; }
-  .direct-contact-secondary { color: #214d38; text-decoration: underline; text-underline-offset: 4px; font-size: 14px; font-weight: 600; }
-  .direct-contact .direct-contact-location { margin-top: 48px; color: #596154; font-size: 14px; }
-  @media (max-width: 600px) { .direct-contact .direct-contact-inner { padding: 34px 0 72px; } }
-</style>

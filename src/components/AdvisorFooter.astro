@@ -1,0 +1,11 @@
+---
+interface Props {
+  about?: boolean;
+}
+
+const { about = false } = Astro.props;
+---
+<footer class:list={['advisor-footer', { 'advisor-footer--about': about }]}>
+  <span>© {new Date().getFullYear()} Danny McGiffin</span>
+  <a href="/elsewhere/">Elsewhere ↗</a>
+</footer>

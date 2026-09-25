@@ -1,0 +1,9 @@
+body:has(> .site-header) .writing-briefing { margin-top: 22px; padding: 22px 24px; background: var(--advisor-surface); border-left: 3px solid var(--advisor-green); }
+.writing-briefing .eyebrow { color: var(--advisor-green); }
+.writing-briefing h2 { margin: 8px 0; color: var(--advisor-green); font-size: 1.4rem; line-height: 1.3; }
+.writing-briefing h2 a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.writing-briefing p:last-child { max-width: 56ch; font-size: 15px; line-height: 1.5; }
+body:has(> .site-header) .writing-subscribe { margin-top: 16px; margin-bottom: 76px; padding: 28px 24px; border-top: 1px solid var(--advisor-line); }
+.writing-subscribe h2 { margin: 8px 0; color: var(--advisor-green); font-size: 1.5rem; line-height: 1.3; }
+.writing-subscribe p:not(.eyebrow) { max-width: 56ch; font-size: 15px; line-height: 1.55; }
+.writing-subscribe a { display: inline-block; margin-top: 14px; color: var(--advisor-green); font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }

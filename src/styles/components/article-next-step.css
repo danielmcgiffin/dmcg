@@ -1,0 +1,7 @@
+body:has(> .site-header) .article-next-step { padding: 26px 0 70px; border-top: 1px solid var(--advisor-line); }
+.article-next-step h2 { color: var(--advisor-green); font-size: 1.45rem; line-height: 1.25; }
+.article-next-step p { max-width: 58ch; margin: 10px 0 16px; font-size: 16px; }
+.article-next-actions { display: flex; flex-wrap: wrap; gap: 12px 24px; }
+.article-next-actions a { color: var(--advisor-green); font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.article-next-step .article-subscribe { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--advisor-line-soft); font-size: 14px; }
+.article-subscribe a { color: var(--advisor-green); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }

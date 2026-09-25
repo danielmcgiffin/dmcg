@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import { bookingUrl } from '../../config';
+import { breadcrumbList } from '../../lib/schema';
+import { SITE_URL } from '../../site';
+
+const pageUrl = `${SITE_URL}/work/erp-second-opinion/`;
+import '../../styles/pages/erp-second-opinion.css';
+---
+<BaseLayout
+  title="ERP Second Opinion: When the System Did Not Fit the Business | Danny McGiffin"
+  description="How a PE-backed distributor stopped a misfit ERP implementation and designed a simpler path to trustworthy reporting."
+  structuredData={breadcrumbList([{ name: 'Home', url: `${SITE_URL}/` }, { name: 'Selected work', url: `${SITE_URL}/#work` }, { name: 'ERP second opinion', url: pageUrl }])}
+>
+  <SiteHeader />
+  <main id="main-content">
+    <PageIntro eyebrow="Selected work / PE-backed distribution" title="The ERP we decided not to implement." deck="The system could not represent the relationships at the center of the business. Finishing the project would have meant substantial customization and workarounds." />
+    <article class="prose service-prose shell case-detail">
+      <div class="case-facts" aria-label="Case summary">
+        <p><strong>Situation</strong><span>A distributor had already purchased an enterprise ERP and was partway through implementation.</span></p>
+        <p><strong>My role</strong><span>I assessed the fit, recommended stopping, and designed an alternative architecture.</span></p>
+        <p><strong>Result</strong><span>The CEO stopped the implementation. I designed an alternative using existing systems, with full implementation estimated at roughly $50K.</span></p>
+      </div>
+
+      <h2>The problem behind the implementation</h2>
+      <p>The company needed a faster monthly close, cleaner data, and reporting its board and new owners could trust. The ERP looked like a direct route to those results. During implementation, I found a mismatch: it modeled the company's commercial relationships as simple two-party contracts, while the actual arrangements involved multiple parties with different rights and responsibilities.</p>
+      <p>The five-year license had been contracted at $1.25M. Implementation was originally estimated at $600K; the custom-code path would have brought that implementation estimate to at least $1.2M. License plus revised implementation put the projected five-year path at $2.45M or more. That is a projection, not the amount the company paid. Even that path would have left extensive workarounds and a heavily customized system.</p>
+
+      <h2>The decision</h2>
+      <p>I asked whether finishing the ERP was still the right way to get trustworthy financial information. I recommended that the CEO stop the implementation, and the project was canceled.</p>
+      <p>I then designed an alternative around QuickBooks, existing operational systems, cleaned and normalized exports, a governed data layer, and analytics. I estimated the full implementation of that alternative at about $50K. The design aimed to make the information useful without forcing the business into a system model that did not fit.</p>
+
+      <h2>What changed</h2>
+      <p>The CEO canceled the implementation after about $350K had been paid. I designed an alternative using systems the company already had, with full implementation estimated at about $50K. That was roughly 2% of the projected $2.45M or more for the five-year ERP license-and-implementation path. The five-year license had already been contracted.</p>
+      <p>The transferable lesson is to test whether a system can represent how the business actually works before committing further money to close its gaps.</p>
+
+      <div class="case-next">
+        <h2>Facing a similar decision?</h2>
+        <p>I can review the business need, the vendor's assumptions, the implementation path, and the options still open to you.</p>
+        <p><a href="/advisory/">See how an independent review works ↗</a> <a href={bookingUrl('erp-case')}>Get a second opinion ↗</a></p>
+      </div>
+    </article>
+  </main>
+  <SiteFooter />
+</BaseLayout>

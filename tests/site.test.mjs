@@ -43,12 +43,12 @@ test('retired routes redirect directly and are excluded from the sitemap and nav
 });
 test('homepage provides consulting navigation, expandable evidence, and independent engagement modes',()=>{
  const home=normal.find(p=>p.route==='/');const headings=home.nodes.filter(n=>n.tagName==='h2').map(n=>attr(n,'id'));
- assert.deepEqual(headings,['triggers-title','decision-title','engagement-title','expertise-title','work-title','about-title','conversation-title']);
+ assert.deepEqual(headings,['decision-title','triggers-title','engagement-title','work-title','about-title','conversation-title']);
  assert.equal(home.nodes.filter(n=>n.tagName==='details'&&n.childNodes.some(c=>c.tagName==='summary')).length,5);
- assert.ok(attrs(home,'img','src').includes('/danny-mcgiffin.jpg'));
+ assert.ok(attrs(home,'img','src').includes('/headshot.jpg'));
  for(const name of ['Advisory','Design','Build'])assert.ok(home.nodes.some(n=>n.tagName==='h3'&&content(n).startsWith(name)));
- assert.match(content(parse(home.html)),/A clear decision not to buy or build anything can be the whole result/);
- for(const href of ['/about/','/writing/','/contact/'])assert.ok(attrs(home,'a','href').includes(href));
+ assert.match(content(parse(home.html)),/no major purchase at all/);
+ for(const href of ['/about/','/advisory/','/work/erp-second-opinion/','/writing/','/contact/'])assert.ok(attrs(home,'a','href').includes(href));
 });
 test('contact and elsewhere have distinct jobs and a working email destination',()=>{
  const contact=normal.find(p=>p.route==='/contact/');
@@ -62,11 +62,41 @@ test('contact and elsewhere have distinct jobs and a working email destination',
   assert.ok(attrs(p,'a','href').includes('/elsewhere/'),p.route);
  }
 });
+test('production pages include the configured GA4 loader',()=>{
+ for(const p of normal){
+  const loaders=p.nodes.filter(n=>n.tagName==='script'&&attr(n,'src')?.startsWith('https://www.googletagmanager.com/gtag/js'));
+  assert.equal(loaders.length,1,p.route);
+  assert.equal(attr(loaders[0],'src'),'https://www.googletagmanager.com/gtag/js?id=G-ZYTMP3PS7G');
+  assert.match(p.html,/window\.gtag\s*=\s*function gtag\(\)/);
+ }
+});
 test('case claims retain role and measurement boundaries',()=>{
  const about=normal.find(p=>p.route==='/about/');const text=content(parse(about.html));
+ const erp=normal.find(p=>p.route==='/work/erp-second-opinion/');const erpText=content(parse(erp.html));
  for(const fragment of ['erp','collaboration','growth','navy'])assert.ok(about.nodes.some(n=>attr(n,'id')===fragment));
- assert.match(text,/alternative was estimated at roughly 2–5%/);assert.match(text,/recognized revenue/);assert.match(text,/program-level results/);assert.match(text,/not a claim that I personally “saved the Navy \$250 million\.”/);
+ assert.match(text,/I estimated the alternative's full implementation at about \$50,000/);assert.match(text,/executive team approved the model/);assert.doesNotMatch(text,/behavior changed because/);
+ assert.match(erpText,/CEO canceled the implementation/);assert.match(erpText,/full implementation estimated at about \$50K/);assert.match(erpText,/five-year license had already been contracted/);
+ assert.doesNotMatch(erpText,/saved.*\$|realized savings/);
+ assert.match(erpText,/\$1\.25M/);assert.match(erpText,/\$600K/);assert.match(erpText,/\$1\.2M/);assert.match(erpText,/\$2\.45M/);assert.match(erpText,/\$350K/);assert.match(erpText,/\$50K/);
+ assert.match(text,/recognized revenue/);assert.match(text,/internal program reporting/);assert.match(text,/not recovered cash/);
+ assert.match(text,/From 2015 to 2019/);assert.match(text,/roughly \$250 million less in estimated improper payments/);assert.match(text,/error rates fell by about 45%/);
+ assert.doesNotMatch(normal.map(p=>p.html).join(''),/roughly \$2\.5M ERP implementation|roughly \$1\.5M ERP license/);
+ assert.doesNotMatch(normal.map(p=>p.html).join(''),/more than \$1M in additional customization|more than \$1 million in additional customization/);
  assert.doesNotMatch(text,/70%|50% faster|60%|Roger Porres|\$64M/);
+});
+test('advisory and writing journeys expose next steps and source evidence',()=>{
+ const advisory=normal.find(p=>p.route==='/advisory/');const writing=normal.find(p=>p.route==='/writing/');const research=normal.find(p=>p.route==='/still-on-tools/');
+ assert.ok(advisory && writing && research);
+ assert.match(content(parse(advisory.html)),/free 30-minute introduction/);
+ assert.match(content(parse(advisory.html)),/no vendor compensation or affiliations/);
+ assert.ok(attrs(writing,'a','href').includes('/still-on-tools/'));
+ assert.ok(attrs(writing,'a','href').some(href=>href?.startsWith('https://therealmcgiffin.substack.com/subscribe')));
+ for(const p of normal.filter(p=>p.route.startsWith('/writing/')&&p.route!=='/writing/')){
+  assert.ok(p.nodes.some(n=>n.tagName==='aside'&&attr(n,'class')?.includes('article-next-step')),p.route);
+  assert.ok(attrs(p,'a','href').includes('/about/'),p.route);
+  assert.ok(attrs(p,'a','href').some(href=>href?.startsWith('https://therealmcgiffin.substack.com/subscribe')),p.route);
+ }
+ for(const host of ['kaufman','rsmus','mckinsey','deloitte'])assert.ok(attrs(research,'a','href').some(href=>href?.includes(host)),host);
 });
 test('RSS, llms, and the custom 404 remain usable',async()=>{
  const rss=await readFile(join(dist,'rss.xml'),'utf8');assert.equal((rss.match(/<item>/g)||[]).length,4);
