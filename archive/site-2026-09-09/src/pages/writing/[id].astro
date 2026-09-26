@@ -1,0 +1,47 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import SiteFooter from '../../components/SiteFooter.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { articleNode } from '../../lib/schema';
+import { SITE_URL } from '../../site';
+
+export async function getStaticPaths() {
+	const entries = await getCollection('writing', ({ data }) => !data.draft);
+	return entries.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+interface Props { entry: CollectionEntry<'writing'>; }
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const pageUrl = `${SITE_URL}/writing/${entry.id}/`;
+---
+
+<BaseLayout
+	title={`${entry.data.title} — Danny McGiffin`}
+	description={entry.data.description}
+	ogType="article"
+	publishedAt={entry.data.publishedAt}
+	structuredData={articleNode({
+		url: pageUrl,
+		headline: entry.data.title,
+		description: entry.data.description,
+		datePublished: entry.data.publishedAt
+	})}
+>
+	<SiteHeader />
+	<main id="main-content">
+		<article>
+			<header class="article-hero section-dark">
+				<div class="shell">
+					<a class="eyebrow" href="/writing/">← Writing/</a>
+					<h1 class="display">{entry.data.title}</h1>
+					<p>{entry.data.description}</p>
+					<time datetime={entry.data.publishedAt.toISOString()}>{entry.data.publishedAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time>
+				</div>
+			</header>
+			<div class="prose shell"><Content /></div>
+		</article>
+	</main>
+	<SiteFooter />
+</BaseLayout>

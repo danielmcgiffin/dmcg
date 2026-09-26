@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import ArrowUpRight from '../components/ArrowUpRight.astro';
+import { bookingUrl } from '../config';
+import { LINKEDIN_URL, X_URL } from '../site';
+
+// Edit all dispatch destinations here. Replace example.com URLs before launch.
+const links = [
+	{ id: 'field-notes', title: 'Actual AI Field Notes', description: 'One useful AI workflow, delivered on paper every other month.', href: '/field-notes/', featured: true, placeholder: true },
+	{ id: 'writing', title: 'Actual AI for Actual Business', description: 'My writing on AI, work, and how companies should actually use it.', href: '/writing/' },
+	{ id: 'evergreen-guide', title: 'The Evergreen AI Operations Guide', description: 'A practical primer for thinking through technological strategy and change.', href: '/evergreen-ai-operations-guide/', placeholder: true },
+	{ id: 'work', title: 'Work With Me', description: 'See how I help companies redesign work and implement useful AI.', href: '/#work' },
+	{ id: 'latest-field-note', title: 'The Latest Field Note', subtitle: 'The Proposal Factory', description: 'Turn call notes + source files into a first-draft proposal.', href: '/proposal-factory/', placeholder: true },
+	{ id: 'conversation', title: 'Book a Conversation', description: 'For consulting, partnerships, or something interesting.', href: bookingUrl('go') },
+	{ id: 'linkedin', title: 'LinkedIn', description: 'Follow my shorter and more frequent writing.', href: LINKEDIN_URL, social: true },
+	{ id: 'x', title: 'X.com', description: 'Follow my even shorter and less relevant writing.', href: X_URL, social: true }
+];
+---
+
+<BaseLayout title="Danny McGiffin | Practical AI for Actual Business" description="Field Notes, practical AI writing, consulting, and other work from Danny McGiffin.">
+	<SiteHeader />
+	<main id="main-content" class="dispatch section-light">
+		<header class="dispatch-intro">
+			<h1>DANNY McGIFFIN</h1>
+			<p>I get rid of expensive, manual, time-consuming work.</p>
+		</header>
+		{links.filter(link => link.featured).map(link => (
+			<a class="dispatch-feature section-dark" href={link.href} rel="external" data-go-link={link.id}>
+				<h2 class="eyebrow">{link.title}</h2>
+				<p class="feature-deck">{link.description}</p>
+				<p class="feature-price">$25/year · 6 physical issues</p>
+				<span class="feature-cta">GET FIELD NOTES <ArrowUpRight /></span>
+				{link.placeholder && <span class="destination-note">Placeholder destination</span>}
+			</a>
+		))}
+		<nav aria-labelledby="also-heading" class="dispatch-links">
+			<h2 id="also-heading" class="eyebrow">Also</h2>
+			<ul>
+				{links.filter(link => !link.featured).map(link => {
+					const external = link.href.startsWith('https://');
+					return (
+						<li class:list={{ 'social-row': link.social }}>
+							<a href={link.href} rel={external ? 'external' : undefined} data-go-link={link.id}>
+								<div>
+									<h3>{link.title}</h3>
+									{link.subtitle && <p class="row-subtitle">{link.subtitle}</p>}
+									<p class="row-description">{link.description}</p>
+									{link.placeholder && <span class="destination-note">Placeholder destination</span>}
+								</div>
+								<span class="row-arrow" aria-hidden="true">{external ? <ArrowUpRight /> : '→'}</span>
+								{external && <span class="sr-only"> (external link)</span>}
+							</a>
+						</li>
+					);
+				})}
+			</ul>
+		</nav>
+	</main>
+	<SiteFooter />
+</BaseLayout>
+
+<script is:inline>
+	document.querySelectorAll('[data-go-link]').forEach((link) => {
+		link.addEventListener('click', () => {
+			if (typeof window.gtag === 'function') {
+				window.gtag('event', 'go_link_click', {
+					link_id: link.dataset.goLink,
+					page_path: '/go',
+					transport_type: 'beacon'
+				});
+			}
+		});
+	});
+</script>
+
+<style>
+	.dispatch { width: min(640px, calc(100% - 44px)); margin-inline: auto; padding-block: 108px 72px; }
+	.dispatch-intro { margin-bottom: 32px; }
+	h1 { font-family: var(--display); font-size: clamp(2rem, 7vw, 2.8rem); font-weight: 300; line-height: 1.15; letter-spacing: -.025em; }
+	.dispatch-intro > p { max-width: 36ch; margin-top: 14px; font-size: 1.125rem; }
+	.dispatch-feature { display: block; padding: clamp(24px, 5vw, 40px); border: 1px solid var(--dark); }
+	.feature-deck { margin-top: 22px; font-family: var(--display); font-size: clamp(1.9rem, 6vw, 2.5rem); font-weight: 300; line-height: 1.15; letter-spacing: -.02em; }
+	.feature-price { margin-top: 20px; font-size: .9375rem; color: var(--muted-dark); }
+	.feature-cta { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line-dark); color: var(--accent-on-dark); font-size: .8125rem; letter-spacing: .1em; }
+	.dispatch-links { margin-top: 40px; }
+	.dispatch-links > h2 { margin-bottom: 18px; }
+	ul { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line-light); }
+	li { border-bottom: 1px solid var(--line-light); }
+	li a { display: flex; justify-content: space-between; align-items: start; gap: 20px; padding: 24px 0; }
+	h3 { font-family: var(--display); font-weight: 300; font-size: 1.65rem; line-height: 1.15; letter-spacing: -.02em; }
+	.row-description { margin-top: 8px; color: var(--muted-light); font-size: .9375rem; }
+	.row-subtitle { margin-top: 12px; font-weight: 600; font-size: .9375rem; }
+	.row-arrow { flex: none; color: var(--accent); line-height: 1.4; }
+	.social-row h3 { font-size: 1.35rem; }
+	.destination-note { display: block; margin-top: 12px; font-size: .75rem; }
+	.dispatch-feature .destination-note { color: var(--muted-dark); }
+	.dispatch-feature:focus-visible { outline-color: var(--accent); }
+	li a:hover h3 { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+	.dispatch-feature:hover .feature-cta { text-decoration: underline; text-underline-offset: 4px; }
+	.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+	@media (min-width: 768px) { .dispatch { padding-top: 124px; } }
+	@media (prefers-reduced-motion: no-preference) { li a h3 { transition: color 150ms ease; } }
+	@view-transition { navigation: none; }
+</style>

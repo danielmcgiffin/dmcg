@@ -1,0 +1,16 @@
+{
+  "file": "plaza-repaired-full-canvas.png",
+  "canvas": [
+    1024,
+    558
+  ],
+  "mode": "RGBA",
+  "layer_offset": [
+    0,
+    0
+  ],
+  "nonopaque_pixels_inside_plaza_row_spans": 0,
+  "opaque_plaza_pixels": 140718,
+  "transparent_exterior_pixels": 430674,
+  "note": "Completed inferred pavement; original front curb alignment retained; old object remnants and shadows removed. Source-preserving alternative is separate."
+}

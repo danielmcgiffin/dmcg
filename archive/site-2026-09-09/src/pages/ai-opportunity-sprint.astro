@@ -1,0 +1,92 @@
+---
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { bookingUrl } from '../config';
+import ArrowUpRight from '../components/ArrowUpRight.astro';
+import { assertDetails } from '../details';
+import { breadcrumbList, serviceNode } from '../lib/schema';
+import { SITE_URL } from '../site';
+
+const details = [
+	{
+		label: 'Scope',
+		value: 'Two to four workflows, picked with you. I interview the people who actually do the work, map how it runs today, and cost it out — hours, handoffs, rework, and the delay it creates downstream. Nothing is purchased or installed during the review.'
+	},
+	{
+		label: 'Timeline',
+		value: 'Two weeks from kickoff. One kickoff call, interviews in week one, findings delivered in week two.'
+	},
+	{
+		label: 'Deliverable',
+		value: 'A written Workflow Report: how the process actually runs today, where the cost sits, a redesigned process, and a build plan scoped to it — with a fixed implementation price. Yours to keep and use, whether or not I build it.'
+	},
+	{
+		label: 'Price',
+		value: '$5,000. Fixed. Invoiced at kickoff.'
+	},
+	{
+		label: 'Credit',
+		value: "The full $5,000 credits toward implementation if you decide to build. If you don't, you still keep the report."
+	},
+	{
+		label: 'Guarantee',
+		value: "If you read the report and don't think it was worth what you paid, tell me within two weeks of delivery and I'll refund it in full. You keep the report either way. This holds as long as I get the access I ask for — the interviews and the documents. I can't diagnose a process I'm not allowed to see."
+	}
+] as const;
+
+assertDetails('src/pages/ai-opportunity-sprint.astro', details);
+
+const pageUrl = `${SITE_URL}/ai-opportunity-sprint/`;
+const description =
+	'A fixed-price, two-week AI Opportunity Sprint from Danny McGiffin in Herndon, Virginia. $5,000, credited toward implementation, refundable if it is not worth it.';
+
+const structuredData = [
+	breadcrumbList([
+		{ name: 'Home', url: `${SITE_URL}/` },
+		{ name: 'AI Opportunity Sprint', url: pageUrl }
+	]),
+	serviceNode({
+		id: `${pageUrl}#service`,
+		name: 'AI Opportunity Sprint',
+		description,
+		url: pageUrl
+	}),
+	{
+		'@type': 'Offer',
+		name: 'AI Opportunity Sprint',
+		price: 5000,
+		priceCurrency: 'USD',
+		priceValidUntil: '2027-01-01',
+		url: pageUrl,
+		seller: { '@id': `${SITE_URL}/#service` }
+	}
+];
+---
+
+<BaseLayout title="AI Opportunity Sprint — Danny McGiffin" description={description} structuredData={structuredData}>
+	<SiteHeader />
+	<main id="main-content">
+		<header class="offer-hero section-dark">
+			<div class="shell">
+				<p class="eyebrow">AI Opportunity Sprint/</p>
+				<h1 class="display">AI Opportunity<br /><em>Sprint.</em></h1>
+				<p class="offer-deck">Before anyone automates anything, someone has to find the work that costs too much and put a number on it. That is what this is. I work from Herndon with businesses across Northern Virginia and Washington, DC.</p>
+			</div>
+		</header>
+		<section class="offer-page section-light shell" aria-label="AI Opportunity Sprint details">
+			{details.map(({ label, value }) => (
+				<div>
+					<p class="eyebrow">{label}/</p>
+					<p>{value}</p>
+				</div>
+			))}
+		</section>
+		<section class="offer-page-cta section-dark">
+			<div class="shell">
+				<a class="button button--primary" href={bookingUrl('sprint')}>Book a call <ArrowUpRight /></a>
+			</div>
+		</section>
+	</main>
+	<SiteFooter />
+</BaseLayout>

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node_modules/.bin/astro check *)",
+      "Bash(timeout 400 node_modules/.bin/astro check *)",
+      "Bash(vault-consult *)"
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+---
+import '@fontsource/newsreader/latin-300.css';
+import '@fontsource/newsreader/latin-300-italic.css';
+import '@fontsource/geist/latin-400.css';
+import '../styles/editorial.css';
+interface Props { title: string; description: string; article?: boolean; publishedAt?: Date }
+const { title, description, article = false, publishedAt } = Astro.props;
+const canonical = new URL(Astro.url.pathname, 'https://dannymcgiffin.com');
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>{title}</title>
+<meta name="description" content={description}/>
+<link rel="canonical" href={canonical}/>
+<meta name="theme-color" content="#0c1713"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<meta property="og:title" content={title}/>
+<meta property="og:description" content={description}/>
+<meta property="og:type" content={article ? "article" : "website"}/>
+<meta property="og:url" content={canonical}/>
+<meta property="og:site_name" content="Danny McGiffin"/>
+<meta property="og:image" content="https://dannymcgiffin.com/study-editorial.png"/>{publishedAt && <meta property="article:published_time" content={publishedAt.toISOString()} />}
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="alternate" type="application/rss+xml" title="Notes from the Workshop" href="/rss.xml"/>
+<script type="application/ld+json" is:inline set:html={JSON.stringify({'@context':'https://schema.org','@type':'Person',name:'Danny McGiffin',url:'https://dannymcgiffin.com',jobTitle:'Business designer and consultant',sameAs:['https://www.linkedin.com/in/danny-mcgiffin/']})}/>
+</head>
+<body>
+<a class="skip" href="#main-content">Skip to content</a>
+<header class="masthead">
+<a class="brand" href="/">Danny McGiffin<span>Machinery of Magic</span>
+</a>
+<nav aria-label="Main navigation">
+<a href="/#work">Work</a>
+<a href="/writing/">Writing</a>
+<a href="/#field-notes">Field Notes</a>
+<a href="/about/">About</a>
+<a href="/contact/">Talk <span aria-hidden="true">↗</span>
+</a>
+</nav>
+</header>
+<slot/>
+<footer class="site-foot">
+<a class="brand" href="/">Danny McGiffin<span>Machinery of Magic</span>
+</a>
+<p>Considered. Built. Made better.</p>
+<a href="https://www.linkedin.com/in/danny-mcgiffin/">LinkedIn ↗</a>
+<small>© {new Date().getFullYear()} Danny McGiffin</small>
+</footer>
+</body>
+</html>

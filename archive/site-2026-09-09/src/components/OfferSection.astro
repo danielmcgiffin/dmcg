@@ -1,0 +1,99 @@
+---
+import ArrowUpRight from './ArrowUpRight.astro';
+import { bookingUrl } from '../config';
+
+const outcomes = [
+	'How the workflow actually works',
+	'Where time and money are being consumed',
+	'Which steps should disappear or be redesigned',
+	'Which work should stay human or be delegated',
+	'Which work should be automated',
+	'What technology, if any, should be built'
+] as const;
+
+const buildScope = [
+	'Workflow redesign',
+	'System integrations',
+	'Internal tools',
+	'Deterministic automation',
+	'AI-assisted steps',
+	'Training and documentation'
+] as const;
+
+const goodFit = [
+	'A growing business with recurring operational work',
+	'A process involving multiple people or systems',
+	'Significant checking, re-entry, handoffs, delays, or rework',
+	'A team considering automation or AI but unsure what should be automated',
+	'A process expensive enough that recovered capacity creates meaningful value'
+] as const;
+
+const poorFit = [
+	'A generic chatbot or one-off tiny automation',
+	'A workflow too small to justify a $5,000 diagnostic',
+	'A predetermined software specification that only needs commodity development'
+] as const;
+---
+
+<section class="offer section-light" id="offer" aria-labelledby="offer-title">
+	<div class="shell">
+		<p class="eyebrow reveal">The Workflow Teardown</p>
+		<h2 id="offer-title" class="display reveal">Find out what the work is actually costing you.</h2>
+		<div class="teardown reveal">
+			<div class="page-copy">
+				<p>
+					The Workflow Teardown is the diagnostic entry point. I observe the work, interview the people who do it,
+					map the workflow from trigger to finished outcome, and quantify the constraint before recommending a build.
+				</p>
+				<p>By the end, you will know:</p>
+				<ul>
+					{outcomes.map((item) => (
+						<li>{item}</li>
+					))}
+				</ul>
+				<p class="teardown-candor"><strong>If there is nothing worth building, I will say so.</strong></p>
+				<p>You still receive the findings, the redesigned workflow, and a practical recommendation you can use. There is no pressure to implement technology the operation does not need.</p>
+			</div>
+			<div class="teardown-panel">
+				<p class="teardown-price">$5,000</p>
+				<p class="teardown-meta">Fixed price · Two weeks · Diagnostic first</p>
+				<p class="teardown-refund">
+					The full Workflow Teardown fee is credited toward an approved Fixed-Price Workflow Build.
+				</p>
+				<a class="button button--primary" href={bookingUrl('offer')}>Show me the work <ArrowUpRight /></a>
+			</div>
+		</div>
+
+		<div class="build-path reveal">
+			<div>
+				<p class="eyebrow">The next step</p>
+				<h3>Fixed-Price Workflow Build</h3>
+				<p>If the Teardown identifies a worthwhile opportunity and we agree on the build, I turn the redesigned workflow into a working system with a defined scope and price.</p>
+			</div>
+			<ul>
+				{buildScope.map((item) => (
+					<li>{item}</li>
+				))}
+			</ul>
+		</div>
+
+		<div class="fit-grid reveal">
+			<div>
+				<p class="eyebrow">Good fit</p>
+				<ul>
+					{goodFit.map((item) => (
+						<li>{item}</li>
+					))}
+				</ul>
+			</div>
+			<div>
+				<p class="eyebrow">Poor fit</p>
+				<ul>
+					{poorFit.map((item) => (
+						<li>{item}</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>

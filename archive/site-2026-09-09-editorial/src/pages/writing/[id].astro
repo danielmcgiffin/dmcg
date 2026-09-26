@@ -1,0 +1,25 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Editorial from '../../layouts/Editorial.astro';
+export async function getStaticPaths(){return (await getCollection('writing',({data})=>!data.draft)).map(entry=>({params:{id:entry.id},props:{entry}}))}
+interface Props {entry: CollectionEntry<'writing'>}
+const {entry}=Astro.props;const {Content}=await render(entry);
+---
+<Editorial title={`${entry.data.title} — Danny McGiffin`} description={entry.data.description} article publishedAt={entry.data.publishedAt}>
+<main id="main-content">
+<article>
+<header class="section subpage">
+<a class="eyebrow" href="/writing/">← Notes from the Workshop</a>
+<h1>{entry.data.title}</h1>
+<p class="article-deck">{entry.data.description}</p>
+<p class="article-meta">Danny McGiffin · <time datetime={entry.data.publishedAt.toISOString()}>{entry.data.publishedAt.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</time>
+</p>
+</header>
+<div class="section light">
+<div class="reading">
+<Content/>
+</div>
+</div>
+</article>
+</main>
+</Editorial>

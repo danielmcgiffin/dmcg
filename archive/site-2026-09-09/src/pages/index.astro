@@ -1,0 +1,207 @@
+---
+import { Picture } from 'astro:assets';
+import ArrowUpRight from '../components/ArrowUpRight.astro';
+import OfferSection from '../components/OfferSection.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { bookingUrl } from '../config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { HOME_DESCRIPTION, HOME_TITLE } from '../site';
+import heroImage from '../assets/constraint-hero.png';
+
+const findings = [
+	['What should disappear.', 'Duplicate work, unnecessary approvals, repeated checks, and steps that exist only because the workflow grew around them.'],
+	['Where work gets stuck.', 'Broken handoffs, missing information, manual lookups, waiting, re-entry, and avoidable rework.'],
+	['What it costs.', 'Hours, delay, errors, margin, and capacity you cannot use somewhere else.'],
+	['What should stay human.', 'Judgment, relationships, accountability, and decisions the business should not delegate to a system.'],
+	['What should be built.', 'Software, integrations, internal tools, deterministic automation, or AI-assisted steps that make the redesigned workflow real.']
+] as const;
+
+const method = [
+	['Observe the real work', 'Follow the workflow from trigger to finished outcome with the people who actually do it.'],
+	['Quantify the constraint', 'Measure the labor, delay, error, rework, and capacity tied up in the current process.'],
+	['Eliminate unnecessary work', 'Remove steps that create no value, reduce no risk, and enable nothing necessary.'],
+	['Simplify and redesign the workflow', 'Clarify handoffs, decisions, inputs, and ownership before choosing technology.'],
+	['Build the solution', 'Implement the software, integrations, internal tools, automation, or AI the better workflow requires.'],
+	['Measure the result', 'Check whether the operation actually uses less labor, creates fewer errors, and returns capacity.']
+] as const;
+
+---
+
+<BaseLayout title={HOME_TITLE} description={HOME_DESCRIPTION} pageType="ProfilePage">
+	<SiteHeader />
+
+	<main id="main-content">
+		<section class="hero section-dark" aria-labelledby="hero-title">
+			<div class="hero-media" aria-hidden="true">
+				<Picture
+					src={heroImage}
+					formats={['avif']}
+					fallbackFormat="webp"
+					alt=""
+					width={heroImage.width}
+					height={heroImage.height}
+					widths={[768, 1024, 1440, 1920]}
+					sizes="100vw"
+					loading="eager"
+					decoding="sync"
+					fetchpriority="high"
+					priority
+				/>
+			</div>
+			<div class="media-grain" aria-hidden="true"></div>
+			<div class="visual-grid" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+			<div class="hero-copy shell">
+				<p class="overline">Operations design & engineering</p>
+				<h1 id="hero-title" class="display display--hero">
+					<span class="reveal-clip"><span class="reveal-line">Grow the business.</span></span>
+					<span class="reveal-clip"><em class="reveal-line">Not the back office.</em></span>
+				</h1>
+			</div>
+
+			<div class="hero-bar shell">
+				<p>
+					<strong>I find the operational work consuming your team's time and margin, redesign it, and build the systems that give that capacity back.</strong>
+				</p>
+				<div class="hero-actions">
+					<a class="button button--primary" href={bookingUrl('hero')}>Show me the work <ArrowUpRight /></a>
+				</div>
+			</div>
+		</section>
+
+		<section class="hero-deck section-dark" aria-label="What more work looks like">
+			<div class="shell page-copy">
+				<p>
+					Every new client and every new contract creates more work.
+				</p>
+				<p>
+					More onboarding. More reporting. More data entry. More approvals. More spreadsheets. More things your experienced people end up tracking, managing, checking, and doing by hand.
+				</p>
+				<p>
+					I study how the work actually happens, remove what should not exist, simplify what remains, and build	the integrations, software, automation, internal tools, or AI-assisted steps the better workflow needs.
+				</p>
+			</div>
+		</section>
+
+		<section class="rule section-light" id="rule" aria-labelledby="rule-title">
+			<div class="shell rule-row">
+				<div>
+					<p class="eyebrow reveal">A simple rule</p>
+					<h2 id="rule-title" class="display reveal">Technology is not the starting point.</h2>
+				</div>
+				<div class="page-copy reveal">
+					<p>Sometimes another hire is actually the right answer.</p>
+					<p>Before you hire another person, show me the work.</p>
+					<p>
+						Most companies do not have a technology problem. They have workflow problems, and expensive people spending expensive hours moving information between systems, rebuilding reports, chasing approvals, copying data, checking work, and
+						keeping things moving through sheer willpower.
+					</p>
+					<p>
+						I do not begin with "Where can we add AI?" I begin with <strong>"Why did we start doing the work this way?"</strong>
+					</p>
+					<p>Streamline and simplify the process first. Then automate what makes sense.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="find section-dark" id="work" aria-labelledby="find-title">
+			<div class="section-grid section-heading">
+				<p class="eyebrow reveal">The work</p>
+				<div>
+					<h2 id="find-title" class="display reveal">The way things work isn't what's written down.</h2>
+					<p class="section-intro reveal">
+						I work with your team to see how the work actually happens, not how the SOP says it is supposed to happen: what starts it, who touches it, where they look something up or make a judgment, where it fails, and what finished actually means. That is how we build solutions that stick.
+					</p>
+				</div>
+			</div>
+			<div class="find-list shell reveal">
+				{findings.map(([title, body]) => (
+					<div class="find-row">
+						<h3>{title}</h3>
+						<p>{body}</p>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<section class="about section-light" id="why" aria-labelledby="why-title">
+			<div class="about-copy reveal">
+				<p class="eyebrow">Why this works</p>
+				<h2 id="why-title" class="display">Observe. Measure. Eliminate. Simplify. Build. Measure again.</h2>
+				<p>
+					Operations are unique because they connect what a company sells, the people it has, the systems it uses,
+					and the strategy it wants to pursue. The method for understanding and improving them can still be systematic.
+				</p>
+				<ol>
+					{method.map(([title, body], index) => (
+						<li>
+							<span>{String(index + 1).padStart(2, '0')}</span>
+							<div><strong>{title}</strong><p>{body}</p></div>
+						</li>
+					))}
+				</ol>
+			</div>
+		</section>
+
+		<section class="proof section-dark" aria-labelledby="client-proof-title">
+			<div class="section-grid section-heading">
+				<p class="eyebrow reveal">Client result / sanitized case study</p>
+				<div>
+					<h2 id="client-proof-title" class="display reveal">From a fragile multi-step process to two uploads and "Generate".</h2>
+					<p class="proof-result reveal">From 100 hours/year to 15  ·  85% less manual effort  ·  85 hours of capacity reclaimed</p>
+				</div>
+			</div>
+			<div class="proof-grid shell reveal">
+				<article>
+					<p class="eyebrow">Before</p>
+					<p class="proof-context">A messy, time-consuming process to generate documents that took too long, had too many manual fixes that needed to happen every time, and caused a lot of friction in the day-to-day.</p>
+				</article>
+				<article>
+					<p class="eyebrow">What changed</p>
+					<p class="proof-context">We mapped the actual workflow, questioned why each step existed, removed unnecessary work, simplified the inputs, and built the generation system.</p>
+				</article>
+				<article>
+					<p class="eyebrow">After</p>
+					<p class="proof-context">A simple applet that does the tricky work for them, is simple to maintain and update, and just plain works.</p>
+				</article>
+			</div>
+			<blockquote class="proof-quote shell reveal">
+				<p>“Danny took a fragile process that required significant manual checking and rebuilt it into something simple and reliable. We went from a multi-step process involving our database, spreadsheets, Word mail merge, manual lookups, and individual document cleanup to uploading two files and clicking Generate. He didn't just come in and automate what we had. He actually eliminated the steps that shouldn’t have existed in the first place.”</p>
+				<footer>Roger Porres · Director of Ancillary Services</footer>
+			</blockquote>
+		</section>
+
+		<OfferSection />
+
+		<section class="founder section-light" aria-labelledby="founder-title">
+			<div class="shell rule-row reveal">
+				<div>
+					<p class="eyebrow">Founder-led</p>
+					<h2 id="founder-title" class="display">Danny McGiffin: Operations Engineering</h2>
+				</div>
+				<div class="page-copy">
+					<p><strong>Every engagement is led by Danny McGiffin.</strong></p>
+					<p>I have spent my career inside operations: running teams, fixing broken processes, implementing enterprise systems, and dealing with the gap between what a system was supposed to do and what people actually do to make the business run.</p>
+					<p>You work directly with me from observation and diagnosis through workflow redesign, technical implementation, and measurement.</p>
+				</div>
+			</div>
+		</section>
+		
+		<section class="closer section-dark" id="contact" aria-labelledby="closing-title">
+			<div class="shell closer-inner reveal">
+				<h2 id="closing-title" class="display">
+					<a class="closer-ask" href={bookingUrl('closer')}
+						><span>Before you hire another person, show me the work.</span></a>
+				</h2>
+				<p class="hero-note">No sales presentation required.</p>
+			</div>
+		</section>
+	</main>
+
+	<SiteFooter />
+
+	<script is:inline>
+		if(!CSS.supports('animation-timeline:scroll()')){let o=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('is-visible');o.unobserve(x.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>o.observe(e))}
+	</script>
+</BaseLayout>

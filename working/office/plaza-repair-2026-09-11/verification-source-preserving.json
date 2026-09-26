@@ -1,0 +1,15 @@
+{
+  "canvas": [
+    1024,
+    558
+  ],
+  "layer_offset": [
+    0,
+    0
+  ],
+  "enclosed_transparent_pixels": 0,
+  "nonopaque_pixels_inside_plaza": 0,
+  "changed_original_opaque_pixels": 0,
+  "original_opaque_pixels": 32234,
+  "note": "Hidden rear outline and pavement are inferred. Original pavement including existing ground shadows is preserved."
+}

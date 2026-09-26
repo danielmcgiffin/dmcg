@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Office Layer & Transparency Inspector</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { display: flex; height: 100vh; overflow: hidden; background: #1a1a1a; color: #e0e0e0; }
+    #sidebar { width: 360px; min-width: 320px; background: #242424; border-right: 1px solid #383838; display: flex; flex-direction: column; height: 100%; z-index: 10; }
+    #sidebar-header { padding: 14px 18px; border-bottom: 1px solid #383838; background: #2c2c2c; }
+    #sidebar-header h1 { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+    #sidebar-header p { font-size: 12px; color: #999; }
+    .tabs { display: flex; border-bottom: 1px solid #383838; background: #222; }
+    .tab-btn { flex: 1; padding: 10px; font-size: 12px; font-weight: 500; border: none; background: none; color: #888; cursor: pointer; border-bottom: 2px solid transparent; }
+    .tab-btn.active { color: #fff; border-bottom-color: #3b82f6; background: #292929; }
+    .tab-content { display: none; flex: 1; overflow-y: auto; padding: 12px 14px; }
+    .tab-content.active { display: block; }
+    
+    .quick-actions { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+    .btn { background: #383838; border: 1px solid #4a4a4a; color: #ddd; font-size: 11px; padding: 5px 9px; border-radius: 4px; cursor: pointer; }
+    .btn:hover { background: #484848; color: #fff; }
+    .btn.primary { background: #2563eb; border-color: #3b82f6; color: #fff; }
+    
+    .group-block { margin-bottom: 10px; border: 1px solid #333; border-radius: 6px; background: #1e1e1e; overflow: hidden; }
+    .group-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; background: #2a2a2a; cursor: pointer; font-size: 13px; font-weight: 600; }
+    .group-title { display: flex; align-items: center; gap: 8px; }
+    .layer-list { padding: 4px 8px; }
+    .layer-item { display: flex; align-items: center; justify-content: space-between; padding: 4px 6px; font-size: 12px; border-radius: 4px; }
+    .layer-item:hover { background: #262626; }
+    .layer-label { display: flex; align-items: center; gap: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 220px; }
+    .isolate-btn { font-size: 10px; color: #666; cursor: pointer; padding: 2px 4px; border-radius: 3px; }
+    .isolate-btn:hover { color: #3b82f6; background: #333; }
+    
+    #viewport { flex: 1; position: relative; overflow: auto; display: flex; align-items: center; justify-content: center; background: #141414; }
+    .checkerboard {
+      background-color: #202020;
+      background-image: linear-gradient(45deg, #181818 25%, transparent 25%),
+                        linear-gradient(-45deg, #181818 25%, transparent 25%),
+                        linear-gradient(45deg, transparent 75%, #181818 75%),
+                        linear-gradient(-45deg, transparent 75%, #181818 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    }
+    #stage-container { position: relative; width: 1024px; height: 558px; transform-origin: center center; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+    .layer-img { position: absolute; top: 0; left: 0; pointer-events: none; }
+    
+    #controls-bar { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(30, 30, 30, 0.9); backdrop-filter: blur(8px); border: 1px solid #444; border-radius: 8px; padding: 6px 14px; display: flex; align-items: center; gap: 14px; z-index: 20; box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
+    .ctrl-item { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+    
+    .compare-card { background: #222; border: 1px solid #383838; border-radius: 6px; padding: 10px; margin-bottom: 12px; }
+    .compare-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 4px; color: #fff; }
+    .compare-card p { font-size: 11px; color: #aaa; margin-bottom: 8px; line-height: 1.4; }
+    .badge { display: inline-block; padding: 2px 6px; font-size: 10px; font-weight: 600; border-radius: 3px; background: #10b981; color: #fff; margin-bottom: 6px; }
+    .badge.blue { background: #2563eb; }
+  </style>
+</head>
+<body>
+  <div id="sidebar">
+    <div id="sidebar-header">
+      <h1>Office Asset Inspector</h1>
+      <p>1024 × 558 | 94 Raster Layers</p>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="setTab('layers')">Layer Tree</button>
+      <button class="tab-btn" onclick="setTab('patches')">Hole Patches</button>
+      <button class="tab-btn" onclick="setTab('windows')">Windows & Glazing</button>
+    </div>
+
+    <!-- TAB 1: Layer Tree -->
+    <div id="tab-layers" class="tab-content active">
+      <div class="quick-actions">
+        <button class="btn primary" onclick="setAllLayers(true)">All On</button>
+        <button class="btn" onclick="setAllLayers(false)">All Off</button>
+        <button class="btn" onclick="isolateGroup('04 Building')">Only Building</button>
+        <button class="btn" onclick="isolateGroup('07 Background')">Only Background</button>
+      </div>
+      <div id="tree-container"></div>
+    </div>
+
+    <!-- TAB 2: Hole Patches -->
+    <div id="tab-patches" class="tab-content">
+      <div class="compare-card">
+        <span class="badge">Inpainted & Seamless</span>
+        <h3>background.png (Parchment)</h3>
+        <p>205,917 cutout pixels inpainted with authentic paper grain. When foreground layers are hidden or moved, solid parchment extends continuously beneath them.</p>
+        <div style="display:flex; gap:6px;">
+          <button class="btn primary" onclick="viewPatchedLayer('background.png', true)">View Patched</button>
+          <button class="btn" onclick="viewPatchedLayer('background.png', false)">View Before Patch (Hole)</button>
+        </div>
+      </div>
+
+      <div class="compare-card">
+        <span class="badge">Inpainted & Seamless</span>
+        <h3>roof-deck.png (Rooftop)</h3>
+        <p>18,057 hole pixels beneath the pavilion, solar array, and railings inpainted to form a continuous deck plate.</p>
+        <div style="display:flex; gap:6px;">
+          <button class="btn primary" onclick="viewPatchedLayer('roof-deck.png', true)">View Patched</button>
+          <button class="btn" onclick="viewPatchedLayer('roof-deck.png', false)">View Before Patch (Hole)</button>
+        </div>
+      </div>
+
+      <div class="compare-card">
+        <span class="badge">Inpainted & Seamless</span>
+        <h3>roof-patio-platform.png</h3>
+        <p>1,359 hole pixels underneath patio furniture and perimeter planters reconstructed seamlessly.</p>
+        <div style="display:flex; gap:6px;">
+          <button class="btn primary" onclick="viewPatchedLayer('roof-patio-platform.png', true)">View Patched</button>
+          <button class="btn" onclick="viewPatchedLayer('roof-patio-platform.png', false)">View Before Patch (Hole)</button>
+        </div>
+      </div>
+
+      <div class="compare-card">
+        <span class="badge">Inpainted & Seamless</span>
+        <h3>Tree Canopies</h3>
+        <p>Holes in tree-front-left-canopy (27 px), tree-back-left-canopy (18 px), and tree-outer-right-canopy (1 px) fully filled with foliage texture.</p>
+      </div>
+    </div>
+
+    <!-- TAB 3: Windows & Glazing -->
+    <div id="tab-windows" class="tab-content">
+      <div class="compare-card">
+        <span class="badge blue">Glazing Opacity Verified</span>
+        <h3>Window & Interior Integrity</h3>
+        <p>All facade window panes and glass walls contain <b>0 semi-transparent pixels</b> and <b>0 see-through holes</b>. Every pixel is 100% opaque (alpha=255).</p>
+        <button class="btn primary" onclick="isolateWindows()" style="width:100%; margin-bottom:8px;">Isolate Windows & Facades</button>
+        <button class="btn" onclick="toggleBackground()" style="width:100%;">Toggle Background Behind Windows</button>
+      </div>
+      <div style="font-size:11px; color:#aaa; line-height:1.5;">
+        <b>Technical Verification:</b>
+        <ul style="margin-left:16px; margin-top:4px;">
+          <li><code>floor-01-east.png</code>: 0 semi-transparency</li>
+          <li><code>floor-01-west.png</code>: 0 semi-transparency</li>
+          <li><code>floor-02-east.png</code>: 0 semi-transparency</li>
+          <li><code>floor-02-west.png</code>: 0 semi-transparency</li>
+          <li><code>floor-03-east.png</code>: 0 semi-transparency</li>
+          <li><code>floor-03-west.png</code>: 0 semi-transparency</li>
+          <li><code>pavilion-left/right.png</code>: 0 semi-transparency</li>
+        </ul>
+        <p style="margin-top:8px;">Because all window glass pixels are completely opaque with illustrated reflections and warm interior tones, <b>nothing from the background or the other side of the building shows through them</b>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="viewport" class="checkerboard">
+    <div id="stage-container">
+      <!-- Layers injected dynamically -->
+    </div>
+
+    <div id="controls-bar">
+      <div class="ctrl-item">
+        <label>Zoom:</label>
+        <select id="zoom-select" onchange="setZoom(this.value)" class="btn">
+          <option value="0.8">80%</option>
+          <option value="1.0" selected>100%</option>
+          <option value="1.5">150%</option>
+          <option value="2.0">200%</option>
+          <option value="3.0">300%</option>
+        </select>
+      </div>
+      <div class="ctrl-item">
+        <label><input type="checkbox" id="checker-toggle" checked onchange="toggleChecker(this.checked)"> Transparency Grid</label>
+      </div>
+      <div class="ctrl-item">
+        <button class="btn" onclick="resetView()">Reset Stack</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let layerMap = [];
+    let layerElements = {};
+    let currentZoom = 1.0;
+
+    function setTab(name) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('tab-' + name).classList.add('active');
+    }
+
+    async function init() {
+      layerMap = [{"name": "Canopy", "group": ["01 Trees", "Back left"], "id": "tree-back-left-canopy", "src": "data/tree-back-left-canopy.png", "x": 236, "y": 214, "width": 78, "height": 80, "source_pixel_count": 4134}, {"name": "Trunk and branches", "group": ["01 Trees", "Back left"], "id": "tree-back-left-trunk", "src": "data/tree-back-left-trunk.png", "x": 269, "y": 287, "width": 10, "height": 29, "source_pixel_count": 165}, {"name": "Tree grate", "group": ["01 Trees", "Back left"], "id": "tree-back-left-grate", "src": "data/tree-back-left-grate.png", "x": 256, "y": 304, "width": 37, "height": 23, "source_pixel_count": 416}, {"name": "Canopy", "group": ["01 Trees", "Outer left"], "id": "tree-outer-left-canopy", "src": "data/tree-outer-left-canopy.png", "x": 187, "y": 276, "width": 72, "height": 73, "source_pixel_count": 3530}, {"name": "Trunk and branches", "group": ["01 Trees", "Outer left"], "id": "tree-outer-left-trunk", "src": "data/tree-outer-left-trunk.png", "x": 215, "y": 348, "width": 9, "height": 27, "source_pixel_count": 182}, {"name": "Tree grate", "group": ["01 Trees", "Outer left"], "id": "tree-outer-left-grate", "src": "data/tree-outer-left-grate.png", "x": 199, "y": 361, "width": 38, "height": 22, "source_pixel_count": 381}, {"name": "Canopy", "group": ["01 Trees", "Front left"], "id": "tree-front-left-canopy", "src": "data/tree-front-left-canopy.png", "x": 401, "y": 406, "width": 79, "height": 80, "source_pixel_count": 4091}, {"name": "Trunk and branches", "group": ["01 Trees", "Front left"], "id": "tree-front-left-trunk", "src": "data/tree-front-left-trunk.png", "x": 434, "y": 480, "width": 11, "height": 25, "source_pixel_count": 136}, {"name": "Tree grate", "group": ["01 Trees", "Front left"], "id": "tree-front-left-grate", "src": "data/tree-front-left-grate.png", "x": 418, "y": 490, "width": 42, "height": 23, "source_pixel_count": 410}, {"name": "Canopy", "group": ["01 Trees", "Back right"], "id": "tree-back-right-canopy", "src": "data/tree-back-right-canopy.png", "x": 729, "y": 214, "width": 69, "height": 80, "source_pixel_count": 3739}, {"name": "Trunk and branches", "group": ["01 Trees", "Back right"], "id": "tree-back-right-trunk", "src": "data/tree-back-right-trunk.png", "x": 753, "y": 286, "width": 11, "height": 32, "source_pixel_count": 183}, {"name": "Tree grate", "group": ["01 Trees", "Back right"], "id": "tree-back-right-grate", "src": "data/tree-back-right-grate.png", "x": 738, "y": 304, "width": 39, "height": 23, "source_pixel_count": 397}, {"name": "Canopy", "group": ["01 Trees", "Outer right"], "id": "tree-outer-right-canopy", "src": "data/tree-outer-right-canopy.png", "x": 776, "y": 275, "width": 72, "height": 77, "source_pixel_count": 3699}, {"name": "Trunk and branches", "group": ["01 Trees", "Outer right"], "id": "tree-outer-right-trunk", "src": "data/tree-outer-right-trunk.png", "x": 809, "y": 350, "width": 9, "height": 26, "source_pixel_count": 170}, {"name": "Tree grate", "group": ["01 Trees", "Outer right"], "id": "tree-outer-right-grate", "src": "data/tree-outer-right-grate.png", "x": 792, "y": 361, "width": 42, "height": 23, "source_pixel_count": 406}, {"name": "Canopy", "group": ["01 Trees", "Front right"], "id": "tree-front-right-canopy", "src": "data/tree-front-right-canopy.png", "x": 554, "y": 407, "width": 78, "height": 80, "source_pixel_count": 4154}, {"name": "Trunk and branches", "group": ["01 Trees", "Front right"], "id": "tree-front-right-trunk", "src": "data/tree-front-right-trunk.png", "x": 587, "y": 481, "width": 11, "height": 24, "source_pixel_count": 135}, {"name": "Tree grate", "group": ["01 Trees", "Front right"], "id": "tree-front-right-grate", "src": "data/tree-front-right-grate.png", "x": 570, "y": 490, "width": 43, "height": 24, "source_pixel_count": 438}, {"name": "Outdoor cafe \u2014 table and chairs", "group": ["02 Outdoor activity", "Furniture"], "id": "cafe-outdoor", "src": "data/cafe-outdoor.png", "x": 273, "y": 366, "width": 42, "height": 36, "source_pixel_count": 888}, {"name": "Pedestrian \u2014 right inner", "group": ["02 Outdoor activity", "People"], "id": "pedestrian-right-inner", "src": "data/pedestrian-right-inner.png", "x": 766, "y": 363, "width": 17, "height": 41, "source_pixel_count": 415}, {"name": "Pedestrian \u2014 right outer", "group": ["02 Outdoor activity", "People"], "id": "pedestrian-right-outer", "src": "data/pedestrian-right-outer.png", "x": 779, "y": 358, "width": 17, "height": 42, "source_pixel_count": 419}, {"name": "Entrance colleague \u2014 right", "group": ["02 Outdoor activity", "People"], "id": "entrance-person-right", "src": "data/entrance-person-right.png", "x": 395, "y": 396, "width": 17, "height": 44, "source_pixel_count": 472}, {"name": "Entrance colleague \u2014 left", "group": ["02 Outdoor activity", "People"], "id": "entrance-person-left", "src": "data/entrance-person-left.png", "x": 379, "y": 394, "width": 16, "height": 43, "source_pixel_count": 464}, {"name": "Pedestrian \u2014 left", "group": ["02 Outdoor activity", "People"], "id": "pedestrian-left", "src": "data/pedestrian-left.png", "x": 233, "y": 356, "width": 20, "height": 40, "source_pixel_count": 423}, {"name": "Cafe guest \u2014 right", "group": ["02 Outdoor activity", "People"], "id": "cafe-person-right", "src": "data/cafe-person-right.png", "x": 300, "y": 360, "width": 13, "height": 26, "source_pixel_count": 209}, {"name": "Cafe guest \u2014 left", "group": ["02 Outdoor activity", "People"], "id": "cafe-person-left", "src": "data/cafe-person-left.png", "x": 276, "y": 359, "width": 12, "height": 25, "source_pixel_count": 187}, {"name": "Parked bicycles and racks", "group": ["02 Outdoor activity", "Bicycles"], "id": "bicycle-racks", "src": "data/bicycle-racks.png", "x": 678, "y": 370, "width": 65, "height": 49, "source_pixel_count": 1689}, {"name": "Cyclist and moving bicycle", "group": ["02 Outdoor activity", "Bicycles"], "id": "cyclist-with-bicycle", "src": "data/cyclist-with-bicycle.png", "x": 654, "y": 402, "width": 37, "height": 45, "source_pixel_count": 923}, {"name": "Roof fascia \u2014 right", "group": ["03 Roof", "Deck and structure"], "id": "roof-fascia-right", "src": "data/roof-fascia-right.png", "x": 518, "y": 178, "width": 218, "height": 141, "source_pixel_count": 3661}, {"name": "Roof fascia \u2014 left", "group": ["03 Roof", "Deck and structure"], "id": "roof-fascia-left", "src": "data/roof-fascia-left.png", "x": 299, "y": 178, "width": 219, "height": 140, "source_pixel_count": 3565}, {"name": "Roof deck and remaining rooftop details", "group": ["03 Roof", "Deck and structure"], "id": "roof-deck", "src": "data/roof-deck.png", "x": 300, "y": 81, "width": 436, "height": 227, "source_pixel_count": 7148}, {"name": "Front roof railing \u2014 right", "group": ["03 Roof", "Railings"], "id": "railing-front-right", "src": "data/railing-front-right.png", "x": 518, "y": 166, "width": 211, "height": 137, "source_pixel_count": 2033}, {"name": "Front roof railing \u2014 left", "group": ["03 Roof", "Railings"], "id": "railing-front-left", "src": "data/railing-front-left.png", "x": 307, "y": 167, "width": 211, "height": 135, "source_pixel_count": 2465}, {"name": "Rear roof railing \u2014 right", "group": ["03 Roof", "Railings"], "id": "railing-back-right", "src": "data/railing-back-right.png", "x": 578, "y": 83, "width": 150, "height": 88, "source_pixel_count": 1234}, {"name": "Rear roof railing \u2014 left", "group": ["03 Roof", "Railings"], "id": "railing-back-left", "src": "data/railing-back-left.png", "x": 306, "y": 82, "width": 151, "height": 89, "source_pixel_count": 416}, {"name": "Pavilion right glass wall and interior", "group": ["03 Roof", "Glass pavilion"], "id": "pavilion-right", "src": "data/pavilion-right.png", "x": 518, "y": 73, "width": 60, "height": 79, "source_pixel_count": 2478}, {"name": "Pavilion left glass wall and interior", "group": ["03 Roof", "Glass pavilion"], "id": "pavilion-left", "src": "data/pavilion-left.png", "x": 457, "y": 73, "width": 61, "height": 77, "source_pixel_count": 2365}, {"name": "Pavilion upper rim and visible interior", "group": ["03 Roof", "Glass pavilion"], "id": "pavilion-top", "src": "data/pavilion-top.png", "x": 457, "y": 36, "width": 121, "height": 71, "source_pixel_count": 4413}, {"name": "Solar array \u2014 complete", "group": ["03 Roof", "Solar array"], "id": "solar-array", "src": "data/solar-array.png", "x": 458, "y": 114, "width": 241, "height": 150, "source_pixel_count": 17627}, {"name": "Roof patio platform and steps", "group": ["03 Roof", "Patio"], "id": "roof-patio-platform", "src": "data/roof-patio-platform.png", "x": 340, "y": 101, "width": 175, "height": 122, "source_pixel_count": 6014}, {"name": "Pavilion right pots", "group": ["03 Roof", "Plants"], "id": "layer-057", "src": "data/layer-057.png", "x": 570, "y": 88, "width": 23, "height": 43, "source_pixel_count": 653}, {"name": "Pavilion left pots", "group": ["03 Roof", "Plants"], "id": "layer-056", "src": "data/layer-056.png", "x": 450, "y": 92, "width": 20, "height": 37, "source_pixel_count": 526}, {"name": "Roof right corner tree", "group": ["03 Roof", "Plants"], "id": "layer-055", "src": "data/layer-055.png", "x": 701, "y": 151, "width": 17, "height": 32, "source_pixel_count": 401}, {"name": "Roof front corner tree", "group": ["03 Roof", "Plants"], "id": "layer-054", "src": "data/layer-054.png", "x": 506, "y": 253, "width": 18, "height": 35, "source_pixel_count": 488}, {"name": "Roof left corner tree", "group": ["03 Roof", "Plants"], "id": "layer-053", "src": "data/layer-053.png", "x": 316, "y": 147, "width": 18, "height": 32, "source_pixel_count": 417}, {"name": "Solar-side planter", "group": ["03 Roof", "Plants"], "id": "layer-052", "src": "data/layer-052.png", "x": 473, "y": 233, "width": 34, "height": 26, "source_pixel_count": 430}, {"name": "Right front planter", "group": ["03 Roof", "Plants"], "id": "layer-051", "src": "data/layer-051.png", "x": 548, "y": 178, "width": 156, "height": 99, "source_pixel_count": 2039}, {"name": "Patio planter beside steps", "group": ["03 Roof", "Plants"], "id": "layer-050", "src": "data/layer-050.png", "x": 411, "y": 191, "width": 26, "height": 26, "source_pixel_count": 433}, {"name": "Patio divider planter", "group": ["03 Roof", "Plants"], "id": "layer-049", "src": "data/layer-049.png", "x": 357, "y": 160, "width": 39, "height": 32, "source_pixel_count": 575}, {"name": "Long front-left planter", "group": ["03 Roof", "Plants"], "id": "layer-048", "src": "data/layer-048.png", "x": 445, "y": 239, "width": 36, "height": 30, "source_pixel_count": 549}, {"name": "Front planter beside corner", "group": ["03 Roof", "Plants"], "id": "layer-047", "src": "data/layer-047.png", "x": 405, "y": 219, "width": 34, "height": 25, "source_pixel_count": 410}, {"name": "Middle front planter", "group": ["03 Roof", "Plants"], "id": "layer-046", "src": "data/layer-046.png", "x": 367, "y": 195, "width": 28, "height": 25, "source_pixel_count": 329}, {"name": "Left front planter", "group": ["03 Roof", "Plants"], "id": "layer-045", "src": "data/layer-045.png", "x": 314, "y": 168, "width": 51, "height": 36, "source_pixel_count": 637}, {"name": "Rear patio hedge", "group": ["03 Roof", "Plants"], "id": "layer-044", "src": "data/layer-044.png", "x": 355, "y": 98, "width": 88, "height": 58, "source_pixel_count": 1620}, {"name": "Cafe set \u2014 front", "group": ["03 Roof", "Furniture"], "id": "layer-061", "src": "data/layer-061.png", "x": 422, "y": 158, "width": 32, "height": 31, "source_pixel_count": 624}, {"name": "Cafe set \u2014 right", "group": ["03 Roof", "Furniture"], "id": "layer-060", "src": "data/layer-060.png", "x": 463, "y": 140, "width": 27, "height": 30, "source_pixel_count": 499}, {"name": "Cafe set \u2014 rear", "group": ["03 Roof", "Furniture"], "id": "layer-059", "src": "data/layer-059.png", "x": 427, "y": 117, "width": 29, "height": 33, "source_pixel_count": 668}, {"name": "Cafe set \u2014 left", "group": ["03 Roof", "Furniture"], "id": "layer-058", "src": "data/layer-058.png", "x": 389, "y": 133, "width": 32, "height": 37, "source_pixel_count": 681}, {"name": "Person \u2014 right table", "group": ["03 Roof", "People"], "id": "layer-065", "src": "data/layer-065.png", "x": 480, "y": 135, "width": 10, "height": 21, "source_pixel_count": 161}, {"name": "Person \u2014 front table", "group": ["03 Roof", "People"], "id": "layer-064", "src": "data/layer-064.png", "x": 430, "y": 151, "width": 12, "height": 20, "source_pixel_count": 160}, {"name": "Person \u2014 left table", "group": ["03 Roof", "People"], "id": "layer-063", "src": "data/layer-063.png", "x": 391, "y": 129, "width": 10, "height": 23, "source_pixel_count": 158}, {"name": "Person \u2014 rear standing", "group": ["03 Roof", "People"], "id": "layer-062", "src": "data/layer-062.png", "x": 417, "y": 99, "width": 14, "height": 38, "source_pixel_count": 365}, {"name": "Right timber columns", "group": ["04 Building", "Floor 01 \u2014 ground"], "id": "floor-01-east-columns", "src": "data/floor-01-east-columns.png", "x": 518, "y": 368, "width": 218, "height": 124, "source_pixel_count": 1238}, {"name": "Left timber columns", "group": ["04 Building", "Floor 01 \u2014 ground"], "id": "floor-01-west-columns", "src": "data/floor-01-west-columns.png", "x": 374, "y": 362, "width": 145, "height": 131, "source_pixel_count": 1011}, {"name": "Right timber floor edge", "group": ["04 Building", "Floor 01 \u2014 ground"], "id": "floor-01-east-edge", "src": "data/floor-01-east-edge.png", "x": 528, "y": 404, "width": 149, "height": 84, "source_pixel_count": 528}, {"name": "Left timber floor edge", "group": ["04 Building", "Floor 01 \u2014 ground"], "id": "floor-01-west-edge", "src": "data/floor-01-west-edge.png", "x": 393, "y": 415, "width": 115, "height": 73, "source_pixel_count": 334}, {"name": "Right facade \u2014 visible glazing and interiors", "group": ["04 Building", "Floor 01 \u2014 ground"], "id": "floor-01-east", "src": "data/floor-01-east.png", "x": 528, "y": 372, "width": 150, "height": 107, "source_pixel_count": 3710}, {"name": "Left facade \u2014 visible glazing and interiors", "group": ["04 Building", "Floor 01 \u2014 ground"], "id": "floor-01-west", "src": "data/floor-01-west.png", "x": 377, "y": 363, "width": 131, "height": 127, "source_pixel_count": 3998}, {"name": "Right timber columns", "group": ["04 Building", "Floor 02 \u2014 middle"], "id": "floor-02-east-columns", "src": "data/floor-02-east-columns.png", "x": 518, "y": 297, "width": 136, "height": 138, "source_pixel_count": 1709}, {"name": "Left timber columns", "group": ["04 Building", "Floor 02 \u2014 middle"], "id": "floor-02-west-columns", "src": "data/floor-02-west-columns.png", "x": 304, "y": 267, "width": 215, "height": 166, "source_pixel_count": 1911}, {"name": "Right timber floor edge", "group": ["04 Building", "Floor 02 \u2014 middle"], "id": "floor-02-east-edge", "src": "data/floor-02-east-edge.png", "x": 528, "y": 351, "width": 118, "height": 75, "source_pixel_count": 887}, {"name": "Left timber floor edge", "group": ["04 Building", "Floor 02 \u2014 middle"], "id": "floor-02-west-edge", "src": "data/floor-02-west-edge.png", "x": 384, "y": 348, "width": 124, "height": 78, "source_pixel_count": 812}, {"name": "Right facade \u2014 visible glazing and interiors", "group": ["04 Building", "Floor 02 \u2014 middle"], "id": "floor-02-east", "src": "data/floor-02-east.png", "x": 528, "y": 302, "width": 118, "height": 127, "source_pixel_count": 5396}, {"name": "Left facade \u2014 visible glazing and interiors", "group": ["04 Building", "Floor 02 \u2014 middle"], "id": "floor-02-west", "src": "data/floor-02-west.png", "x": 310, "y": 259, "width": 198, "height": 169, "source_pixel_count": 7852}, {"name": "Right timber columns", "group": ["04 Building", "Floor 03 \u2014 upper"], "id": "floor-03-east-columns", "src": "data/floor-03-east-columns.png", "x": 518, "y": 197, "width": 218, "height": 177, "source_pixel_count": 2006}, {"name": "Left timber columns", "group": ["04 Building", "Floor 03 \u2014 upper"], "id": "floor-03-west-columns", "src": "data/floor-03-west-columns.png", "x": 299, "y": 195, "width": 219, "height": 177, "source_pixel_count": 2305}, {"name": "Right timber floor edge", "group": ["04 Building", "Floor 03 \u2014 upper"], "id": "floor-03-east-edge", "src": "data/floor-03-east-edge.png", "x": 528, "y": 293, "width": 118, "height": 75, "source_pixel_count": 1022}, {"name": "Left timber floor edge", "group": ["04 Building", "Floor 03 \u2014 upper"], "id": "floor-03-west-edge", "src": "data/floor-03-west-edge.png", "x": 310, "y": 248, "width": 198, "height": 120, "source_pixel_count": 1650}, {"name": "Right facade \u2014 visible glazing and interiors", "group": ["04 Building", "Floor 03 \u2014 upper"], "id": "floor-03-east", "src": "data/floor-03-east.png", "x": 528, "y": 204, "width": 196, "height": 155, "source_pixel_count": 7510}, {"name": "Left facade \u2014 visible glazing and interiors", "group": ["04 Building", "Floor 03 \u2014 upper"], "id": "floor-03-west", "src": "data/floor-03-west.png", "x": 310, "y": 201, "width": 198, "height": 157, "source_pixel_count": 8030}, {"name": "Right portal lower window and interior", "group": ["04 Building", "Architectural details"], "id": "portal-window-right-lower", "src": "data/portal-window-right-lower.png", "x": 670, "y": 316, "width": 64, "height": 82, "source_pixel_count": 2859}, {"name": "Right portal upper window and interior", "group": ["04 Building", "Architectural details"], "id": "portal-window-right-upper", "src": "data/portal-window-right-upper.png", "x": 670, "y": 260, "width": 64, "height": 80, "source_pixel_count": 2919}, {"name": "Right stone portal frame", "group": ["04 Building", "Architectural details"], "id": "stone-portal-right", "src": "data/stone-portal-right.png", "x": 654, "y": 241, "width": 92, "height": 175, "source_pixel_count": 3891}, {"name": "Left portal window and interior", "group": ["04 Building", "Architectural details"], "id": "portal-window-left", "src": "data/portal-window-left.png", "x": 305, "y": 318, "width": 57, "height": 66, "source_pixel_count": 1855}, {"name": "Left stone portal frame", "group": ["04 Building", "Architectural details"], "id": "stone-portal-left", "src": "data/stone-portal-left.png", "x": 291, "y": 297, "width": 90, "height": 119, "source_pixel_count": 2400}, {"name": "Right entrance canopy", "group": ["04 Building", "Architectural details"], "id": "right-entrance-canopy", "src": "data/right-entrance-canopy.png", "x": 607, "y": 351, "width": 47, "height": 41, "source_pixel_count": 691}, {"name": "Left entrance canopy", "group": ["04 Building", "Architectural details"], "id": "left-entrance-canopy", "src": "data/left-entrance-canopy.png", "x": 381, "y": 350, "width": 52, "height": 37, "source_pixel_count": 578}, {"name": "Front foundation planting bed", "group": ["05 Landscape", "Building planters"], "id": "front-foundation-plants", "src": "data/front-foundation-plants.png", "x": 460, "y": 470, "width": 113, "height": 40, "source_pixel_count": 1478}, {"name": "Right ground planter and shrubs", "group": ["05 Landscape", "Building planters"], "id": "planter-right-ground", "src": "data/planter-right-ground.png", "x": 672, "y": 331, "width": 86, "height": 76, "source_pixel_count": 916}, {"name": "Left ground planter and shrubs", "group": ["05 Landscape", "Building planters"], "id": "planter-left-ground", "src": "data/planter-left-ground.png", "x": 266, "y": 322, "width": 106, "height": 90, "source_pixel_count": 2657}, {"name": "Right raised planter and shrubs", "group": ["05 Landscape", "Building planters"], "id": "planter-right-upper", "src": "data/planter-right-upper.png", "x": 658, "y": 214, "width": 80, "height": 81, "source_pixel_count": 1058}, {"name": "Left raised planter and shrubs", "group": ["05 Landscape", "Building planters"], "id": "planter-left-upper", "src": "data/planter-left-upper.png", "x": 296, "y": 276, "width": 81, "height": 66, "source_pixel_count": 1375}, {"name": "Pavement, site edge and remaining ground shadows", "group": ["06 Plaza"], "id": "plaza", "src": "data/plaza.png", "x": 172, "y": 287, "width": 692, "height": 271, "source_pixel_count": 32234}, {"name": "Parchment \u2014 original visible background", "group": ["07 Background"], "id": "background", "src": "data/background.png", "x": 0, "y": 0, "width": 1024, "height": 558, "source_pixel_count": 365475}];
+
+      const stage = document.getElementById('stage-container');
+      const treeContainer = document.getElementById('tree-container');
+
+      // Group layers
+      const groups = {};
+      layerMap.forEach(l => {
+        const gName = (l.group && l.group[0]) ? l.group[0] : 'Other';
+        if (!groups[gName]) groups[gName] = [];
+        groups[gName].push(l);
+      });
+
+      // Render stack layers from bottom to top (reversed layerMap)
+      [...layerMap].reverse().forEach(l => {
+        const img = document.createElement('img');
+        img.src = l.src;
+        img.className = 'layer-img';
+        img.id = 'layer-img-' + l.id;
+        img.style.left = l.x + 'px';
+        img.style.top = l.y + 'px';
+        img.style.width = l.width + 'px';
+        img.style.height = l.height + 'px';
+        stage.appendChild(img);
+        layerElements[l.id] = img;
+      });
+
+      // Build layer tree UI
+      for (const [gName, layers] of Object.entries(groups)) {
+        const gBlock = document.createElement('div');
+        gBlock.className = 'group-block';
+
+        const gHeader = document.createElement('div');
+        gHeader.className = 'group-header';
+        gHeader.innerHTML = `
+          <div class="group-title">
+            <input type="checkbox" checked onchange="toggleGroup('${gName}', this.checked)">
+            <span>${gName}</span>
+          </div>
+          <span style="font-size:11px; color:#888;">${layers.length}</span>
+        `;
+        gBlock.appendChild(gHeader);
+
+        const lList = document.createElement('div');
+        lList.className = 'layer-list';
+        layers.forEach(l => {
+          const lItem = document.createElement('div');
+          lItem.className = 'layer-item';
+          lItem.innerHTML = `
+            <label class="layer-label">
+              <input type="checkbox" checked id="chk-${l.id}" onchange="toggleLayer('${l.id}', this.checked)">
+              <span title="${l.name}">${l.name}</span>
+            </label>
+            <span class="isolate-btn" onclick="isolateLayer('${l.id}')">only</span>
+          `;
+          lList.appendChild(lItem);
+        });
+        gBlock.appendChild(lList);
+        treeContainer.appendChild(gBlock);
+      }
+    }
+
+    function toggleLayer(id, visible) {
+      if (layerElements[id]) {
+        layerElements[id].style.display = visible ? 'block' : 'none';
+      }
+      const chk = document.getElementById('chk-' + id);
+      if (chk) chk.checked = visible;
+    }
+
+    function toggleGroup(groupName, visible) {
+      layerMap.forEach(l => {
+        if (l.group && l.group[0] === groupName) {
+          toggleLayer(l.id, visible);
+        }
+      });
+    }
+
+    function setAllLayers(visible) {
+      layerMap.forEach(l => toggleLayer(l.id, visible));
+      document.querySelectorAll('.group-header input').forEach(c => c.checked = visible);
+    }
+
+    function isolateGroup(groupName) {
+      layerMap.forEach(l => {
+        const isMatch = l.group && l.group[0] === groupName;
+        toggleLayer(l.id, isMatch);
+      });
+      document.querySelectorAll('.group-header input').forEach(c => {
+        c.checked = c.parentElement.textContent.includes(groupName);
+      });
+    }
+
+    function isolateLayer(id) {
+      layerMap.forEach(l => toggleLayer(l.id, l.id === id));
+      document.querySelectorAll('.group-header input').forEach(c => c.checked = false);
+    }
+
+    function isolateWindows() {
+      const windowIds = [
+        'floor-01-east', 'floor-01-west',
+        'floor-02-east', 'floor-02-west',
+        'floor-03-east', 'floor-03-west',
+        'portal-window-left', 'portal-window-right-lower', 'portal-window-right-upper',
+        'pavilion-left', 'pavilion-right', 'pavilion-top'
+      ];
+      layerMap.forEach(l => toggleLayer(l.id, windowIds.includes(l.id)));
+    }
+
+    function toggleBackground() {
+      const bg = layerElements['background'];
+      if (bg) {
+        const cur = bg.style.display !== 'none';
+        toggleLayer('background', !cur);
+      }
+    }
+
+    function viewPatchedLayer(filename, isPatched) {
+      const id = filename.replace('.png', '');
+      isolateLayer(id);
+      const img = layerElements[id];
+      if (img) {
+        img.src = isPatched ? 'data/' + filename : 'data_backup_before_patch/' + filename;
+      }
+    }
+
+    function setZoom(z) {
+      currentZoom = parseFloat(z);
+      document.getElementById('stage-container').style.transform = `scale(${currentZoom})`;
+    }
+
+    function toggleChecker(enabled) {
+      const vp = document.getElementById('viewport');
+      if (enabled) vp.classList.add('checkerboard');
+      else vp.classList.remove('checkerboard');
+    }
+
+    function resetView() {
+      setAllLayers(true);
+      setZoom(1.0);
+      document.getElementById('zoom-select').value = "1.0";
+      for (const id in layerElements) {
+        layerElements[id].src = 'data/' + id + '.png';
+      }
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>

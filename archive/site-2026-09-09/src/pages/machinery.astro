@@ -1,0 +1,292 @@
+---
+import ArrowUpRight from '../components/ArrowUpRight.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { bookingUrl } from '../config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbList } from '../lib/schema';
+import { SITE_URL } from '../site';
+
+const title = 'Danny McGiffin';
+const description = 'Building the machinery that lets your business make magic. For your customers. For your people. For you.';
+const pageUrl = `${SITE_URL}/machinery/`;
+const talkHref = bookingUrl('machinery');
+
+const structuredData = [
+	breadcrumbList([
+		{ name: 'Home', url: `${SITE_URL}/` },
+		{ name: 'The office', url: pageUrl }
+	])
+];
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+	<header class="office-header">
+		<a class="wordmark" href="/">
+			<span class="monogram" aria-hidden="true"><span>D</span></span>
+			<span>Danny McGiffin</span>
+		</a>
+		<a class="button button--primary" href={talkHref}>Talk with Danny <ArrowUpRight /></a>
+	</header>
+
+	<main id="main-content" class="office-page" data-office>
+		<section class="office-pin" data-office-pin>
+			<div class="office-sticky">
+				<canvas class="office-canvas" data-office-canvas aria-hidden="true"></canvas>
+				<div class="office-fallback" data-office-fallback hidden>
+					<p>A two-storey office, opened to show people at work inside.</p>
+				</div>
+				<div class="office-copy">
+					<p class="office-name">Danny McGiffin</p>
+					<h1>Building the machinery that lets your business make <em>magic</em>.</h1>
+					<p class="office-lede">For your customers. For your people. For you.</p>
+					<p class="office-cue" data-office-cue>Look inside.</p>
+					<p class="office-note">Illustrative concept</p>
+				</div>
+				<p class="office-caption" data-office-caption hidden aria-live="polite"></p>
+				<div class="office-hotspots" role="group" aria-label="Places in the office">
+					<button type="button" data-hotspot="reception" disabled>Reception</button>
+					<button type="button" data-hotspot="studio" disabled>Studio</button>
+					<button type="button" data-hotspot="owner" disabled>Owner’s office</button>
+				</div>
+				<div class="office-close" data-office-close hidden>
+					<p>What would you like your business to make possible?</p>
+					<a class="button button--primary" href={talkHref}>Talk with Danny <ArrowUpRight /></a>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<SiteFooter />
+</BaseLayout>
+
+<script>
+	import { hasWebGL, mountOffice } from '../office/scene';
+
+	const root = document.querySelector<HTMLElement>('[data-office]');
+	const fallback = document.querySelector<HTMLElement>('[data-office-fallback]');
+	const canvas = document.querySelector<HTMLCanvasElement>('[data-office-canvas]');
+	if (root && hasWebGL()) {
+		mountOffice(root);
+	} else {
+		if (fallback) fallback.hidden = false;
+		if (canvas) canvas.hidden = true;
+		root?.querySelectorAll<HTMLButtonElement>('[data-hotspot]').forEach((button) => {
+			button.disabled = false;
+		});
+		const caption = root?.querySelector<HTMLElement>('[data-office-caption]');
+		const close = root?.querySelector<HTMLElement>('[data-office-close]');
+		if (close) close.hidden = false;
+		root?.querySelectorAll<HTMLButtonElement>('[data-hotspot]').forEach((button) => {
+			button.addEventListener('click', () => {
+				if (!caption) return;
+				caption.hidden = false;
+				const text = {
+					reception: 'Customers feel the care.',
+					studio: 'People can do excellent work.',
+					owner: 'You can see what comes next.'
+				} as const;
+				caption.textContent = text[button.dataset.hotspot as keyof typeof text];
+			});
+		});
+	}
+</script>
+
+<style>
+	.office-page {
+		color: var(--ink);
+		background: #e9e1cc;
+	}
+
+	.office-header {
+		position: sticky;
+		top: 0;
+		z-index: 40;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		height: 64px;
+		padding-inline: 4vw;
+		color: var(--bone);
+		background: var(--dark);
+		border-bottom: 1px solid rgb(255 255 255 / 12%);
+	}
+
+	.office-pin {
+		height: 320vh;
+	}
+
+	.office-sticky {
+		position: sticky;
+		top: 64px;
+		height: calc(100vh - 64px);
+		overflow: hidden;
+	}
+
+	.office-canvas {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.office-fallback {
+		position: absolute;
+		inset: 0;
+		display: grid;
+		place-items: end start;
+		padding: 8vh 6vw;
+		background:
+			radial-gradient(circle at 70% 40%, #d7c7a3, #cbb892 55%, #b39a72);
+		color: var(--ink);
+	}
+
+	.office-copy {
+		position: absolute;
+		left: 4vw;
+		top: 6vh;
+		max-width: 22rem;
+		pointer-events: none;
+		padding: 12px 14px 14px 0;
+		background: linear-gradient(90deg, rgb(233 225 204 / 82%), rgb(233 225 204 / 0%) 95%);
+	}
+
+	.office-name {
+		font-size: 0.75rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--accent);
+	}
+
+	.office-copy h1 {
+		margin-top: 12px;
+		font-family: var(--display);
+		font-size: clamp(2rem, 4.4vw, 3.4rem);
+		font-weight: 300;
+		line-height: 1.12;
+		text-wrap: balance;
+	}
+
+	.office-copy em {
+		color: var(--accent);
+		font-style: italic;
+	}
+
+	.office-lede {
+		margin-top: 14px;
+		font-family: var(--display);
+		font-size: 1.2rem;
+		font-weight: 300;
+	}
+
+	.office-cue {
+		margin-top: 28px;
+		font-size: 0.8rem;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--muted-light);
+	}
+
+	.office-note {
+		margin-top: 22px;
+		font-size: 0.72rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: rgb(23 26 23 / 45%);
+	}
+
+	.office-caption {
+		position: absolute;
+		left: 4vw;
+		bottom: 22vh;
+		max-width: 22rem;
+		font-family: var(--display);
+		font-size: 1.35rem;
+		font-weight: 300;
+	}
+
+	.office-hotspots {
+		position: absolute;
+		right: 4vw;
+		bottom: 8vh;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 8px;
+	}
+
+	.office-hotspots button {
+		min-height: 40px;
+		padding: 0 14px;
+		border: 1px solid rgb(23 26 23 / 18%);
+		border-radius: 999px;
+		background: rgb(247 241 227 / 78%);
+		font-size: 0.8rem;
+	}
+
+	.office-hotspots button:disabled {
+		opacity: 0.35;
+	}
+
+	.office-close {
+		position: absolute;
+		left: 4vw;
+		bottom: 8vh;
+		max-width: 26rem;
+	}
+
+	.office-close p {
+		font-family: var(--display);
+		font-size: clamp(1.6rem, 3vw, 2.2rem);
+		font-weight: 300;
+		line-height: 1.2;
+		margin-bottom: 18px;
+	}
+
+	@media (max-width: 720px) {
+		.office-header {
+			padding-inline: 16px;
+		}
+
+		.office-header .wordmark > span:last-of-type {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			overflow: hidden;
+			clip-path: inset(50%);
+		}
+
+		.office-copy {
+			left: 18px;
+			right: 18px;
+			top: 18px;
+			max-width: none;
+		}
+
+		.office-copy h1 {
+			font-size: 1.85rem;
+		}
+
+		.office-hotspots {
+			right: 12px;
+			bottom: 18px;
+		}
+
+		.office-close {
+			left: 18px;
+			right: 18px;
+			bottom: 18px;
+			max-width: none;
+		}
+
+		.office-caption {
+			left: 18px;
+			bottom: 28vh;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.office-pin {
+			height: 100vh;
+		}
+	}
+</style>

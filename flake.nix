@@ -1,5 +1,5 @@
 {
-  description = "A SvelteKit landing page template";
+  description = "Plain Svelte and Vite development environment";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";

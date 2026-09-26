@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import Editorial from '../../layouts/Editorial.astro';
+const articles=(await getCollection('writing',({data})=>!data.draft)).sort((a,b)=>b.data.publishedAt.valueOf()-a.data.publishedAt.valueOf());
+---
+<Editorial title="Notes from the Workshop — Danny McGiffin" description="An ongoing inquiry into better businesses, human judgment, and the machinery underneath.">
+<main id="main-content">
+<header class="section subpage">
+<p class="eyebrow">An ongoing inquiry</p>
+<h1>Notes from<br/>
+<em>the Workshop</em>
+</h1>
+</header>
+<section class="section light editorial-index" aria-label="Published writing">{articles.map((article,i)=>
+<a href={`/writing/${article.id}/`}>
+<span class="eyebrow">{String(i+1).padStart(2,'0')}</span>
+<div>
+<h3>{article.data.title}</h3>
+<p>{article.data.description}</p>
+</div>
+<span aria-hidden="true">↗</span>
+</a>)}</section>
+</main>
+</Editorial>

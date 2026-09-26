@@ -1,0 +1,222 @@
+---
+import { Picture } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Editorial from '../layouts/Editorial.astro';
+import study from '../assets/study-editorial.png';
+
+const parts = [
+  ['Promises', 'The experience you commit to delivering. The reason someone chooses you.'],
+  ['Standards', 'What good looks like, made specific enough to repeat.'],
+  ['Decision rights', 'Who can decide what, with the authority to act when it matters.'],
+  ['Information', 'The right context, in the right hands, at the moment it is needed.'],
+  ['Workflows', 'How a promise moves through the business and becomes a result.'],
+  ['Tools', 'Instruments that fit the work and the people doing it.'],
+  ['Automation', 'Reliable machinery for the ordinary, so attention can go elsewhere.'],
+  ['AI', 'A useful capability with clear boundaries, human judgment, and a purpose.'],
+  ['Feedback', 'A way to notice the gap between what you intended and what happened.']
+];
+
+const articles = (await getCollection('writing', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+---
+
+<Editorial
+  title="Magic is the Moat. — Danny McGiffin"
+  description="Business design, systems, and thoughtful machinery for small founder-led businesses. Make exceptional experiences repeatable."
+>
+  <main id="main-content">
+    <!-- 1. HERO: Magic is the Moat -->
+    <section class="poster" id="hero" aria-labelledby="hero-title">
+      <div class="poster-image">
+        <Picture
+          src={study}
+          alt="An open book on a lamplit desk in a forest-green study, overlooking the city at night."
+          formats={['avif']}
+          fallbackFormat="webp"
+          widths={[480, 768, 1080, 1440, 1920]}
+          sizes="100vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="poster-shade"></div>
+
+      <div class="poster-copy">
+        <p class="lead-in">In the Age of AI, competence is cheap, execution is everywhere,<br class="desktop-break"/> and good enough is no longer good enough.</p>
+        <p class="eyebrow nowadays">Nowadays</p>
+        <h1 id="hero-title">Magic is <em>the Moat.</em></h1>
+      </div>
+
+      <div class="poster-bottom">
+        <span>Exceptional is intentional.</span>
+        <a href="#meaning">Look beneath the surface <span aria-hidden="true">↓</span></a>
+        <span>Est. in the real world</span>
+      </div>
+    </section>
+
+    <!-- 2. THE PREMISE: Sequential arrival of three lines -->
+    <section class="meaning light section" id="meaning" aria-labelledby="meaning-title">
+      <div class="meaning-track">
+        <div class="meaning-stage">
+          <div class="section-marker">
+            <span>01 / The premise</span>
+            <span>A business worth caring about</span>
+          </div>
+
+          <h2 id="meaning-title" class="three-lines">
+            <span class="meaning-line meaning-line-1">Better for the customer.</span>
+            <span class="meaning-line meaning-line-2">Better for the people<br/>doing the work.</span>
+            <span class="meaning-line meaning-line-3">Better for the owner.</span>
+          </h2>
+
+          <div class="aside-copy">
+            <span class="small-cross" aria-hidden="true">✳</span>
+            <div>
+              <p>A magical business is not necessarily slow, quiet, easy, or luxurious.</p>
+              <p>It is a business where customers, employees, and owners consistently leave interactions better than they entered them.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Beneath the surface -->
+    <section class="machinery section" id="machinery" aria-labelledby="machinery-title">
+      <div class="section-marker">
+        <span>02 / Beneath the surface</span>
+        <span>The parts make a whole</span>
+      </div>
+
+      <div class="split-heading">
+        <h2 id="machinery-title">Magic has<br/><em>machinery.</em></h2>
+        <p>What feels effortless on the outside is considered on the inside. These are the things we design, connect, and make work.</p>
+      </div>
+
+      <div class="system-list">
+        {parts.map(([name, description], i) => (
+          <details>
+            <summary>
+              <span class="part-no">{String(i + 1).padStart(2, '0')}</span>
+              <span class="part-name">{name}</span>
+              <span class="plus" aria-hidden="true">+</span>
+            </summary>
+            <p>{description}</p>
+          </details>
+        ))}
+      </div>
+      <p class="system-caption">Not nine separate things. One business, working together.</p>
+
+    </section>
+
+    <section class="ratio light section" id="ratio" aria-labelledby="ratio-title">
+      <div class="section-marker">
+        <span>03 / Room for the exceptional</span>
+        <span>The 95 / 5</span>
+      </div>
+      <h2 id="ratio-title" class="ratio-thesis">Systematize the ordinary 95% so people have the attention, judgment, and freedom to make the consequential 5% exceptional.</h2>
+      <div class="ratio-spread">
+        <div class="ordinary">
+          <p class="ratio-number">95<span>%</span></p>
+          <p>The ordinary work.<br/>Considered. Repeatable. Taken care of.</p>
+        </div>
+        <div class="exceptional">
+          <p class="ratio-number">5<span>%</span></p>
+          <h3>Make this exceptional.</h3>
+          <p>The judgment to make an exception.<br/>The attention to notice.<br/>The freedom to care.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. In practice -->
+    <section class="proof section" id="work" aria-labelledby="proof-title">
+
+          <div class="section-marker">
+            <span>04 / In practice</span>
+            <span>Independent school · Document generation</span>
+          </div>
+
+          <h2 id="proof-title">The most useful work?<br/>
+          <em>The work that disappears.</em>
+          </h2>
+
+          <div class="proof-metric-display">
+            <div class="metric-meter">
+              <div class="metric-val-wrap">
+                <span class="metric-number">100</span>
+                <small>hours</small>
+              </div>
+              <span class="metric-arrow" aria-hidden="true">→</span>
+              <div class="metric-val-target">
+                <span class="metric-target-num">15</span>
+                <small>hours</small>
+              </div>
+            </div>
+            <p class="metric-caption">Annual manual effort · 85 hours of capacity returned</p>
+          </div>
+
+          <div class="proof-account">
+            <div><p class="eyebrow">Before</p><p>Spreadsheets, Word mail merge, manual lookups, and individual cleanup between the database and the finished documents.</p></div>
+            <div><p class="eyebrow">After</p><p>Two files. Generate. Human review.</p></div>
+          </div>
+
+          <p class="proof-principle">We did not automate the mess. We removed work that should not have existed, then built machinery for what remained.</p>
+          <blockquote>
+            <p>“He didn't just come in and automate what we had. He actually eliminated the steps that shouldn’t have existed in the first place.”</p>
+            <footer>Roger Porres <span>Director of Ancillary Services</span></footer>
+          </blockquote>
+    </section>
+
+    <!-- 6. Field Notes -->
+    <section class="field section" id="field-notes" aria-labelledby="field-title">
+      <div class="field-copy">
+        <p class="eyebrow">05 / Field Notes</p>
+        <h2 id="field-title">Small pieces of<br/>business machinery<br/>
+        <em>you can steal.</em>
+        </h2>
+        <p>Practical instruments from the workshop.<br/>Made to be picked up and put to work.</p>
+        <a class="underlink" href="/field-notes/proposal-factory/">Open Field Note No. 001 <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <a class="pamphlet" href="/field-notes/proposal-factory/">
+        <div class="paper-top">
+          <span>Machinery of Magic</span>
+          <span>No. 001</span>
+        </div>
+        <p class="eyebrow">Field Notes</p>
+        <h3>The<br/>Proposal<br/><em>Factory</em></h3>
+        <p>From a good conversation<br/>to a proposal worth sending.</p>
+        <div class="paper-bottom">Danny McGiffin <span>↗</span></div>
+      </a>
+    </section>
+
+    <!-- 7. WRITING: Calm Journal Index -->
+    <section class="writing section light" aria-labelledby="writing-title">
+      <div class="section-marker">
+        <span>06 / An ongoing inquiry</span>
+        <a href="/writing/">All writing ↗</a>
+      </div>
+      <h2 id="writing-title">Notes from<br/><em>the Workshop</em></h2>
+      <div class="editorial-index">
+        {articles.map((article, i) => (
+          <a href={`/writing/${article.id}/`}>
+            <span class="eyebrow">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{article.data.title}</h3>
+              <p>{article.data.description}</p>
+            </div>
+            <span aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- 8. FINAL CTA: Stark Invitation -->
+    <section class="closing section" aria-labelledby="closing-title">
+      <p class="eyebrow">An invitation</p>
+      <h2 id="closing-title">Something in your business is being held together by <em class="heroics-phrase">memory, effort, or heroics.</em></h2>
+      <p>I’m Danny. I work directly with owners of small founder-led businesses to find that machinery, rethink it, and build what belongs underneath.</p>
+      <a href="/contact/" class="show-me">Show me. <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+</Editorial>
