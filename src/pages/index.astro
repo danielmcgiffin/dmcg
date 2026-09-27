@@ -78,7 +78,7 @@ import '../styles/pages/index.css';
       <p class="consulting-note">It’s worth getting an independent view before you go further.</p>
     </section>
 
-    <section class="consulting-section" aria-labelledby="engagement-title">
+    <section class="consulting-section" id="advisory" aria-labelledby="engagement-title">
       <h2 class="consulting-label" id="engagement-title">How we can work together</h2>
       <div class="consulting-engagements">
         <article><h3>Advisory</h3><p>Independent judgment on a consequential decision. Think through what’s happening, test assumptions, compare options, and determine what actually needs to change.</p></article>
@@ -87,6 +87,12 @@ import '../styles/pages/index.css';
       </div>
       <p class="consulting-note">The answer can be new software, integration, better data, clearer ownership, a different process or vendor, or no major purchase at all. <a href="/advisory/">Read about the independent review.</a></p>
     </section>
+
+    <aside class="consulting-ai-link" aria-label="AI opportunity assessment">
+      <p><strong>Trying to figure out what your business should actually do with AI?</strong></p>
+      <p>Get a ranked view of what’s worth pursuing, what needs more evidence, and what to leave alone.</p>
+      <a class="consulting-inline-link" href="/ai/">Explore the AI opportunity assessment ↗</a>
+    </aside>
 
     <section class="consulting-section" id="work" aria-labelledby="work-title">
       <h2 class="consulting-label" id="work-title">Selected work</h2>
@@ -107,7 +113,7 @@ import '../styles/pages/index.css';
       </div>
     </section>
 
-    <section class="consulting-section consulting-about" aria-labelledby="about-title">
+    <section class="consulting-section consulting-about" id="about" aria-labelledby="about-title">
       <h2 class="consulting-label" id="about-title">About me</h2>
 <p><b>I help leaders make expensive technology decisions before they become expensive mistakes.
 </b></p>
@@ -123,7 +129,7 @@ import '../styles/pages/index.css';
 
     <section class="consulting-close" aria-labelledby="conversation-title">
       <h2 id="conversation-title">About to make an expensive systems decision?</h2>
-      <p>You don’t need to have the problem neatly framed. In fact, that’s usually the point.</p>
+      <p>You don’t need to have the problem neatly framed.</p>
       <a class="consulting-button" href={bookingUrl('closing')}>Get a second opinion</a>
       <a class="consulting-inline-link" href="/contact/">Or get in touch ↗</a>
     </section>

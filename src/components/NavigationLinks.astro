@@ -1,0 +1,19 @@
+---
+import { primaryLinks } from '../navigation';
+
+const path = Astro.url.pathname;
+---
+<ul class="navigation-links">
+  {primaryLinks.map(({ href, label, children }) => (
+    <li>
+      <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>
+      {children && (
+        <ul class="navigation-sections">
+          {children.map(link => (
+            <li><a href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>{link.label}{link.external && <span aria-hidden="true"> ↗</span>}</a></li>
+          ))}
+        </ul>
+      )}
+    </li>
+  ))}
+</ul>

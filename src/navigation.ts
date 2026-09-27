@@ -1,9 +1,20 @@
-export const primaryLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/#work', label: 'Selected work' },
-  { href: '/advisory/', label: 'Advisory' },
-  { href: '/about/', label: 'About me' },
+import { elsewhereLinks } from './elsewhere-links';
+
+interface NavigationLink {
+  href: string;
+  label: string;
+  external?: boolean;
+  children?: NavigationLink[];
+}
+
+export const primaryLinks: NavigationLink[] = [
+  { href: '/', label: 'Home', children: [
+    { href: '/#advisory', label: 'Advisory' },
+    { href: '/#work', label: 'Selected work' },
+    { href: '/#about', label: 'About me' },
+  ] },
+  { href: '/ai/', label: 'AI assessment' },
   { href: '/writing/', label: 'Writing' },
   { href: '/contact/', label: 'Get in touch' },
-  { href: '/elsewhere/', label: 'Elsewhere' },
+  { href: '/elsewhere/', label: 'Elsewhere', children: elsewhereLinks.filter(link => link.external) },
 ];

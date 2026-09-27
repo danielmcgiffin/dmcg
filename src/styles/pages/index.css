@@ -47,6 +47,9 @@ body.consulting-home { background: #ffffff; color: var(--advisor-ink); font-fami
 .consulting-project-card .project-link { display: inline-flex; align-items: center; color: var(--advisor-green); font-size: 13px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
 .consulting-about > p { max-width: 76ch; margin-bottom: 18px; }
 .consulting-inline-link { color: var(--advisor-green); font-weight: 700; font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
+.consulting-ai-link { padding: 24px 28px; margin-bottom: 12px; background: var(--advisor-surface); border-left: 3px solid var(--advisor-green); }
+.consulting-ai-link p + p { margin-top: 8px; color: var(--advisor-muted); font-size: 14px; }
+.consulting-ai-link .consulting-inline-link { display: inline-block; margin-top: 14px; }
 .consulting-close { padding: 30px 0 55px; }
 .consulting-close h2 { font-family: "Geist", Arial, sans-serif; font-size: 25px; font-weight: 600; line-height: 1.3; margin-bottom: 12px; letter-spacing: -.025em; }
 .consulting-close .consulting-inline-link { margin-left: 24px; }

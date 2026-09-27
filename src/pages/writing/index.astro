@@ -16,8 +16,10 @@ import '../../styles/pages/writing-index.css';
 	<main id="main-content">
 		<header class="writing-hero section-dark">
 			<div class="shell">
-				<p class="eyebrow">Writing/</p>
-				<h1 class="display">Notes on work,<br />systems, and <em>leverage.</em></h1>
+				<h1 class="sr-only">Writing — Built that Way by Danny McGiffin</h1>
+				<a class="writing-publication" href={subscribeUrl('writing-index')} data-subscribe-link data-cta-placement="writing-index">
+					<img src="/built-that-way-square.jpg" width="800" height="800" alt="Built that Way by Danny McGiffin. Read and subscribe at dannymcgiffin.substack.com." fetchpriority="high" />
+				</a>
 			</div>
 		</header>
 		<section class="writing-briefing shell" aria-labelledby="briefing-title">
@@ -35,12 +37,6 @@ import '../../styles/pages/writing-index.css';
 				</a>
 			))}
 		</section>
-		<aside class="writing-subscribe shell" aria-labelledby="subscribe-title">
-			<p class="eyebrow">Keep reading</p>
-			<h2 id="subscribe-title">Writing on how work gets designed.</h2>
-			<p>Subscribe on Substack for writing on business decisions, operating systems, and the way work is organized. A paid tier is available for deeper business teardowns and longer essays on designing work. I do not publish on a fixed schedule.</p>
-			<a href={subscribeUrl('writing-index')} data-subscribe-link data-cta-placement="writing-index">Subscribe on Substack ↗</a>
-		</aside>
 	</main>
 	<SiteFooter />
 </BaseLayout>

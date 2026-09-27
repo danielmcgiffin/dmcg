@@ -23,7 +23,7 @@ test('built pages have coherent metadata and entity graphs without retired posit
   const meta=name=>attr(p.nodes.find(n=>n.tagName==='meta'&&(attr(n,'name')===name||attr(n,'property')===name)),'content');
   assert.ok(meta('description')?.length>25,p.route);assert.equal(meta('og:title'),title);assert.equal(meta('og:description'),meta('description'));
   assert.equal(attr(p.nodes.find(n=>n.tagName==='link'&&attr(n,'rel')==='canonical'),'href'),origin+p.route);
-  assert.equal(meta('og:url'),origin+p.route);assert.equal(meta('og:image'),origin+'/og-systems-decision.png');
+  assert.equal(meta('og:url'),origin+p.route);assert.equal(meta('og:image'),origin+(p.route==='/ai/'?'/og-ai-assessment.png':'/og-systems-decision.png'));
   const graph=p.nodes.filter(n=>n.tagName==='script'&&attr(n,'type')==='application/ld+json').flatMap(n=>{const data=JSON.parse((n.childNodes??[]).map(n=>n.value??'').join(''));assert.equal(data['@context'],'https://schema.org');return data['@graph']??[data];});
   const person=graph.find(n=>n['@type']==='Person');const service=graph.find(n=>n['@type']==='ProfessionalService');
   assert.equal(person.jobTitle,'Independent business advisor and designer');assert.equal(person['@id'],origin+'/#person');assert.equal(person.image,undefined);assert.equal(service.makesOffer,undefined);assert.equal(service.logo,origin+'/favicon.svg');assert.ok(person.knowsAbout.includes('Organizational design'));
@@ -90,11 +90,11 @@ test('advisory and writing journeys expose next steps and source evidence',()=>{
  assert.match(content(parse(advisory.html)),/free 30-minute introduction/);
  assert.match(content(parse(advisory.html)),/no vendor compensation or affiliations/);
  assert.ok(attrs(writing,'a','href').includes('/still-on-tools/'));
- assert.ok(attrs(writing,'a','href').some(href=>href?.startsWith('https://therealmcgiffin.substack.com/subscribe')));
+ assert.ok(attrs(writing,'a','href').some(href=>href?.startsWith('https://dannymcgiffin.substack.com/subscribe')));
  for(const p of normal.filter(p=>p.route.startsWith('/writing/')&&p.route!=='/writing/')){
   assert.ok(p.nodes.some(n=>n.tagName==='aside'&&attr(n,'class')?.includes('article-next-step')),p.route);
   assert.ok(attrs(p,'a','href').includes('/about/'),p.route);
-  assert.ok(attrs(p,'a','href').some(href=>href?.startsWith('https://therealmcgiffin.substack.com/subscribe')),p.route);
+  assert.ok(attrs(p,'a','href').some(href=>href?.startsWith('https://dannymcgiffin.substack.com/subscribe')),p.route);
  }
  for(const host of ['kaufman','rsmus','mckinsey','deloitte'])assert.ok(attrs(research,'a','href').some(href=>href?.includes(host)),host);
 });
@@ -102,4 +102,22 @@ test('RSS, llms, and the custom 404 remain usable',async()=>{
  const rss=await readFile(join(dist,'rss.xml'),'utf8');assert.equal((rss.match(/<item>/g)||[]).length,4);
  const llms=await readFile(join(dist,'llms.txt'),'utf8');assert.match(llms,/independent business advisor and designer/);assert.doesNotMatch(llms,/Workflow Teardown|AI Opportunity Sprint/);
  const missing=pages.find(p=>p.route==='/404.html');assert.ok(missing);assert.ok(missing.nodes.some(n=>attr(n,'name')==='robots'&&attr(n,'content')==='noindex'));
+});
+
+test('AI assessment is discoverable, priced, and separates illustrative economics from proof',()=>{
+ const ai=normal.find(p=>p.route==='/ai/');assert.ok(ai);
+ const home=normal.find(p=>p.route==='/');assert.ok(attrs(home,'a','href').includes('/ai/'));
+ const text=content(parse(ai.html));
+ assert.match(text,/\$7,500 fixed fee/);assert.match(text,/10 business days/);
+ assert.match(text,/Fictional business\. Assumed figures/);
+ assert.match(text,/Labor cost is not recoverable savings/);
+ assert.match(text,/not results from this AI assessment/);
+ assert.match(text,/Worth the fee, or your money back/);
+ assert.match(text,/within seven calendar days of the review/);
+ assert.match(text,/refund the full fee/);
+ const samples=ai.nodes.filter(n=>n.tagName==='details'&&attr(n,'name')==='sample-opportunity');
+ assert.equal(samples.length,3);assert.equal(samples.filter(n=>attr(n,'open')!==undefined).length,1);
+ for(const label of ['Test now','Investigate','Don’t bother'])assert.ok(samples.some(n=>content(n).includes(label)));
+ for(const placement of ['ai-hero','ai-deliverable','ai-offer','ai-closing'])assert.ok(attrs(ai,'a','href').some(href=>href===`https://cal.com/dannymcgiffin/30min?src=${placement}`));
+ assert.ok(attrs(ai,'a','href').includes('/work/erp-second-opinion/'));
 });
