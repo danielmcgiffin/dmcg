@@ -40,7 +40,8 @@ assessment redirect directly to the retained research briefing.
 `.github/workflows/sync-substack.yml` workflow fetches the Built that Way archive and RSS feed,
 keeps previously listed posts, builds and tests the site, and commits new entries
 to `main`. Run `python3 scripts/sync-substack.py` to sync locally, or trigger the
-workflow manually in GitHub Actions. A source update appears on the live site
+workflow manually in GitHub Actions. The sync uses public relays when Substack
+blocks GitHub's runner. A source update appears on the live site
 only after the hosting deployment publishes that commit.
 
 ## Preserved work

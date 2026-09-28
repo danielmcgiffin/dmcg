@@ -37,6 +37,7 @@ class SubstackSyncTests(unittest.TestCase):
             "title": "A new article", "publishedAt": "2026-09-28",
             "href": "https://dannymcgiffin.substack.com/p/a-new-article"
         }])
+        self.assertEqual(sync.parse_relay_archive(b"Title: \n\nMarkdown Content:\n" + archive), sync.parse_archive(archive))
 
 
 if __name__ == "__main__":

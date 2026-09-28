@@ -7,12 +7,14 @@ from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.error import URLError
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree
 
 FEED_URL = "https://dannymcgiffin.substack.com/feed"
 ARCHIVE_URL = "https://dannymcgiffin.substack.com/api/v1/archive?sort=new&limit=20"
+ARCHIVE_RELAY_URL = "https://r.jina.ai/http://dannymcgiffin.substack.com/api/v1/archive?sort=new%26limit=20"
+FEED_RELAY_URL = "https://api.allorigins.win/raw?url=" + quote(FEED_URL, safe="")
 POSTS_FILE = Path(__file__).resolve().parents[1] / "src/data/substack-posts.json"
 REQUEST_HEADERS = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
@@ -60,6 +62,13 @@ def parse_archive(archive: bytes) -> list[dict[str, str]]:
     ]
 
 
+def parse_relay_archive(response: bytes) -> list[dict[str, str]]:
+    marker = b"Markdown Content:\n"
+    if marker not in response:
+        raise ValueError("Archive relay response has no JSON content")
+    return parse_archive(response.split(marker, 1)[1].strip())
+
+
 def merge_posts(existing: list[dict[str, str]], incoming: list[dict[str, str]]) -> list[dict[str, str]]:
     posts = {post["href"]: post for post in existing}
     posts.update({post["href"]: post for post in incoming})
@@ -80,13 +89,18 @@ def main() -> None:
             incoming.extend(parse_archive(args.archive_file.read_bytes()))
     else:
         incoming = []
-        for name, url, parse in (("archive", ARCHIVE_URL, parse_archive), ("RSS", FEED_URL, parse_posts)):
-            try:
-                request = Request(url, headers=REQUEST_HEADERS)
-                with urlopen(request, timeout=20) as response:
-                    incoming.extend(parse(response.read()))
-            except (URLError, TimeoutError, ValueError, ElementTree.ParseError, KeyError) as error:
-                print(f"Could not read Substack {name}: {error}")
+        sources = (("archive", ARCHIVE_URL, parse_archive), ("RSS", FEED_URL, parse_posts))
+        relays = (("archive relay", ARCHIVE_RELAY_URL, parse_relay_archive), ("RSS relay", FEED_RELAY_URL, parse_posts))
+        for group in (sources, relays):
+            for name, url, parse in group:
+                try:
+                    request = Request(url, headers=REQUEST_HEADERS)
+                    with urlopen(request, timeout=20) as response:
+                        incoming.extend(parse(response.read()))
+                except (URLError, TimeoutError, ValueError, ElementTree.ParseError, KeyError) as error:
+                    print(f"Could not read Substack {name}: {error}")
+            if incoming:
+                break
         if not incoming:
             raise RuntimeError("Neither Substack source returned published posts")
 
