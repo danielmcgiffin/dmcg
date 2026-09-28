@@ -37,7 +37,16 @@ class SubstackSyncTests(unittest.TestCase):
             "title": "A new article", "publishedAt": "2026-09-28",
             "href": "https://dannymcgiffin.substack.com/p/a-new-article"
         }])
-        self.assertEqual(sync.parse_relay_archive(b"Title: \n\nMarkdown Content:\n" + archive), sync.parse_archive(archive))
+
+    def test_converted_feed_can_supply_posts_when_substack_blocks_runner(self):
+        response = json.dumps({"status": "ok", "items": [{
+            "title": "A new article", "pubDate": "2026-09-28 16:00:34",
+            "link": "https://dannymcgiffin.substack.com/p/a-new-article"
+        }]}).encode()
+        self.assertEqual(sync.parse_converted_feed(response), [{
+            "title": "A new article", "publishedAt": "2026-09-28",
+            "href": "https://dannymcgiffin.substack.com/p/a-new-article"
+        }])
 
 
 if __name__ == "__main__":
