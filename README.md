@@ -44,6 +44,7 @@ workflow manually in GitHub Actions. The sync uses the public rss2json feed
 converter when Substack blocks GitHub's runner. New entries deploy to Cloudflare
 when GitHub has a `CLOUDFLARE_API_TOKEN` secret. Without that token, the workflow
 commits the list but reports that live deployment was skipped.
+The manual workflow input can force a deployment after the token is configured.
 
 ## Preserved work
 

@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '17 */6 * * *'
   workflow_dispatch:
+    inputs:
+      deploy:
+        description: Deploy the current site even when there are no new posts
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -47,11 +52,11 @@ jobs:
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
       - name: Deploy new posts
-        if: steps.commit.outputs.changed == 'true' && steps.cloudflare.outputs.ready == 'true'
+        if: (steps.commit.outputs.changed == 'true' || inputs.deploy == true) && steps.cloudflare.outputs.ready == 'true'
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: 038f386f26a1a9bef9eb2d50e7f8c218
       - name: Report missing Cloudflare credentials
-        if: steps.commit.outputs.changed == 'true' && steps.cloudflare.outputs.ready != 'true'
+        if: (steps.commit.outputs.changed == 'true' || inputs.deploy == true) && steps.cloudflare.outputs.ready != 'true'
         run: echo "::warning::New posts committed, but live deployment skipped because Cloudflare credentials are not configured."
