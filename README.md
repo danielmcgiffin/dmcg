@@ -26,12 +26,22 @@ The restored hosting configuration and analytics integration remain in place.
 - `src/styles/pages/` and `src/styles/components/` — route and component rules, imported only where used
 - `src/site.ts`, `src/lib/schema.ts` — shared identity and structured data
 - `src/content/writing/` — existing MDX essays; stable URLs and RSS
+- `src/data/substack-posts.json` — published Substack articles listed on `/writing/`
 - `public/_redirects` — retired offer/assessment routes; mirrors Astro redirects
 - `docs/APPROVED_AUDIT_2026-09-17.md` — approved scope
 - `docs/IMPLEMENTATION_EVIDENCE_2026-09-17.md` — validation and remaining limitations
 
 The Northern Virginia URL remains stable. Retired offer URLs and the unfinished
 assessment redirect directly to the retained research briefing.
+
+## Substack writing list
+
+`/writing/` reads `src/data/substack-posts.json`. Every six hours, the
+`.github/workflows/sync-substack.yml` workflow fetches the Built that Way archive and RSS feed,
+keeps previously listed posts, builds and tests the site, and commits new entries
+to `main`. Run `python3 scripts/sync-substack.py` to sync locally, or trigger the
+workflow manually in GitHub Actions. A source update appears on the live site
+only after the hosting deployment publishes that commit.
 
 ## Preserved work
 

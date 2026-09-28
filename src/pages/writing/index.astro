@@ -4,11 +4,8 @@ import SiteFooter from '../../components/SiteFooter.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { subscribeUrl } from '../../config';
+import articles from '../../data/substack-posts.json';
 
-const articles = [
-	{ title: 'Your Most Efficient Employee Is the Customer', publishedAt: '2026-09-25', href: 'https://dannymcgiffin.substack.com/p/your-most-efficient-employee-is-the' },
-	{ title: 'Consultants vs Mongers', publishedAt: '2026-09-18', href: 'https://dannymcgiffin.substack.com/p/consultants-vs-mongers' }
-];
 import '../../styles/pages/writing-index.css';
 ---
 

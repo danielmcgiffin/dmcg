@@ -1,5 +1,6 @@
 node_modules
 .direnv
+__pycache__/
 
 # Output
 .astro

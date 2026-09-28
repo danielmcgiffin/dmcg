@@ -7,6 +7,7 @@ const dist=resolve('dist');
 const origin='https://dannymcgiffin.com';
 async function files(dir){const out=[];for(const f of await readdir(dir,{withFileTypes:true})){const path=join(dir,f.name);if(f.isDirectory())out.push(...await files(path));else out.push(path);}return out;}
 const all=await files(dist);
+const substackPosts=JSON.parse(await readFile(resolve('src/data/substack-posts.json'),'utf8'));
 function flatten(node){return [node,...(node.childNodes??[]).flatMap(flatten)];}
 function attr(node,key){return node.attrs?.find(a=>a.name===key)?.value;}
 function content(node){if(['style','script'].includes(node.tagName))return '';return node.nodeName==='#text'?node.value:(node.childNodes??[]).map(content).join('');}
@@ -91,8 +92,7 @@ test('advisory and writing journeys expose next steps and source evidence',()=>{
  assert.match(content(parse(advisory.html)),/no vendor compensation or affiliations/);
  const writingLinks=attrs(writing,'a','href');
  assert.ok(writingLinks.some(href=>href?.startsWith('https://dannymcgiffin.substack.com/subscribe')));
- assert.ok(writingLinks.includes('https://dannymcgiffin.substack.com/p/your-most-efficient-employee-is-the'));
- assert.ok(writingLinks.includes('https://dannymcgiffin.substack.com/p/consultants-vs-mongers'));
+ assert.deepEqual(writingLinks.filter(href=>href?.startsWith('https://dannymcgiffin.substack.com/p/')),substackPosts.map(post=>post.href));
  assert.ok(!writingLinks.includes('/still-on-tools/'));
  assert.ok(!writingLinks.some(href=>href?.startsWith('/writing/')&&href!=='/writing/'));
  for(const p of normal.filter(p=>p.route.startsWith('/writing/')&&p.route!=='/writing/')){
