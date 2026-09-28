@@ -1,4 +1,4 @@
-.ai-page { --ai-paper: #f3f2e9; --ai-muted: #596154; }
+.ai-page { --ai-paper: var(--advisor-surface); --ai-muted: #596154; }
 .ai-wrap { width: min(calc(100% - 96px), 1040px); margin-inline: auto; }
 .ai-page h1, .ai-page h2, .ai-page h3 { text-wrap: balance; }
 .ai-page h2 { max-width: 25ch; font-size: clamp(1.9rem, 3vw, 2.65rem); line-height: 1.15; font-weight: 600; letter-spacing: -.045em; }

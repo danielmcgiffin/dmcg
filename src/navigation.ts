@@ -15,6 +15,5 @@ export const primaryLinks: NavigationLink[] = [
   ] },
   { href: '/ai/', label: 'AI assessment' },
   { href: '/writing/', label: 'Writing' },
-  { href: '/contact/', label: 'Get in touch' },
-  { href: '/elsewhere/', label: 'Elsewhere', children: elsewhereLinks.filter(link => link.external) },
+  { href: '/elsewhere/', label: 'Elsewhere', children: elsewhereLinks.filter(link => link.external || link.href === '/contact/') },
 ];

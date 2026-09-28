@@ -35,7 +35,7 @@
 	--advisor-muted: #596154;
 	--advisor-line: #bcc8b9;
 	--advisor-line-strong: #bfc9bd;
-	--advisor-surface: #f3f2e9;
+	--advisor-surface: var(--advisor-sidebar-bg);
 	--advisor-line-soft: #dce1d3;
 	--advisor-sidebar-bg: #ece7d9;
 	--advisor-sidebar-line: #e0e1d5;

@@ -1,17 +1,18 @@
 ---
-import { getCollection } from 'astro:content';
 import ArrowUpRight from '../../components/ArrowUpRight.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { subscribeUrl } from '../../config';
 
-const articles = (await getCollection('writing', ({ data }) => !data.draft))
-	.sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const articles = [
+	{ title: 'Your Most Efficient Employee Is the Customer', publishedAt: '2026-09-25', href: 'https://dannymcgiffin.substack.com/p/your-most-efficient-employee-is-the' },
+	{ title: 'Consultants vs Mongers', publishedAt: '2026-09-18', href: 'https://dannymcgiffin.substack.com/p/consultants-vs-mongers' }
+];
 import '../../styles/pages/writing-index.css';
 ---
 
-<BaseLayout title="Writing — Danny McGiffin" description="Essays on how businesses work: ownership, decisions, systems, and technology." pageType="CollectionPage">
+<BaseLayout title="Writing — Danny McGiffin" description="Built that Way articles by Danny McGiffin on Substack." pageType="CollectionPage">
 	<SiteHeader />
 	<main id="main-content">
 		<header class="writing-hero section-dark">
@@ -22,17 +23,12 @@ import '../../styles/pages/writing-index.css';
 				</a>
 			</div>
 		</header>
-		<section class="writing-briefing shell" aria-labelledby="briefing-title">
-			<p class="eyebrow">Research briefing</p>
-			<h2 id="briefing-title"><a href="/still-on-tools/">You're Not Late. You're Still on Tools. ↗</a></h2>
-			<p>What four surveys can—and cannot—tell a smaller business about AI tools, workflow redesign, and the work between them.</p>
-		</section>
-		<section class="writing-index section-light shell" aria-label="All writing">
+		<section class="writing-index section-light shell" aria-label="Substack articles">
 			{articles.map((article, index) => (
-				<a href={`/writing/${article.id}/`}>
+				<a href={article.href}>
 					<span class="index">{String(index + 1).padStart(2, '0')}</span>
-					<div><h2>{article.data.title}</h2><p>{article.data.description}</p></div>
-					<time datetime={article.data.publishedAt.toISOString()}>{article.data.publishedAt.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'short', day: 'numeric', year: 'numeric' })}</time>
+					<div><h2>{article.title}</h2></div>
+					<time datetime={article.publishedAt}>{new Date(`${article.publishedAt}T00:00:00Z`).toLocaleDateString('en-US', { timeZone: 'UTC', month: 'short', day: 'numeric', year: 'numeric' })}</time>
 					<span class="round-arrow" aria-hidden="true"><ArrowUpRight /></span>
 				</a>
 			))}

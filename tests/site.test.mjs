@@ -89,8 +89,12 @@ test('advisory and writing journeys expose next steps and source evidence',()=>{
  assert.ok(advisory && writing && research);
  assert.match(content(parse(advisory.html)),/free 30-minute introduction/);
  assert.match(content(parse(advisory.html)),/no vendor compensation or affiliations/);
- assert.ok(attrs(writing,'a','href').includes('/still-on-tools/'));
- assert.ok(attrs(writing,'a','href').some(href=>href?.startsWith('https://dannymcgiffin.substack.com/subscribe')));
+ const writingLinks=attrs(writing,'a','href');
+ assert.ok(writingLinks.some(href=>href?.startsWith('https://dannymcgiffin.substack.com/subscribe')));
+ assert.ok(writingLinks.includes('https://dannymcgiffin.substack.com/p/your-most-efficient-employee-is-the'));
+ assert.ok(writingLinks.includes('https://dannymcgiffin.substack.com/p/consultants-vs-mongers'));
+ assert.ok(!writingLinks.includes('/still-on-tools/'));
+ assert.ok(!writingLinks.some(href=>href?.startsWith('/writing/')&&href!=='/writing/'));
  for(const p of normal.filter(p=>p.route.startsWith('/writing/')&&p.route!=='/writing/')){
   assert.ok(p.nodes.some(n=>n.tagName==='aside'&&attr(n,'class')?.includes('article-next-step')),p.route);
   assert.ok(attrs(p,'a','href').includes('/about/'),p.route);
