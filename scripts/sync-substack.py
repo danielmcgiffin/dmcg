@@ -14,6 +14,11 @@ from xml.etree import ElementTree
 FEED_URL = "https://dannymcgiffin.substack.com/feed"
 ARCHIVE_URL = "https://dannymcgiffin.substack.com/api/v1/archive?sort=new&limit=20"
 POSTS_FILE = Path(__file__).resolve().parents[1] / "src/data/substack-posts.json"
+REQUEST_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+    "Accept": "application/json, application/rss+xml, application/xml, text/xml, */*",
+    "Accept-Language": "en-US,en;q=0.9",
+}
 
 
 def post_record(title: str, published_at: str, href: str) -> dict[str, str]:
@@ -77,7 +82,7 @@ def main() -> None:
         incoming = []
         for name, url, parse in (("archive", ARCHIVE_URL, parse_archive), ("RSS", FEED_URL, parse_posts)):
             try:
-                request = Request(url, headers={"User-Agent": "DMCG-Substack-Sync/1.0"})
+                request = Request(url, headers=REQUEST_HEADERS)
                 with urlopen(request, timeout=20) as response:
                     incoming.extend(parse(response.read()))
             except (URLError, TimeoutError, ValueError, ElementTree.ParseError, KeyError) as error:
