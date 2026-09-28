@@ -41,8 +41,9 @@ assessment redirect directly to the retained research briefing.
 keeps previously listed posts, builds and tests the site, and commits new entries
 to `main`. Run `python3 scripts/sync-substack.py` to sync locally, or trigger the
 workflow manually in GitHub Actions. The sync uses the public rss2json feed
-converter when Substack blocks GitHub's runner. A source update appears on the live site
-only after the hosting deployment publishes that commit.
+converter when Substack blocks GitHub's runner. New entries deploy to Cloudflare
+when GitHub has a `CLOUDFLARE_API_TOKEN` secret. Without that token, the workflow
+commits the list but reports that live deployment was skipped.
 
 ## Preserved work
 
