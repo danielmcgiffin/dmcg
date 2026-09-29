@@ -2,11 +2,11 @@
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { subscribeUrl } from '../config';
+import { bookingUrl, subscribeUrl } from '../config';
 import { breadcrumbList } from '../lib/schema';
 import { SITE_URL } from '../site';
 
-const title = "You're Not Late. You're Still on Tools. | Danny McGiffin";
+const title = 'You’re Not Late. You’re Still on Tools. | Danny McGiffin';
 const description =
 	'A research briefing on the difference between using AI tools and redesigning work, with the limits of the available mid-market evidence.';
 const pageUrl = `${SITE_URL}/still-on-tools/`;
@@ -20,7 +20,7 @@ const sourceUrls = {
 const structuredData = [
 	breadcrumbList([
 		{ name: 'Home', url: `${SITE_URL}/` },
-		{ name: "You're not late. You're still on tools.", url: pageUrl }
+		{ name: 'You’re not late. You’re still on tools.', url: pageUrl }
 	])
 ];
 import '../styles/pages/still-on-tools.css';
@@ -32,7 +32,7 @@ import '../styles/pages/still-on-tools.css';
 		<header class="offer-hero section-dark">
 			<div class="shell">
 				<p class="eyebrow">Research briefing for $5–50M founders and operators</p>
-				<h1 class="display">You're not late.<br /><em>You're still on tools.</em></h1>
+				<h1 class="display">You’re not late.<br /><em>You’re still on tools.</em></h1>
                 <p class="offer-deck">Using AI tools and redesigning work are different things. The available surveys help distinguish them, but do not establish a prevalence rate for $5–50M businesses.</p>
 			</div>
 		</header>
@@ -166,9 +166,9 @@ import '../styles/pages/still-on-tools.css';
             <h2>What to do with the distinction</h2>
             <p>These surveys do not establish that a particular business is behind or needs an AI project. The useful question is what would have to change for a tool to produce a better business result.</p>
             <p>Choose a consequential piece of work. Examine who owns it, how information reaches the next person, where decisions get made, and what happens when something goes wrong. Then decide what needs changing and whether technology has a useful role.</p>
-            <p>For a practical example of examining the gap between two parts of a business, read <a href="/writing/your-vendor-already-told-you-what-it-doesnt-do/">Your Vendor Already Told You What It Doesn't Do</a>.</p>
+            <p>For a practical example of examining the gap between two parts of a business, read <a href="/writing/your-vendor-already-told-you-what-it-doesnt-do/">Your Vendor Already Told You What It Doesn’t Do</a>.</p>
             <h2>Start with the situation</h2>
-            <p>If something important is stuck and the right answer is unclear, <a href="/contact/">tell me what's going on</a>. It does not have to arrive as an AI or workflow project.</p>
+            <p>If something important is stuck and the right answer is unclear, <a href={bookingUrl('still-on-tools')}>tell me what’s going on</a>. It does not have to arrive as an AI or workflow project.</p>
             <p>For more writing on business decisions and designing work, <a href={subscribeUrl('research-briefing')} data-subscribe-link data-cta-placement="research-briefing">subscribe on Substack</a>. I do not publish on a fixed schedule.</p>
         </article>
     </main>

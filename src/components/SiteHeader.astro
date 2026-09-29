@@ -1,25 +1,25 @@
 ---
-import { bookingUrl } from '../config';
+import { bookingUrl, CTA_LABEL } from '../config';
+import { DESCRIPTOR } from '../site';
 import NavigationLinks from './NavigationLinks.astro';
 
 interface Props {
-  bookingLabel?: string;
   bookingPlacement?: string;
 }
 
-const { bookingLabel = 'Get a second opinion', bookingPlacement = 'navigation' } = Astro.props;
+const { bookingPlacement = 'navigation' } = Astro.props;
 ---
 <header class="site-header">
-  <div class="site-identity"><a class="wordmark" href="/" aria-label="Danny McGiffin — Home">Danny McGiffin</a><p class="site-availability"><span aria-hidden="true"></span>Open for new clients</p></div>
+  <div class="site-identity"><p class="wordmark">DANNY McGIFFIN</p><p class="site-descriptor">{DESCRIPTOR}</p></div>
   <nav class="header-nav" aria-label="Primary navigation">
     <NavigationLinks />
-    <a class="nav-booking" href={bookingUrl(bookingPlacement)}>{bookingLabel}</a>
+    <a class="nav-booking" href={bookingUrl(bookingPlacement)}>{CTA_LABEL}</a>
   </nav>
   <details class="mobile-navigation">
     <summary>Menu <span aria-hidden="true">+</span></summary>
     <nav aria-label="Mobile navigation">
       <NavigationLinks />
-      <a class="nav-booking" href={bookingUrl(bookingPlacement)}>{bookingLabel}</a>
+      <a class="nav-booking" href={bookingUrl(bookingPlacement)}>{CTA_LABEL}</a>
     </nav>
   </details>
 </header>

@@ -1,5 +1,5 @@
 ---
-import { bookingUrl, subscribeUrl } from '../config';
+import { bookingUrl, CTA_LABEL, subscribeUrl } from '../config';
 
 interface Props { id: string; }
 const { id } = Astro.props;
@@ -7,26 +7,26 @@ const nextSteps: Record<string, { title: string; description: string; primary: {
   'your-vendor-already-told-you-what-it-doesnt-do': {
     title: 'Questioning a vendor proposal?',
     description: 'The ERP case shows what happened when we tested a system against the business it was meant to serve.',
-    primary: { href: '/work/erp-second-opinion/', label: 'Read the ERP case' },
-    secondary: { href: '/advisory/', label: 'See how an independent review works' }
+    primary: { href: '/case-studies/erp-second-opinion/', label: 'Read the ERP case' },
+    secondary: { href: '/second-opinion/', label: 'See the Second Opinion' }
   },
   'your-company-keeps-books-on-the-money-and-nothing-else': {
     title: 'Where does your operational knowledge live?',
     description: 'If a cutover, AI pilot, or key departure depends on rules no one has written down, start with the decision and the work behind it.',
-    primary: { href: bookingUrl('article-books'), label: 'Get a second opinion' },
-    secondary: { href: '/advisory/', label: 'See how the review works' }
+    primary: { href: bookingUrl('article-books'), label: CTA_LABEL },
+    secondary: { href: '/data-connection/', label: 'See Data Connection' }
   },
   'why-your-ai-initiative-is-a-failure': {
     title: 'More ideas than results?',
     description: 'We can look at the work you want to improve and whether AI belongs in the answer at all.',
-    primary: { href: bookingUrl('article-ai'), label: 'Get a second opinion' },
-    secondary: { href: '/still-on-tools/', label: 'Read the research briefing' }
+    primary: { href: bookingUrl('article-ai'), label: CTA_LABEL },
+    secondary: { href: '/ai-opportunity/', label: 'See the AI Opportunity assessment' }
   },
   'the-300000-lesson': {
     title: 'Before the next operations hire',
     description: 'Clarify who owns the work, what decisions the role can make, and what needs to change around it.',
-    primary: { href: '/advisory/', label: 'See how we could work together' },
-    secondary: { href: bookingUrl('article-ops-hire'), label: 'Get a second opinion' }
+    primary: { href: '/tech-audit/', label: 'See the Tech Audit' },
+    secondary: { href: bookingUrl('article-ops-hire'), label: CTA_LABEL }
   }
 };
 const step = nextSteps[id];

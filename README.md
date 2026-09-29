@@ -2,8 +2,9 @@
 
 The existing Astro marketing site, evolved under the approved September 17 audit.
 Newsreader + Geist, forest green + bone, and the existing static-page infrastructure.
-Positioning: independent business advisor and designer for consequential, ambiguous
-business problems. Advisory, Design, and Build are independent ways to engage.
+Positioning: Independent Tech Advisor. Four offers — Tech Audit, Second Opinion,
+AI Opportunity, Data Connection — defined once in `src/offers.ts`. One call to action,
+“Schedule Our First Chat”, links to Cal with a `src=` placement tag.
 
 ## Development
 
@@ -27,7 +28,9 @@ The restored hosting configuration and analytics integration remain in place.
 - `src/site.ts`, `src/lib/schema.ts` — shared identity and structured data
 - `src/content/writing/` — existing MDX essays; stable URLs and RSS
 - `src/data/substack-posts.json` — published Substack articles listed on `/writing/`
-- `public/_redirects` — retired offer/assessment routes; mirrors Astro redirects
+- `src/case-studies.ts` — case studies rendered at `/case-studies/<slug>/`
+- `scripts/og-images.py` — renders the share images in `public/og/` (needs rsvg-convert)
+- `public/_redirects` — retired and renamed routes; mirrors Astro redirects
 - `docs/APPROVED_AUDIT_2026-09-17.md` — approved scope
 - `docs/IMPLEMENTATION_EVIDENCE_2026-09-17.md` — validation and remaining limitations
 

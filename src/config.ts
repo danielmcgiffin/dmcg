@@ -1,5 +1,7 @@
 export const BOOKING_URL = 'https://cal.com/dannymcgiffin/30min';
 export const SUBSCRIBE_URL = 'https://dannymcgiffin.substack.com/subscribe';
+/** The site's one call to action. Every booking link uses this label. */
+export const CTA_LABEL = 'Schedule Our First Chat';
 export const GA_MEASUREMENT_ID = 'G-ZYTMP3PS7G';
 
 /** Tag a booking link with the CTA it came from, so Cal.com records where the click started. */

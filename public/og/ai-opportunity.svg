@@ -2,15 +2,15 @@
   <rect width="1200" height="630" fill="#f3f2e9"/>
   <rect width="18" height="630" fill="#214d38"/>
   <g font-family="Arial, sans-serif">
-    <text x="76" y="82" font-size="19" font-weight="700" letter-spacing="2" fill="#214d38">DANNY MCGIFFIN / INDEPENDENT ADVISOR</text>
+    <text x="76" y="82" font-size="19" font-weight="700" letter-spacing="2" fill="#214d38">DANNY McGIFFIN / INDEPENDENT TECH ADVISOR</text>
     <g font-size="66" font-weight="700" letter-spacing="-2" fill="#303a32">
       <text x="72" y="204">Figure out what AI is</text>
       <text x="72" y="283" fill="#214d38">actually worth doing</text>
       <text x="72" y="362">in your business.</text>
     </g>
     <path d="M76 420H1124" stroke="#bcc8b9"/>
-    <text x="76" y="478" font-size="24" fill="#214d38">$7,500 fixed fee · 10 business days · A map of what comes next</text>
-    <text x="76" y="559" font-size="19" fill="#596154">AI OPPORTUNITY ASSESSMENT</text>
-    <text x="1124" y="559" font-size="19" text-anchor="end" fill="#596154">dannymcgiffin.com/ai</text>
+    <text x="76" y="478" font-size="24" fill="#214d38">$5,000 fixed fee · 10 business days · A map of what comes next</text>
+    <text x="76" y="559" font-size="19" fill="#596154">AI OPPORTUNITY</text>
+    <text x="1124" y="559" font-size="19" text-anchor="end" fill="#596154">dannymcgiffin.com/ai-opportunity</text>
   </g>
 </svg>

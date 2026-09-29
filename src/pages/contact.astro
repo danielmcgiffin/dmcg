@@ -2,20 +2,20 @@
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { bookingUrl } from '../config';
+import { bookingUrl, CTA_LABEL } from '../config';
 import { breadcrumbList } from '../lib/schema';
 import { SITE_URL, CONTACT_EMAIL } from '../site';
 import '../styles/pages/contact.css';
 ---
-<BaseLayout title="Get in touch — Danny McGiffin" description="Get in touch with Danny McGiffin before a consequential systems decision." pageType="ContactPage" structuredData={breadcrumbList([{name:'Home',url:`${SITE_URL}/`},{name:'Contact',url:`${SITE_URL}/contact/`}])}>
+<BaseLayout title="Contact | Danny McGiffin" description="Contact Danny McGiffin, an independent tech advisor in Herndon, Virginia. Book a free 30-minute introduction or send an email." pageType="ContactPage" structuredData={breadcrumbList([{name:'Home',url:`${SITE_URL}/`},{name:'Contact',url:`${SITE_URL}/contact/`}])}>
   <SiteHeader />
   <main id="main-content" class="direct-contact">
     <div class="shell direct-contact-inner">
-      <p class="eyebrow">Get in touch</p>
+      <p class="eyebrow">Contact</p>
       <h1>Tell me what you’re deciding.</h1>
-      <p>You don’t need a polished brief. The first 30-minute video call is free: we talk about your business and main pain points, then decide whether to dig deeper. <a href="/advisory/">See how an independent review works.</a></p>
+      <p>You don’t need a polished brief. The first 30-minute video call is free: we talk about your business and main pain points, then decide whether to dig deeper. <a href="/#services">See the four ways to work together ↗</a></p>
       <div class="direct-contact-actions">
-        <a class="direct-contact-button" href={bookingUrl('contact')}>Get a second opinion <span aria-hidden="true">↗</span></a>
+        <a class="direct-contact-button" href={bookingUrl('contact')}>{CTA_LABEL} <span aria-hidden="true">↗</span></a>
         <a class="direct-contact-secondary" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("A decision worth talking through")}`}>Or send an email <span aria-hidden="true">↗</span></a>
       </div>
       <p class="direct-contact-email">Email directly: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>

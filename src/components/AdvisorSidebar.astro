@@ -1,5 +1,6 @@
 ---
-import { bookingUrl } from '../config';
+import { bookingUrl, CTA_LABEL } from '../config';
+import { DESCRIPTOR } from '../site';
 import NavigationLinks from './NavigationLinks.astro';
 
 interface Props {
@@ -10,18 +11,18 @@ const { current } = Astro.props;
 ---
 <header class:list={['advisor-sidebar', { 'advisor-sidebar--home': current === '/' }]}>
   <div class="advisor-identity">
-    <a class="advisor-name" href="/" aria-label="Danny McGiffin — Home">Danny McGiffin</a>
-    <p class="advisor-availability"><span aria-hidden="true"></span>Open for new clients</p>
+    <p class="advisor-name">DANNY McGIFFIN</p>
+    <p class="advisor-descriptor">{DESCRIPTOR}</p>
   </div>
   <nav class="advisor-desktop-nav" aria-label="Primary navigation">
     <NavigationLinks />
-    <a class="nav-booking" href={bookingUrl('navigation')}>Get a second opinion</a>
+    <a class="nav-booking" href={bookingUrl('navigation')}>{CTA_LABEL}</a>
   </nav>
   <details class="advisor-mobile-menu">
     <summary>Menu <span aria-hidden="true">+</span></summary>
     <nav aria-label="Mobile navigation">
       <NavigationLinks />
-      <a class="nav-booking" href={bookingUrl('navigation')}>Get a second opinion</a>
+      <a class="nav-booking" href={bookingUrl('navigation')}>{CTA_LABEL}</a>
     </nav>
   </details>
 </header>

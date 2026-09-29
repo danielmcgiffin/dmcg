@@ -5,7 +5,7 @@ import '@fontsource/geist/latin-400.css';
 import '@fontsource/geist/latin-600.css';
 import Analytics from '../components/Analytics.astro';
 import { pageGraph } from '../lib/schema';
-import { SITE_NAME } from '../site';
+import { IMAGE_PATH, SITE_NAME } from '../site';
 import '../styles/global.css';
 
 interface Props {
@@ -27,8 +27,8 @@ const {
 	description,
 	bodyClass,
 	canonical = new URL(Astro.url.pathname, Astro.site),
-	image = '/og-systems-decision.png',
-	imageAlt = 'Before you buy a new system, get a second opinion. Danny McGiffin — independent advice for owners and executives.',
+	image = IMAGE_PATH,
+	imageAlt = 'Straight answers about your business technology. Danny McGiffin, Independent Tech Advisor.',
 	ogType = 'website',
 	pageType = 'WebPage',
 	publishedAt,

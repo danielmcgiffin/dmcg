@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import ClosingCta from '../../components/ClosingCta.astro';
+import { caseStudies } from '../../case-studies';
+import { breadcrumbList } from '../../lib/schema';
+import { SITE_URL } from '../../site';
+import '../../styles/pages/case-study.css';
+---
+<BaseLayout
+  title="Case Studies | Danny McGiffin"
+  description="Four accounts of expensive business problems: what I found, what we decided, and what happened, from a $2.45M ERP path to a $250M decline in estimated improper payments."
+  image="/og/case-studies.png"
+  imageAlt="Case studies: what I found, what we decided, and what happened. Danny McGiffin, Independent Tech Advisor."
+  pageType="CollectionPage"
+  structuredData={breadcrumbList([{ name: 'Home', url: `${SITE_URL}/` }, { name: 'Case Studies', url: `${SITE_URL}/case-studies/` }])}
+>
+  <SiteHeader bookingPlacement="case-studies-navigation" />
+  <main id="main-content">
+    <PageIntro eyebrow="Case studies" title="What I found, what we decided, and what happened." deck="Each account follows the same format: the situation, the expensive problem, what I found, the decision, and the result. Roles and measurement limits are stated plainly." />
+    <div class="shell case-index">
+      {caseStudies.map(study => (
+        <a href={`/case-studies/${study.slug}/`}>
+          <small>{study.context}</small>
+          <h2>{study.title}</h2>
+          <p>{study.teaser}</p>
+          <span>Read the case ↗</span>
+        </a>
+      ))}
+    </div>
+    <ClosingCta placement="case-studies-closing" />
+  </main>
+  <SiteFooter />
+</BaseLayout>

@@ -1,0 +1,60 @@
+---
+import OfferPage from '../components/OfferPage.astro';
+import { offer } from '../offers';
+
+const sensitive = 'We agree access and handling before work begins, including what can be shared, what should be redacted, and which tools are approved. Do not send confidential business records when booking the introductory call.';
+---
+<OfferPage
+  offer={offer('tech-audit')}
+  title="Tech Audit | Danny McGiffin"
+  description="A $3,500 fixed-fee Tech Audit. In 10 business days, find out what your software, subscriptions, and processes cost, what to keep, what to cut, and what to fix first."
+  imageAlt="Find out what your technology actually costs, and what it’s worth. Tech Audit with Danny McGiffin. $3,500 fixed fee, 10 business days."
+  headline="Find out what your technology"
+  emphasis="actually costs, and what it’s worth."
+  deck="In 10 business days, I’ll inventory your software, subscriptions, and the processes around them, find the waste and the gaps, and give you a prioritized list of what to keep, cut, consolidate, or fix."
+  guarantee="Complete the audit and review the findings with me. If you don’t believe they’re worth the $3,500 fee, tell me within seven calendar days of the review. I’ll refund the full fee, and you keep the findings."
+  symptomsTitle="Technology spending that grew without a plan."
+  symptoms={[
+    ['Spend', 'The software bill keeps growing.', 'Subscriptions renew automatically, seats go unused, and nobody can say what each tool is for.'],
+    ['Overlap', 'Three tools do the same job.', 'Different teams bought their own answers. Now the data lives in all of them and agrees in none.'],
+    ['Workarounds', 'The real process lives in spreadsheets.', 'People export, re-key, and reconcile by hand because the systems don’t fit how the work actually happens.'],
+    ['Risk', 'One person knows how it all works.', 'Access, renewals, and integrations depend on someone who might leave or is already stretched thin.'],
+  ]}
+  symptomsNote="Most businesses don’t need more software. They need to know what they have and whether it’s pulling its weight."
+  outputTitle="A clear picture of what you have, and a plan for what to do about it."
+  outputIntro="Plain-English findings you can act on, with the numbers and reasoning behind each recommendation."
+  deliverables={[
+    ['The inventory', 'Every system and subscription, with its owner, cost, users, and renewal date, in one editable file.'],
+    ['The findings', 'What to keep, cut, consolidate, renegotiate, or fix, ranked by savings and effort.'],
+    ['The walkthrough', 'A working session with me to challenge the findings and agree who does what next.'],
+  ]}
+  steps={[
+    ['Kickoff', 'We agree the scope, the people I’ll talk with, and the access I need: invoices, admin consoles, and a few real examples of the work.'],
+    ['Inventory', 'I build a complete list of systems and subscriptions: what each costs, who uses it, what it’s for, and when it renews.'],
+    ['Follow the work', 'I talk with the people doing the work and trace how information moves between systems, where it gets re-keyed, and where it breaks.'],
+    ['Make the calls', 'We review the findings together: quick wins, bigger fixes, and what to leave alone. You keep the working files.'],
+  ]}
+  processNote="The 10 business days start at kickoff, once the agreed access is available. One business or business unit. Making the changes is separate work, and you’re free to do it yourself or with anyone you choose."
+  fit={[
+    'You run an established business and the technology bill has grown without a clear plan.',
+    'You suspect you’re paying for overlap, unused seats, or tools that don’t fit the work.',
+    'You want an independent baseline before a renewal, a new hire, or a bigger technology decision.',
+    'Someone has the authority to cancel, renegotiate, or change how the work is done.',
+  ]}
+  notFit={[
+    'You need a cybersecurity or compliance audit. That calls for a specialist firm.',
+    'You already know what to change and need someone to implement it.',
+    'You want a list of new tools to buy.',
+    'Nobody has time to show how the work actually happens.',
+  ]}
+  faqs={[
+    ['Is this a security audit?', 'No. I’ll flag obvious access and ownership risks I come across, like former employees with active accounts or a single administrator for a critical system. But a Tech Audit is about cost, fit, and how the work flows. If you need a security or compliance assessment, I’ll say so.'],
+    ['What do you need from us?', 'Recent invoices or card statements for software, admin access or a guided walkthrough of your main systems, and focused conversations with the people who use them. We agree the list before starting.'],
+    ['What if everything is fine?', 'Then you’ll know, with evidence, and the next budget or renewal conversation gets easier. That is a valid result.'],
+    ['Will you make the changes?', 'The audit stands on its own. If you want help connecting or cleaning up systems afterward, that’s a separate Data Connection project. There is no obligation to hire me for anything else.'],
+    ['How does the money-back guarantee work?', 'Give me the access we agree on and join the findings review. If you don’t believe the findings are worth the $3,500 fee, tell me within seven calendar days of that review. I’ll refund the full fee, and you keep the findings.'],
+    ['How do you handle sensitive information?', sensitive],
+  ]}
+  closeTitle="Find out what your technology is really costing you."
+  closeText="Tell me what you’re paying for, what feels off, or what renewal is coming up. We’ll decide whether an audit makes sense."
+/>

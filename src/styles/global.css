@@ -602,10 +602,10 @@ a:hover { text-decoration-thickness: 1px; }
 /* Shared light reading layout for pages outside the homepage and About page. */
 body:has(> .site-header) { background: #fff; color: #303a32; font-family: "Geist", Arial, sans-serif; font-size: 17px; }
 .site-header { position: fixed; inset: 0 auto 0 0; width: 223px; min-height: 0; height: 100vh; padding: 28px 24px; display: block; overflow-y: auto; background: #ece7d9; color: #303a32; border-right: 1px solid #e0e1d5; border-bottom: 0; }
-.site-header .wordmark { display: inline-block; color: #214d38; font-family: "Geist", Arial, sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; white-space: normal; }
+.site-header .wordmark { display: inline-block; color: #214d38; font-family: "Geist", Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: normal; }
 .site-header .header-nav { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-top: 40px; font-size: 12px; }
 .site-header .header-nav a { display: block; padding: 10px 0; text-transform: uppercase; }
-.site-header .header-nav .nav-booking { margin-top: 24px; padding-top: 16px; color: #214d38; font-weight: 700; border-top: 1px solid #bcc8b9; }
+.site-header .header-nav .nav-booking { margin: 24px 0 0; white-space: nowrap; padding-top: 16px; color: #214d38; font-weight: 700; border-top: 1px solid #bcc8b9; }
 .site-header .header-nav a[aria-current="page"] { color: #214d38; font-weight: 700; }
 body:has(> .site-header) > main { margin-left: 223px; min-height: 75vh; background: #fff; }
 body:has(> .site-header) .site-footer { margin-left: 223px; padding: 24px 40px; display: flex; justify-content: space-between; gap: 20px; background: #fff; color: #596154; border-top: 1px solid #dce1d3; font-size: 12px; }
@@ -651,8 +651,6 @@ body:has(> .site-header) .prose a { color: #214d38; }
 body:has(> .site-header) .writing-index > a > div { grid-column: 1; grid-row: 1; }
 body:has(> .site-header) .writing-index time { grid-column: 1; grid-row: 2; }
 
-.site-header .site-availability { display: flex; align-items: baseline; gap: 7px; margin-top: 12px; color: #596154; font-size: 11px; }
-.site-header .site-availability span { flex: none; width: 6px; height: 6px; border-radius: 50%; background: #214d38; }
 html { background: #fff; }
 
 :is(.consulting-mobile-menu, .about-mobile-menu, .site-header .mobile-navigation) nav .nav-booking { color: #214d38; font-weight: 700; border-bottom: 1px solid #bcc8b9; }
@@ -665,28 +663,18 @@ html { background: #fff; }
 .navigation-sections { margin: 0 0 8px 4px; padding-left: 16px; border-left: 1px solid var(--advisor-line); }
 .navigation-sections a { color: var(--advisor-muted); }
 .advisor-sidebar { position: fixed; inset: 0 auto 0 0; width: var(--advisor-sidebar-width); padding: 28px 24px; background: var(--advisor-sidebar-bg); border-right: 1px solid var(--advisor-sidebar-line); overflow-y: auto; }
-.advisor-name { display: inline-block; color: var(--advisor-green); font-size: 14px; font-weight: 700; text-transform: uppercase; }
-.advisor-availability { display: flex; align-items: baseline; gap: 7px; margin-top: 12px; color: var(--advisor-muted); font-size: 11px; }
-.advisor-sidebar--home .advisor-availability { max-width: 170px; }
-.advisor-availability span { flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--advisor-green); }
-.advisor-availability span, .site-header .site-availability span { animation: availability-pulse 1.2s ease-out infinite; }
-@keyframes availability-pulse {
-  0% { box-shadow: 0 0 0 0 rgb(33 77 56 / 35%); }
-  70%, 100% { box-shadow: 0 0 0 6px rgb(33 77 56 / 0%); }
-}
+.advisor-name { display: inline-block; color: var(--advisor-green); font-size: 14px; font-weight: 700; }
+.advisor-descriptor, .site-header .site-descriptor { margin-top: 6px; color: var(--advisor-muted); font-size: 11px; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; }
+.navigation-group { display: block; padding: 10px 0; font-size: 12px; text-transform: uppercase; color: var(--advisor-ink); }
 .advisor-desktop-nav { margin-top: 40px; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
 .advisor-desktop-nav a { display: block; padding: 10px 0; font-size: 12px; text-transform: uppercase; }
-.advisor-desktop-nav .nav-booking { margin-top: 24px; color: var(--advisor-green); font-weight: 700; border-top: 1px solid var(--advisor-line); }
-.about-timeline-page .advisor-desktop-nav .nav-booking { padding-top: 16px; }
-.about-timeline-page .advisor-desktop-nav a[aria-current="page"] { color: var(--advisor-green); font-weight: 700; }
+.advisor-desktop-nav .nav-booking { margin-top: 24px; white-space: nowrap; padding-top: 16px; color: var(--advisor-green); font-weight: 700; border-top: 1px solid var(--advisor-line); }
+.advisor-desktop-nav a[aria-current="page"] { color: var(--advisor-green); font-weight: 700; }
 .advisor-desktop-nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .about-main a:hover, .consulting-home a:not(.consulting-button):hover { text-decoration: underline; text-underline-offset: 4px; }
 .advisor-mobile-menu { display: none; }
 .advisor-footer { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--advisor-line-soft); padding: 24px 0 8px; color: var(--advisor-muted); font-size: 12px; }
 .advisor-footer--about { max-width: 720px; margin: 0 auto; padding-top: 20px; }
-@media (prefers-reduced-motion: reduce) {
-  .advisor-availability span, .site-header .site-availability span { animation: none; }
-}
 @media (max-width: 1024px) {
   .advisor-sidebar { position: relative; width: 100%; padding: 18px 28px; overflow: visible; display: flex; justify-content: space-between; align-items: center; border-right: 0; border-bottom: 1px solid var(--advisor-sidebar-line); z-index: 2; }
   .advisor-desktop-nav { display: none; }
@@ -701,4 +689,8 @@ html { background: #fff; }
 @media (max-width: 600px) {
   .advisor-sidebar { padding: 10px 22px; }
   .advisor-name { font-size: 13px; }
+}
+@media (max-width: 1024px) {
+  :is(.advisor-mobile-menu, .site-header .mobile-navigation) .navigation-group { padding: 12px 0; font-size: 15px; color: var(--advisor-muted); }
+  .advisor-descriptor, .site-header .site-descriptor { margin-top: 3px; font-size: 10px; }
 }

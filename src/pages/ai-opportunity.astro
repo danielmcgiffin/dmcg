@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import { bookingUrl } from '../config';
+import { bookingUrl, CTA_LABEL } from '../config';
 import { breadcrumbList } from '../lib/schema';
 import { SITE_URL } from '../site';
 import '../styles/pages/ai.css';
@@ -33,28 +33,28 @@ const faqs = [
   ['Will you build or implement the recommendations?', 'This engagement ends with the assessment, priorities, and first experiments. Implementation, software, and ongoing support are separate. You can take the findings to your own team or another provider; there is no obligation to hire me for anything else.'],
   ['What if AI is not worth doing?', 'That is a valid result. The assessment will explain why and identify the better next move, which may be a simpler process, clearer ownership, a conventional integration, or no project. I do not receive vendor commissions or referral fees.'],
   ['Are the estimates guaranteed savings?', 'No. I distinguish measured costs from assumptions, freed capacity from cash savings, and an attractive hypothesis from a tested result. The first experiment is designed to find out whether the value survives contact with the real work.'],
-  ['How does the money-back guarantee work?', 'Give me the access we agree on and join the findings review. If you do not believe the decisions and recommendations are worth the $7,500 fee, tell me within seven calendar days of that review. I will refund the full fee, and you keep the findings. You do not need to implement a recommendation or buy further work to qualify.'],
+  ['How does the money-back guarantee work?', 'Give me the access we agree on and join the findings review. If you do not believe the decisions and recommendations are worth the $5,000 fee, tell me within seven calendar days of that review. I will refund the full fee, and you keep the findings. You do not need to implement a recommendation or buy further work to qualify.'],
   ['How do you handle sensitive information?', 'We agree access and handling before work begins, including what can be shared, what should be redacted, and which tools are approved. Do not send confidential business records when booking the introductory call.'],
 ];
 ---
 <BaseLayout
-  title="What Is AI Actually Worth Doing in Your Business? | Danny McGiffin"
-  description="A $7,500 independent AI opportunity assessment. In 10 business days, get a ranked opportunity map, clear economics, and a decision on what to test, investigate, or leave alone."
-  image="/og-ai-assessment.png"
-  imageAlt="Figure out what AI is actually worth doing in your business. Independent AI opportunity assessment with Danny McGiffin. $7,500 fixed fee, 10 business days."
+  title="AI Opportunity | Danny McGiffin"
+  description="A $5,000 independent AI Opportunity assessment. In 10 business days, get a ranked opportunity map, clear economics, and a decision on what to test, investigate, or leave alone."
+  image="/og/ai-opportunity.png"
+  imageAlt="Figure out what AI is actually worth doing in your business. AI Opportunity assessment with Danny McGiffin. $5,000 fixed fee, 10 business days."
   bodyClass="ai-page"
-  structuredData={breadcrumbList([{ name: 'Home', url: `${SITE_URL}/` }, { name: 'AI opportunity assessment', url: `${SITE_URL}/ai/` }])}
+  structuredData={breadcrumbList([{ name: 'Home', url: `${SITE_URL}/` }, { name: 'AI Opportunity', url: `${SITE_URL}/ai-opportunity/` }])}
 >
-  <SiteHeader bookingLabel="See if it’s a fit" bookingPlacement="ai-navigation" />
+  <SiteHeader bookingPlacement="ai-navigation" />
   <main id="main-content">
     <div class="ai-wrap">
       <header class="ai-hero">
-        <p class="ai-eyebrow">For owners & executives / AI opportunity assessment</p>
+        <p class="ai-eyebrow">AI Opportunity</p>
         <h1>Figure out what AI is <em>actually worth doing</em> in your business.</h1>
         <p class="ai-deck">In 10 business days, I’ll look across your business for places AI and related technology could create meaningful value, quantify the strongest opportunities, and tell you what to pursue, what to postpone, and what to ignore.</p>
-        <p class="ai-offer-facts"><strong>$7,500 fixed fee</strong><span>10 business days</span><span>Worth the fee or your money back</span></p>
+        <p class="ai-offer-facts"><strong>$5,000 fixed fee</strong><span>10 business days</span><span>Worth the fee or your money back</span></p>
         <div class="ai-actions">
-          <a class="ai-button" href={bookingUrl('ai-hero')}>See if it’s a fit <span aria-hidden="true">↗</span></a>
+          <a class="ai-button" href={bookingUrl('ai-hero')}>{CTA_LABEL} <span aria-hidden="true">↗</span></a>
           <a class="ai-text-link" href="#opportunity-map">See what you get <span aria-hidden="true">↓</span></a>
         </div>
         <p class="ai-small">Start with a free 30-minute conversation. You work directly with me.</p>
@@ -74,10 +74,6 @@ const faqs = [
         <p class="ai-conclusion">You need someone whose business model permits the answer to be “none of those.”</p>
       </section>
 
-      <figure class="ai-quote">
-        <blockquote><p>“Working with Danny was excellent. He didn't just come in and automate what we had. He studied the problem, stripped away the noise, and eliminated work that shouldn’t have existed in the first place.”</p></blockquote>
-        <figcaption><strong>Roger Porres</strong> · Director of Ancillary Services</figcaption>
-      </figure>
 
       <section class="ai-section" aria-labelledby="look-title">
         <p class="ai-eyebrow">Where the value might be</p>
@@ -135,7 +131,7 @@ const faqs = [
           <p><strong>The decision brief</strong><span>A concise account of what matters most, what to leave alone, and the first experiments worth running.</span></p>
           <p><strong>The walkthrough</strong><span>A conversation with me to challenge the findings and decide who should do what next.</span></p>
         </div>
-        <a class="ai-text-link" href={bookingUrl('ai-deliverable')}>See if this would be useful for your business ↗</a>
+        <a class="ai-text-link" href={bookingUrl('ai-deliverable')}>{CTA_LABEL} ↗</a>
       </section>
 
       <section class="ai-section" aria-labelledby="pressure-title">
@@ -151,7 +147,7 @@ const faqs = [
         <div class="ai-proof-numbers"><p><strong>$2.45M+</strong><span>Projected five-year ERP license + implementation path</span></p><span class="ai-proof-arrow" aria-hidden="true">→</span><p><strong>~$50K</strong><span>Estimated full implementation of the alternative I designed</span></p></div>
         <p>A PE-backed distributor had purchased an ERP that could not represent how the business actually worked. I recommended stopping. The CEO canceled the implementation, and I designed an alternative around systems the company already had.</p>
         <p class="ai-small">The ERP license had already been contracted, and about $350K had been paid when implementation stopped. These are projected costs and a design estimate, not a claim of realized savings.</p>
-        <a class="ai-text-link" href="/work/erp-second-opinion/">Read the full ERP case ↗</a>
+        <a class="ai-text-link" href="/case-studies/erp-second-opinion/">Read the full ERP case ↗</a>
       </section>
 
       <section class="ai-section" aria-labelledby="process-title">
@@ -173,21 +169,21 @@ const faqs = [
       </section>
 
       <section class="ai-offer" aria-labelledby="offer-title">
-        <div><p class="ai-eyebrow">AI opportunity assessment / fixed fee</p><h2 id="offer-title">$7,500.<br />10 business days.</h2><p>Business review, ranked opportunity register, decision brief, and a walkthrough with me. The work stands on its own.</p><p class="ai-small">One business or business unit, with review areas agreed before kickoff. Software, implementation, and pilots are outside this fee.</p></div>
-        <div class="ai-offer-action"><a class="ai-button" href={bookingUrl('ai-offer')}>See if it’s a fit ↗</a><p class="ai-small">Free 30-minute introduction.<br />Scope agreed before paid work begins.</p></div>
+        <div><p class="ai-eyebrow">AI Opportunity / fixed fee</p><h2 id="offer-title">$5,000.<br />10 business days.</h2><p>Business review, ranked opportunity register, decision brief, and a walkthrough with me. The work stands on its own.</p><p class="ai-small">One business or business unit, with review areas agreed before kickoff. Software, implementation, and pilots are outside this fee.</p></div>
+        <div class="ai-offer-action"><a class="ai-button" href={bookingUrl('ai-offer')}>{CTA_LABEL} ↗</a><p class="ai-small">Free 30-minute introduction.<br />Scope agreed before paid work begins.</p></div>
         <div class="ai-offer-boundary"><strong>You keep the findings. You choose what happens next.</strong><p>No software purchase, implementation contract, or continuing engagement is required. If the first conversation shows that an assessment would not help, I’ll tell you.</p></div>
       </section>
 
       <section class="ai-guarantee" aria-labelledby="guarantee-title">
         <p class="ai-eyebrow">The guarantee</p>
         <h2 id="guarantee-title">Worth the fee, or your money back.</h2>
-        <p>Complete the assessment and review the findings with me. If you don’t believe the decisions and recommendations are worth the $7,500 fee, tell me within seven calendar days of the review. I’ll refund the full fee. You keep the findings.</p>
+        <p>Complete the assessment and review the findings with me. If you don’t believe the decisions and recommendations are worth the $5,000 fee, tell me within seven calendar days of the review. I’ll refund the full fee. You keep the findings.</p>
         <p class="ai-small">Give me the access we agree on and join the findings review. You do not have to implement a recommendation or buy further work to use this guarantee.</p>
       </section>
 
       <section class="ai-section ai-faq" aria-labelledby="faq-title"><p class="ai-eyebrow">Before we talk</p><h2 id="faq-title">A few practical questions.</h2>{faqs.map(([question, answer]) => <details><summary>{question}<span class="ai-toggle" aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</section>
 
-      <section class="ai-close" aria-labelledby="close-title"><p class="ai-eyebrow">Start with the business</p><h2 id="close-title">Find out what AI is actually worth doing.</h2><p>Tell me where the work gets stuck, what you’re considering, or what you suspect you might be missing. We’ll decide whether an assessment makes sense.</p><a class="ai-button" href={bookingUrl('ai-closing')}>See if it’s a fit ↗</a><p class="ai-small">A free 30-minute conversation with Danny McGiffin.</p></section>
+      <section class="ai-close" aria-labelledby="close-title"><p class="ai-eyebrow">Let’s talk</p><h2 id="close-title">Find out what AI is actually worth doing.</h2><p>Tell me where the work gets stuck, what you’re considering, or what you suspect you might be missing. We’ll decide whether an assessment makes sense.</p><a class="ai-button" href={bookingUrl('ai-closing')}>{CTA_LABEL} ↗</a><p class="ai-small">A free 30-minute conversation with Danny McGiffin.</p></section>
     </div>
   </main>
   <SiteFooter />

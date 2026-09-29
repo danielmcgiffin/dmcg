@@ -1,0 +1,63 @@
+---
+import OfferPage from '../components/OfferPage.astro';
+import { offer } from '../offers';
+---
+<OfferPage
+  offer={offer('second-opinion')}
+  title="Second Opinion | Danny McGiffin"
+  description="A $1,500 fixed-fee Second Opinion on an ERP, CRM, or other major system decision. In 5 business days, get a clear call: proceed, proceed with changes, or stop."
+  imageAlt="Before you commit, get an independent call. Second Opinion with Danny McGiffin. $1,500 fixed fee, 5 business days."
+  headline="Before you commit,"
+  emphasis="get an independent call."
+  deck="About to sign for an ERP, CRM, or other major system, or stuck in an implementation that keeps getting more expensive? In 5 business days, I’ll review the proposal, the business need, and the alternatives, and give you a clear decision: proceed, proceed with changes, or stop. I take no vendor commissions, referral fees, or resale margins."
+  guarantee="Complete the review and walk through the decision with me. If you don’t believe it’s worth the $1,500 fee, tell me within seven calendar days of that meeting. I’ll refund the full fee, and you keep the findings."
+  symptomsTitle="An expensive decision that’s hard to reverse."
+  symptoms={[
+    ['The purchase', 'A big proposal is waiting for a signature.', 'The demo looked great. The price is large, the contract is long, and it’s hard to tell what you’re really getting.'],
+    ['The implementation', 'The project keeps getting more expensive.', 'Change orders, custom code, and slipping dates. Everyone says it will be worth it once it’s done.'],
+    ['The fit', '“That’s just how the system works.”', 'The software can’t represent how your business actually operates, and the answer is always another workaround.'],
+    ['The disagreement', 'Leadership sees three different problems.', 'Finance, operations, and IT each have a theory. The decision is expensive and hard to reverse.'],
+  ]}
+  outputTitle="A decision, not a report."
+  outputIntro="You get one of three calls, with the reasons and evidence behind it: proceed as planned, proceed with specific changes, or stop and take a different route."
+  deliverables={[
+    ['The decision', 'Proceed, proceed with changes, or stop, stated plainly with the reasons behind it.'],
+    ['The evidence', 'What I reviewed, what the proposal assumes, where it fits the business, and where it doesn’t.'],
+    ['The alternatives', 'If the answer is to change course, the most viable, least complicated options still open to you.'],
+  ]}
+  steps={[
+    ['Kickoff', 'We agree the decision at stake, and I collect the proposal, contract, requirements, change orders, and anything else on the table.'],
+    ['Review', 'I read the documents and test the proposal against how the business actually makes money and gets work done.'],
+    ['Talk to the people', 'Short conversations with the people who will live with the decision, and with the vendor if useful.'],
+    ['The call', 'We meet to walk through the decision and the reasons, and I answer the hard questions from your team.'],
+  ]}
+  processNote="The 5 business days start once the agreed documents and conversations are available. One decision per engagement. If the situation needs a larger review, like a full implementation rescue, I’ll say so and quote it separately before any additional work."
+  proof={{
+    title: 'Sometimes the right call is to stop.',
+    lead: 'At a PE-backed distributor, the ERP being implemented couldn’t represent the commercial relationships at the center of the business.',
+    body: 'The five-year license was contracted at $1.25M. Implementation was estimated at $600K, then at least $1.2M with custom code. I recommended stopping. The CEO canceled the implementation, and I designed an alternative around systems the company already had.',
+    small: 'About $350K had been paid when implementation stopped. These are projected costs and a design estimate, not a claim of realized savings.',
+  }}
+  fit={[
+    'You’re about to sign for a major system, or you’re partway through implementing one.',
+    'The cost is large enough that being wrong would hurt.',
+    'You want someone with no stake in the outcome to look at it.',
+    'Someone has the authority to act on the answer, including stopping.',
+  ]}
+  notFit={[
+    'You’ve already decided and want the purchase validated.',
+    'You need an implementation partner rather than an independent view.',
+    'The decision is small enough to reverse cheaply.',
+    'The documents and people involved can’t be made available.',
+  ]}
+  faqs={[
+    ['Do you receive vendor commissions?', 'No. I have no vendor compensation or affiliations. I do not receive commissions, referral fees, or resale margins for recommending a product or provider.'],
+    ['Can you review an implementation already underway?', 'Yes. The question becomes whether the remaining work still serves the business result. I look at requirements, gaps, change orders, workarounds, and the cost of continuing versus changing course.'],
+    ['What if the answer is to proceed?', 'Then you proceed with confidence, usually with a short list of changes to the contract, scope, or plan that make success more likely.'],
+    ['Can the work end without a build?', 'Yes. Keeping the current tools, changing the process, renegotiating, or stopping can be the whole result. If you want help with what comes next, that’s separate.'],
+    ['How does the money-back guarantee work?', 'Share the documents and access we agree on and join the decision meeting. If you don’t believe the call is worth the $1,500 fee, tell me within seven calendar days of that meeting. I’ll refund the full fee, and you keep the findings.'],
+    ['What happens in the first call?', 'It’s a free 30-minute introduction. We talk through the decision, what’s on the table, and whether a Second Opinion would help. No preparation is required.'],
+  ]}
+  closeTitle="Get an independent call before you commit."
+  closeText="Tell me what you’re deciding and what’s on the table. We’ll decide whether a Second Opinion makes sense."
+/>

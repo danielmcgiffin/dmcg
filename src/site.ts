@@ -1,7 +1,9 @@
 export const SITE_URL = 'https://dannymcgiffin.com';
 export const SITE_NAME = 'Danny McGiffin';
 export const PERSON_NAME = 'Danny McGiffin';
-export const JOB_TITLE = 'Independent business advisor and designer';
+export const JOB_TITLE = 'Independent tech advisor';
+/** Shown under the name in navigation and on the homepage title. */
+export const DESCRIPTOR = 'Independent Tech Advisor';
 
 export const LOCATION = {
 	locality: 'Herndon',
@@ -12,15 +14,15 @@ export const LOCATION = {
 } as const;
 
 export const ENTITY_STATEMENT =
-  'Danny McGiffin is an independent business advisor and designer based in Herndon, Virginia. He helps owners and executives decide what actually needs to change before a major technology or systems commitment.';
+  'Danny McGiffin is an independent tech advisor based in Herndon, Virginia. He helps owners and executives of growing businesses cut wasted technology spend, make sound system decisions, connect the systems they already have, and find where AI is worth the money.';
 
 export const ABOUT_LOCATION =
   'Based in Herndon, Virginia, working with businesses across Northern Virginia and the Washington, DC area.';
 
 export const HOME_DESCRIPTION =
-  'Before you spend a bunch of money on a new system, make sure you actually need it. Independent advice for owners and executives from Danny McGiffin.';
+  'Vendor-neutral technology advice for owners and executives: Tech Audits, Second Opinions, AI Opportunity assessments, and Data Connection. No software to sell.';
 
-export const HOME_TITLE = 'Danny McGiffin — Before You Buy a New System';
+export const HOME_TITLE = 'Danny McGiffin | Independent Tech Advisor';
 
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/danny-mcgiffin/';
 export const X_URL = 'https://x.com/therealmcgiffin';
@@ -28,7 +30,7 @@ export const CONTACT_EMAIL = 'danny@dannymcgiffin.com';
 
 export const SAME_AS = [LINKEDIN_URL, X_URL] as const;
 
-export const IMAGE_PATH = '/og-systems-decision.png';
+export const IMAGE_PATH = '/og/default.png';
 export const LOGO_PATH = '/favicon.svg';
 
 export const KNOWS_ABOUT = [

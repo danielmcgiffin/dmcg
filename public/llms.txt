@@ -1,28 +1,36 @@
 # Danny McGiffin
 
-Danny McGiffin is an independent business advisor and designer based in Herndon, Virginia. He works with owners and executives of established companies before consequential technology and systems commitments.
+Danny McGiffin is an independent tech advisor based in Herndon, Virginia. He works with owners and executives of established, growing businesses on technology spending, major system decisions, connecting existing systems, and where AI is worth the money.
 
-Before an owner spends a bunch of money on a new system, he figures out whether they actually need it. Often, they need less than they were about to buy. Buying moments include ERP replacement, disconnected systems, unreliable reporting, major software proposals, and decisions about AI.
+He is vendor-neutral. He does not sell software or receive commissions, referral fees, or resale margins, so the answer can be new software, integration, better data, process change, clearer ownership, a different vendor, or no purchase at all.
 
-His advice does not depend on a technology sale. The answer may be software, integration, better data, process redesign, clearer ownership, a smaller tool, a different vendor, or no major purchase. Advisory, Design, and Build are independent ways to engage. His work spans strategy, operations, organization, information, and business design; an advisory engagement need not lead to implementation.
+## Services
+
+- Tech Audit ($3,500 fixed fee, 10 business days): what your software, subscriptions, and processes cost, and what to keep, cut, consolidate, or fix. https://dannymcgiffin.com/tech-audit/
+- Second Opinion ($1,500 fixed fee, 5 business days): an independent decision on a major system purchase or troubled implementation: proceed, proceed with changes, or stop. https://dannymcgiffin.com/second-opinion/
+- AI Opportunity ($5,000 fixed fee, 10 business days): a ranked map of where AI is worth pursuing, what needs more evidence, and what to leave alone. https://dannymcgiffin.com/ai-opportunity/
+- Data Connection (from $7,500, fixed quote, typically 3–6 weeks): connect the systems a business already has so the numbers line up, without buying a new platform. https://dannymcgiffin.com/data-connection/
+
+The three fixed-fee offers carry a money-back guarantee described on each page. Every engagement starts with a free 30-minute introduction.
 
 ## Site
 
 - Home: https://dannymcgiffin.com/
-- Independent advisory before a systems decision: https://dannymcgiffin.com/advisory/
-- ERP second-opinion case: https://dannymcgiffin.com/work/erp-second-opinion/
-- About and selected experience: https://dannymcgiffin.com/about/
-- Contact: https://dannymcgiffin.com/contact/
-- Elsewhere: https://dannymcgiffin.com/elsewhere/
+- Case studies: https://dannymcgiffin.com/case-studies/
+- ERP case study: https://dannymcgiffin.com/case-studies/erp-second-opinion/
+- About: https://dannymcgiffin.com/about/
 - Northern Virginia: https://dannymcgiffin.com/northern-virginia-ai-workflow-automation/
 - Writing: https://dannymcgiffin.com/writing/
 - Research briefing on AI tools and work: https://dannymcgiffin.com/still-on-tools/
+- Contact: https://dannymcgiffin.com/contact/
+- Elsewhere: https://dannymcgiffin.com/elsewhere/
 - RSS: https://dannymcgiffin.com/rss.xml
 
 ## Profiles
 
 - LinkedIn: https://www.linkedin.com/in/danny-mcgiffin/
 - X: https://x.com/therealmcgiffin
+- Substack: https://dannymcgiffin.substack.com/
 
 ## Location
 
@@ -30,4 +38,4 @@ Based in Herndon. Works with businesses across Northern Virginia and the Washing
 
 ## Experience
 
-Experience includes internal leadership and advisory work. The About and ERP case pages distinguish Danny's role from team and organization-level results. The alternative ERP design's cost and timeline are estimates, not measured savings. No standard engagement price or guaranteed outcome is offered on the site.
+The case study pages distinguish Danny's role from team and organization-level results. The alternative ERP design's cost is an estimate, not measured savings. No guaranteed business outcome is offered.

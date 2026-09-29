@@ -3,135 +3,86 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import AdvisorSidebar from '../components/AdvisorSidebar.astro';
 import AdvisorFooter from '../components/AdvisorFooter.astro';
 import { HOME_TITLE, HOME_DESCRIPTION } from '../site';
-import { bookingUrl } from '../config';
+import { bookingUrl, CTA_LABEL } from '../config';
+import { offers, offer } from '../offers';
+import { caseStudies } from '../case-studies';
 
-const triggers = [
-  '“We need an ERP.”',
-  '“None of our systems talk to each other.”',
-  '“We can’t trust our numbers.”',
-  '“We’ve already spent too much for this not to work.”',
-  '“What could we actually use AI for?”',
-  '“The vendor says this is just how the system works.”',
-];
-const projects = [
-  {
-    title: 'The ERP we decided not to implement', context: 'PE-backed distributor', anchor: 'erp',
-    result: 'Stopped a misfit ERP rollout and designed an alternative estimated at ~$50K.',
-    situation: 'The company had purchased an enterprise ERP. During implementation, I found that the software could not represent how the business actually made money.',
-    work: 'The five-year license was contracted at $1.25M. Implementation was first estimated at $600K, then at least $1.2M with custom code. That put the projected path at least at $2.45M, and after all that, they were still expecting manual workarounds would be required.',
-    outcome: 'I recommended the CEO terminate the implementation before more money was spent,and designed an alternative solution around systems the company already had. The full build and implementation of the designed solution came in  at roughly $50K, about 2% of the projected cost.',
-  },
-  {
-    title: 'Redesigning an operating model that made collaboration impossible', context: 'Professional services', anchor: 'collaboration',
-    result: 'Designed an operating model that made cross-practice collaboration effective and rewarding in support of the executive strategy, changing the historical culture of the firm.',
-    situation: 'A professional-services firm wanted its practices to work together in the federal market. Their incentives made that a bad deal for everyone. There were fights over funding attribution, frustration over misaligned expectations, and a general antipathy towards the public sector practice.',
-    work: 'I redesigned the model so commercial practices owned the client relationship while the public sector team supplied the contracting, administration, and delivery support required to succeed in the Federal marketplace.',
-    outcome: 'The executive team approved the model and its use across all related businesses, and implementation began that year.',
-  },
-  {
-    title: 'Building the company that could handle 10x growth', context: 'Professional services', anchor: 'growth',
-    result: 'Recognized revenue grew about 10x and the team retained every employee during the period.',
-    situation: 'A growing professional-services firm needed management, delivery, hiring, and reporting systems to support a rapidly expanding team.',
-    work: 'I built those systems and operating routines, including monthly conversations between the CEO and each employee, while supporting our teams delivering to the client.',
-    outcome: 'Firm-wide recognized revenue grew from about $200K to $2M in roughly a year, while the team retained every employee. I built the management and delivery systems that helped the firm handle that growth.',
-  },
-  {
-    title: 'Making improper payments measurable and controllable', context: 'U.S. Navy', anchor: 'navy',
-    result: 'Program reporting showed a roughly $250M decline in estimated improper payments, 2015–2019.',
-    situation: 'The Navy needed a reliable way to estimate improper payments before it could credibly attempt to reduce them.',
-    work: 'Working with finance and payment experts, I helped build statistical models, risk assessments, review methods, controls, training, and leadership reporting to drive a culture of internal controls and payment integrity.',
-    outcome: 'The Pentagon pointed to our program as a model for other services. Internal program reporting showed a roughly $250M decline in estimated improper payments between 2015 and 2019, with underlying error rates down about 45% in a separate two-year comparison.',
-  },
-];
+const router = offers.flatMap(item => item.triggers.map(trigger => ({ trigger, item })));
+const [audit, second, ai, data] = (['tech-audit', 'second-opinion', 'ai-opportunity', 'data-connection'] as const).map(offer);
 import '../styles/pages/index.css';
 ---
-<BaseLayout title={HOME_TITLE} description={HOME_DESCRIPTION} bodyClass="consulting-home">
+<BaseLayout title={HOME_TITLE} description={HOME_DESCRIPTION} image="/og/home.png" imageAlt="Straight answers about your business technology. Danny McGiffin, Independent Tech Advisor." bodyClass="consulting-home">
   <AdvisorSidebar current="/" />
   <main id="main-content" class="consulting-main">
     <section class="consulting-intro" aria-labelledby="hero-title">
       <div>
-        <p class="consulting-label">Independent Tech Advisor</p>
-        <h1 id="hero-title">Before you spend a bunch of money on a new system, make sure it's actually what you need.</h1>
-        <p class="consulting-deck">I help owners and executives define a tech strategy, audit their existing stack and processes, and design the ideal future to help the business accomplish its goals and avoid expensive mistakes.</p>
-        <a class="consulting-button" href={bookingUrl('hero')}>Get a second opinion</a>
-      <p class="consulting-first-step">We start with a free 30-minute introduction. We’ll discuss the business and its symptoms, then decide whether it's worthwhile to dig deeper. <a href="/advisory/">See how the review works ↗</a></p>
+        <h1 id="hero-title">Straight answers about your business technology.</h1>
+        <p class="consulting-deck">For owners and executives of growing businesses: cut wasted software spend, make sound calls on big systems, connect the tools you already have, and find where AI actually pays off.</p>
+        <p class="consulting-neutral">I’m vendor-neutral. I don’t sell software, take commissions, or need the answer to be a purchase.</p>
+        <p class="consulting-offers-line">Whether you need a <a href={audit.href}>{audit.name}</a>, a <a href={second.href}>{second.name}</a>, an <a href={ai.href}>{ai.name}</a> assessment, or a <a href={data.href}>{data.name}</a> project, we start with a free 30-minute introduction. We’ll discuss the business and its symptoms, then decide whether it’s worthwhile to dig deeper.</p>
+        <a class="consulting-button" href={bookingUrl('hero')}>{CTA_LABEL}</a>
       </div>
       <img class="consulting-portrait" src="/headshot.jpg" width="400" height="400" alt="Danny McGiffin" fetchpriority="high" />
+    </section>
+
+    <section class="consulting-section" aria-labelledby="triggers-title">
+      <h2 class="consulting-label" id="triggers-title">When you hear yourself saying…</h2>
+      <ul class="consulting-router">
+        {router.map(({ trigger, item }) => <li><a href={item.href}><span>{trigger}</span><small>{item.name} ↗</small></a></li>)}
+      </ul>
+    </section>
+
+    <section class="consulting-bridge" aria-label="How I work">
+      <p>It’s worth getting an independent review before going into any overhauls or expensive subscriptions. You need to make sure you have the most viable solution for your business—and the least complicated.</p>
+      <p><strong>Not another layer on an already expensive process.</strong></p>
     </section>
 
     <section class="consulting-section consulting-about consulting-featured" aria-labelledby="decision-title">
       <p class="consulting-label">Case study</p>
       <h2 id="decision-title">The ERP we decided not to implement</h2>
-      <p>A PE-backed distributor had bought an ERP that couldn't actually handle how it saw its business. The implementation estimate rose from ~$500k to at least $1.2M as more and more custom code requirements were surfaced, and when all was said and done, the system would <em>still</em> have required workarounds.</p>
-      <p>I recommended the business stop the implementation and seek redress from the vendor. Then I designed an alternative solution around systems already in use for ~5% of the cost that would accomplish their actual goal: better financial reporting.</p>
-      <a class="consulting-inline-link" href="/work/erp-second-opinion/">Read the ERP case ↗</a>
+      <p>A PE-backed distributor had bought an ERP that couldn’t actually handle how it saw its business. The five-year license was contracted at $1.25M. The implementation estimate rose from $600K to at least $1.2M as more and more custom code requirements surfaced, putting the projected total at $2.45M or more, and when all was said and done, the system would <em>still</em> have required workarounds.</p>
+      <p>I recommended the business stop the implementation. Then I designed an alternative around systems already in use, estimated at ~$50K (about 2% of the projected cost), that would accomplish their actual goal: better financial reporting.</p>
+      <a class="consulting-inline-link" href="/case-studies/erp-second-opinion/">Read the ERP case ↗</a>
     </section>
 
     <figure class="consulting-testimonial">
-      <blockquote><p>“Working with Danny was excellent. He didn't just come in and automate what we had. He studied the problem, stripped away the noise, and eliminated work that shouldn’t have existed in the first place.”</p></blockquote>
+      <blockquote><p>“Working with Danny was excellent. He didn’t just come in and automate what we had. He studied the problem, stripped away the noise, and eliminated work that shouldn’t have existed in the first place.”</p></blockquote>
       <figcaption><strong>Roger Porres</strong><span>Director of Ancillary Services</span></figcaption>
     </figure>
 
-    <section class="consulting-section" aria-labelledby="triggers-title">
-      <h2 class="consulting-label" id="triggers-title">When you hear yourself saying…</h2>
-      <div class="consulting-engagements">{triggers.map(trigger => <article><h3>{trigger}</h3></article>)}</div>
-      <p class="consulting-note">It’s worth getting an independent view before you go further.</p>
-    </section>
-
-    <section class="consulting-section" id="advisory" aria-labelledby="engagement-title">
-      <h2 class="consulting-label" id="engagement-title">How we can work together</h2>
-      <div class="consulting-engagements">
-        <article><h3>Advisory</h3><p>Independent judgment on a consequential decision. Think through what’s happening, test assumptions, compare options, and determine what actually needs to change.</p></article>
-        <article><h3>Design</h3><p>Make a concrete plan for responsibilities, decisions, information flow, and systems so the business can work differently.</p></article>
-        <article><h3>Build</h3><p>Make the change real where hands-on help is appropriate: systems, integrations, software, automation, implementation oversight, or program & vendor management.</p></article>
-      </div>
-      <p class="consulting-note">The answer can be new software, integration, better data, clearer ownership, a different process or vendor, or no major purchase at all. <a href="/advisory/">Read about the independent review.</a></p>
-    </section>
-
-    <aside class="consulting-ai-link" aria-label="AI opportunity assessment">
-      <p><strong>Trying to figure out what your business should actually do with AI?</strong></p>
-      <p>Get a ranked view of what’s worth pursuing, what needs more evidence, and what to leave alone.</p>
-      <a class="consulting-inline-link" href="/ai/">Explore the AI opportunity assessment ↗</a>
-    </aside>
-
-    <section class="consulting-section" id="work" aria-labelledby="work-title">
-      <h2 class="consulting-label" id="work-title">Selected work</h2>
-      <div class="consulting-projects">
-        {projects.map(project => (
-          <div class="consulting-project-card">
-            <details>
-              <summary><span>{project.title} <strong>{project.context}</strong><small>{project.result}</small></span><span class="project-toggle" aria-hidden="true">+</span></summary>
-              <div class="consulting-project-body">
-                <p>{project.situation}</p><p>{project.work}</p><p>{project.outcome}</p>
-              </div>
-            </details>
-            <div class="consulting-project-footer">
-              <a class="project-link" href={project.anchor === 'erp' ? '/work/erp-second-opinion/' : `/about/#${project.anchor}`}>Read the full account ↗</a>
-            </div>
-          </div>
+    <section class="consulting-section" id="services" aria-labelledby="services-title">
+      <h2 class="consulting-label" id="services-title">How we can work together</h2>
+      <div class="consulting-services">
+        {offers.map(item => (
+          <a class="consulting-service" href={item.href}>
+            <h3>{item.name}</h3>
+            <p>{item.oneLiner}</p>
+            <p class="consulting-service-terms"><strong>{item.price}</strong><span>{item.duration}</span></p>
+            <span class="consulting-service-link">Learn more ↗</span>
+          </a>
         ))}
       </div>
+      <p class="consulting-note">The answer can be new software, integration, better data, clearer ownership, a different process or vendor, or no major purchase at all.</p>
     </section>
 
     <section class="consulting-section consulting-about" id="about" aria-labelledby="about-title">
       <h2 class="consulting-label" id="about-title">About me</h2>
-<p><b>I help leaders make expensive technology decisions before they become expensive mistakes.
-</b></p>
-<p>Most companies don’t need more tech sales. They need someone who can look at the business, the systems, the processes, the vendors, and the economics <em>together</em> and figure out what actually needs to change.</p>
-<p>I work with owners and executives when they’re considering a new system, an AI initiative, a major technology investment, or some other change where the stakes are high and the answer isn’t obvious.</p>
-<p>My job is to assess the situation, find the bedrock problem and, as needed, design and even build the practical path forward.</p>
-<p>Sometimes that means new technology. Sometimes it means changing the process, the operating model, the data, or who owns a decision. And sometimes the best answer is not buying anything at all.</p>
-<p>I’m independent: I don’t sell software, represent vendors, or have a business model that needs the answer to involve technology. I work for you, the business.</p>
-<p>Before doing this independently, I was a senior leader working across strategy, operations, technology, and large transformation efforts. The recurring pattern was always the same: the hardest problems rarely fit neatly into one function. Solving them requires understanding how the whole business actually works.</p>
-<p>That’s what I do now.</p>
-      <a class="consulting-inline-link" href="/about/">More about me and the work ↗</a>
+      <p><b>I help leaders make expensive technology decisions before they become expensive mistakes.</b></p>
+      <p>Most companies don’t need more tech sales. They need someone who can look at the business, the systems, the processes, the vendors, and the economics <em>together</em> and figure out what actually needs to change.</p>
+      <p>Before working independently, I was a senior leader across strategy, operations, technology, and large transformation efforts, from Army logistics to the U.S. Navy’s improper-payments program to a professional-services firm that grew tenfold. The hardest problems rarely fit neatly into one function. I follow them through the whole business.</p>
+      <a class="consulting-inline-link" href="/about/">More about me ↗</a>
+      <aside class="consulting-cases" aria-label="Case studies">
+        <p class="consulting-label">Case studies</p>
+        <ul>{caseStudies.map(study => <li><a href={`/case-studies/${study.slug}/`}>{study.title}</a><span>{study.teaser}</span></li>)}</ul>
+        <a class="consulting-inline-link" href="/case-studies/">See all case studies ↗</a>
+      </aside>
     </section>
 
     <section class="consulting-close" aria-labelledby="conversation-title">
-      <h2 id="conversation-title">About to make an expensive systems decision?</h2>
-      <p>You don’t need to have the problem neatly framed.</p>
-      <a class="consulting-button" href={bookingUrl('closing')}>Get a second opinion</a>
-      <a class="consulting-inline-link" href="/contact/">Or get in touch ↗</a>
+      <p class="consulting-label">Let’s talk</p>
+      <h2 id="conversation-title">Technology should make the business easier to run.</h2>
+      <p>If yours doesn’t, let’s find out why. You don’t need to have the problem neatly framed.</p>
+      <a class="consulting-button" href={bookingUrl('closing')}>{CTA_LABEL}</a>
     </section>
     <AdvisorFooter />
   </main>
