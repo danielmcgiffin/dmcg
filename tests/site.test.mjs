@@ -57,7 +57,7 @@ test('homepage routes visitors to the four offers with one call to action',()=>{
  const cards=home.nodes.filter(n=>n.tagName==='a'&&attr(n,'class')==='consulting-service');
  assert.deepEqual(cards.map(n=>attr(n,'href')),offerRoutes);
  for(const card of cards)assert.match(content(card),/\$[\d,]+.*(business days|weeks)/);
- assert.match(text,/vendor-neutral/i);assert.match(text,/not another layer on an already expensive process/i);assert.match(text,/most viable solution for your business—and the least complicated/);
+ assert.match(text,/vendor-neutral/i);
  assert.doesNotMatch(text,/Selected work|Advisory|Design and Build|About to make an expensive/);
  assert.equal((text.match(/Working with Danny was excellent/g)||[]).length,1);
  assert.equal((text.match(/The ERP we decided not to implement/g)||[]).length,2,'featured case plus its case-study teaser');
@@ -82,7 +82,7 @@ test('every booking link uses the one call to action and keeps its source tag',(
  }}
 });
 test('offer pages share one skeleton with price, timing, fit, and FAQ',()=>{
- const expected={'/tech-audit/':['$3,500 fixed fee','10 business days'],'/second-opinion/':['$1,500 fixed fee','5 business days'],'/ai-opportunity/':['$5,000 fixed fee','10 business days'],'/data-connection/':['From $7,500, fixed quote','Typically 3–6 weeks']};
+ const expected={'/tech-audit/':['$5,000 fixed fee','10 business days'],'/second-opinion/':['From $2,500, fixed quote','5 business days'],'/ai-opportunity/':['$5,000 fixed fee','10 business days'],'/data-connection/':['From $7,500, fixed quote','Typically 3–6 weeks']};
  for(const [route,[price,time]] of Object.entries(expected)){
   const p=normal.find(p=>p.route===route);assert.ok(p,route);const text=content(parse(p.html));
   assert.ok(text.includes(price),route);assert.ok(text.includes(time),route);assert.match(text,/Probably a good fit/);assert.match(text,/A few practical questions/);

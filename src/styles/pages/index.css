@@ -61,9 +61,7 @@ body.consulting-home { background: #ffffff; color: var(--advisor-ink); font-fami
 }
 
 .consulting-router { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 28px; }
-.consulting-router a { display: flex; flex-direction: column; gap: 6px; height: 100%; padding: 16px 0; border-top: 1px solid var(--advisor-line); color: var(--advisor-ink); }
-.consulting-router a span { font-size: clamp(19px, 1.7vw, 23px); line-height: 1.35; letter-spacing: -.02em; }
-.consulting-router a small { color: var(--advisor-green); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.consulting-router a { display: block; height: 100%; padding: 16px 0; border-top: 1px solid var(--advisor-line); color: var(--advisor-ink); font-size: clamp(19px, 1.7vw, 23px); line-height: 1.35; letter-spacing: -.02em; }
 .consulting-bridge { margin: 4px 0 30px; padding: 26px 30px; border-left: 3px solid var(--advisor-green); background: var(--advisor-surface); max-width: 76ch; }
 .consulting-bridge p { font-size: 18px; line-height: 1.55; }
 .consulting-bridge p + p { margin-top: 10px; color: var(--advisor-green); }

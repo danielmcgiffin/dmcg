@@ -28,13 +28,8 @@ import '../styles/pages/index.css';
     <section class="consulting-section" aria-labelledby="triggers-title">
       <h2 class="consulting-label" id="triggers-title">When you hear yourself saying…</h2>
       <ul class="consulting-router">
-        {router.map(({ trigger, item }) => <li><a href={item.href}><span>{trigger}</span><small>{item.name} ↗</small></a></li>)}
+        {router.map(({ trigger, item }) => <li><a href={item.href}>{trigger}</a></li>)}
       </ul>
-    </section>
-
-    <section class="consulting-bridge" aria-label="How I work">
-      <p>It’s worth getting an independent review before going into any overhauls or expensive subscriptions. You need to make sure you have the most viable solution for your business—and the least complicated.</p>
-      <p><strong>Not another layer on an already expensive process.</strong></p>
     </section>
 
     <section class="consulting-section consulting-about consulting-featured" aria-labelledby="decision-title">
@@ -62,7 +57,6 @@ import '../styles/pages/index.css';
           </a>
         ))}
       </div>
-      <p class="consulting-note">The answer can be new software, integration, better data, clearer ownership, a different process or vendor, or no major purchase at all.</p>
     </section>
 
     <section class="consulting-section consulting-about" id="about" aria-labelledby="about-title">

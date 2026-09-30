@@ -6,12 +6,12 @@ He is vendor-neutral. He does not sell software or receive commissions, referral
 
 ## Services
 
-- Tech Audit ($3,500 fixed fee, 10 business days): what your software, subscriptions, and processes cost, and what to keep, cut, consolidate, or fix. https://dannymcgiffin.com/tech-audit/
-- Second Opinion ($1,500 fixed fee, 5 business days): an independent decision on a major system purchase or troubled implementation: proceed, proceed with changes, or stop. https://dannymcgiffin.com/second-opinion/
+- Tech Audit ($5,000 fixed fee, 10 business days): what your software and subscriptions actually cost, how to make the most of what you have, and where to focus next. https://dannymcgiffin.com/tech-audit/
+- Second Opinion (from $2,500, fixed quote, 5 business days): an independent decision on a major system purchase or troubled implementation: proceed, proceed with changes, or stop. https://dannymcgiffin.com/second-opinion/
 - AI Opportunity ($5,000 fixed fee, 10 business days): a ranked map of where AI is worth pursuing, what needs more evidence, and what to leave alone. https://dannymcgiffin.com/ai-opportunity/
 - Data Connection (from $7,500, fixed quote, typically 3–6 weeks): connect the systems a business already has so the numbers line up, without buying a new platform. https://dannymcgiffin.com/data-connection/
 
-The three fixed-fee offers carry a money-back guarantee described on each page. Every engagement starts with a free 30-minute introduction.
+Tech Audit, Second Opinion, and AI Opportunity carry a money-back guarantee described on each page. Every engagement starts with a free 30-minute introduction.
 
 ## Site
 
