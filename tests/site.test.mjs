@@ -57,7 +57,7 @@ test('homepage routes visitors to the four offers with one call to action',()=>{
  const cards=home.nodes.filter(n=>n.tagName==='a'&&attr(n,'class')==='consulting-service');
  assert.deepEqual(cards.map(n=>attr(n,'href')),offerRoutes);
  for(const card of cards)assert.match(content(card),/\$[\d,]+.*(business days|weeks)/);
- assert.match(text,/vendor-neutral/i);
+ assert.match(text,/completely independent\. I don’t sell software/);
  assert.doesNotMatch(text,/Selected work|Advisory|Design and Build|About to make an expensive/);
  assert.equal((text.match(/Working with Danny was excellent/g)||[]).length,1);
  assert.equal((text.match(/The ERP we decided not to implement/g)||[]).length,2,'featured case plus its case-study teaser');
@@ -69,7 +69,7 @@ test('navigation names the offers and ends with the single call to action',()=>{
  for(const p of normal){
   const nav=p.nodes.find(n=>n.tagName==='nav'&&attr(n,'aria-label')==='Primary navigation');assert.ok(nav,p.route);
   const labels=flatten(nav).filter(n=>n.tagName==='a').map(n=>content(n).replace(/\s*↗$/,'').trim());
-  assert.deepEqual(labels,['Home','Tech Audit','Second Opinion','AI Opportunity','Data Connection','Case Studies','About','Writing','LinkedIn','Substack','X',CTA],p.route);
+  assert.deepEqual(labels,['Home','About','Tech Audit','Second Opinion','AI Opportunity','Data Connection','Case Studies','Writing','LinkedIn','Substack','X',CTA],p.route);
   const groups=flatten(nav).filter(n=>attr(n,'class')==='navigation-group').map(content);assert.deepEqual(groups,['Services','Elsewhere']);
   const identity=p.nodes.find(n=>['advisor-identity','site-identity'].includes(attr(n,'class')));
   assert.deepEqual(identity.childNodes.map(n=>content(n).trim()).filter(Boolean),['DANNY McGIFFIN','Independent Tech Advisor']);assert.ok(!flatten(identity).some(n=>n.tagName==='a'),'name is not a link');

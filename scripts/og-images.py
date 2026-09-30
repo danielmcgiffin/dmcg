@@ -14,7 +14,7 @@ HEADER = "DANNY McGIFFIN / INDEPENDENT TECH ADVISOR"
 CARDS = {
     "default": (["Straight answers about", "your business", "technology."], 1, "Tech Audit · Second Opinion · AI Opportunity · Data Connection", "VENDOR-NEUTRAL TECH ADVICE", ""),
     "home": (["Straight answers about", "your business", "technology."], 1, "Tech Audit · Second Opinion · AI Opportunity · Data Connection", "VENDOR-NEUTRAL TECH ADVICE", ""),
-    "about": (["I help leaders make", "expensive technology", "decisions well."], 1, "Strategy, operations, systems, and the people who run them", "ABOUT", "about"),
+    "about": (["Something important is", "happening between the", "boxes on the org chart."], 2, "Independent tech advisor · Herndon, Virginia · No software to sell", "ABOUT", "about"),
     "tech-audit": (["Find out what your", "technology actually", "costs, and what it’s worth."], 1, "$5,000 fixed fee · 10 business days · Money-back guarantee", "TECH AUDIT", "tech-audit"),
     "second-opinion": (["Before you commit,", "get an independent", "call."], 1, "From $2,500 · Fixed quote · Proceed, change, or stop", "SECOND OPINION", "second-opinion"),
     "ai-opportunity": (["Figure out what AI is", "actually worth doing", "in your business."], 1, "$5,000 fixed fee · 10 business days · A map of what comes next", "AI OPPORTUNITY", "ai-opportunity"),

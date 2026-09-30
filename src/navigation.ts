@@ -11,8 +11,11 @@ export interface NavigationLink {
 }
 
 export const primaryLinks: NavigationLink[] = [
-  { href: "/", label: "Home" },
-  { href: "/#about", label: "About" },
+  {
+    href: "/",
+    label: "Home",
+    children: [{ href: "/about/", label: "About" }],
+  },
   {
     label: "Services",
     children: offers.map(({ href, name }) => ({ href, label: name })),
