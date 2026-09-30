@@ -1,6 +1,6 @@
-import { subscribeUrl } from './config';
-import { offers } from './offers';
-import { LINKEDIN_URL, X_URL } from './site';
+import { subscribeUrl } from "./config";
+import { offers } from "./offers";
+import { LINKEDIN_URL, X_URL } from "./site";
 
 export interface NavigationLink {
   /** Groups without an href render as plain headings. */
@@ -11,14 +11,20 @@ export interface NavigationLink {
 }
 
 export const primaryLinks: NavigationLink[] = [
-  { href: '/', label: 'Home' },
-  { label: 'Services', children: offers.map(({ href, name }) => ({ href, label: name })) },
-  { href: '/case-studies/', label: 'Case Studies' },
-  { href: '/#about', label: 'About' },
-  { href: '/writing/', label: 'Writing' },
-  { label: 'Elsewhere', children: [
-    { href: LINKEDIN_URL, label: 'LinkedIn', external: true },
-    { href: subscribeUrl('navigation'), label: 'Substack', external: true },
-    { href: X_URL, label: 'X', external: true },
-  ] },
+  { href: "/", label: "Home" },
+  { href: "/#about", label: "About" },
+  {
+    label: "Services",
+    children: offers.map(({ href, name }) => ({ href, label: name })),
+  },
+  { href: "/case-studies/", label: "Case Studies" },
+  { href: "/writing/", label: "Writing" },
+  {
+    label: "Elsewhere",
+    children: [
+      { href: LINKEDIN_URL, label: "LinkedIn", external: true },
+      { href: subscribeUrl("navigation"), label: "Substack", external: true },
+      { href: X_URL, label: "X", external: true },
+    ],
+  },
 ];
