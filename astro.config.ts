@@ -1,6 +1,5 @@
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
@@ -32,8 +31,5 @@ export default defineConfig({
 		'/second-opinion': '/offers/second-opinion/',
 		'/ai-opportunity': '/offers/ai-opportunity/',
 		'/data-connection': '/offers/data-connection/'
-	},
-	vite: {
-		plugins: [tailwindcss()]
 	}
 });

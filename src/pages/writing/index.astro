@@ -1,35 +1,23 @@
 ---
-import ArrowUpRight from '../../components/ArrowUpRight.astro';
-import SiteFooter from '../../components/SiteFooter.astro';
-import SiteHeader from '../../components/SiteHeader.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { subscribeUrl } from '../../config';
 import { fieldNotes as articles, formatNoteDate, writingIndex } from '../../lib/content/writing';
-
 import '../../styles/pages/writing-index.css';
 ---
-
 <BaseLayout title={writingIndex.title} description={writingIndex.description} pageType="CollectionPage">
-	<SiteHeader />
-	<main id="main-content">
-		<header class="writing-hero section-dark">
-			<div class="shell">
-				<h1 class="sr-only">{writingIndex.heading}</h1>
-				<a class="writing-publication" href={subscribeUrl('writing-index')} data-subscribe-link data-cta-placement="writing-index">
-					<img src="/built-that-way-square.jpg" width="800" height="800" alt={writingIndex.publicationAlt} fetchpriority="high" />
-				</a>
-			</div>
-		</header>
-		<section class="writing-index section-light shell" aria-label={writingIndex.listLabel}>
-			{articles.map((article, index) => (
-				<a href={article.href}>
-					<span class="index">{String(index + 1).padStart(2, '0')}</span>
-					<div><h2>{article.title}</h2></div>
-					<time datetime={article.publishedAt}>{formatNoteDate(article.publishedAt)}</time>
-					<span class="round-arrow" aria-hidden="true"><ArrowUpRight /></span>
-				</a>
-			))}
-		</section>
-	</main>
-	<SiteFooter />
+  <header class="writing-intro shell">
+    <div>
+      <p class="eyebrow">Built that Way</p>
+      <h1>Writing</h1>
+      <p>Essays on business, technology, and how work actually gets done.</p>
+      <a href={subscribeUrl('writing-index')} data-subscribe-link data-cta-placement="writing-index">Read and subscribe on Substack</a>
+    </div>
+    <img src="/built-that-way-square.jpg" width="800" height="800" alt={writingIndex.publicationAlt} />
+  </header>
+  <section class="writing-index shell" aria-label={writingIndex.listLabel}>
+    {articles.map(article => <a href={article.href}>
+      <h2>{article.title}</h2>
+      <time datetime={article.publishedAt}>{formatNoteDate(article.publishedAt)}</time>
+    </a>)}
+  </section>
 </BaseLayout>

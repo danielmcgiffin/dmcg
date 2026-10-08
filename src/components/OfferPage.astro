@@ -1,116 +1,67 @@
 ---
-/**
- * Offer page skeleton shared by the fixed-scope services:
- * hero, price/time/guarantee, symptoms, what you get, process, fit, FAQ, CTA.
- */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SiteHeader from './SiteHeader.astro';
-import SiteFooter from './SiteFooter.astro';
 import { bookingUrl, CTA_LABEL } from '../config';
 import { breadcrumbList, serviceNode } from '../lib/schema';
 import { SITE_URL } from '../site';
-import { offerPageLabels as l, type Offer, type OfferPageContent } from '../lib/content/offers';
-import '../styles/pages/ai.css';
-
-interface Props {
-  offer: Offer;
-  content: OfferPageContent;
-}
-
-const { offer, content: p } = Astro.props;
+import { type Offer, type OfferPageContent } from '../lib/content/offers';
+import { aiExample } from '../lib/content/ai-example';
+import '../styles/pages/offers.css';
+interface Props { offer: Offer; content: OfferPageContent; }
+const { offer, content: page } = Astro.props;
 const pageUrl = `${SITE_URL}${offer.href}`;
-const placement = (spot: string) => bookingUrl(`${offer.slug}-${spot}`);
 ---
-<BaseLayout
-  title={p.title}
-  description={p.description}
-  image={`/og/${offer.slug}.png`}
-  imageAlt={p.imageAlt}
-  bodyClass="ai-page"
+<BaseLayout title={page.title} description={page.description} image={`/og/${offer.slug}.png`} imageAlt={page.imageAlt}
   structuredData={[
-    breadcrumbList([{ name: l.breadcrumbHome, url: `${SITE_URL}/` }, { name: offer.name, url: pageUrl }]),
-    serviceNode({ id: `${pageUrl}#service`, name: offer.name, description: p.description, url: pageUrl }),
-  ]}
->
-  <SiteHeader bookingPlacement={`${offer.slug}-navigation`} />
-  <main id="main-content">
-    <div class="ai-wrap">
-      <header class="ai-hero">
-        <p class="ai-eyebrow">{offer.name}</p>
-        <h1>{p.headline} <em>{p.emphasis}</em></h1>
-        <p class="ai-deck">{p.deck}</p>
-        <p class="ai-offer-facts"><strong>{offer.price}</strong><span>{offer.duration}</span>{p.guarantee && <span>{l.heroGuarantee}</span>}</p>
-        <div class="ai-actions">
-          <a class="ai-button" href={placement('hero')}>{CTA_LABEL} <span aria-hidden="true">↗</span></a>
-          <a class="ai-text-link" href="#what-you-get">{l.seeWhatYouGet} <span aria-hidden="true">↓</span></a>
-        </div>
-        <p class="ai-small">{l.heroSmall}</p>
-        <ul class="ai-independence" aria-label={l.independenceLabel}>
-          {l.independence.map(item => <li>{item}</li>)}
-        </ul>
-      </header>
-
-      <section class="ai-section" aria-labelledby="symptoms-title">
-        <p class="ai-eyebrow">{l.symptomsEyebrow}</p>
-        <h2 id="symptoms-title">{p.symptomsTitle}</h2>
-        <div class="ai-opportunities">
-          {p.symptoms.map(([label, title, detail]) => <article><p class="ai-eyebrow">{label}</p><h3>{title}</h3><p>{detail}</p></article>)}
-        </div>
-        {p.symptomsNote && <p class="ai-section-note">{p.symptomsNote}</p>}
-      </section>
-
-      <section class="ai-section" id="what-you-get" aria-labelledby="output-title">
-        <p class="ai-eyebrow">{l.outputEyebrow}</p>
-        <h2 id="output-title">{p.outputTitle}</h2>
-        <p class="ai-section-intro">{p.outputIntro}</p>
-        <div class="ai-delivery-list">
-          {p.deliverables.map(([title, detail]) => <p><strong>{title}</strong><span>{detail}</span></p>)}
-        </div>
-      </section>
-
-      <section class="ai-section" aria-labelledby="process-title">
-        <p class="ai-eyebrow">{l.processEyebrow}</p>
-        <h2 id="process-title">{offer.duration}.<br />{l.processSubtitle}</h2>
-        <ol class="ai-process">{p.steps.map(([title, detail], i) => <li><span class="ai-number">0{i + 1}</span><div><h3>{title}</h3><p>{detail}</p></div></li>)}</ol>
-        <p class="ai-section-note">{p.processNote}</p>
-      </section>
-
-      {p.proof && (
-        <section class="ai-section ai-proof" aria-labelledby="proof-title">
-          <p class="ai-eyebrow">{l.proofEyebrow}</p>
-          <h2 id="proof-title">{p.proof.title}</h2>
-          <p class="ai-proof-lead">{p.proof.lead}</p>
-          <div class="ai-proof-numbers"><p><strong>{l.proofMetrics[0].value}</strong><span>{l.proofMetrics[0].label}</span></p><span class="ai-proof-arrow" aria-hidden="true">→</span><p><strong>{l.proofMetrics[1].value}</strong><span>{l.proofMetrics[1].label}</span></p></div>
-          <p>{p.proof.body}</p>
-          {p.proof.small && <p class="ai-small">{p.proof.small}</p>}
-          <a class="ai-text-link" href={l.proofHref}>{l.proofLinkLabel}</a>
-        </section>
-      )}
-
-      <section class="ai-section" id="fit" aria-labelledby="fit-title">
-        <p class="ai-eyebrow">{l.fitEyebrow}</p>
-        <h2 id="fit-title">{l.fitTitle}</h2>
-        <div class="ai-fit-grid"><div><h3>{l.fitLabel}</h3><ul>{p.fit.map(item => <li>{item}</li>)}</ul></div><div><h3>{l.notFitLabel}</h3><ul>{p.notFit.map(item => <li>{item}</li>)}</ul></div></div>
-      </section>
-
-      <section class="ai-offer" aria-labelledby="offer-title">
-        <div><p class="ai-eyebrow">{offer.name}</p><h2 id="offer-title">{offer.price}.<br />{offer.duration}.</h2><p>{offer.oneLiner}</p></div>
-        <div class="ai-offer-action"><a class="ai-button" href={placement('offer')}>{CTA_LABEL} ↗</a><p class="ai-small">{l.offerSmall[0]}<br />{l.offerSmall[1]}</p></div>
-        <div class="ai-offer-boundary"><strong>{l.boundaryTitle}</strong><p>{l.boundaryText}</p></div>
-      </section>
-
-      {p.guarantee && (
-        <section class="ai-guarantee" aria-labelledby="guarantee-title">
-          <p class="ai-eyebrow">{l.guaranteeEyebrow}</p>
-          <h2 id="guarantee-title">{l.guaranteeTitle}</h2>
-          <p>{p.guarantee}</p>
-        </section>
-      )}
-
-      <section class="ai-section ai-faq" aria-labelledby="faq-title"><p class="ai-eyebrow">{l.faqEyebrow}</p><h2 id="faq-title">{l.faqTitle}</h2>{p.faqs.map(([question, answer]) => <details><summary>{question}<span class="ai-toggle" aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</section>
-
-      <section class="ai-close" aria-labelledby="close-title"><p class="ai-eyebrow">{l.closeEyebrow}</p><h2 id="close-title">{p.closeTitle}</h2><p>{p.closeText}</p><a class="ai-button" href={placement('closing')}>{CTA_LABEL} ↗</a><p class="ai-small">{l.closeSmall}</p></section>
-    </div>
-  </main>
-  <SiteFooter />
+    breadcrumbList([{ name: 'Home', url: `${SITE_URL}/` }, { name: offer.name, url: pageUrl }]),
+    serviceNode({ id: `${pageUrl}#service`, name: offer.name, description: page.description, url: pageUrl }),
+  ]}>
+  <div class="offer-page shell">
+    <header class="offer-overview">
+      <p class="eyebrow">{offer.name}</p>
+      <h1>{page.headline}</h1>
+      <p class="offer-deck">{page.deck}</p>
+      <p class="offer-terms"><strong>{offer.price}</strong><span>{offer.duration}</span></p>
+      <a class="button" href={bookingUrl(`${offer.slug}-hero`)}>{CTA_LABEL}</a>
+      <p class="offer-intro-note">Free 30-minute conversation. Scope agreed before paid work begins.</p>
+      <h2>What you get</h2>
+      <dl class="deliverables">{page.deliverables.map(([title, detail]) => <div><dt>{title}</dt><dd>{detail}</dd></div>)}</dl>
+    </header>
+    <section class="offer-details" aria-labelledby="details-title">
+      <h2 id="details-title">The details</h2>
+      <details>
+        <summary>How the engagement works</summary>
+        <ol class="offer-process">{page.steps.map(([title, detail]) => <li><strong>{title}.</strong> {detail}</li>)}</ol>
+        <p>{page.processNote}</p>
+        <p>No software purchase, implementation contract, or continuing engagement is required.</p>
+      </details>
+      <details id="fit">
+        <summary>When this is a good fit</summary>
+        <ul>{page.fit.map(item => <li>{item}</li>)}</ul>
+        <h3>When something else would help more</h3>
+        <ul>{page.notFit.map(item => <li>{item}</li>)}</ul>
+      </details>
+      {offer.slug === 'ai-opportunity' && <details id="opportunity-map" class="example-map">
+        <summary>See an example opportunity map</summary>
+        <p>{aiExample.disclosure}</p>
+        {aiExample.samples.map(sample => <details name="sample-opportunity" open={'open' in sample && sample.open}>
+          <summary>{sample.title}<span class="example-status">{sample.status}</span></summary>
+          <p>{sample.intro}</p>
+          {'economics' in sample && <dl class="example-economics">{sample.economics.map(([term, value, note]) => <div><dt>{term}</dt><dd><strong>{value}</strong><span>{note}</span></dd></div>)}</dl>}
+          <dl class="example-record">{sample.record.map(([term, detail]) => <div><dt>{term}</dt><dd>{detail}</dd></div>)}</dl>
+          {'note' in sample && <p>{sample.note}</p>}
+        </details>)}
+      </details>}
+      {page.proof && <details>
+        <summary>Related work: the ERP decision</summary>
+        <p>{page.proof.lead}</p><p>{page.proof.body}</p>
+        {page.proof.small && <p>{page.proof.small}</p>}
+        <p><a href="/work/erp-decision/">Read the ERP case</a></p>
+      </details>}
+      {page.guarantee && <details>
+        <summary>Worth the fee, or your money back</summary>
+        <p>{page.guarantee}</p>
+      </details>}
+      {page.faqs.map(([question, answer]) => <details><summary>{question}</summary><p>{answer}</p></details>)}
+    </section>
+  </div>
 </BaseLayout>

@@ -1,6 +1,4 @@
 ---
-import SiteHeader from '../components/SiteHeader.astro';
-import SiteFooter from '../components/SiteFooter.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { bookingUrl, CTA_LABEL } from '../config';
 import { breadcrumbList } from '../lib/schema';
@@ -10,23 +8,23 @@ import { chrome } from '../lib/content/navigation';
 import { offers } from '../lib/content/offers';
 import '../styles/pages/contact.css';
 ---
-<BaseLayout title={contact.title} description={contact.description} pageType="ContactPage" structuredData={breadcrumbList([{name:chrome.breadcrumbHome,url:`${SITE_URL}/`},{name:contact.breadcrumb,url:`${SITE_URL}/contact/`}])}>
-  <SiteHeader />
-  <main id="main-content" class="direct-contact">
+<BaseLayout mainClass="direct-contact" title={contact.title} description={contact.description} pageType="ContactPage" structuredData={breadcrumbList([{name:chrome.breadcrumbHome,url:`${SITE_URL}/`},{name:contact.breadcrumb,url:`${SITE_URL}/contact/`}])}>
+
     <div class="shell direct-contact-inner">
       <p class="eyebrow">{contact.eyebrow}</p>
       <h1>{contact.heading}</h1>
-      <p>{contact.intro} <a href={`#${contact.offersAnchor}`}>{contact.offersLinkLabel}</a></p>
+      <p>{contact.intro}</p>
       <div class="direct-contact-actions">
         <a class="direct-contact-button" href={bookingUrl('contact')}>{CTA_LABEL} <span aria-hidden="true">↗</span></a>
         <a class="direct-contact-secondary" href={contact.emailButton.href}>{contact.emailButton.label} <span aria-hidden="true">↗</span></a>
       </div>
       <p class="direct-contact-email">{contact.emailLabel}<a href={contact.emailHref}>{contact.email}</a></p>
       <p class="direct-contact-location" set:html={contact.locationHtml} />
-      <ul id={contact.offersAnchor}>
+      <h2 id={contact.offersAnchor}>Focused engagements</h2>
+      <p>These are a few ways to start. We can also discuss work that doesn’t fit one of these engagements.</p>
+      <ul class="contact-offers">
         {offers.map(item => <li><p><a href={item.href}>{item.name}</a>: {item.oneLiner}</p></li>)}
       </ul>
     </div>
-  </main>
-  <SiteFooter />
+
 </BaseLayout>

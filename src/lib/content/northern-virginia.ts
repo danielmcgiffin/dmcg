@@ -2,19 +2,19 @@
 import { offers } from './offers';
 
 export const northernVirginia = {
-	title: 'Tech Advisor in Northern Virginia | Danny McGiffin',
+	title: 'Management Consultant in Northern Virginia | Danny McGiffin',
 	description: 'Independent, vendor-neutral tech advice for Northern Virginia businesses: Tech Audits, Second Opinions, AI Opportunity assessments, and Data Connection. Based in Herndon.',
-	imageAlt: 'Independent tech advisor in Northern Virginia. Danny McGiffin, based in Herndon.',
+	imageAlt: 'Independent management consultant in Northern Virginia. Danny McGiffin, based in Herndon.',
 	breadcrumb: 'Northern Virginia',
 	serviceName: 'Independent technology advice',
 	eyebrow: 'Herndon / Northern Virginia',
-	heading: 'An independent tech advisor in Northern Virginia.',
+	heading: 'An independent management consultant in Northern Virginia.',
 	deck: 'Vendor-neutral advice for owners and executives across the Washington, DC area. Based in Herndon, and close enough to see the real work.',
 	sections: [
 		{
 			heading: 'Four ways to work together.',
 			html: [
-				'<p>I’m Danny McGiffin, an independent tech advisor based in Herndon. I don’t sell software or take referral fees, so the answer can be to buy nothing.</p>',
+				'<p>I’m Danny McGiffin, an independent management consultant based in Herndon. I don’t sell software or take referral fees, so the answer can be to buy nothing.</p>',
 				`<ul>${offers.map((item) => `<li><a href="${item.href}"><strong>${item.name}</strong></a>: ${item.oneLiner} ${item.price}, ${item.duration.toLowerCase()}.</li>`).join('')}</ul>`,
 			].join(''),
 		},

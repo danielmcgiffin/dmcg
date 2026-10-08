@@ -18,8 +18,6 @@ export interface WorkEntry {
 	readonly title: string;
 	/** Card and intro summary. */
 	readonly summary: string;
-	/** Optional single figure for the homepage card. */
-	readonly metric?: string;
 	/** Who the work was for, e.g. "PE-backed distributor". */
 	readonly client?: string;
 	readonly role?: string;
@@ -75,32 +73,34 @@ export const work: readonly WorkEntry[] = [
 		principle: 'Test whether a system can represent how the business actually works before committing more money to close its gaps.',
 		related: 'second-opinion',
 	},
-	{
-		slug: '64m-deployment',
-		title: '[TODO: title for 64m-deployment]',
-		summary: '[TODO: summary]',
-		metric: '[TODO: metric]',
-		description: '[TODO: meta description for 64m-deployment]',
-		ogImage: '/og/default.png',
-		context: ['[TODO: context]'],
-		problem: ['[TODO: problem]'],
-		decision: ['[TODO: decision]'],
-		outcome: ['[TODO: outcome]'],
-		metrics: [{ value: '[TODO: metric value]', label: '[TODO: metric label]' }],
-	},
-	{
-		slug: 'negotiation-policy',
-		title: '[TODO: title for negotiation-policy]',
-		summary: '[TODO: summary]',
-		metric: '[TODO: metric]',
-		description: '[TODO: meta description for negotiation-policy]',
-		ogImage: '/og/default.png',
-		context: ['[TODO: context]'],
-		problem: ['[TODO: problem]'],
-		decision: ['[TODO: decision]'],
-		outcome: ['[TODO: outcome]'],
-		metrics: [{ value: '[TODO: metric value]', label: '[TODO: metric label]' }],
-	},
+  {
+    slug: '64m-deployment',
+    title: 'Leading a $64M technology deployment',
+    client: 'Four Inc.',
+    role: 'Program Manager, Special Projects. Led the core team and coordinated delivery across partners and stakeholders.',
+    summary: 'Led a complex technology rollout through funding and approval delays, completing the planned scope.',
+    description: 'Program leadership for a $64M technology deployment at Four Inc.: coordinating delivery, managing dependencies, and completing the planned scope.',
+    ogImage: '/og/case-64m-deployment.png',
+    context: ['Four Inc. recruited me to lead a $64M hardware-and-software rollout. The work brought together a core team, technology partners, vendors, a subcontractor, and customer stakeholders.'],
+    problem: ['Delivery depended on technical work, logistics, funding, and approvals moving together. Recurring funding and approval delays made coordination an ongoing management responsibility.'],
+    found: [],
+    decision: ['I led the core team and coordinated the partners, logistics, and technical dependencies. I owned scope, schedule, risk, issue escalation, partner performance, and decision tracking, with a regular operating rhythm for the customer and executives.'],
+    outcome: ['We completed all planned scope despite the recurring funding and approval delays.'],
+    metrics: [],
+  },
+  {
+    slug: 'negotiation-policy',
+    title: 'A simpler answer to a contracting problem',
+    summary: 'A working conversation about a contract-redline policy helped an owner resolve a problem he had been wrestling with for weeks.',
+    description: 'A focused advisory conversation about a contract-redline policy, supported by a client’s account of the questions, listening, and simple solution.',
+    ogImage: '/og/case-negotiation-policy.png',
+    context: ['An owner brought a problem involving a contract-redline policy to a working conversation. He had been wrestling with it for weeks.'],
+    problem: [],
+    decision: ['We worked through the problem in conversation. The answer was a simple policy solution.'],
+    outcome: [],
+    testimonial: 'ed-burns',
+    metrics: [],
+  },
 	{
 		slug: 'operating-model',
 		anchor: 'collaboration',
@@ -162,7 +162,7 @@ export const work: readonly WorkEntry[] = [
 		slug: 'navy-improper-payments',
 		anchor: 'navy',
 		title: 'Making improper payments measurable and controllable',
-		client: 'U.S. Navy',
+		client: 'Federal financial management',
 		role: 'Helped build the measurement and controls behind a decline in estimated improper payments.',
 		summary: 'Helped build the measurement and controls behind a roughly $250M decline in estimated improper payments.',
 		description: 'How the U.S. Navy made improper payments measurable and controllable, with a roughly $250 million decline in estimated improper payments from 2015 to 2019.',
@@ -198,25 +198,25 @@ export const workHref = (slug: string) => `/work/${slug}/`;
 
 export const workIndex = {
 	title: 'Case Studies | Danny McGiffin',
-	description: 'Four accounts of expensive business problems: what I found, what we decided, and what happened, from a $2.45M ERP path to a $250M decline in estimated improper payments.',
-	imageAlt: 'Case studies: what I found, what we decided, and what happened. Danny McGiffin, Independent Tech Advisor.',
+	description: 'Selected accounts of business problems: what I found, what we decided, and what happened, from a $2.45M ERP path to a $250M decline in estimated improper payments.',
+	imageAlt: 'Case studies: what I found, what we decided, and what happened. Danny McGiffin, Independent Management Consultant.',
 	breadcrumb: 'Case Studies',
 	eyebrow: 'Case studies',
-	heading: 'What I found, what we decided, and what happened.',
-	deck: 'Each account follows the same format: the situation, the expensive problem, what I found, the decision, and the result. Roles and measurement limits are stated plainly.',
+	heading: 'Selected work.',
+	deck: 'Decisions, operating models, and delivery. These accounts show the work I took responsibility for and what happened.',
 	cardLinkLabel: 'Read the case ↗',
 } as const;
 
 export const workDetailLabels = {
 	titleSuffix: ' | Danny McGiffin',
-	imageAlt: (title: string) => `${title}. A case study by Danny McGiffin, Independent Tech Advisor.`,
+	imageAlt: (title: string) => `${title}. A case study by Danny McGiffin, Independent Management Consultant.`,
 	eyebrow: 'Case study',
 	eyebrowSeparator: ' / ',
 	summaryLabel: 'Case summary',
 	client: 'Client',
 	role: 'My role',
 	context: 'The situation',
-	problem: 'The expensive problem',
+	problem: 'The problem',
 	found: 'What I found',
 	decision: 'The decision',
 	outcome: 'The result',

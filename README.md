@@ -1,60 +1,68 @@
 # Danny McGiffin
 
-The existing Astro marketing site, evolved under the approved September 17 audit.
-Newsreader + Geist, forest green + bone, and the existing static-page infrastructure.
-Positioning: Independent Tech Advisor. Four offers — Tech Audit, Second Opinion,
-AI Opportunity, Data Connection — defined once in `src/lib/content/offers.ts`. One call to action,
-“Schedule Our First Chat”, links to Cal with a `src=` placement tag.
+A small, static Astro site for an independent management consultant.
+The homepage introduces Danny, shows selected work and client testimony, and links to writing and contact.
 
-## Development
+## Run locally
 
-Node.js 24 and npm. `package-lock.json` is the CI lockfile.
+Node.js 24 and npm. `package-lock.json` is the only JavaScript lockfile.
 
 - `npm ci` — install dependencies
-- `npm run dev -- --host 127.0.0.1` — local Astro server
-- `npm run build` — Astro/TypeScript checks and production build
-- `npm run preview -- --host 127.0.0.1` — preview `dist/`
-- `npm test` — built-site links, metadata, redirect and positioning checks (build first)
+- `npm run dev -- --host 127.0.0.1` — development preview
+- `npm run build` — type-check and build to `dist/`
+- `npm run preview -- --host 127.0.0.1` — preview the production build
+- `npm test` — check the built site (build first)
 
-Deployment requires an explicit request. The CI workflow builds and tests; it does not deploy.
-The restored hosting configuration and analytics integration remain in place.
+Deployment requires an explicit request. The Check workflow builds and tests without deploying.
+The separate Substack workflow can deploy after a sync if its Cloudflare token is configured.
 
-## Structure
+## Where to make changes
 
-- `src/pages/` — homepage, Work (`/work/`), offers (`/offers/<slug>/`), About, Contact, regional page, writing and research
-- `src/lib/content/` — typed content modules; every page and component reads its copy from here
-- `src/lib/sections/home/` — one component per homepage section: Identity, SelectedWork, Testimonial, Writing, NextStep
-- `src/components/` — shared navigation, advisor sidebar/footer, page intro, and section components
-- `src/styles/global.css` — global foundations, design tokens, and shared advisor sidebar/footer rules
-- `src/styles/pages/` and `src/styles/components/` — route and component rules, imported only where used
-- `src/site.ts`, `src/lib/schema.ts` — shared identity and structured data
-- `src/content/writing/` — existing MDX essays; stable URLs and RSS
-- `src/data/substack-posts.json` — published Substack articles listed on `/writing/`
-- `src/lib/content/work.ts` — case studies rendered at `/work/<slug>/`; `[TODO: …]` marks unfilled slots
-- `scripts/og-images.py` — renders the share images in `public/og/` (needs rsvg-convert)
-- `public/_redirects` — retired and renamed routes; mirrors Astro redirects
-- `docs/APPROVED_AUDIT_2026-09-17.md` — approved scope
-- `docs/IMPLEMENTATION_EVIDENCE_2026-09-17.md` — validation and remaining limitations
+| Change | File |
+| --- | --- |
+| Name, professional title, homepage metadata, location | `src/site.ts` |
+| Homepage words | `src/lib/content/home.ts` |
+| Homepage order and layout | `src/pages/index.astro` |
+| Navigation and shared closing invitation | `src/lib/content/navigation.ts` |
+| Case studies and homepage selection | `src/lib/content/work.ts` |
+| Testimonials and featured quotation | `src/lib/content/testimonials.ts` |
+| About and Contact copy | `src/lib/content/about.ts`, `contact.ts` |
+| Service copy, prices, duration, scope and guarantees | `src/lib/content/offers.ts` |
+| Illustrative AI example | `src/lib/content/ai-example.ts` |
+| Color, typography, page width, sidebar and mobile menu | `src/styles/global.css` |
+| Page-specific layout rules | `src/styles/pages/` |
+| Shared page layout, metadata and analytics | `src/layouts/BaseLayout.astro` |
+| Booking link, CTA label and subscription link | `src/config.ts` |
+| Substack articles | `src/data/substack-posts.json` (automatically synced) |
+| Local essays | `src/content/writing/*.mdx` |
+| Social/share-image copy | `scripts/og-images.py` |
 
-The Northern Virginia URL remains stable. Retired offer URLs and the unfinished
-assessment redirect directly to the retained research briefing.
+`BaseLayout` owns the header, main element, and footer on every page. Pages supply their content.
+Do not add another header/footer variant or page-wide CSS override layer.
+Homepage sections live together in one file; repeated page formats use shared templates.
+All four services use `OfferPage.astro`: overview, then expandable details.
 
-## Substack writing list
+To add a case, add an entry to `work.ts`; its route appears automatically at `/work/<slug>/`.
+Use `selectedWorkSlugs` to choose the homepage cases. Empty section arrays are omitted.
+Never publish placeholder text or turn projected costs into claimed savings.
 
-`/writing/` reads `src/data/substack-posts.json`. Every six hours, the
-`.github/workflows/sync-substack.yml` workflow fetches the Built that Way archive and RSS feed,
-keeps previously listed posts, builds and tests the site, and commits new entries
-to `main`. Run `python3 scripts/sync-substack.py` to sync locally, or trigger the
-workflow manually in GitHub Actions. The sync uses the public rss2json feed
-converter when Substack blocks GitHub's runner. New entries deploy to Cloudflare
-when GitHub has a `CLOUDFLARE_API_TOKEN` secret. Without that token, the workflow
-commits the list but reports that live deployment was skipped.
-The manual workflow input can force a deployment after the token is configured.
+After changing share cards, run `python3 scripts/og-images.py` (uses the installed Sharp package).
+Update visible copy, metadata, `public/llms.txt`, and share cards together when the professional identity changes.
 
-## Preserved work
+## URLs and integrations
 
-The uncommitted Svelte app, public assets (including the office artwork), dependency
-manifests and configuration were preserved in `archive/site-2026-09-17-svelte/`.
-All 37 moved files were verified against `SHA256.json`. Earlier archives and unrelated
-design/docs remain intact. Archives are excluded from the Astro check/build source scope.
-`package-lock.json` is the only JavaScript package lockfile, so hosting builds and CI both use npm.
+Home, `/work/`, `/writing/`, `/about/`, and `/contact/` form the main site.
+Focused engagements remain at `/offers/<slug>/`. Existing regional, research, essay and RSS URLs remain available.
+Historical URLs redirect through both `astro.config.ts` and `public/_redirects`; update both together.
+
+Cal booking links retain their `src=` placement tags. GA4 and subscription tracking remain in `Analytics.astro`.
+`/writing/` reads the Substack list. Every six hours, `.github/workflows/sync-substack.yml` fetches the publication,
+keeps previous entries, builds and tests, and commits updates to `main`. Run
+`python3 scripts/sync-substack.py` to sync locally. The workflow uses a public feed converter if Substack blocks its runner.
+With `CLOUDFLARE_API_TOKEN`, the workflow can deploy; without it, it only commits the list.
+
+## Historical material
+
+`archive/`, `working/`, and older dated reports in `docs/` preserve prior iterations and artwork.
+They are outside the active app. The current brief is `SITE_BRIEF.md`; design rules are in `DESIGN_LANG.md`.
+Do not restore retired positioning, layouts, or instructions from old reports.

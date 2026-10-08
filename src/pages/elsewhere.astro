@@ -1,6 +1,4 @@
 ---
-import SiteHeader from '../components/SiteHeader.astro';
-import SiteFooter from '../components/SiteFooter.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { breadcrumbList } from '../lib/schema';
 import { SITE_URL } from '../site';
@@ -9,9 +7,8 @@ import { chrome } from '../lib/content/navigation';
 
 import '../styles/pages/elsewhere.css';
 ---
-<BaseLayout title={elsewhere.title} description={elsewhere.description} pageType="WebPage" structuredData={breadcrumbList([{name:chrome.breadcrumbHome,url:`${SITE_URL}/`},{name:elsewhere.breadcrumb,url:`${SITE_URL}/elsewhere/`}])}>
-  <SiteHeader />
-  <main id="main-content" class="contact-hub">
+<BaseLayout mainClass="contact-hub" title={elsewhere.title} description={elsewhere.description} pageType="WebPage" structuredData={breadcrumbList([{name:chrome.breadcrumbHome,url:`${SITE_URL}/`},{name:elsewhere.breadcrumb,url:`${SITE_URL}/elsewhere/`}])}>
+
     <div class="contact-hub-inner">
       <img class="contact-hub-portrait" src="/headshot.jpg" width="112" height="112" alt="" />
       <h1>{elsewhere.name}</h1>
@@ -26,6 +23,5 @@ import '../styles/pages/elsewhere.css';
       </nav>
       <p class="contact-hub-note">{elsewhere.note}</p>
     </div>
-  </main>
-  <SiteFooter />
+
 </BaseLayout>

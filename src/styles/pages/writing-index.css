@@ -1,2 +1,5 @@
-.writing-publication { display: block; width: min(100%, 480px); margin-inline: auto; }
-.writing-publication img { width: 100%; height: auto; }
+.writing-intro { display: grid; grid-template-columns: 1fr 160px; gap: 36px; align-items: center; }
+.writing-intro p:not(.eyebrow) { margin-top: 20px; }
+.writing-intro a { display: inline-block; margin-top: 18px; font-size: 15px; }
+.writing-intro img { width: 160px; height: 160px; object-fit: contain; }
+@media (max-width: 600px) { .writing-intro { grid-template-columns: 1fr; gap: 24px; } .writing-intro img { width: 120px; height: 120px; } }

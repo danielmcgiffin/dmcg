@@ -1,17 +1,34 @@
-# Business Objective
-Someone should book a meeting with me or, failing that, sign up for some persistent connection (newsletter subscription, social follow, etc.). Otherwise stated: Create more high-value buyer conversations with less selling required.
+# Purpose
 
-# Person
-An owner or executive who has already built something real, but can feel that the business is becoming harder, messier, and more ordinary as it grows. They care about making something genuinely excellent—not merely efficient—and they do not want that excellence to depend on their constant personal intervention.
+Make Danny legible, credible, and approachable, in that order.
+A visitor should understand what kind of professional he is, see work he has taken responsibility for,
+and know how to start a conversation. The homepage is a concise professional introduction.
 
-# Before
-“I know this business could be better than this, but every improvement seems to require more of me.” They are caught between protecting what makes the business special and trying to make it easier to run.
+# Working category
 
-# After
-“This can be designed.” They understand that the customer experience, employee experience, systems, information, technology, and their own role can be deliberately shaped into one coherent business. And they believe I can help them figure out what needs to change and build it.
+Independent Management Consultant. This is a working professional title, not a proprietary method or slogan.
+Danny sees the business as a whole: its direction, operating approach, problems, and practical solutions.
+His experience spans strategy, operations, organizational design, technology, and implementation.
+His judgment is independent of vendor commissions or a predetermined solution.
 
-# Core Idea
-Exceptional businesses are designed. You can deliberately build a business that is more remarkable for customers, better for the people doing the work, and better to own.
+# Structure
 
-# Desired feeling
-Everything feels intentional. Nothing is arbitrary. Nothing is overdone. Every detail appears to have a reason for being there. The experience should feel precise, confident, tactile, and almost effortless—as though significant machinery is working underneath something that appears simple. The visitor should think: “Someone cared about every inch of this.”
+- Home: introduction, client testimony, selected work, writing, contact.
+- About: background, experience, approach, and professional perspective.
+- Work: specific cases with honest descriptions of responsibility and results.
+- Writing: essays and Substack.
+- Contact: email, scheduling, and links to focused engagements.
+
+Service pages remain available without dominating the main navigation.
+The service list is not an exhaustive definition of the practice.
+
+# Editorial standard
+
+Use plain language. Preserve factual qualifications in the cases without filling the interface with editorial explanations.
+Use approved quotations. Keep scope, prices and guarantees explicit on offer pages.
+No invented outcomes, amounts, biographical details, or client disclosures.
+
+# Maintenance standard
+
+One layout, header, footer, palette and type system. Straightforward content files.
+Keep the existing Astro stack. Remove unused code instead of accumulating overrides.

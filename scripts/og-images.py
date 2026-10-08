@@ -1,30 +1,32 @@
 #!/usr/bin/env python3
 """Render the 1200×630 share images in public/og/ from one template.
 
-Run after changing a card below: python3 scripts/og-images.py (needs rsvg-convert).
+Run after changing a card below: python3 scripts/og-images.py (after npm ci).
 """
 import subprocess
 from pathlib import Path
 from xml.sax.saxutils import escape
 
 OUT = Path(__file__).resolve().parents[1] / "public/og"
-HEADER = "DANNY McGIFFIN / INDEPENDENT TECH ADVISOR"
+HEADER = "DANNY McGIFFIN / INDEPENDENT MANAGEMENT CONSULTANT"
 
 # slug: (headline lines, index of the green line, detail line, footer label, footer path)
 CARDS = {
-    "default": (["Straight answers about", "your business", "technology."], 1, "Tech Audit · Second Opinion · AI Opportunity · Data Connection", "VENDOR-NEUTRAL TECH ADVICE", ""),
-    "home": (["Straight answers about", "your business", "technology."], 1, "Tech Audit · Second Opinion · AI Opportunity · Data Connection", "VENDOR-NEUTRAL TECH ADVICE", ""),
-    "about": (["Something important is", "happening between the", "boxes on the org chart."], 2, "Independent tech advisor · Herndon, Virginia · No software to sell", "ABOUT", "about"),
+    "case-64m-deployment": (["Leading a $64M", "technology deployment."], 0, "Four Inc. · Program leadership and coordinated delivery", "CASE STUDY", "work/64m-deployment"),
+    "case-negotiation-policy": (["A simpler answer to", "a contracting problem."], 0, "A focused advisory conversation", "CASE STUDY", "work/negotiation-policy"),
+    "default": (["Danny McGiffin", "Independent management", "consultant."], 0, "Business judgment. Practical design. Experience delivering change.", "DANNY MCGIFFIN", ""),
+    "home": (["Danny McGiffin", "Independent management", "consultant."], 0, "Business judgment. Practical design. Experience delivering change.", "DANNY MCGIFFIN", ""),
+    "about": (["About Danny.", "Background, work,", "and approach."], 0, "Northern Virginia / Washington, DC", "ABOUT", "about"),
     "tech-audit": (["Find out what your", "technology actually", "costs, and what it’s worth."], 1, "$5,000 fixed fee · 10 business days · Money-back guarantee", "TECH AUDIT", "tech-audit"),
     "second-opinion": (["Before you commit,", "get an independent", "call."], 1, "From $2,500 · Fixed quote · Proceed, change, or stop", "SECOND OPINION", "second-opinion"),
     "ai-opportunity": (["Figure out what AI is", "actually worth doing", "in your business."], 1, "$5,000 fixed fee · 10 business days · A map of what comes next", "AI OPPORTUNITY", "ai-opportunity"),
     "data-connection": (["Connect what you have", "without buying", "a new system."], 1, "From $7,500 · Fixed quote · Typically 3–6 weeks", "DATA CONNECTION", "data-connection"),
-    "case-studies": (["What I found,", "what we decided,", "and what happened."], 1, "Four case studies, from a $2.45M ERP path to a $250M program", "CASE STUDIES", "case-studies"),
-    "case-erp-second-opinion": (["The ERP we decided", "not to implement."], 1, "$2.45M+ projected path → alternative estimated at ~$50K", "CASE STUDY", "case-studies/erp-second-opinion"),
-    "case-operating-model": (["Redesigning an operating", "model that made", "collaboration irrational."], 1, "Professional services · Incentives, ownership, decision rights", "CASE STUDY", "case-studies/operating-model"),
-    "case-growth": (["Building the company", "underneath", "10× growth."], 2, "Professional services · ~$200K to $2M recognized revenue", "CASE STUDY", "case-studies/growth"),
-    "case-navy-improper-payments": (["Making improper", "payments measurable", "and controllable."], 1, "U.S. Navy · ~$250M decline in estimated improper payments", "CASE STUDY", "case-studies/navy-improper-payments"),
-    "northern-virginia": (["An independent", "tech advisor in", "Northern Virginia."], 2, "Based in Herndon · Serving the Washington, DC area", "NORTHERN VIRGINIA", "northern-virginia-ai-workflow-automation"),
+    "case-studies": (["What I found,", "what we decided,", "and what happened."], 1, "Decisions, operating models, and delivery", "CASE STUDIES", "work"),
+    "case-erp-second-opinion": (["The ERP we decided", "not to implement."], 1, "$2.45M+ projected path → alternative estimated at ~$50K", "CASE STUDY", "work/erp-decision"),
+    "case-operating-model": (["Redesigning an operating", "model that made", "collaboration irrational."], 1, "Professional services · Incentives, ownership, decision rights", "CASE STUDY", "work/operating-model"),
+    "case-growth": (["Building the company", "underneath", "10× growth."], 2, "Professional services · ~$200K to $2M recognized revenue", "CASE STUDY", "work/growth"),
+    "case-navy-improper-payments": (["Making improper", "payments measurable", "and controllable."], 1, "Federal financial management · ~$250M decline in estimated improper payments", "CASE STUDY", "work/navy-improper-payments"),
+    "northern-virginia": (["Independent management", "consulting in", "Northern Virginia."], 2, "Based in Herndon · Serving the Washington, DC area", "NORTHERN VIRGINIA", "northern-virginia-ai-workflow-automation"),
 }
 
 
@@ -58,7 +60,11 @@ def main():
     for slug, card in CARDS.items():
         source = OUT / f"{slug}.svg"
         source.write_text(svg(*card))
-        subprocess.run(["rsvg-convert", "-w", "1200", "-h", "630", "-o", str(OUT / f"{slug}.png"), str(source)], check=True)
+        subprocess.run([
+            "node", "--input-type=module", "-e",
+            "import sharp from 'sharp'; await sharp(process.argv[1]).png().toFile(process.argv[2]);",
+            str(source), str(OUT / f"{slug}.png")
+        ], cwd=OUT.parents[1], check=True)
     print(f"Rendered {len(CARDS)} images in {OUT}")
 
 

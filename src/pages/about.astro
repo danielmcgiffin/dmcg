@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import AdvisorSidebar from '../components/AdvisorSidebar.astro';
-import AdvisorFooter from '../components/AdvisorFooter.astro';
 import { breadcrumbList } from '../lib/schema';
 import { SITE_URL } from '../site';
 import { bookingUrl, CTA_LABEL } from '../config';
@@ -12,9 +10,8 @@ import '../styles/pages/about.css';
 
 const stories = work.filter(entry => entry.anchor);
 ---
-<BaseLayout title={about.title} description={about.description} image="/og/about.png" imageAlt={about.imageAlt} bodyClass="about-timeline-page" pageType="AboutPage" structuredData={breadcrumbList([{name:chrome.breadcrumbHome,url:`${SITE_URL}/`},{name:about.breadcrumb,url:`${SITE_URL}/about/`}])}>
-  <AdvisorSidebar current="/about/" />
-  <main id="main-content" class="about-main">
+<BaseLayout mainClass="about-main" title={about.title} description={about.description} image="/og/about.png" imageAlt={about.imageAlt} bodyClass="about-timeline-page" pageType="AboutPage" structuredData={breadcrumbList([{name:chrome.breadcrumbHome,url:`${SITE_URL}/`},{name:about.breadcrumb,url:`${SITE_URL}/about/`}])}>
+
     <div class="about-column">
       <section class="about-intro" aria-labelledby="about-title">
         <p class="eyebrow about-eyebrow">{about.eyebrow}</p>
@@ -42,7 +39,6 @@ const stories = work.filter(entry => entry.anchor);
             <p class="eyebrow">{entry.client}</p>
             <h3 id={`${entry.anchor}-title`}><a href={workHref(entry.slug)}>{entry.title}</a></h3>
             <p class="case-summary">{about.rolePrefix}{entry.role}</p>
-            <blockquote class="story-principle">{entry.principle}</blockquote>
           </article>
         ))}
         <p class="about-work-link"><a href="/work/">{about.allWorkLabel}</a></p>
@@ -54,6 +50,5 @@ const stories = work.filter(entry => entry.anchor);
         <a href={bookingUrl('about-closing')}>{CTA_LABEL} ↗</a>
       </section>
     </div>
-    <AdvisorFooter about />
-  </main>
+
 </BaseLayout>

@@ -1,26 +1,49 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import AdvisorSidebar from '../components/AdvisorSidebar.astro';
-import AdvisorFooter from '../components/AdvisorFooter.astro';
-import Identity from '../lib/sections/home/Identity.astro';
-import SelectedWork from '../lib/sections/home/SelectedWork.astro';
-import Testimonial from '../lib/sections/home/Testimonial.astro';
-import Writing from '../lib/sections/home/Writing.astro';
-import NextStep from '../lib/sections/home/NextStep.astro';
 import { homeMeta, identity, nextStep, selectedWorkSection, writingSection } from '../lib/content/home';
-import { selectedWork } from '../lib/content/work';
+import { selectedWork, workHref } from '../lib/content/work';
 import { featuredTestimonial } from '../lib/content/testimonials';
-import { latestFieldNotes } from '../lib/content/writing';
+import { latestFieldNotes, formatNoteDate } from '../lib/content/writing';
 import '../styles/pages/index.css';
 ---
-<BaseLayout title={homeMeta.title} description={homeMeta.description} image="/og/home.png" imageAlt={homeMeta.imageAlt} bodyClass="consulting-home">
-  <AdvisorSidebar current="/" />
-  <main id="main-content" class="consulting-main">
-    <Identity content={identity} />
-    <SelectedWork content={selectedWorkSection} entries={selectedWork} />
-    <Testimonial testimonial={featuredTestimonial} />
-    <Writing content={writingSection} notes={latestFieldNotes(3)} />
-    <NextStep content={nextStep} />
-    <AdvisorFooter />
-  </main>
+<BaseLayout mainClass="consulting-main" title={homeMeta.title} description={homeMeta.description} image="/og/home.png" imageAlt={homeMeta.imageAlt} bodyClass="consulting-home">
+
+    <section class="consulting-intro" aria-labelledby="hero-title">
+      <div>
+        <h1 id="hero-title">{identity.name}</h1>
+        <p class="consulting-deck">{identity.title}</p>
+        <p class="consulting-neutral">{identity.description}</p>
+      </div>
+      <img class="consulting-portrait" src="/headshot.jpg" width="400" height="400" alt={identity.portraitAlt} fetchpriority="high" />
+    </section>
+    {featuredTestimonial && <figure class="consulting-testimonial">
+      <blockquote><p>{featuredTestimonial.quote}</p></blockquote>
+      <figcaption><strong>{featuredTestimonial.name}</strong><span>{featuredTestimonial.role}</span></figcaption>
+    </figure>}
+    <section class="consulting-section" aria-labelledby="work-title">
+      <h2 id="work-title">{selectedWorkSection.heading}</h2>
+      <div class="consulting-services">
+        {selectedWork.map(entry => <a class="consulting-service" href={workHref(entry.slug)}>
+          <h3>{entry.title}</h3>
+          <p>{entry.summary}</p>
+          <span class="consulting-service-link">{selectedWorkSection.cardLinkLabel}</span>
+        </a>)}
+      </div>
+      <p class="consulting-note"><a href="/work/">{selectedWorkSection.allLabel}</a></p>
+    </section>
+    <section class="consulting-section consulting-about" aria-labelledby="writing-title">
+      <h2 id="writing-title">{writingSection.heading}</h2>
+      <p>{writingSection.intro}</p>
+      <div class="consulting-cases">
+        <ul>{latestFieldNotes(3).map(note => <li><a href={note.href}>{note.title}</a><span><time datetime={note.publishedAt}>{formatNoteDate(note.publishedAt)}</time></span></li>)}</ul>
+        <a class="consulting-inline-link" href="/writing/">{writingSection.allLabel}</a>
+      </div>
+    </section>
+    <section class="consulting-close" aria-labelledby="conversation-title">
+      <h2 id="conversation-title">{nextStep.heading}</h2>
+      <p>{nextStep.body}</p>
+      <a class="consulting-button" href={nextStep.primaryHref}>{nextStep.primaryLabel}</a>
+      <p class="consulting-note"><a href={nextStep.secondaryHref}>{nextStep.secondaryLabel}</a></p>
+    </section>
+
 </BaseLayout>

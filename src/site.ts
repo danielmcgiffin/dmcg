@@ -1,9 +1,9 @@
 export const SITE_URL = 'https://dannymcgiffin.com';
 export const SITE_NAME = 'Danny McGiffin';
 export const PERSON_NAME = 'Danny McGiffin';
-export const JOB_TITLE = 'Independent tech advisor';
+export const JOB_TITLE = 'Independent management consultant';
 /** Shown under the name in navigation and on the homepage title. */
-export const DESCRIPTOR = 'Independent Tech Advisor';
+export const DESCRIPTOR = 'Independent Management Consultant';
 
 export const LOCATION = {
 	locality: 'Herndon',
@@ -14,15 +14,15 @@ export const LOCATION = {
 } as const;
 
 export const ENTITY_STATEMENT =
-  'Danny McGiffin is an independent tech advisor based in Herndon, Virginia. He helps owners and executives of growing businesses cut wasted technology spend, make sound system decisions, connect the systems they already have, and find where AI is worth the money.';
+  'Danny McGiffin is an independent management consultant in Northern Virginia. He helps owners and executives understand business problems, design practical solutions, and carry changes through.';
 
 export const ABOUT_LOCATION =
   'Based in Herndon, Virginia, working with businesses across Northern Virginia and the Washington, DC area.';
 
 export const HOME_DESCRIPTION =
-  'Vendor-neutral technology advice for owners and executives: Tech Audits, Second Opinions, AI Opportunity assessments, and Data Connection. No software to sell.';
+  'Independent management consulting for owners and executives. Business judgment, practical design, and experience carrying consequential changes through.';
 
-export const HOME_TITLE = 'Danny McGiffin | Independent Tech Advisor';
+export const HOME_TITLE = 'Danny McGiffin | Independent Management Consultant';
 
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/danny-mcgiffin/';
 export const X_URL = 'https://x.com/therealmcgiffin';

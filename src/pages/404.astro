@@ -1,17 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SiteHeader from '../components/SiteHeader.astro';
-import SiteFooter from '../components/SiteFooter.astro';
 import PageIntro from '../components/PageIntro.astro';
 import { notFound } from '../lib/content/not-found';
 ---
 <BaseLayout title={notFound.title} description={notFound.description} noindex>
-  <SiteHeader />
-  <main id="main-content">
+
     <PageIntro eyebrow={notFound.eyebrow} deck={notFound.deck}>
       <Fragment set:html={notFound.headingHtml} />
       <a slot="after" class="button" href="/">{notFound.homeLabel}</a>
     </PageIntro>
-  </main>
-  <SiteFooter />
+
 </BaseLayout>

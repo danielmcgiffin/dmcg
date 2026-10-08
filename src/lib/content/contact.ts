@@ -5,7 +5,7 @@ const mailto = (subject?: string) => `mailto:${CONTACT_EMAIL}${subject ? `?subje
 
 export const contact = {
 	title: 'Contact | Danny McGiffin',
-	description: 'Contact Danny McGiffin, an independent tech advisor in Herndon, Virginia. Book a free 30-minute introduction or send an email.',
+	description: 'Contact Danny McGiffin, an independent management consultant in Herndon, Virginia. Book a free 30-minute introduction or send an email.',
 	breadcrumb: 'Contact',
 	eyebrow: 'Contact',
 	heading: 'Tell me what you’re deciding.',
