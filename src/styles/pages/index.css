@@ -1,6 +1,6 @@
 /* Homepage only; shared layout and typography are in global.css. */
 .consulting-intro { display: grid; grid-template-columns: 1fr 220px; gap: 48px; align-items: center; }
-.consulting-intro h1 { margin-bottom: 18px; }
+.consulting-intro h1 { margin: 0 0 20px; font-size: clamp(29px, 2.65vw, 39px); font-weight: 400; line-height: 1.2; letter-spacing: -.035em; }
 .consulting-deck { font-size: 14px; font-weight: 600; color: var(--green); }
 .consulting-neutral { max-width: 47ch; margin-top: 22px; font-size: 19px; line-height: 1.65; }
 .consulting-portrait { aspect-ratio: 1; object-fit: cover; }
@@ -8,31 +8,35 @@
 .consulting-testimonial blockquote p { max-width: 66ch; font-size: 18px; line-height: 1.7; }
 .consulting-testimonial figcaption { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 18px; font-size: 13px; color: var(--muted); }
 .consulting-testimonial strong { color: var(--green); }
+.consulting-testimonial:has(+ .testimonial-cta) { margin-bottom: 0; }
+.testimonial-cta { margin-bottom: 48px; }
 .consulting-section { margin-top: 48px; }
-.consulting-section > h2 { margin-bottom: 22px; }
-.consulting-services { border-top: 1px solid var(--line); }
+.consulting-section > h2 { margin-bottom: 25px; color: var(--green); font-size: clamp(22px, 2.2vw, 27px); line-height: 1.25; letter-spacing: -.025em; }
+/* Dark green head with a tan body, carried over from the old offer-page price block. */
+.selected-work-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px 40px; padding: 32px 40px; background: var(--green); color: white; }
+.selected-work-head h2 { color: white; }
+.selected-work-all { display: inline-block; padding: 13px 19px; background: var(--sidebar); color: var(--green); font-size: 15px; font-weight: 600; text-decoration: none; }
+.selected-work-all:hover { background: #ffffff; text-decoration: none; }
+.selected-work .consulting-services { padding: 0 40px; background: var(--sidebar); border: 1px solid var(--line); border-top: 0; }
+.selected-work .consulting-service:last-child { border-bottom: 0; }
 .consulting-service { display: grid; grid-template-columns: 1fr auto; gap: 12px 24px; padding: 26px 0; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none; }
-.consulting-service h3 { font-size: clamp(1.7rem, 2.4vw, 2rem); }
-.consulting-service p { grid-column: 1; color: var(--muted); max-width: 65ch; }
+.consulting-service h3 { margin-bottom: 6px; font-size: 16px; line-height: 1.4; }
+.consulting-service p { grid-column: 1; color: var(--muted); max-width: 65ch; line-height: 1.85; }
 .consulting-service-link { grid-column: 2; grid-row: 1; align-self: center; color: var(--green); font-size: 13px; }
 .consulting-service:hover h3 { text-decoration: underline; text-underline-offset: .16em; text-decoration-thickness: 1px; }
 .consulting-note { margin-top: 20px; font-size: 14px; }
-.consulting-about > p { color: var(--muted); max-width: 62ch; }
-.consulting-cases ul { padding: 0; list-style: none; margin: 22px 0; }
-.consulting-cases li { padding: 15px 0; border-top: 1px solid var(--line); }
-.consulting-cases li a { font-weight: 600; text-decoration: none; }
-.consulting-cases li a:hover { text-decoration: underline; }
-.consulting-cases li span { display: block; color: var(--muted); font-size: 13px; margin-top: 5px; }
-.consulting-inline-link { font-size: 14px; }
 .consulting-close { margin-top: 48px; padding-top: 36px; border-top: 1px solid var(--line); }
+.consulting-close h2 { margin-bottom: 12px; font-size: 25px; line-height: 1.3; letter-spacing: -.025em; }
 .consulting-close p { max-width: 58ch; margin-top: 18px; }
-.consulting-button { display: inline-block; padding: 13px 19px; margin-top: 24px; background: var(--green); color: var(--paper); font-size: 15px; font-weight: 600; text-decoration: none; }
-.consulting-button:hover { background: var(--green-hover); text-decoration: none; }
+@media (max-width: 1024px) { .consulting-intro h1 { font-size: 34px; } }
+@media (max-width: 600px) { .consulting-intro h1 { font-size: 30px; margin-top: 22px; } }
 @media (max-width: 1150px) and (min-width: 961px), (max-width: 650px) {
   .consulting-intro { grid-template-columns: 1fr; gap: 24px; }
   .consulting-portrait { width: 150px; }
   .consulting-neutral { font-size: 17px; }
   .consulting-service { grid-template-columns: 1fr; }
+  .selected-work-head { padding: 26px 24px; }
+  .selected-work .consulting-services { padding: 0 24px; }
   .consulting-service-link { grid-column: 1; grid-row: auto; }
   .consulting-testimonial { padding-left: 20px; margin-block: 36px; }
   .consulting-testimonial blockquote p { font-size: 16px; }

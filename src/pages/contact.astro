@@ -16,10 +16,9 @@ import '../styles/pages/contact.css';
       <p>{contact.intro}</p>
       <div class="direct-contact-actions">
         <a class="direct-contact-button" href={bookingUrl('contact')}>{CTA_LABEL} <span aria-hidden="true">↗</span></a>
-        <a class="direct-contact-secondary" href={contact.emailButton.href}>{contact.emailButton.label} <span aria-hidden="true">↗</span></a>
+        <a class="direct-contact-secondary" href={contact.emailButton.href} data-copy-email={contact.emailButton.email} data-copied-label={contact.emailButton.copiedLabel}><span data-copy-label>{contact.emailButton.label}</span> <span aria-hidden="true">↗</span></a>
+        <span class="sr-only" role="status" data-copy-status></span>
       </div>
-      <p class="direct-contact-email">{contact.emailLabel}<a href={contact.emailHref}>{contact.email}</a></p>
-      <p class="direct-contact-location" set:html={contact.locationHtml} />
       <h2 id={contact.offersAnchor}>Focused engagements</h2>
       <p>These are a few ways to start. We can also discuss work that doesn’t fit one of these engagements.</p>
       <ul class="contact-offers">
@@ -28,3 +27,21 @@ import '../styles/pages/contact.css';
     </div>
 
 </BaseLayout>
+<script>
+  // Copy the address as well as following the mailto: link, so visitors without a mail app still get it.
+  const status = document.querySelector('[data-copy-status]');
+  document.querySelectorAll<HTMLAnchorElement>('[data-copy-email]').forEach(link => {
+    const label = link.querySelector('[data-copy-label]');
+    const original = label?.textContent ?? '';
+    let timer: number | undefined;
+    link.addEventListener('click', () => {
+      navigator.clipboard?.writeText(link.dataset.copyEmail ?? '').then(() => {
+        const copied = link.dataset.copiedLabel ?? '';
+        if (label) label.textContent = copied;
+        if (status) status.textContent = copied;
+        clearTimeout(timer);
+        timer = window.setTimeout(() => { if (label) label.textContent = original; }, 3000);
+      }).catch(() => {});
+    });
+  });
+</script>

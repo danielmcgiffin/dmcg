@@ -8,7 +8,7 @@ export const elsewhereLinks = [
   { label: 'LinkedIn', detail: 'Work and updates', href: LINKEDIN_URL, external: true },
   { label: 'Substack', detail: 'Subscribe to my writing', href: subscribeUrl('elsewhere'), external: true },
   { label: 'X', detail: '@therealmcgiffin', href: X_URL, external: true },
-  { label: 'Meet locally', detail: 'Email to arrange an in-person conversation in Northern Virginia', href: `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Meet locally in Northern Virginia')}`, external: false },
+  { label: 'Meet locally', detail: 'Email to arrange an in-person conversation in the DC area', href: `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Meet locally in the DC area')}`, external: false },
 ] as const;
 
 export const elsewhere = {
@@ -16,8 +16,8 @@ export const elsewhere = {
   description: 'Email Danny McGiffin, find him on LinkedIn, Substack, and X, or arrange a conversation.',
   breadcrumb: 'Elsewhere',
   name: 'Danny McGiffin',
-  location: 'Herndon, Virginia',
+  location: 'Washington, DC area',
   intro: 'Independent advice before a consequential systems decision. Find me here, or start a conversation.',
   linksLabel: 'Ways to connect',
-  note: 'Based in Herndon, Virginia.',
+  note: 'Based outside Washington, DC.',
 } as const;

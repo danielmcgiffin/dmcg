@@ -5,10 +5,7 @@ import { SITE_URL } from '../site';
 import { bookingUrl, CTA_LABEL } from '../config';
 import { about } from '../lib/content/about';
 import { chrome } from '../lib/content/navigation';
-import { work, workHref } from '../lib/content/work';
 import '../styles/pages/about.css';
-
-const stories = work.filter(entry => entry.anchor);
 ---
 <BaseLayout mainClass="about-main" title={about.title} description={about.description} image="/og/about.png" imageAlt={about.imageAlt} bodyClass="about-timeline-page" pageType="AboutPage" structuredData={breadcrumbList([{name:chrome.breadcrumbHome,url:`${SITE_URL}/`},{name:about.breadcrumb,url:`${SITE_URL}/about/`}])}>
 
@@ -32,22 +29,13 @@ const stories = work.filter(entry => entry.anchor);
         </section>
       ))}
 
-      <section class="about-work" aria-labelledby="work-title">
-        <h2 id="work-title">{about.workHeading}</h2>
-        {stories.map(entry => (
-          <article class="case-story" id={entry.anchor} aria-labelledby={`${entry.anchor}-title`}>
-            <p class="eyebrow">{entry.client}</p>
-            <h3 id={`${entry.anchor}-title`}><a href={workHref(entry.slug)}>{entry.title}</a></h3>
-            <p class="case-summary">{about.rolePrefix}{entry.role}</p>
-          </article>
-        ))}
-        <p class="about-work-link"><a href="/work/">{about.allWorkLabel}</a></p>
-      </section>
-
       <section class="about-contact" aria-labelledby="conversation-title">
         <h2 id="conversation-title">{about.contactHeading}</h2>
         {about.contactParagraphs.map(text => <p>{text}</p>)}
-        <a href={bookingUrl('about-closing')}>{CTA_LABEL} ↗</a>
+        <div class="consulting-actions">
+          <a class="consulting-button" href={bookingUrl('about-closing')}>{CTA_LABEL}</a>
+          <a class="consulting-button consulting-button-secondary" href={about.secondaryHref}>{about.secondaryLabel}</a>
+        </div>
       </section>
     </div>
 

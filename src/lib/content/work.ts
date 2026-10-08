@@ -76,7 +76,7 @@ export const work: readonly WorkEntry[] = [
   {
     slug: '64m-deployment',
     title: 'Leading a $64M technology deployment',
-    client: 'Four Inc.',
+    client: 'Defense Tech',
     role: 'Program Manager, Special Projects. Led the core team and coordinated delivery across partners and stakeholders.',
     summary: 'Led a complex technology rollout through funding and approval delays, completing the planned scope.',
     description: 'Program leadership for a $64M technology deployment at Four Inc.: coordinating delivery, managing dependencies, and completing the planned scope.',
@@ -91,6 +91,7 @@ export const work: readonly WorkEntry[] = [
   {
     slug: 'negotiation-policy',
     title: 'A simpler answer to a contracting problem',
+    client: 'Logistics',
     summary: 'A working conversation about a contract-redline policy helped an owner resolve a problem he had been wrestling with for weeks.',
     description: 'A focused advisory conversation about a contract-redline policy, supported by a client’s account of the questions, listening, and simple solution.',
     ogImage: '/og/case-negotiation-policy.png',
@@ -162,7 +163,7 @@ export const work: readonly WorkEntry[] = [
 		slug: 'navy-improper-payments',
 		anchor: 'navy',
 		title: 'Making improper payments measurable and controllable',
-		client: 'Federal financial management',
+		client: 'Defense Tech',
 		role: 'Helped build the measurement and controls behind a decline in estimated improper payments.',
 		summary: 'Helped build the measurement and controls behind a roughly $250M decline in estimated improper payments.',
 		description: 'How the U.S. Navy made improper payments measurable and controllable, with a roughly $250 million decline in estimated improper payments from 2015 to 2019.',
@@ -199,7 +200,7 @@ export const workHref = (slug: string) => `/work/${slug}/`;
 export const workIndex = {
 	title: 'Case Studies | Danny McGiffin',
 	description: 'Selected accounts of business problems: what I found, what we decided, and what happened, from a $2.45M ERP path to a $250M decline in estimated improper payments.',
-	imageAlt: 'Case studies: what I found, what we decided, and what happened. Danny McGiffin, Independent Management Consultant.',
+	imageAlt: 'Case studies: what I found, what we decided, and what happened. Danny McGiffin, Business & Technology Advisor.',
 	breadcrumb: 'Case Studies',
 	eyebrow: 'Case studies',
 	heading: 'Selected work.',
@@ -209,7 +210,7 @@ export const workIndex = {
 
 export const workDetailLabels = {
 	titleSuffix: ' | Danny McGiffin',
-	imageAlt: (title: string) => `${title}. A case study by Danny McGiffin, Independent Management Consultant.`,
+	imageAlt: (title: string) => `${title}. A case study by Danny McGiffin, Business & Technology Advisor.`,
 	eyebrow: 'Case study',
 	eyebrowSeparator: ' / ',
 	summaryLabel: 'Case summary',

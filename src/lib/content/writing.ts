@@ -11,10 +11,6 @@ export interface FieldNote {
 /** Newest first, as synced from Substack. */
 export const fieldNotes: readonly FieldNote[] = posts;
 
-export function latestFieldNotes(count: number): readonly FieldNote[] {
-	return fieldNotes.slice(0, count);
-}
-
 export const formatNoteDate = (publishedAt: string) =>
 	new Date(`${publishedAt}T00:00:00Z`).toLocaleDateString('en-US', { timeZone: 'UTC', month: 'short', day: 'numeric', year: 'numeric' });
 

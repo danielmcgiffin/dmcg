@@ -1,66 +1,46 @@
-export const SITE_URL = 'https://dannymcgiffin.com';
-export const SITE_NAME = 'Danny McGiffin';
-export const PERSON_NAME = 'Danny McGiffin';
-export const JOB_TITLE = 'Independent management consultant';
+export const SITE_URL = "https://dannymcgiffin.com";
+export const SITE_NAME = "Danny McGiffin";
+export const PERSON_NAME = "Danny McGiffin";
+export const JOB_TITLE = "Business & Technology Advisor";
 /** Shown under the name in navigation and on the homepage title. */
-export const DESCRIPTOR = 'Independent Management Consultant';
+export const DESCRIPTOR = "Business & Technology Advisor";
 
 export const LOCATION = {
-	locality: 'Herndon',
-	region: 'Virginia',
-	regionCode: 'VA',
-	country: 'US',
-	countryName: 'United States'
+  locality: "Washington",
+  region: "D.C.",
+  regionCode: "DC",
+  country: "US",
+  countryName: "United States",
 } as const;
 
 export const ENTITY_STATEMENT =
-  'Danny McGiffin is an independent management consultant in Northern Virginia. He helps owners and executives understand business problems, design practical solutions, and carry changes through.';
+  "Danny McGiffin is an independent business & technology advisor based outside Washington, DC. He helps owners and executives of growing businesses solve problems that won’t stay solved, make sound decisions about expensive solutions, and get real value from their technology, including AI.";
 
 export const ABOUT_LOCATION =
-  'Based in Herndon, Virginia, working with businesses across Northern Virginia and the Washington, DC area.';
+  "Based outside Washington, DC, and working with businesses across the DC area.";
 
 export const HOME_DESCRIPTION =
-  'Independent management consulting for owners and executives. Business judgment, practical design, and experience carrying consequential changes through.';
+  "Independent business & technology advice for owners and executives of growing businesses. Sound decisions, practical solutions, and no agenda to sell.";
 
-export const HOME_TITLE = 'Danny McGiffin | Independent Management Consultant';
+export const HOME_TITLE = "Danny McGiffin | Business & Technology Advisor";
 
-export const LINKEDIN_URL = 'https://www.linkedin.com/in/danny-mcgiffin/';
-export const X_URL = 'https://x.com/therealmcgiffin';
-export const CONTACT_EMAIL = 'danny@dannymcgiffin.com';
+export const LINKEDIN_URL = "https://www.linkedin.com/in/danny-mcgiffin/";
+export const X_URL = "https://x.com/therealmcgiffin";
+export const CONTACT_EMAIL = "danny@dannymcgiffin.com";
 
 export const SAME_AS = [LINKEDIN_URL, X_URL] as const;
 
-export const IMAGE_PATH = '/og/default.png';
-export const LOGO_PATH = '/favicon.svg';
+export const IMAGE_PATH = "/og/default.png";
+export const LOGO_PATH = "/favicon.svg";
 
 export const KNOWS_ABOUT = [
-  'Business strategy', 'Operating-model design', 'Organizational design',
-  'Decision-making', 'Ownership and accountability', 'Business systems',
-  'Customer experience', 'Employee experience', 'Workflow design',
-  'Systems integration', 'AI and automation'
-] as const;
-
-/** Regions named on the homepage and in the sitewide footer. */
-export const PRIMARY_AREAS_SERVED = [
-	{ type: 'City', name: 'Herndon' },
-	{ type: 'AdministrativeArea', name: 'Northern Virginia' },
-	{ type: 'AdministrativeArea', name: 'Washington, DC' }
-] as const;
-
-/** Cities and counties named on the Northern Virginia service page. */
-export const SERVICE_AREA_PLACES = [
-	'Herndon',
-	'Reston',
-	'Chantilly',
-	'Fairfax',
-	'Tysons',
-	'McLean',
-	'Vienna',
-	'Ashburn',
-	'Leesburg',
-	'Arlington',
-	'Alexandria',
-	'Loudoun County',
-	'Fairfax County',
-	'Washington, DC'
+  "Business strategy",
+  "Operations management",
+  "Organizational design",
+  "Technology strategy",
+  "ERP selection",
+  "Software vendor evaluation",
+  "Systems integration",
+  "Workflow automation",
+  "Artificial intelligence",
 ] as const;

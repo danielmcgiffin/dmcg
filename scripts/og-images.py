@@ -8,15 +8,15 @@ from pathlib import Path
 from xml.sax.saxutils import escape
 
 OUT = Path(__file__).resolve().parents[1] / "public/og"
-HEADER = "DANNY McGIFFIN / INDEPENDENT MANAGEMENT CONSULTANT"
+HEADER = "DANNY McGIFFIN / BUSINESS & TECHNOLOGY ADVISOR"
 
 # slug: (headline lines, index of the green line, detail line, footer label, footer path)
 CARDS = {
-    "case-64m-deployment": (["Leading a $64M", "technology deployment."], 0, "Four Inc. · Program leadership and coordinated delivery", "CASE STUDY", "work/64m-deployment"),
-    "case-negotiation-policy": (["A simpler answer to", "a contracting problem."], 0, "A focused advisory conversation", "CASE STUDY", "work/negotiation-policy"),
-    "default": (["Danny McGiffin", "Independent management", "consultant."], 0, "Business judgment. Practical design. Experience delivering change.", "DANNY MCGIFFIN", ""),
-    "home": (["Danny McGiffin", "Independent management", "consultant."], 0, "Business judgment. Practical design. Experience delivering change.", "DANNY MCGIFFIN", ""),
-    "about": (["About Danny.", "Background, work,", "and approach."], 0, "Northern Virginia / Washington, DC", "ABOUT", "about"),
+    "case-64m-deployment": (["Leading a $64M", "technology deployment."], 0, "Defense Tech · Program leadership and coordinated delivery", "CASE STUDY", "work/64m-deployment"),
+    "case-negotiation-policy": (["A simpler answer to", "a contracting problem."], 0, "Logistics · A focused advisory conversation", "CASE STUDY", "work/negotiation-policy"),
+    "default": (["Danny McGiffin", "Business & technology", "advisor."], 0, "Sound decisions. Practical solutions. No agenda to sell.", "DANNY MCGIFFIN", ""),
+    "home": (["Danny McGiffin", "Business & technology", "advisor."], 0, "Sound decisions. Practical solutions. No agenda to sell.", "DANNY MCGIFFIN", ""),
+    "about": (["About Danny.", "Background, work,", "and approach."], 0, "Washington, DC area", "ABOUT", "about"),
     "tech-audit": (["Find out what your", "technology actually", "costs, and what it’s worth."], 1, "$5,000 fixed fee · 10 business days · Money-back guarantee", "TECH AUDIT", "tech-audit"),
     "second-opinion": (["Before you commit,", "get an independent", "call."], 1, "From $2,500 · Fixed quote · Proceed, change, or stop", "SECOND OPINION", "second-opinion"),
     "ai-opportunity": (["Figure out what AI is", "actually worth doing", "in your business."], 1, "$5,000 fixed fee · 10 business days · A map of what comes next", "AI OPPORTUNITY", "ai-opportunity"),
@@ -25,8 +25,7 @@ CARDS = {
     "case-erp-second-opinion": (["The ERP we decided", "not to implement."], 1, "$2.45M+ projected path → alternative estimated at ~$50K", "CASE STUDY", "work/erp-decision"),
     "case-operating-model": (["Redesigning an operating", "model that made", "collaboration irrational."], 1, "Professional services · Incentives, ownership, decision rights", "CASE STUDY", "work/operating-model"),
     "case-growth": (["Building the company", "underneath", "10× growth."], 2, "Professional services · ~$200K to $2M recognized revenue", "CASE STUDY", "work/growth"),
-    "case-navy-improper-payments": (["Making improper", "payments measurable", "and controllable."], 1, "Federal financial management · ~$250M decline in estimated improper payments", "CASE STUDY", "work/navy-improper-payments"),
-    "northern-virginia": (["Independent management", "consulting in", "Northern Virginia."], 2, "Based in Herndon · Serving the Washington, DC area", "NORTHERN VIRGINIA", "northern-virginia-ai-workflow-automation"),
+    "case-navy-improper-payments": (["Making improper", "payments measurable", "and controllable."], 1, "Defense Tech · ~$250M decline in estimated improper payments", "CASE STUDY", "work/navy-improper-payments"),
 }
 
 
@@ -42,7 +41,7 @@ def svg(lines, green, detail, label, path):
   <rect width="1200" height="630" fill="#f3f2e9"/>
   <rect width="18" height="630" fill="#214d38"/>
   <g font-family="Arial, sans-serif">
-    <text x="76" y="82" font-size="19" font-weight="700" letter-spacing="2" fill="#214d38">{HEADER}</text>
+    <text x="76" y="82" font-size="19" font-weight="700" letter-spacing="2" fill="#214d38">{escape(HEADER)}</text>
     <g font-size="{size}" font-weight="700" letter-spacing="-2" fill="#303a32">
 {text}
     </g>

@@ -1,7 +1,7 @@
 # Danny McGiffin
 
-A small, static Astro site for an independent management consultant.
-The homepage introduces Danny, shows selected work and client testimony, and links to writing and contact.
+A small, static Astro site for an independent business & technology advisor based outside Washington, DC.
+The homepage introduces Danny, shows client testimony and selected work, and invites a conversation.
 
 ## Run locally
 
@@ -29,7 +29,7 @@ The separate Substack workflow can deploy after a sync if its Cloudflare token i
 | About and Contact copy | `src/lib/content/about.ts`, `contact.ts` |
 | Service copy, prices, duration, scope and guarantees | `src/lib/content/offers.ts` |
 | Illustrative AI example | `src/lib/content/ai-example.ts` |
-| Color, typography, page width, sidebar and mobile menu | `src/styles/global.css` |
+| Color, typography, buttons, page width, sidebar and mobile menu | `src/styles/global.css` |
 | Page-specific layout rules | `src/styles/pages/` |
 | Shared page layout, metadata and analytics | `src/layouts/BaseLayout.astro` |
 | Booking link, CTA label and subscription link | `src/config.ts` |
@@ -51,8 +51,9 @@ Update visible copy, metadata, `public/llms.txt`, and share cards together when 
 
 ## URLs and integrations
 
-Home, `/work/`, `/writing/`, `/about/`, and `/contact/` form the main site.
-Focused engagements remain at `/offers/<slug>/`. Existing regional, research, essay and RSS URLs remain available.
+Home, `/work/`, `/writing/`, `/about/`, `/contact/`, and `/elsewhere/` form the main site and sidebar navigation.
+Focused engagements remain at `/offers/<slug>/`, linked from Contact. Research, essay and RSS URLs remain available.
+The Northern Virginia page is retired; its URL redirects to the homepage.
 Historical URLs redirect through both `astro.config.ts` and `public/_redirects`; update both together.
 
 Cal booking links retain their `src=` placement tags. GA4 and subscription tracking remain in `Analytics.astro`.

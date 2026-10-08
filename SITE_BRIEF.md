@@ -6,18 +6,22 @@ and know how to start a conversation. The homepage is a concise professional int
 
 # Working category
 
-Independent Management Consultant. This is a working professional title, not a proprietary method or slogan.
+Business & Technology Advisor. This is a working professional title, not a proprietary method or slogan.
+Danny helps owners and executives of growing businesses solve problems that won’t stay solved, make sound decisions
+about expensive solutions, and get real value from their technology, including AI. He is based outside Washington, DC,
+and works with businesses across the DC area.
 Danny sees the business as a whole: its direction, operating approach, problems, and practical solutions.
 His experience spans strategy, operations, organizational design, technology, and implementation.
 His judgment is independent of vendor commissions or a predetermined solution.
 
 # Structure
 
-- Home: introduction, client testimony, selected work, writing, contact.
+- Home: introduction, client testimony, selected work, contact.
 - About: background, experience, approach, and professional perspective.
 - Work: specific cases with honest descriptions of responsibility and results.
 - Writing: essays and Substack.
-- Contact: email, scheduling, and links to focused engagements.
+- Contact: scheduling, email, and links to focused engagements.
+- Elsewhere: profiles and ways to connect.
 
 Service pages remain available without dominating the main navigation.
 The service list is not an exhaustive definition of the practice.

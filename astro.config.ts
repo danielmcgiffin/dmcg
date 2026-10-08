@@ -12,7 +12,7 @@ export default defineConfig({
 	integrations: [
 		mdx(),
 		sitemap({
-			filter: (page) => !['/workflow-review/', '/ai-opportunity-sprint/', '/score-one-workflow/', '/advisory/', '/ai/', '/work/erp-second-opinion/', '/case-studies/', '/case-studies/erp-second-opinion/', '/case-studies/operating-model/', '/case-studies/growth/', '/case-studies/navy-improper-payments/', '/tech-audit/', '/second-opinion/', '/ai-opportunity/', '/data-connection/', '/404/'].some((route) => new URL(page).pathname === route)
+			filter: (page) => !['/workflow-review/', '/ai-opportunity-sprint/', '/score-one-workflow/', '/advisory/', '/ai/', '/work/erp-second-opinion/', '/case-studies/', '/case-studies/erp-second-opinion/', '/case-studies/operating-model/', '/case-studies/growth/', '/case-studies/navy-improper-payments/', '/tech-audit/', '/second-opinion/', '/ai-opportunity/', '/data-connection/', '/northern-virginia-ai-workflow-automation/', '/404/'].some((route) => new URL(page).pathname === route)
 		})
 	],
 	redirects: {
@@ -30,6 +30,7 @@ export default defineConfig({
 		'/tech-audit': '/offers/tech-audit/',
 		'/second-opinion': '/offers/second-opinion/',
 		'/ai-opportunity': '/offers/ai-opportunity/',
-		'/data-connection': '/offers/data-connection/'
+		'/data-connection': '/offers/data-connection/',
+		'/northern-virginia-ai-workflow-automation': '/'
 	}
 });

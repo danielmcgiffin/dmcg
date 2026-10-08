@@ -5,6 +5,7 @@ export const primaryLinks = [
   { href: '/writing/', label: 'Writing' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
+  { href: '/elsewhere/', label: 'Elsewhere' },
 ] as const;
 
 export const chrome = {
@@ -15,7 +16,7 @@ export const chrome = {
   menuLabel: "Menu",
   skipLink: "Skip to main content",
   rssTitle: "Danny McGiffin writing",
-  defaultImageAlt: "Danny McGiffin, Independent Management Consultant.",
+  defaultImageAlt: "Danny McGiffin, Business & Technology Advisor.",
   copyright: (year: number) => `© ${year} Danny McGiffin`,
   footerLink: { href: "/elsewhere/", label: "Elsewhere ↗" },
   breadcrumbHome: "Home",

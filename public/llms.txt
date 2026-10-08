@@ -1,6 +1,6 @@
 # Danny McGiffin
 
-Danny McGiffin is an independent management consultant based in Herndon, Virginia. He helps owners and executives understand business problems, design practical solutions, and carry changes through. His work spans strategy, operations, organizational design, and technology.
+Danny McGiffin is an independent business & technology advisor based outside Washington, DC. He helps owners and executives of growing businesses solve problems that won’t stay solved, make sound decisions about expensive solutions, and get real value from their technology, including AI. His work spans strategy, operations, organizational design, and technology.
 
 He is vendor-neutral. He does not sell software or receive commissions, referral fees, or resale margins, so the answer can be new software, integration, better data, process change, clearer ownership, a different vendor, or no purchase at all.
 
@@ -19,7 +19,6 @@ Tech Audit, Second Opinion, and AI Opportunity carry a money-back guarantee desc
 - Case studies: https://dannymcgiffin.com/work/
 - ERP case study: https://dannymcgiffin.com/work/erp-decision/
 - About: https://dannymcgiffin.com/about/
-- Northern Virginia: https://dannymcgiffin.com/northern-virginia-ai-workflow-automation/
 - Writing: https://dannymcgiffin.com/writing/
 - Research briefing on AI tools and work: https://dannymcgiffin.com/still-on-tools/
 - Contact: https://dannymcgiffin.com/contact/
@@ -34,7 +33,7 @@ Tech Audit, Second Opinion, and AI Opportunity carry a money-back guarantee desc
 
 ## Location
 
-Based in Herndon. Works with businesses across Northern Virginia and the Washington, DC area. Service locations are not separate offices.
+Based outside Washington, DC, and working with businesses across the DC area.
 
 ## Experience
 

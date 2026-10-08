@@ -3,14 +3,11 @@
 .about-person { display: grid; grid-template-columns: 140px 1fr; gap: 28px; align-items: center; margin-top: 32px; }
 .about-portrait { width: 140px; aspect-ratio: 1; object-fit: cover; }
 .about-lead { font-size: 19px; }
-.about-section, .about-work { margin-top: 40px; }
-.about-section h2, .about-work > h2 { margin-bottom: 20px; }
-.about-work .case-story { padding: 24px 0; border-top: 1px solid var(--line); scroll-margin-top: 24px; }
-.about-work .eyebrow { margin-bottom: 10px; }
-.about-work h3 { margin-bottom: 12px; }
-.case-summary { color: var(--muted); font-size: 15px; }
-.about-work-link { margin-top: 20px; }
+.about-section { margin-top: 40px; }
+.about-section h2 { margin-bottom: 20px; }
 .about-contact { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--line); }
 .about-contact h2 { margin-bottom: 18px; }
-.about-contact a { display: inline-block; margin-top: 20px; }
 @media (max-width: 600px) { .about-person { grid-template-columns: 1fr; gap: 24px; } }
+.about-person h1, .about-intro h1 { font-family: var(--font-display); font-size: clamp(2rem, 3.4vw, 2.75rem); font-weight: 300; line-height: 1.15; letter-spacing: -.02em; }
+.about-section h2 { color: var(--green); font-size: 15px; letter-spacing: .08em; line-height: 1.4; text-transform: uppercase; }
+.about-contact h2 { font-size: 1.6rem; line-height: 1.3; }

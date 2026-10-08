@@ -23,7 +23,7 @@ test('built pages have coherent metadata and entity graphs without retired posit
  const titles=new Set();
  for(const p of normal){
   const title=content(p.nodes.find(n=>n.tagName==='title'));assert.ok(title);assert.ok(!titles.has(title),`duplicate title ${title}`);titles.add(title);
-  if(p.route==='/')assert.equal(title,'Danny McGiffin | Independent Management Consultant');else assert.match(title,/^.+ \| Danny McGiffin$/,p.route);
+  if(p.route==='/')assert.equal(title,'Danny McGiffin | Business & Technology Advisor');else assert.match(title,/^.+ \| Danny McGiffin$/,p.route);
   assert.equal(p.nodes.filter(n=>n.tagName==='h1').length,1,p.route);
   assert.equal(attr(p.nodes.find(n=>n.tagName==='html'),'lang'),'en');
   const meta=name=>attr(p.nodes.find(n=>n.tagName==='meta'&&(attr(n,'name')===name||attr(n,'property')===name)),'content');
@@ -32,7 +32,7 @@ test('built pages have coherent metadata and entity graphs without retired posit
   assert.equal(meta('og:url'),origin+p.route);const image=meta('og:image');assert.ok(image?.startsWith(origin+'/og/'),p.route);await assert.doesNotReject(access(join(dist,new URL(image).pathname)),image);
   const graph=p.nodes.filter(n=>n.tagName==='script'&&attr(n,'type')==='application/ld+json').flatMap(n=>{const data=JSON.parse((n.childNodes??[]).map(n=>n.value??'').join(''));assert.equal(data['@context'],'https://schema.org');return data['@graph']??[data];});
   const person=graph.find(n=>n['@type']==='Person');const service=graph.find(n=>n['@type']==='ProfessionalService');
-  assert.equal(person.jobTitle,'Independent management consultant');assert.equal(person['@id'],origin+'/#person');assert.equal(person.image,undefined);assert.equal(service.makesOffer,undefined);assert.equal(service.logo,origin+'/favicon.svg');assert.ok(person.knowsAbout.includes('Organizational design'));
+  assert.equal(person.jobTitle,'Business & Technology Advisor');assert.equal(person['@id'],origin+'/#person');assert.equal(person.image,undefined);assert.equal(service.makesOffer,undefined);assert.equal(service.logo,origin+'/favicon.svg');assert.ok(person.knowsAbout.includes('Organizational design'));
   assert.doesNotMatch(p.html,/Workflow Teardown|Fixed-Price Workflow Build|workflow automation and AI consultant|Operations engineer|Business Advisor &amp; Designer|Get a second opinion|See if it’s a fit|\$7,500 fixed fee|~\$500k|~5%|redress/i);
  }
 });
@@ -48,28 +48,27 @@ test('retired routes redirect directly and are excluded from the sitemap and nav
  assert.ok(!sitemap.includes('404'));for(const p of normal)assert.ok(sitemap.includes(origin+p.route),p.route);
 });
 
-test('homepage introduces Danny and links to completed work, writing, and contact',()=>{
+test('homepage introduces Danny and links to completed work and contact',()=>{
  const home=normal.find(p=>p.route==='/');const text=content(parse(home.html));const hrefs=attrs(home,'a','href');
- assert.deepEqual(home.nodes.filter(n=>n.tagName==='h2').map(n=>attr(n,'id')),['work-title','writing-title','conversation-title']);
+ assert.deepEqual(home.nodes.filter(n=>n.tagName==='h2').map(n=>attr(n,'id')),['work-title','conversation-title']);
  assert.equal(content(home.nodes.find(n=>n.tagName==='h1')).trim(),'Danny McGiffin');
  assert.ok(attrs(home,'img','src').includes('/headshot.jpg'));
  const cards=home.nodes.filter(n=>n.tagName==='a'&&attr(n,'class')==='consulting-service');
  assert.deepEqual(cards.map(n=>attr(n,'href')),selectedRoutes);
  assert.equal((text.match(/Danny asks thought-provoking, challenging questions/g)||[]).length,1);
- for(const post of substackPosts.slice(0,3))assert.ok(hrefs.includes(post.href),post.href);
  for(const href of ['/work/','/writing/','/contact/'])assert.ok(hrefs.includes(href),href);
  assert.ok(hrefs.includes('https://cal.com/dannymcgiffin/30min?src=closing'));
  for(const route of offerRoutes)assert.ok(!hrefs.includes(route),`homepage links offer ${route}`);
  assert.doesNotMatch(text,/How we can work together|When you hear yourself saying/);
 });
-test('navigation lists Work, Writing, About, Contact; the name links home',()=>{
+test('navigation lists Work, Writing, About, Contact, Elsewhere; the name links home',()=>{
  for(const p of normal){
   const nav=p.nodes.find(n=>n.tagName==='nav'&&attr(n,'aria-label')==='Primary navigation');assert.ok(nav,p.route);
   const labels=flatten(nav).filter(n=>n.tagName==='a').map(n=>content(n).replace(/\s*↗$/,'').trim());
-  assert.deepEqual(labels,['Work','Writing','About','Contact'],p.route);
+  assert.deepEqual(labels,['Work','Writing','About','Contact','Elsewhere'],p.route);
   for(const route of offerRoutes)assert.ok(!flatten(nav).some(n=>attr(n,'href')===route),`${p.route} nav links ${route}`);
   const identity=p.nodes.find(n=>['advisor-identity','site-identity'].includes(attr(n,'class')));
-  assert.deepEqual(identity.childNodes.map(n=>content(n).trim()).filter(Boolean),['DANNY McGIFFIN','Independent Management Consultant']);
+  assert.deepEqual(identity.childNodes.map(n=>content(n).trim()).filter(Boolean),['DANNY McGIFFIN','Business & Technology Advisor']);
   assert.deepEqual(flatten(identity).filter(n=>n.tagName==='a').map(n=>attr(n,'href')),['/'],'name links home');
  }
 });
@@ -115,9 +114,6 @@ test('production pages include the configured GA4 loader',()=>{
  }
 });
 test('case claims retain role and measurement boundaries',()=>{
- const about=normal.find(p=>p.route==='/about/');
- for(const fragment of ['erp','collaboration','growth','navy'])assert.ok(about.nodes.some(n=>attr(n,'id')===fragment));
- for(const route of caseRoutes)assert.ok(attrs(about,'a','href').includes(route),route);
  const index=normal.find(p=>p.route==='/work/');for(const route of caseRoutes)assert.ok(attrs(index,'a','href').includes(route),route);
  const caseText=route=>content(parse(normal.find(p=>p.route===route).html));
  for(const route of caseRoutes){const text=caseText(route);for(const heading of ['The situation','The problem','What I found','The decision','The result'])assert.ok(text.includes(heading),`${route}: ${heading}`);}
@@ -131,7 +127,7 @@ test('case claims retain role and measurement boundaries',()=>{
  const all=normal.map(p=>p.html).join('');
  assert.doesNotMatch(all,/roughly \$2\.5M ERP implementation|roughly \$1\.5M ERP license|came in +at/);
  assert.doesNotMatch(all,/more than \$1M in additional customization|more than \$1 million in additional customization/);
- assert.doesNotMatch(content(parse(about.html)),/70%|50% faster|60%|Roger Porres|\$64M/);
+ assert.doesNotMatch(content(parse(normal.find(p=>p.route==='/about/').html)),/70%|50% faster|60%|Roger Porres|\$64M/);
 });
 
 test('advisory and writing journeys expose next steps and source evidence',()=>{
@@ -153,7 +149,7 @@ test('advisory and writing journeys expose next steps and source evidence',()=>{
 });
 test('RSS, llms, and the custom 404 remain usable',async()=>{
  const rss=await readFile(join(dist,'rss.xml'),'utf8');assert.equal((rss.match(/<item>/g)||[]).length,4);
- const llms=await readFile(join(dist,'llms.txt'),'utf8');assert.match(llms,/independent management consultant/);for(const route of offerRoutes)assert.ok(llms.includes(origin+route),route);assert.doesNotMatch(llms,/Workflow Teardown|AI Opportunity Sprint/);
+ const llms=await readFile(join(dist,'llms.txt'),'utf8');assert.match(llms,/independent business & technology advisor/);for(const route of offerRoutes)assert.ok(llms.includes(origin+route),route);assert.doesNotMatch(llms,/Workflow Teardown|AI Opportunity Sprint/);
  const missing=pages.find(p=>p.route==='/404.html');assert.ok(missing);assert.ok(missing.nodes.some(n=>attr(n,'name')==='robots'&&attr(n,'content')==='noindex'));
 });
 

@@ -1,4 +1,4 @@
-/** About page copy. Case stories come from work.ts entries that carry an anchor. */
+/** About page copy. */
 export interface AboutSection {
 	readonly id: string;
 	readonly heading: string;
@@ -7,13 +7,13 @@ export interface AboutSection {
 
 export const about = {
 	title: 'About | Danny McGiffin',
-	description: 'Danny McGiffin is an independent management consultant in Herndon, Virginia. He follows business problems across departments, systems, and incentives, and has no software, vendors, or commissions to sell.',
-	imageAlt: 'About Danny McGiffin, Independent Management Consultant. Background, work, and approach.',
+	description: 'Danny McGiffin is an independent business & technology advisor in the Washington, DC area. He follows business problems across departments, systems, and incentives, and has no software, vendors, or commissions to sell.',
+	imageAlt: 'About Danny McGiffin, Business & Technology Advisor. Background, work, and approach.',
 	breadcrumb: 'About',
 	eyebrow: 'About',
 	heading: 'About Danny.',
 	portraitAlt: 'Danny McGiffin',
-	lead: 'I’m Danny McGiffin. I live and work in Northern Virginia, in the Washington, DC area.',
+	lead: 'I’m Danny McGiffin. I live and work in the DC area.',
 	intro: 'My work has taken me from Army logistics to consulting, company operations, and technology delivery. Today I work independently with owners and executives.',
 	sections: [
     {
@@ -42,12 +42,11 @@ export const about = {
       ],
     },
   ] as readonly AboutSection[],
-	workHeading: 'What that looks like',
-	rolePrefix: 'My role: ',
-	allWorkLabel: 'All case studies ↗',
 	contactHeading: 'Let’s talk.',
 	contactParagraphs: [
 		'If there’s something you’re trying to work through in your business, I’d like to hear about it.',
 		'You don’t need to have the problem neatly framed yet.',
 	],
+	secondaryLabel: 'Or send me a note',
+	secondaryHref: '/contact/',
 } as const;

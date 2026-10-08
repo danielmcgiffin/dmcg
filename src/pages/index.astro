@@ -1,9 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { homeMeta, identity, nextStep, selectedWorkSection, writingSection } from '../lib/content/home';
+import { homeMeta, identity, nextStep, selectedWorkSection, testimonialCta } from '../lib/content/home';
 import { selectedWork, workHref } from '../lib/content/work';
 import { featuredTestimonial } from '../lib/content/testimonials';
-import { latestFieldNotes, formatNoteDate } from '../lib/content/writing';
 import '../styles/pages/index.css';
 ---
 <BaseLayout mainClass="consulting-main" title={homeMeta.title} description={homeMeta.description} image="/og/home.png" imageAlt={homeMeta.imageAlt} bodyClass="consulting-home">
@@ -20,8 +19,15 @@ import '../styles/pages/index.css';
       <blockquote><p>{featuredTestimonial.quote}</p></blockquote>
       <figcaption><strong>{featuredTestimonial.name}</strong><span>{featuredTestimonial.role}</span></figcaption>
     </figure>}
-    <section class="consulting-section" aria-labelledby="work-title">
-      <h2 id="work-title">{selectedWorkSection.heading}</h2>
+    {featuredTestimonial && <div class="consulting-actions testimonial-cta">
+      <a class="consulting-button" href={testimonialCta.primaryHref}>{testimonialCta.primaryLabel}</a>
+      <a class="consulting-button consulting-button-secondary" href={testimonialCta.secondaryHref}>{testimonialCta.secondaryLabel}</a>
+    </div>}
+    <section class="consulting-section selected-work" aria-labelledby="work-title">
+      <div class="selected-work-head">
+        <h2 id="work-title">{selectedWorkSection.heading}</h2>
+        <a class="selected-work-all" href="/work/">{selectedWorkSection.allLabel}</a>
+      </div>
       <div class="consulting-services">
         {selectedWork.map(entry => <a class="consulting-service" href={workHref(entry.slug)}>
           <h3>{entry.title}</h3>
@@ -29,21 +35,14 @@ import '../styles/pages/index.css';
           <span class="consulting-service-link">{selectedWorkSection.cardLinkLabel}</span>
         </a>)}
       </div>
-      <p class="consulting-note"><a href="/work/">{selectedWorkSection.allLabel}</a></p>
-    </section>
-    <section class="consulting-section consulting-about" aria-labelledby="writing-title">
-      <h2 id="writing-title">{writingSection.heading}</h2>
-      <p>{writingSection.intro}</p>
-      <div class="consulting-cases">
-        <ul>{latestFieldNotes(3).map(note => <li><a href={note.href}>{note.title}</a><span><time datetime={note.publishedAt}>{formatNoteDate(note.publishedAt)}</time></span></li>)}</ul>
-        <a class="consulting-inline-link" href="/writing/">{writingSection.allLabel}</a>
-      </div>
     </section>
     <section class="consulting-close" aria-labelledby="conversation-title">
       <h2 id="conversation-title">{nextStep.heading}</h2>
       <p>{nextStep.body}</p>
-      <a class="consulting-button" href={nextStep.primaryHref}>{nextStep.primaryLabel}</a>
-      <p class="consulting-note"><a href={nextStep.secondaryHref}>{nextStep.secondaryLabel}</a></p>
+      <div class="consulting-actions">
+        <a class="consulting-button" href={nextStep.primaryHref}>{nextStep.primaryLabel}</a>
+        <a class="consulting-button consulting-button-secondary" href={nextStep.secondaryHref}>{nextStep.secondaryLabel}</a>
+      </div>
     </section>
 
 </BaseLayout>
