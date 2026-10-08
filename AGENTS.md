@@ -2,9 +2,9 @@
 
 ## Current app
 
-- Astro + TypeScript at the repository root. The approved September 17 report restores and evolves the existing published Astro site.
+- Astro + TypeScript at the repository root. SITE_BRIEF.md and DESIGN_LANG.md describe the current direction; dated audit reports are historical.
 - The prior Svelte working tree is preserved in archive/site-2026-09-17-svelte/.
-- Read README.md before making changes.
+- Read README.md before making changes. BaseLayout owns the shared header, main and footer. Keep homepage sections in src/pages/index.astro and editable words in src/lib/content/.
 - Evolve the existing Newsreader/Geist, forest/bone visual identity. Do not restore other archived designs without an explicit request.
 - Run npm run build for Astro/TypeScript checks and the production build.
 - Deployment requires an explicit request.

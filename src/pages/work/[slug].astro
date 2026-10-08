@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import SiteHeader from '../../components/SiteHeader.astro';
-import SiteFooter from '../../components/SiteFooter.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import { work, workHref, workDetailLabels as l, workIndex, type WorkEntry } from '../../lib/content/work';
 import { testimonial } from '../../lib/content/testimonials';
@@ -36,9 +34,8 @@ const sections = [
   ogType="article"
   structuredData={breadcrumbList([{ name: chrome.breadcrumbHome, url: `${SITE_URL}/` }, { name: workIndex.breadcrumb, url: `${SITE_URL}/work/` }, { name: entry.title, url: pageUrl }])}
 >
-  <SiteHeader bookingPlacement={`case-${entry.slug}-navigation`} />
-  <main id="main-content">
-    <PageIntro eyebrow={entry.client ? `${l.eyebrow}${l.eyebrowSeparator}${entry.client}` : l.eyebrow} title={`${entry.title}.`} deck={entry.summary} />
+
+    <PageIntro eyebrow={entry.client ? `${l.eyebrow}${l.eyebrowSeparator}${entry.client}` : l.eyebrow} title={entry.title} deck={entry.summary} />
     <article class="prose service-prose shell case-detail">
       {(entry.client || entry.role) && (
         <div class="case-facts" aria-label={l.summaryLabel}>
@@ -75,6 +72,5 @@ const sections = [
         </p>
       </div>
     </article>
-  </main>
-  <SiteFooter />
+
 </BaseLayout>

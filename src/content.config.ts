@@ -13,16 +13,4 @@ const writing = defineCollection({
 	})
 });
 
-const proof = defineCollection({
-	loader: glob({ base: './src/content/proof', pattern: '**/*.{md,mdx}' }),
-	schema: z.object({
-		metric_line: z.string().min(1),
-		context: z.string().min(1),
-		attribution: z.string().min(1),
-		name: z.string().min(1).optional(),
-		jobTitle: z.string().min(1).optional(),
-		organization: z.string().min(1).optional()
-	})
-});
-
-export const collections = { writing, proof };
+export const collections = { writing };

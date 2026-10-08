@@ -1,0 +1,19 @@
+.offer-deck { margin-top: 24px; color: var(--muted); }
+.offer-terms { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 24px; color: var(--green); }
+.offer-intro-note { margin-top: 14px; font-size: 14px; color: var(--muted); }
+.offer-overview h2 { margin-top: 42px; }
+.deliverables { margin: 24px 0 0; }
+.deliverables > div { padding: 18px 0; border-top: 1px solid var(--line); }
+.deliverables dt, .example-record dt, .example-economics dt { font-weight: 600; }
+.deliverables dd, .example-record dd, .example-economics dd { margin: 6px 0 0; }
+.offer-details { margin-top: 40px; }
+.offer-details > h2 { margin-bottom: 20px; }
+.offer-details li + li { margin-top: 10px; }
+.offer-details h3 { margin: 20px 0 12px; font-size: 1.4rem; }
+.example-map > details { margin-left: 16px; }
+.example-status { display: block; font-size: 13px; color: var(--muted); font-weight: 400; }
+.example-economics { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; background: var(--sidebar); }
+.example-economics dd strong { font-size: 1.8rem; color: var(--green); }
+.example-economics dd span { display: block; font-size: 14px; }
+.example-record > div { margin-bottom: 18px; }
+@media (max-width: 600px) { .example-economics { grid-template-columns: 1fr; } }

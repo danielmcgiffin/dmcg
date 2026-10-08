@@ -1,15 +1,15 @@
-.case-detail .case-facts { padding: 16px 22px; background: var(--advisor-surface); border-left: 3px solid var(--advisor-green); }
+.case-detail .case-facts { padding: 16px 22px; background: var(--sidebar); border-left: 3px solid var(--green); }
 .case-detail .case-facts p { display: grid; grid-template-columns: 110px 1fr; gap: 12px; margin: 10px 0; font-size: 14px; }
-.case-detail .case-facts strong { color: var(--advisor-green); }
-.case-detail .case-next { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--advisor-line); }
+.case-detail .case-facts strong { color: var(--green); }
+.case-detail .case-next { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--line); }
 .case-detail .case-next a { display: inline-block; margin: 0 18px 12px 0; font-weight: 600; }
 @media (max-width: 600px) { .case-detail .case-facts p { display: block; } .case-detail .case-facts span { display: block; margin-top: 2px; } }
-.case-detail .case-principle { margin-top: 32px; padding-left: 18px; border-left: 2px solid var(--advisor-green); color: var(--advisor-green); }
+.case-detail .case-principle { margin-top: 32px; padding-left: 18px; border-left: 2px solid var(--green); color: var(--green); }
 .case-detail .case-note { color: #596154; font-size: .9rem; }
-.case-index { display: grid; gap: 14px; padding: 30px 0 80px; }
-.case-index a { display: block; padding: 22px 24px; border: 1px solid var(--advisor-line); border-radius: 3px; color: inherit; text-decoration: none; transition: background 180ms ease; }
-.case-index a:hover { background: var(--advisor-surface); }
-.case-index small { display: block; color: var(--advisor-green); font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
-.case-index h2 { margin-top: 8px; font-size: 1.3rem; font-weight: 600; line-height: 1.3; letter-spacing: -.02em; }
-.case-index p { margin-top: 8px; color: #596154; font-size: .95rem; line-height: 1.55; }
-.case-index span { display: inline-block; margin-top: 12px; color: var(--advisor-green); font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.case-index { margin-top: 32px; }
+.case-index a { display: block; padding: 26px 0; border-top: 1px solid var(--line); color: inherit; text-decoration: none; }
+.case-index small { display: block; color: var(--green); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
+.case-index h2 { font-size: 2rem; }
+.case-index p { margin-top: 12px; color: var(--muted); }
+.case-index span { display: inline-block; margin-top: 12px; color: var(--green); font-size: 14px; }
+.case-index a:hover h2 { text-decoration: underline; text-underline-offset: .15em; text-decoration-thickness: 1px; }

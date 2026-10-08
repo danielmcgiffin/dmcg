@@ -1,41 +1,31 @@
 ---
-import { bookingUrl, CTA_LABEL } from '../config';
 import { DESCRIPTOR } from '../site';
 import NavigationLinks from './NavigationLinks.astro';
 import { chrome } from '../lib/content/navigation';
-
-interface Props {
-  bookingPlacement?: string;
-}
-
-const { bookingPlacement = 'navigation' } = Astro.props;
 ---
 <header class="site-header">
-  <div class="site-identity"><p class="wordmark"><a href={chrome.homeHref}>{chrome.wordmark}</a></p><p class="site-descriptor">{DESCRIPTOR}</p></div>
-  <nav class="header-nav" aria-label={chrome.primaryNavLabel}>
-    <NavigationLinks />
-    <a class="nav-booking" href={bookingUrl(bookingPlacement)}>{CTA_LABEL}</a>
-  </nav>
+  <div class="site-identity">
+    <a class="wordmark" href="/">{chrome.wordmark}</a>
+    <p class="site-descriptor">{DESCRIPTOR}</p>
+  </div>
+  <nav class="desktop-navigation" aria-label={chrome.primaryNavLabel}><NavigationLinks /></nav>
   <details class="mobile-navigation">
-    <summary>{chrome.menuLabel} <span aria-hidden="true">+</span></summary>
-    <nav aria-label={chrome.mobileNavLabel}>
-      <NavigationLinks />
-      <a class="nav-booking" href={bookingUrl(bookingPlacement)}>{CTA_LABEL}</a>
-    </nav>
+    <summary>{chrome.menuLabel}<span aria-hidden="true">+</span></summary>
+    <nav aria-label={chrome.mobileNavLabel}><NavigationLinks /></nav>
   </details>
 </header>
 <script>
   const menu = document.querySelector<HTMLDetailsElement>('.mobile-navigation');
-  menu?.addEventListener('click', (event) => {
+  menu?.addEventListener('click', event => {
     if ((event.target as Element).closest('a')) menu.open = false;
   });
-  document.addEventListener('keydown', (event) => {
+  document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && menu?.open) {
       menu.open = false;
       menu.querySelector('summary')?.focus();
     }
   });
-  document.addEventListener('click', (event) => {
+  document.addEventListener('click', event => {
     if (menu?.open && !menu.contains(event.target as Node)) menu.open = false;
   });
 </script>

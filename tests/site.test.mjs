@@ -23,7 +23,7 @@ test('built pages have coherent metadata and entity graphs without retired posit
  const titles=new Set();
  for(const p of normal){
   const title=content(p.nodes.find(n=>n.tagName==='title'));assert.ok(title);assert.ok(!titles.has(title),`duplicate title ${title}`);titles.add(title);
-  if(p.route==='/')assert.equal(title,'Danny McGiffin | Independent Tech Advisor');else assert.match(title,/^.+ \| Danny McGiffin$/,p.route);
+  if(p.route==='/')assert.equal(title,'Danny McGiffin | Independent Management Consultant');else assert.match(title,/^.+ \| Danny McGiffin$/,p.route);
   assert.equal(p.nodes.filter(n=>n.tagName==='h1').length,1,p.route);
   assert.equal(attr(p.nodes.find(n=>n.tagName==='html'),'lang'),'en');
   const meta=name=>attr(p.nodes.find(n=>n.tagName==='meta'&&(attr(n,'name')===name||attr(n,'property')===name)),'content');
@@ -32,7 +32,7 @@ test('built pages have coherent metadata and entity graphs without retired posit
   assert.equal(meta('og:url'),origin+p.route);const image=meta('og:image');assert.ok(image?.startsWith(origin+'/og/'),p.route);await assert.doesNotReject(access(join(dist,new URL(image).pathname)),image);
   const graph=p.nodes.filter(n=>n.tagName==='script'&&attr(n,'type')==='application/ld+json').flatMap(n=>{const data=JSON.parse((n.childNodes??[]).map(n=>n.value??'').join(''));assert.equal(data['@context'],'https://schema.org');return data['@graph']??[data];});
   const person=graph.find(n=>n['@type']==='Person');const service=graph.find(n=>n['@type']==='ProfessionalService');
-  assert.equal(person.jobTitle,'Independent tech advisor');assert.equal(person['@id'],origin+'/#person');assert.equal(person.image,undefined);assert.equal(service.makesOffer,undefined);assert.equal(service.logo,origin+'/favicon.svg');assert.ok(person.knowsAbout.includes('Organizational design'));
+  assert.equal(person.jobTitle,'Independent management consultant');assert.equal(person['@id'],origin+'/#person');assert.equal(person.image,undefined);assert.equal(service.makesOffer,undefined);assert.equal(service.logo,origin+'/favicon.svg');assert.ok(person.knowsAbout.includes('Organizational design'));
   assert.doesNotMatch(p.html,/Workflow Teardown|Fixed-Price Workflow Build|workflow automation and AI consultant|Operations engineer|Business Advisor &amp; Designer|Get a second opinion|See if it’s a fit|\$7,500 fixed fee|~\$500k|~5%|redress/i);
  }
 });
@@ -48,28 +48,28 @@ test('retired routes redirect directly and are excluded from the sitemap and nav
  assert.ok(!sitemap.includes('404'));for(const p of normal)assert.ok(sitemap.includes(origin+p.route),p.route);
 });
 
-test('homepage renders identity, selected work, testimonial, writing, and next step in order',()=>{
+test('homepage introduces Danny and links to completed work, writing, and contact',()=>{
  const home=normal.find(p=>p.route==='/');const text=content(parse(home.html));const hrefs=attrs(home,'a','href');
  assert.deepEqual(home.nodes.filter(n=>n.tagName==='h2').map(n=>attr(n,'id')),['work-title','writing-title','conversation-title']);
  assert.equal(content(home.nodes.find(n=>n.tagName==='h1')).trim(),'Danny McGiffin');
  assert.ok(attrs(home,'img','src').includes('/headshot.jpg'));
  const cards=home.nodes.filter(n=>n.tagName==='a'&&attr(n,'class')==='consulting-service');
  assert.deepEqual(cards.map(n=>attr(n,'href')),selectedRoutes);
- assert.equal((text.match(/Working with Danny was excellent/g)||[]).length,1);
+ assert.equal((text.match(/Danny asks thought-provoking, challenging questions/g)||[]).length,1);
  for(const post of substackPosts.slice(0,3))assert.ok(hrefs.includes(post.href),post.href);
  for(const href of ['/work/','/writing/','/contact/'])assert.ok(hrefs.includes(href),href);
  assert.ok(hrefs.includes('https://cal.com/dannymcgiffin/30min?src=closing'));
  for(const route of offerRoutes)assert.ok(!hrefs.includes(route),`homepage links offer ${route}`);
  assert.doesNotMatch(text,/How we can work together|When you hear yourself saying/);
 });
-test('navigation lists Work, Writing, About, Contact and the call to action; the name links home',()=>{
+test('navigation lists Work, Writing, About, Contact; the name links home',()=>{
  for(const p of normal){
   const nav=p.nodes.find(n=>n.tagName==='nav'&&attr(n,'aria-label')==='Primary navigation');assert.ok(nav,p.route);
   const labels=flatten(nav).filter(n=>n.tagName==='a').map(n=>content(n).replace(/\s*↗$/,'').trim());
-  assert.deepEqual(labels,['Work','Writing','About','Contact',CTA],p.route);
+  assert.deepEqual(labels,['Work','Writing','About','Contact'],p.route);
   for(const route of offerRoutes)assert.ok(!flatten(nav).some(n=>attr(n,'href')===route),`${p.route} nav links ${route}`);
   const identity=p.nodes.find(n=>['advisor-identity','site-identity'].includes(attr(n,'class')));
-  assert.deepEqual(identity.childNodes.map(n=>content(n).trim()).filter(Boolean),['DANNY McGIFFIN','Independent Tech Advisor']);
+  assert.deepEqual(identity.childNodes.map(n=>content(n).trim()).filter(Boolean),['DANNY McGIFFIN','Independent Management Consultant']);
   assert.deepEqual(flatten(identity).filter(n=>n.tagName==='a').map(n=>attr(n,'href')),['/'],'name links home');
  }
 });
@@ -83,7 +83,7 @@ test('offer pages share one skeleton with price, timing, fit, and FAQ',()=>{
  const expected={'/offers/tech-audit/':['$5,000 fixed fee','10 business days'],'/offers/second-opinion/':['From $2,500, fixed quote','5 business days'],'/offers/ai-opportunity/':['$5,000 fixed fee','10 business days'],'/offers/data-connection/':['From $7,500, fixed quote','Typically 3–6 weeks']};
  for(const [route,[price,time]] of Object.entries(expected)){
   const p=normal.find(p=>p.route===route);assert.ok(p,route);const text=content(parse(p.html));
-  assert.ok(text.includes(price),route);assert.ok(text.includes(time),route);assert.match(text,/Probably a good fit/);assert.match(text,/A few practical questions/);
+  assert.ok(text.includes(price),route);assert.ok(text.includes(time),route);assert.match(text,/What you get/);assert.match(text,/The details/);assert.match(text,/When this is a good fit/);
   assert.ok(attrs(p,'a','href').some(href=>href?.startsWith('https://cal.com/')),route);
  }
  const second=content(parse(normal.find(p=>p.route==='/offers/second-opinion/').html));
@@ -120,7 +120,7 @@ test('case claims retain role and measurement boundaries',()=>{
  for(const route of caseRoutes)assert.ok(attrs(about,'a','href').includes(route),route);
  const index=normal.find(p=>p.route==='/work/');for(const route of caseRoutes)assert.ok(attrs(index,'a','href').includes(route),route);
  const caseText=route=>content(parse(normal.find(p=>p.route===route).html));
- for(const route of caseRoutes){const text=caseText(route);for(const heading of ['The situation','The expensive problem','What I found','The decision','The result'])assert.ok(text.includes(heading),`${route}: ${heading}`);}
+ for(const route of caseRoutes){const text=caseText(route);for(const heading of ['The situation','The problem','What I found','The decision','The result'])assert.ok(text.includes(heading),`${route}: ${heading}`);}
  const erpText=caseText('/work/erp-decision/');
  assert.match(erpText,/CEO canceled the implementation/);assert.match(erpText,/full implementation estimated at about \$50K/);assert.match(erpText,/five-year license had already been contracted/);
  assert.doesNotMatch(erpText,/saved.*\$|realized savings(?!\.)/);assert.match(erpText,/not a claim of realized savings/);
@@ -153,7 +153,7 @@ test('advisory and writing journeys expose next steps and source evidence',()=>{
 });
 test('RSS, llms, and the custom 404 remain usable',async()=>{
  const rss=await readFile(join(dist,'rss.xml'),'utf8');assert.equal((rss.match(/<item>/g)||[]).length,4);
- const llms=await readFile(join(dist,'llms.txt'),'utf8');assert.match(llms,/independent tech advisor/);for(const route of offerRoutes)assert.ok(llms.includes(origin+route),route);assert.doesNotMatch(llms,/Workflow Teardown|AI Opportunity Sprint/);
+ const llms=await readFile(join(dist,'llms.txt'),'utf8');assert.match(llms,/independent management consultant/);for(const route of offerRoutes)assert.ok(llms.includes(origin+route),route);assert.doesNotMatch(llms,/Workflow Teardown|AI Opportunity Sprint/);
  const missing=pages.find(p=>p.route==='/404.html');assert.ok(missing);assert.ok(missing.nodes.some(n=>attr(n,'name')==='robots'&&attr(n,'content')==='noindex'));
 });
 
@@ -161,16 +161,37 @@ test('AI assessment is discoverable, priced, and separates illustrative economic
  const ai=normal.find(p=>p.route==='/offers/ai-opportunity/');assert.ok(ai);
  const contactPage=normal.find(p=>p.route==='/contact/');assert.ok(attrs(contactPage,'a','href').includes('/offers/ai-opportunity/'));
  const text=content(parse(ai.html));
- assert.match(text,/\$5,000 fixed fee/);assert.equal((text.match(/Working with Danny was excellent/g)||[]).length,0);assert.match(text,/10 business days/);
+ assert.match(text,/\$5,000 fixed fee/);assert.equal((text.match(/Danny asks thought-provoking, challenging questions/g)||[]).length,0);assert.match(text,/10 business days/);
  assert.match(text,/Fictional business\. Assumed figures/);
  assert.match(text,/Labor cost is not recoverable savings/);
- assert.match(text,/not results from this AI assessment/);
  assert.match(text,/Worth the fee, or your money back/);
  assert.match(text,/within seven calendar days of the review/);
  assert.match(text,/refund the full fee/);
  const samples=ai.nodes.filter(n=>n.tagName==='details'&&attr(n,'name')==='sample-opportunity');
  assert.equal(samples.length,3);assert.equal(samples.filter(n=>attr(n,'open')!==undefined).length,1);
  for(const label of ['Test now','Investigate','Don’t bother'])assert.ok(samples.some(n=>content(n).includes(label)));
- for(const placement of ['ai-hero','ai-deliverable','ai-offer','ai-closing'])assert.ok(attrs(ai,'a','href').some(href=>href===`https://cal.com/dannymcgiffin/30min?src=${placement}`));
+ assert.ok(attrs(ai,'a','href').includes('https://cal.com/dannymcgiffin/30min?src=ai-opportunity-hero'));
  assert.ok(attrs(ai,'a','href').includes('/work/erp-decision/'));
+});
+
+// Publishing unfinished copy and accidentally reintroducing a second shell are real regressions.
+test('every page has one shared shell and no unfinished copy', () => {
+ for (const page of normal) {
+  assert.doesNotMatch(content(parse(page.html)), /\[TODO:|\bTBD\b|Lorem ipsum/i, page.route);
+  assert.equal(page.nodes.filter(n => n.tagName === 'main').length, 1, page.route);
+  assert.equal(page.nodes.filter(n => n.tagName === 'header' && attr(n, 'class') === 'site-header').length, 1, page.route);
+  assert.equal(page.nodes.filter(n => n.tagName === 'footer').length, 1, page.route);
+ }
+});
+test('Ed’s approved testimonial is attributed and precedes selected work', () => {
+ const home = normal.find(p => p.route === '/');
+ const text = content(parse(home.html));
+ assert.match(text, /Ed Burns/);
+ assert.match(text, /CEO at Burns Logistics/);
+ assert.ok(text.indexOf('Danny asks thought-provoking') < text.indexOf('Selected work'));
+ for (const route of selectedRoutes) {
+  const page = normal.find(p => p.route === route);
+  assert.ok(page, route);
+  assert.ok(content(parse(page.html)).length > 300, route);
+ }
 });

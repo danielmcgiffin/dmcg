@@ -2,14 +2,14 @@
   <rect width="1200" height="630" fill="#f3f2e9"/>
   <rect width="18" height="630" fill="#214d38"/>
   <g font-family="Arial, sans-serif">
-    <text x="76" y="82" font-size="19" font-weight="700" letter-spacing="2" fill="#214d38">DANNY McGIFFIN / INDEPENDENT TECH ADVISOR</text>
-    <g font-size="58" font-weight="700" letter-spacing="-2" fill="#303a32">
-      <text x="72" y="204">Something important is</text>
-      <text x="72" y="283">happening between the</text>
-      <text x="72" y="362" fill="#214d38">boxes on the org chart.</text>
+    <text x="76" y="82" font-size="19" font-weight="700" letter-spacing="2" fill="#214d38">DANNY McGIFFIN / INDEPENDENT MANAGEMENT CONSULTANT</text>
+    <g font-size="66" font-weight="700" letter-spacing="-2" fill="#303a32">
+      <text x="72" y="204" fill="#214d38">About Danny.</text>
+      <text x="72" y="283">Background, work,</text>
+      <text x="72" y="362">and approach.</text>
     </g>
     <path d="M76 420H1124" stroke="#bcc8b9"/>
-    <text x="76" y="478" font-size="24" fill="#214d38">Independent tech advisor · Herndon, Virginia · No software to sell</text>
+    <text x="76" y="478" font-size="24" fill="#214d38">Northern Virginia / Washington, DC</text>
     <text x="76" y="559" font-size="19" fill="#596154">ABOUT</text>
     <text x="1124" y="559" font-size="19" text-anchor="end" fill="#596154">dannymcgiffin.com/about</text>
   </g>

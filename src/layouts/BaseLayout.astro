@@ -4,6 +4,8 @@ import '@fontsource/newsreader/latin-300-italic.css';
 import '@fontsource/geist/latin-400.css';
 import '@fontsource/geist/latin-600.css';
 import Analytics from '../components/Analytics.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import { pageGraph } from '../lib/schema';
 import { IMAGE_PATH, SITE_NAME } from '../site';
 import { chrome } from '../lib/content/navigation';
@@ -11,6 +13,7 @@ import '../styles/global.css';
 
 interface Props {
 	bodyClass?: string;
+	mainClass?: string;
 	title: string;
 	description: string;
 	canonical?: URL;
@@ -27,6 +30,7 @@ const {
 	title,
 	description,
 	bodyClass,
+	mainClass,
 	canonical = new URL(Astro.url.pathname, Astro.site),
 	image = IMAGE_PATH,
 	imageAlt = chrome.defaultImageAlt,
@@ -82,7 +86,11 @@ const ogImage = new URL(image, Astro.site);
 	</head>
 	<body class={bodyClass}>
 		<a class="skip-link" href="#main-content">{chrome.skipLink}</a>
-		<slot />
+		<SiteHeader />
+		<div class="site-body">
+			<main id="main-content" class={mainClass}><slot /></main>
+			<SiteFooter />
+		</div>
 		<Analytics />
 	</body>
 </html>

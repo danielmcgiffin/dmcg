@@ -1,6 +1,4 @@
 ---
-import SiteFooter from '../components/SiteFooter.astro';
-import SiteHeader from '../components/SiteHeader.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { breadcrumbList } from '../lib/schema';
 import { SITE_URL } from '../site';
@@ -18,8 +16,7 @@ import '../styles/pages/still-on-tools.css';
 ---
 
 <BaseLayout title={research.title} description={research.description} structuredData={structuredData}>
-	<SiteHeader />
-	<main id="main-content">
+
 		<header class="offer-hero section-dark">
 			<div class="shell">
 				<p class="eyebrow">{research.eyebrow}</p>
@@ -29,6 +26,5 @@ import '../styles/pages/still-on-tools.css';
 		</header>
 
 		<article class="prose service-prose shell" set:html={research.bodyHtml} />
-	</main>
-	<SiteFooter />
+
 </BaseLayout>

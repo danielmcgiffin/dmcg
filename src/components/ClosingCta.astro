@@ -1,13 +1,11 @@
 ---
 import { bookingUrl, CTA_LABEL } from '../config';
 import { closingCta } from '../lib/content/navigation';
-import ArrowUpRight from './ArrowUpRight.astro';
-interface Props { title?: string; emphasis?: string; placement?: string; }
-const { title = closingCta.title, emphasis = closingCta.emphasis, placement = 'closing' } = Astro.props;
+interface Props { placement?: string; }
+const { placement = 'closing' } = Astro.props;
 ---
-<section class="conversation section-dark" aria-labelledby="conversation-title">
-  <div class="shell conversation-layout">
-    <div><p class="eyebrow">{closingCta.eyebrow}</p><h2 id="conversation-title" class="display">{title}<br /><em>{emphasis}</em></h2></div>
-    <div class="conversation-copy">{closingCta.paragraphs.map(text => <p>{text}</p>)}<a class="button button--primary" href={bookingUrl(placement)}>{CTA_LABEL} <ArrowUpRight /></a></div>
-  </div>
+<section class="conversation shell" aria-labelledby="conversation-title">
+  <h2 id="conversation-title">{closingCta.title}</h2>
+  {closingCta.paragraphs.map(text => <p>{text}</p>)}
+  <a class="button" href={bookingUrl(placement)}>{CTA_LABEL}</a>
 </section>
