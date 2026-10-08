@@ -1,0 +1,21 @@
+---
+import type { SelectedWorkContent } from '../../content/home';
+import { workHref, type WorkEntry } from '../../content/work';
+
+interface Props { content: SelectedWorkContent; entries: readonly WorkEntry[]; }
+const { content, entries } = Astro.props;
+---
+<section class="consulting-section" aria-labelledby="work-title">
+  <h2 class="consulting-label" id="work-title">{content.heading}</h2>
+  <div class="consulting-services">
+    {entries.map(entry => (
+      <a class="consulting-service" href={workHref(entry.slug)}>
+        <h3>{entry.title}</h3>
+        <p>{entry.summary}</p>
+        {entry.metric && <p class="consulting-service-terms"><strong>{entry.metric}</strong></p>}
+        <span class="consulting-service-link">{content.cardLinkLabel}</span>
+      </a>
+    ))}
+  </div>
+  <p class="consulting-note"><a href="/work/">{content.allLabel}</a></p>
+</section>

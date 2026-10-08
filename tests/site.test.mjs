@@ -14,9 +14,10 @@ function content(node){if(['style','script'].includes(node.tagName))return '';re
 const pages=await Promise.all(all.filter(f=>f.endsWith('.html')).map(async file=>{const html=await readFile(file,'utf8');const nodes=flatten(parse(html));return {file,html,nodes,route:'/'+relative(dist,file).replace(/index\.html$/,''),redirect:nodes.some(n=>n.tagName==='meta'&&attr(n,'http-equiv')==='refresh')};}));
 const normal=pages.filter(p=>!p.redirect&&p.route!=='/404.html');
 const attrs=(p,tag,key)=>p.nodes.filter(n=>n.tagName===tag).map(n=>attr(n,key));
-const retired={'/workflow-review/':'/still-on-tools/','/ai-opportunity-sprint/':'/still-on-tools/','/score-one-workflow/':'/still-on-tools/','/advisory/':'/second-opinion/','/ai/':'/ai-opportunity/','/work/erp-second-opinion/':'/case-studies/erp-second-opinion/'};
-const offerRoutes=['/tech-audit/','/second-opinion/','/ai-opportunity/','/data-connection/'];
-const caseRoutes=['/case-studies/erp-second-opinion/','/case-studies/operating-model/','/case-studies/growth/','/case-studies/navy-improper-payments/'];
+const retired={'/workflow-review/':'/still-on-tools/','/ai-opportunity-sprint/':'/still-on-tools/','/score-one-workflow/':'/still-on-tools/','/advisory/':'/offers/second-opinion/','/ai/':'/offers/ai-opportunity/','/work/erp-second-opinion/':'/work/erp-decision/','/case-studies/':'/work/','/case-studies/erp-second-opinion/':'/work/erp-decision/','/case-studies/operating-model/':'/work/operating-model/','/case-studies/growth/':'/work/growth/','/case-studies/navy-improper-payments/':'/work/navy-improper-payments/','/tech-audit/':'/offers/tech-audit/','/second-opinion/':'/offers/second-opinion/','/ai-opportunity/':'/offers/ai-opportunity/','/data-connection/':'/offers/data-connection/'};
+const offerRoutes=['/offers/tech-audit/','/offers/second-opinion/','/offers/ai-opportunity/','/offers/data-connection/'];
+const caseRoutes=['/work/erp-decision/','/work/operating-model/','/work/growth/','/work/navy-improper-payments/'];
+const selectedRoutes=['/work/erp-decision/','/work/64m-deployment/','/work/negotiation-policy/'];
 const CTA='Schedule Our First Chat';
 test('built pages have coherent metadata and entity graphs without retired positioning',async()=>{
  const titles=new Set();
@@ -47,32 +48,29 @@ test('retired routes redirect directly and are excluded from the sitemap and nav
  assert.ok(!sitemap.includes('404'));for(const p of normal)assert.ok(sitemap.includes(origin+p.route),p.route);
 });
 
-test('homepage routes visitors to the four offers with one call to action',()=>{
+test('homepage renders identity, selected work, testimonial, writing, and next step in order',()=>{
  const home=normal.find(p=>p.route==='/');const text=content(parse(home.html));const hrefs=attrs(home,'a','href');
- assert.deepEqual(home.nodes.filter(n=>n.tagName==='h2').map(n=>attr(n,'id')),['triggers-title','decision-title','services-title','about-title','conversation-title']);
- const hero=home.nodes.find(n=>attr(n,'class')==='consulting-intro');assert.ok(!flatten(hero).some(n=>attr(n,'class')==='consulting-label'),'hero has no eyebrow');
+ assert.deepEqual(home.nodes.filter(n=>n.tagName==='h2').map(n=>attr(n,'id')),['work-title','writing-title','conversation-title']);
+ assert.equal(content(home.nodes.find(n=>n.tagName==='h1')).trim(),'Danny McGiffin');
  assert.ok(attrs(home,'img','src').includes('/headshot.jpg'));
- const router=home.nodes.find(n=>attr(n,'class')==='consulting-router');const routerLinks=flatten(router).filter(n=>n.tagName==='a').map(n=>attr(n,'href'));
- for(const route of offerRoutes)assert.ok(routerLinks.includes(route),`router links ${route}`);
  const cards=home.nodes.filter(n=>n.tagName==='a'&&attr(n,'class')==='consulting-service');
- assert.deepEqual(cards.map(n=>attr(n,'href')),offerRoutes);
- for(const card of cards)assert.match(content(card),/\$[\d,]+.*(business days|weeks)/);
- assert.match(text,/completely independent\. I don’t sell software/);
- assert.doesNotMatch(text,/Selected work|Advisory|Design and Build|About to make an expensive/);
+ assert.deepEqual(cards.map(n=>attr(n,'href')),selectedRoutes);
  assert.equal((text.match(/Working with Danny was excellent/g)||[]).length,1);
- assert.equal((text.match(/The ERP we decided not to implement/g)||[]).length,2,'featured case plus its case-study teaser');
- for(const href of ['/about/','/case-studies/','/case-studies/erp-second-opinion/'])assert.ok(hrefs.includes(href),href);
- assert.ok(!hrefs.includes('/contact/'));
- for(const src of ['hero','closing'])assert.ok(hrefs.includes(`https://cal.com/dannymcgiffin/30min?src=${src}`),src);
+ for(const post of substackPosts.slice(0,3))assert.ok(hrefs.includes(post.href),post.href);
+ for(const href of ['/work/','/writing/','/contact/'])assert.ok(hrefs.includes(href),href);
+ assert.ok(hrefs.includes('https://cal.com/dannymcgiffin/30min?src=closing'));
+ for(const route of offerRoutes)assert.ok(!hrefs.includes(route),`homepage links offer ${route}`);
+ assert.doesNotMatch(text,/How we can work together|When you hear yourself saying/);
 });
-test('navigation names the offers and ends with the single call to action',()=>{
+test('navigation lists Work, Writing, About, Contact and the call to action; the name links home',()=>{
  for(const p of normal){
   const nav=p.nodes.find(n=>n.tagName==='nav'&&attr(n,'aria-label')==='Primary navigation');assert.ok(nav,p.route);
   const labels=flatten(nav).filter(n=>n.tagName==='a').map(n=>content(n).replace(/\s*↗$/,'').trim());
-  assert.deepEqual(labels,['Home','About','Tech Audit','Second Opinion','AI Opportunity','Data Connection','Case Studies','Writing','LinkedIn','Substack','X',CTA],p.route);
-  const groups=flatten(nav).filter(n=>attr(n,'class')==='navigation-group').map(content);assert.deepEqual(groups,['Services','Elsewhere']);
+  assert.deepEqual(labels,['Work','Writing','About','Contact',CTA],p.route);
+  for(const route of offerRoutes)assert.ok(!flatten(nav).some(n=>attr(n,'href')===route),`${p.route} nav links ${route}`);
   const identity=p.nodes.find(n=>['advisor-identity','site-identity'].includes(attr(n,'class')));
-  assert.deepEqual(identity.childNodes.map(n=>content(n).trim()).filter(Boolean),['DANNY McGIFFIN','Independent Tech Advisor']);assert.ok(!flatten(identity).some(n=>n.tagName==='a'),'name is not a link');
+  assert.deepEqual(identity.childNodes.map(n=>content(n).trim()).filter(Boolean),['DANNY McGIFFIN','Independent Tech Advisor']);
+  assert.deepEqual(flatten(identity).filter(n=>n.tagName==='a').map(n=>attr(n,'href')),['/'],'name links home');
  }
 });
 test('every booking link uses the one call to action and keeps its source tag',()=>{
@@ -82,15 +80,15 @@ test('every booking link uses the one call to action and keeps its source tag',(
  }}
 });
 test('offer pages share one skeleton with price, timing, fit, and FAQ',()=>{
- const expected={'/tech-audit/':['$5,000 fixed fee','10 business days'],'/second-opinion/':['From $2,500, fixed quote','5 business days'],'/ai-opportunity/':['$5,000 fixed fee','10 business days'],'/data-connection/':['From $7,500, fixed quote','Typically 3–6 weeks']};
+ const expected={'/offers/tech-audit/':['$5,000 fixed fee','10 business days'],'/offers/second-opinion/':['From $2,500, fixed quote','5 business days'],'/offers/ai-opportunity/':['$5,000 fixed fee','10 business days'],'/offers/data-connection/':['From $7,500, fixed quote','Typically 3–6 weeks']};
  for(const [route,[price,time]] of Object.entries(expected)){
   const p=normal.find(p=>p.route===route);assert.ok(p,route);const text=content(parse(p.html));
   assert.ok(text.includes(price),route);assert.ok(text.includes(time),route);assert.match(text,/Probably a good fit/);assert.match(text,/A few practical questions/);
   assert.ok(attrs(p,'a','href').some(href=>href?.startsWith('https://cal.com/')),route);
  }
- const second=content(parse(normal.find(p=>p.route==='/second-opinion/').html));
+ const second=content(parse(normal.find(p=>p.route==='/offers/second-opinion/').html));
  assert.match(second,/proceed, proceed with changes, or stop/);assert.match(second,/no vendor commissions, referral fees, or resale margins/);assert.match(second,/no vendor compensation or affiliations/);
- const data=content(parse(normal.find(p=>p.route==='/data-connection/').html));assert.match(data,/without buying a new system/);assert.match(data,/QuickBooks/);assert.match(data,/governed data layer/);
+ const data=content(parse(normal.find(p=>p.route==='/offers/data-connection/').html));assert.match(data,/without buying a new system/);assert.match(data,/QuickBooks/);assert.match(data,/governed data layer/);
 });
 test('visible copy uses curly apostrophes',()=>{
  for(const p of normal)assert.doesNotMatch(content(parse(p.html)),/[A-Za-z]'[A-Za-z]/,p.route);
@@ -120,16 +118,16 @@ test('case claims retain role and measurement boundaries',()=>{
  const about=normal.find(p=>p.route==='/about/');
  for(const fragment of ['erp','collaboration','growth','navy'])assert.ok(about.nodes.some(n=>attr(n,'id')===fragment));
  for(const route of caseRoutes)assert.ok(attrs(about,'a','href').includes(route),route);
- const index=normal.find(p=>p.route==='/case-studies/');for(const route of caseRoutes)assert.ok(attrs(index,'a','href').includes(route),route);
+ const index=normal.find(p=>p.route==='/work/');for(const route of caseRoutes)assert.ok(attrs(index,'a','href').includes(route),route);
  const caseText=route=>content(parse(normal.find(p=>p.route===route).html));
  for(const route of caseRoutes){const text=caseText(route);for(const heading of ['The situation','The expensive problem','What I found','The decision','The result'])assert.ok(text.includes(heading),`${route}: ${heading}`);}
- const erpText=caseText('/case-studies/erp-second-opinion/');
+ const erpText=caseText('/work/erp-decision/');
  assert.match(erpText,/CEO canceled the implementation/);assert.match(erpText,/full implementation estimated at about \$50K/);assert.match(erpText,/five-year license had already been contracted/);
  assert.doesNotMatch(erpText,/saved.*\$|realized savings(?!\.)/);assert.match(erpText,/not a claim of realized savings/);
  for(const figure of ['$1.25M','$600K','$1.2M','$2.45M','$350K','$50K'])assert.ok(erpText.includes(figure),figure);
- assert.match(caseText('/case-studies/operating-model/'),/executive team approved the model/);assert.doesNotMatch(caseText('/case-studies/operating-model/'),/behavior changed because/);
- const growth=caseText('/case-studies/growth/');assert.match(growth,/recognized revenue/);
- const navy=caseText('/case-studies/navy-improper-payments/');assert.match(navy,/internal program reporting/);assert.match(navy,/not recovered cash/);assert.match(navy,/From 2015 to 2019/);assert.match(navy,/roughly \$250 million less in estimated improper payments/);assert.match(navy,/error rates fell by about 45%/);
+ assert.match(caseText('/work/operating-model/'),/executive team approved the model/);assert.doesNotMatch(caseText('/work/operating-model/'),/behavior changed because/);
+ const growth=caseText('/work/growth/');assert.match(growth,/recognized revenue/);
+ const navy=caseText('/work/navy-improper-payments/');assert.match(navy,/internal program reporting/);assert.match(navy,/not recovered cash/);assert.match(navy,/From 2015 to 2019/);assert.match(navy,/roughly \$250 million less in estimated improper payments/);assert.match(navy,/error rates fell by about 45%/);
  const all=normal.map(p=>p.html).join('');
  assert.doesNotMatch(all,/roughly \$2\.5M ERP implementation|roughly \$1\.5M ERP license|came in +at/);
  assert.doesNotMatch(all,/more than \$1M in additional customization|more than \$1 million in additional customization/);
@@ -137,7 +135,7 @@ test('case claims retain role and measurement boundaries',()=>{
 });
 
 test('advisory and writing journeys expose next steps and source evidence',()=>{
- const advisory=normal.find(p=>p.route==='/second-opinion/');const writing=normal.find(p=>p.route==='/writing/');const research=normal.find(p=>p.route==='/still-on-tools/');
+ const advisory=normal.find(p=>p.route==='/offers/second-opinion/');const writing=normal.find(p=>p.route==='/writing/');const research=normal.find(p=>p.route==='/still-on-tools/');
  assert.ok(advisory && writing && research);
  assert.match(content(parse(advisory.html)),/free 30-minute (introduction|conversation)/);
  assert.match(content(parse(advisory.html)),/no vendor compensation or affiliations/);
@@ -160,8 +158,8 @@ test('RSS, llms, and the custom 404 remain usable',async()=>{
 });
 
 test('AI assessment is discoverable, priced, and separates illustrative economics from proof',()=>{
- const ai=normal.find(p=>p.route==='/ai-opportunity/');assert.ok(ai);
- const home=normal.find(p=>p.route==='/');assert.ok(attrs(home,'a','href').includes('/ai-opportunity/'));
+ const ai=normal.find(p=>p.route==='/offers/ai-opportunity/');assert.ok(ai);
+ const contactPage=normal.find(p=>p.route==='/contact/');assert.ok(attrs(contactPage,'a','href').includes('/offers/ai-opportunity/'));
  const text=content(parse(ai.html));
  assert.match(text,/\$5,000 fixed fee/);assert.equal((text.match(/Working with Danny was excellent/g)||[]).length,0);assert.match(text,/10 business days/);
  assert.match(text,/Fictional business\. Assumed figures/);
@@ -174,5 +172,5 @@ test('AI assessment is discoverable, priced, and separates illustrative economic
  assert.equal(samples.length,3);assert.equal(samples.filter(n=>attr(n,'open')!==undefined).length,1);
  for(const label of ['Test now','Investigate','Don’t bother'])assert.ok(samples.some(n=>content(n).includes(label)));
  for(const placement of ['ai-hero','ai-deliverable','ai-offer','ai-closing'])assert.ok(attrs(ai,'a','href').some(href=>href===`https://cal.com/dannymcgiffin/30min?src=${placement}`));
- assert.ok(attrs(ai,'a','href').includes('/case-studies/erp-second-opinion/'));
+ assert.ok(attrs(ai,'a','href').includes('/work/erp-decision/'));
 });

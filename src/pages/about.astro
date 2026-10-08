@@ -5,66 +5,52 @@ import AdvisorFooter from '../components/AdvisorFooter.astro';
 import { breadcrumbList } from '../lib/schema';
 import { SITE_URL } from '../site';
 import { bookingUrl, CTA_LABEL } from '../config';
-import { caseStudies } from '../case-studies';
+import { about } from '../lib/content/about';
+import { chrome } from '../lib/content/navigation';
+import { work, workHref } from '../lib/content/work';
 import '../styles/pages/about.css';
+
+const stories = work.filter(entry => entry.anchor);
 ---
-<BaseLayout title="About | Danny McGiffin" description="Danny McGiffin is an independent tech advisor in Herndon, Virginia. He follows business problems across departments, systems, and incentives, and has no software, vendors, or commissions to sell." image="/og/about.png" imageAlt="About Danny McGiffin, Independent Tech Advisor. Something important is happening between the boxes on the org chart." bodyClass="about-timeline-page" pageType="AboutPage" structuredData={breadcrumbList([{name:'Home',url:`${SITE_URL}/`},{name:'About',url:`${SITE_URL}/about/`}])}>
+<BaseLayout title={about.title} description={about.description} image="/og/about.png" imageAlt={about.imageAlt} bodyClass="about-timeline-page" pageType="AboutPage" structuredData={breadcrumbList([{name:chrome.breadcrumbHome,url:`${SITE_URL}/`},{name:about.breadcrumb,url:`${SITE_URL}/about/`}])}>
   <AdvisorSidebar current="/about/" />
   <main id="main-content" class="about-main">
     <div class="about-column">
       <section class="about-intro" aria-labelledby="about-title">
-        <p class="eyebrow about-eyebrow">About</p>
-        <h1 id="about-title">Something important is happening between the boxes on the org chart, and no specialist owns the whole thing.</h1>
+        <p class="eyebrow about-eyebrow">{about.eyebrow}</p>
+        <h1 id="about-title">{about.heading}</h1>
         <div class="about-person">
-          <img class="about-portrait" src="/headshot.jpg" width="400" height="400" alt="Danny McGiffin" fetchpriority="high" />
+          <img class="about-portrait" src="/headshot.jpg" width="400" height="400" alt={about.portraitAlt} fetchpriority="high" />
           <div>
-            <p class="about-lead">I’m Danny McGiffin, an independent tech advisor in Herndon, Virginia.</p>
-            <p>I work directly with owners and senior leaders of growing businesses who need to see a situation clearly and decide what the business should actually change.</p>
+            <p class="about-lead">{about.lead}</p>
+            <p>{about.intro}</p>
           </div>
         </div>
       </section>
 
-      <section class="about-section" aria-labelledby="arc-title">
-        <h2 id="arc-title">How I got here</h2>
-        <p>I started in Army logistics. From there I moved into consulting, then operations, enterprise systems, organizational design, and strategy.</p>
-        <p>That sounds more eclectic than it feels. Each move followed the same problem into a new room: the thing that was going wrong didn’t belong to any one department, so nobody was in a position to fix it.</p>
-        <p>So I follow the problem. Across departments, systems, incentives, and information. Wherever it actually goes.</p>
-      </section>
-
-      <section class="about-section" aria-labelledby="independent-title">
-        <h2 id="independent-title">Why independent</h2>
-        <p>I went independent to work directly with founders on things that matter, without having to worry about what partnership agreements were in place.</p>
-        <p>When the right answer might be “keep what you have” or “fix the process first,” the person giving it can’t be paid by the answer.</p>
-        <p>So I don’t sell software, represent vendors, take commissions, or accept referral fees. I don’t need the answer to be a purchase, not even of my services.</p>
-        <p>You work with me directly. No junior team, no handoff after the first meeting.</p>
-      </section>
-
-      <section class="about-section" aria-labelledby="pattern-title">
-        <h2 id="pattern-title">The pattern</h2>
-        <p>Finance sees reporting. Operations sees workarounds. IT sees systems. The vendor sees implementation. Leadership sees the cost.</p>
-        <p>Usually, everybody is seeing something real. They’re just not seeing the whole thing.</p>
-        <p>I follow the problem through the business: how the company makes money, who owns what, where information comes from, what the systems can actually represent, and what people have learned to work around.</p>
-        <p>The interesting question is rarely “How do we fix this?” It’s “What is actually causing this?”</p>
-        <p>Sometimes the answer is technology. Just as often, it’s process, incentives, authority, information, or organization.</p>
-      </section>
+      {about.sections.map(section => (
+        <section class="about-section" aria-labelledby={section.id}>
+          <h2 id={section.id}>{section.heading}</h2>
+          {section.paragraphs.map(text => <p>{text}</p>)}
+        </section>
+      ))}
 
       <section class="about-work" aria-labelledby="work-title">
-        <h2 id="work-title">What that looks like</h2>
-        {caseStudies.map(study => (
-          <article class="case-story" id={study.anchor} aria-labelledby={`${study.anchor}-title`}>
-            <p class="eyebrow">{study.context}</p>
-            <h3 id={`${study.anchor}-title`}><a href={`/case-studies/${study.slug}/`}>{study.title}</a></h3>
-            <p class="case-summary">My role: {study.role}</p>
-            <blockquote class="story-principle">{study.principle}</blockquote>
+        <h2 id="work-title">{about.workHeading}</h2>
+        {stories.map(entry => (
+          <article class="case-story" id={entry.anchor} aria-labelledby={`${entry.anchor}-title`}>
+            <p class="eyebrow">{entry.client}</p>
+            <h3 id={`${entry.anchor}-title`}><a href={workHref(entry.slug)}>{entry.title}</a></h3>
+            <p class="case-summary">{about.rolePrefix}{entry.role}</p>
+            <blockquote class="story-principle">{entry.principle}</blockquote>
           </article>
         ))}
-        <p class="about-work-link"><a href="/case-studies/">All case studies ↗</a></p>
+        <p class="about-work-link"><a href="/work/">{about.allWorkLabel}</a></p>
       </section>
 
       <section class="about-contact" aria-labelledby="conversation-title">
-        <h2 id="conversation-title">Let’s talk.</h2>
-        <p>Technology should make the business easier to run. If yours doesn’t, let’s find out why.</p>
-        <p>You don’t need to have the problem neatly framed. In fact, that’s often the point.</p>
+        <h2 id="conversation-title">{about.contactHeading}</h2>
+        {about.contactParagraphs.map(text => <p>{text}</p>)}
         <a href={bookingUrl('about-closing')}>{CTA_LABEL} ↗</a>
       </section>
     </div>

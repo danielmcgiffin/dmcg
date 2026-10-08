@@ -1,4 +1,6 @@
 ---
+import { chrome } from '../lib/content/navigation';
+
 interface Props {
   about?: boolean;
 }
@@ -6,6 +8,6 @@ interface Props {
 const { about = false } = Astro.props;
 ---
 <footer class:list={['advisor-footer', { 'advisor-footer--about': about }]}>
-  <span>© {new Date().getFullYear()} Danny McGiffin</span>
-  <a href="/elsewhere/">Elsewhere ↗</a>
+  <span>{chrome.copyright(new Date().getFullYear())}</span>
+  <a href={chrome.footerLink.href}>{chrome.footerLink.label}</a>
 </footer>

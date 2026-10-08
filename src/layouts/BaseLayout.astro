@@ -6,6 +6,7 @@ import '@fontsource/geist/latin-600.css';
 import Analytics from '../components/Analytics.astro';
 import { pageGraph } from '../lib/schema';
 import { IMAGE_PATH, SITE_NAME } from '../site';
+import { chrome } from '../lib/content/navigation';
 import '../styles/global.css';
 
 interface Props {
@@ -28,7 +29,7 @@ const {
 	bodyClass,
 	canonical = new URL(Astro.url.pathname, Astro.site),
 	image = IMAGE_PATH,
-	imageAlt = 'Straight answers about your business technology. Danny McGiffin, Independent Tech Advisor.',
+	imageAlt = chrome.defaultImageAlt,
 	ogType = 'website',
 	pageType = 'WebPage',
 	publishedAt,
@@ -59,7 +60,7 @@ const ogImage = new URL(image, Astro.site);
 		{noindex && <meta name="robots" content="noindex" />}
 		<link rel="canonical" href={canonical} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
-		<link rel="alternate" type="application/rss+xml" title="Danny McGiffin writing" href="/rss.xml" />
+		<link rel="alternate" type="application/rss+xml" title={chrome.rssTitle} href="/rss.xml" />
 		<meta property="og:type" content={ogType} />
 		<meta property="og:site_name" content={SITE_NAME} />
 		<meta property="og:locale" content="en_US" />
@@ -80,7 +81,7 @@ const ogImage = new URL(image, Astro.site);
 		<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
 	</head>
 	<body class={bodyClass}>
-		<a class="skip-link" href="#main-content">Skip to main content</a>
+		<a class="skip-link" href="#main-content">{chrome.skipLink}</a>
 		<slot />
 		<Analytics />
 	</body>

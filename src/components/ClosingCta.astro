@@ -1,12 +1,13 @@
 ---
 import { bookingUrl, CTA_LABEL } from '../config';
+import { closingCta } from '../lib/content/navigation';
 import ArrowUpRight from './ArrowUpRight.astro';
 interface Props { title?: string; emphasis?: string; placement?: string; }
-const { title = 'Technology should make the business', emphasis = 'easier to run.', placement = 'closing' } = Astro.props;
+const { title = closingCta.title, emphasis = closingCta.emphasis, placement = 'closing' } = Astro.props;
 ---
 <section class="conversation section-dark" aria-labelledby="conversation-title">
   <div class="shell conversation-layout">
-    <div><p class="eyebrow">Let’s talk</p><h2 id="conversation-title" class="display">{title}<br /><em>{emphasis}</em></h2></div>
-    <div class="conversation-copy"><p>If it isn’t, let’s find out why and what to do about it.</p><p>You don’t need to have the problem neatly framed. In fact, that’s often the point.</p><a class="button button--primary" href={bookingUrl(placement)}>{CTA_LABEL} <ArrowUpRight /></a></div>
+    <div><p class="eyebrow">{closingCta.eyebrow}</p><h2 id="conversation-title" class="display">{title}<br /><em>{emphasis}</em></h2></div>
+    <div class="conversation-copy">{closingCta.paragraphs.map(text => <p>{text}</p>)}<a class="button button--primary" href={bookingUrl(placement)}>{CTA_LABEL} <ArrowUpRight /></a></div>
   </div>
 </section>

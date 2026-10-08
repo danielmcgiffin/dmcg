@@ -2,82 +2,25 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AdvisorSidebar from '../components/AdvisorSidebar.astro';
 import AdvisorFooter from '../components/AdvisorFooter.astro';
-import { HOME_TITLE, HOME_DESCRIPTION } from '../site';
-import { bookingUrl, CTA_LABEL } from '../config';
-import { offers, offer } from '../offers';
-import { caseStudies } from '../case-studies';
-
-const router = offers.flatMap(item => item.triggers.map(trigger => ({ trigger, item })));
-const [audit, second, ai, data] = (['tech-audit', 'second-opinion', 'ai-opportunity', 'data-connection'] as const).map(offer);
+import Identity from '../lib/sections/home/Identity.astro';
+import SelectedWork from '../lib/sections/home/SelectedWork.astro';
+import Testimonial from '../lib/sections/home/Testimonial.astro';
+import Writing from '../lib/sections/home/Writing.astro';
+import NextStep from '../lib/sections/home/NextStep.astro';
+import { homeMeta, identity, nextStep, selectedWorkSection, writingSection } from '../lib/content/home';
+import { selectedWork } from '../lib/content/work';
+import { featuredTestimonial } from '../lib/content/testimonials';
+import { latestFieldNotes } from '../lib/content/writing';
 import '../styles/pages/index.css';
 ---
-<BaseLayout title={HOME_TITLE} description={HOME_DESCRIPTION} image="/og/home.png" imageAlt="Straight answers about your business technology. Danny McGiffin, Independent Tech Advisor." bodyClass="consulting-home">
+<BaseLayout title={homeMeta.title} description={homeMeta.description} image="/og/home.png" imageAlt={homeMeta.imageAlt} bodyClass="consulting-home">
   <AdvisorSidebar current="/" />
   <main id="main-content" class="consulting-main">
-    <section class="consulting-intro" aria-labelledby="hero-title">
-      <div>
-        <h1 id="hero-title">Honest answers about your business technology.</h1>
-        <p class="consulting-deck">For owners and leaders of growing businesses: simplify software spend, make good calls on new systems, make the most of the tools you already have, and figure out where AI can actually pay off.</p>
-        <p class="consulting-neutral">I’m completely independent. I don’t sell software, take commissions, or need the answer to be a purchase (not even of my services).</p>
-        <p class="consulting-offers-line">Whether you need a <a href={audit.href}>{audit.name}</a>, a <a href={second.href}>{second.name}</a>, an <a href={ai.href}>{ai.name}</a> assessment, or a <a href={data.href}>{data.name}</a> project, we start with a free 30-minute introduction. We’ll discuss the business and its symptoms, then decide whether it’s worthwhile to dig deeper.</p>
-        <a class="consulting-button" href={bookingUrl('hero')}>{CTA_LABEL}</a>
-      </div>
-      <img class="consulting-portrait" src="/headshot.jpg" width="400" height="400" alt="Danny McGiffin" fetchpriority="high" />
-    </section>
-
-    <section class="consulting-section" aria-labelledby="triggers-title">
-      <h2 class="consulting-label" id="triggers-title">When you hear yourself saying…</h2>
-      <ul class="consulting-router">
-        {router.map(({ trigger, item }) => <li><a href={item.href}>{trigger}</a></li>)}
-      </ul>
-    </section>
-
-    <section class="consulting-section consulting-about consulting-featured" aria-labelledby="decision-title">
-      <p class="consulting-label">Case study</p>
-      <h2 id="decision-title">The ERP we decided not to implement</h2>
-      <p>A PE-backed distributor had bought an ERP that couldn’t actually handle how it saw its business. The five-year license was contracted at $1.25M. The implementation estimate rose from $600K to at least $1.2M as more and more custom code requirements surfaced, putting the projected total at $2.45M or more, and when all was said and done, the system would <em>still</em> have required workarounds.</p>
-      <p>I recommended the business stop the implementation. Then I designed an alternative around systems already in use, estimated at ~$50K (about 2% of the projected cost), that would accomplish their actual goal: better financial reporting.</p>
-      <a class="consulting-inline-link" href="/case-studies/erp-second-opinion/">Read the ERP case ↗</a>
-    </section>
-
-    <figure class="consulting-testimonial">
-      <blockquote><p>“Working with Danny was excellent. He didn’t just come in and automate what we had. He studied the problem, stripped away the noise, and eliminated work that shouldn’t have existed in the first place.”</p></blockquote>
-      <figcaption><strong>Roger Porres</strong><span>Director of Ancillary Services</span></figcaption>
-    </figure>
-
-    <section class="consulting-section" id="services" aria-labelledby="services-title">
-      <h2 class="consulting-label" id="services-title">How we can work together</h2>
-      <div class="consulting-services">
-        {offers.map(item => (
-          <a class="consulting-service" href={item.href}>
-            <h3>{item.name}</h3>
-            <p>{item.oneLiner}</p>
-            <p class="consulting-service-terms"><strong>{item.price}</strong><span>{item.duration}</span></p>
-            <span class="consulting-service-link">Learn more ↗</span>
-          </a>
-        ))}
-      </div>
-    </section>
-
-    <section class="consulting-section consulting-about" id="about" aria-labelledby="about-title">
-      <h2 class="consulting-label" id="about-title">About me</h2>
-      <p><b>I help leaders make expensive technology decisions before they become expensive mistakes.</b></p>
-      <p>Most companies don’t need more tech sales. They need someone who can look at the business, the systems, the processes, the vendors, and the economics <em>together</em> and figure out what actually needs to change.</p>
-      <p>Before working independently, I was a senior leader across strategy, operations, technology, and large transformation efforts, from the defense and tech industries to program management and operational design. The hardest problems don’t fit into one function. I follow them through the whole business.</p>
-      <a class="consulting-inline-link" href="/about/">More about me ↗</a>
-      <aside class="consulting-cases" aria-label="Case studies">
-        <p class="consulting-label">Case studies</p>
-        <ul>{caseStudies.map(study => <li><a href={`/case-studies/${study.slug}/`}>{study.title}</a><span>{study.teaser}</span></li>)}</ul>
-        <a class="consulting-inline-link" href="/case-studies/">See all case studies ↗</a>
-      </aside>
-    </section>
-
-    <section class="consulting-close" aria-labelledby="conversation-title">
-      <p class="consulting-label">Let’s talk</p>
-      <h2 id="conversation-title">Technology should make the business easier to run.</h2>
-      <p>If yours doesn’t, let’s find out why. You don’t need to have the problem neatly framed.</p>
-      <a class="consulting-button" href={bookingUrl('closing')}>{CTA_LABEL}</a>
-    </section>
+    <Identity content={identity} />
+    <SelectedWork content={selectedWorkSection} entries={selectedWork} />
+    <Testimonial testimonial={featuredTestimonial} />
+    <Writing content={writingSection} notes={latestFieldNotes(3)} />
+    <NextStep content={nextStep} />
     <AdvisorFooter />
   </main>
 </BaseLayout>

@@ -4,22 +4,28 @@ import SiteFooter from '../components/SiteFooter.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { bookingUrl, CTA_LABEL } from '../config';
 import { breadcrumbList } from '../lib/schema';
-import { SITE_URL, CONTACT_EMAIL } from '../site';
+import { SITE_URL } from '../site';
+import { contact } from '../lib/content/contact';
+import { chrome } from '../lib/content/navigation';
+import { offers } from '../lib/content/offers';
 import '../styles/pages/contact.css';
 ---
-<BaseLayout title="Contact | Danny McGiffin" description="Contact Danny McGiffin, an independent tech advisor in Herndon, Virginia. Book a free 30-minute introduction or send an email." pageType="ContactPage" structuredData={breadcrumbList([{name:'Home',url:`${SITE_URL}/`},{name:'Contact',url:`${SITE_URL}/contact/`}])}>
+<BaseLayout title={contact.title} description={contact.description} pageType="ContactPage" structuredData={breadcrumbList([{name:chrome.breadcrumbHome,url:`${SITE_URL}/`},{name:contact.breadcrumb,url:`${SITE_URL}/contact/`}])}>
   <SiteHeader />
   <main id="main-content" class="direct-contact">
     <div class="shell direct-contact-inner">
-      <p class="eyebrow">Contact</p>
-      <h1>Tell me what you’re deciding.</h1>
-      <p>You don’t need a polished brief. The first 30-minute video call is free: we talk about your business and main pain points, then decide whether to dig deeper. <a href="/#services">See the four ways to work together ↗</a></p>
+      <p class="eyebrow">{contact.eyebrow}</p>
+      <h1>{contact.heading}</h1>
+      <p>{contact.intro} <a href={`#${contact.offersAnchor}`}>{contact.offersLinkLabel}</a></p>
       <div class="direct-contact-actions">
         <a class="direct-contact-button" href={bookingUrl('contact')}>{CTA_LABEL} <span aria-hidden="true">↗</span></a>
-        <a class="direct-contact-secondary" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("A decision worth talking through")}`}>Or send an email <span aria-hidden="true">↗</span></a>
+        <a class="direct-contact-secondary" href={contact.emailButton.href}>{contact.emailButton.label} <span aria-hidden="true">↗</span></a>
       </div>
-      <p class="direct-contact-email">Email directly: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
-      <p class="direct-contact-location">Based in Herndon, Virginia. The booked first call is by video; <a href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Meet locally in Northern Virginia')}`}>email me to arrange an in-person conversation</a>. Learn more about <a href="/northern-virginia-ai-workflow-automation/">working together in Northern Virginia</a>.</p>
+      <p class="direct-contact-email">{contact.emailLabel}<a href={contact.emailHref}>{contact.email}</a></p>
+      <p class="direct-contact-location" set:html={contact.locationHtml} />
+      <ul id={contact.offersAnchor}>
+        {offers.map(item => <li><p><a href={item.href}>{item.name}</a>: {item.oneLiner}</p></li>)}
+      </ul>
     </div>
   </main>
   <SiteFooter />

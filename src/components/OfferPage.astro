@@ -9,37 +9,15 @@ import SiteFooter from './SiteFooter.astro';
 import { bookingUrl, CTA_LABEL } from '../config';
 import { breadcrumbList, serviceNode } from '../lib/schema';
 import { SITE_URL } from '../site';
-import type { Offer } from '../offers';
+import { offerPageLabels as l, type Offer, type OfferPageContent } from '../lib/content/offers';
 import '../styles/pages/ai.css';
 
-type Pair = readonly [string, string];
 interface Props {
   offer: Offer;
-  title: string;
-  description: string;
-  imageAlt: string;
-  headline: string;
-  emphasis: string;
-  deck: string;
-  guarantee?: string;
-  symptomsTitle: string;
-  symptoms: readonly (readonly [string, string, string])[];
-  symptomsNote?: string;
-  outputTitle: string;
-  outputIntro: string;
-  deliverables: readonly Pair[];
-  steps: readonly Pair[];
-  processNote: string;
-  proof?: { title: string; lead: string; body: string; small?: string };
-  fit: readonly string[];
-  notFit: readonly string[];
-  faqs: readonly Pair[];
-  closeTitle: string;
-  closeText: string;
+  content: OfferPageContent;
 }
 
-const p = Astro.props;
-const { offer } = p;
+const { offer, content: p } = Astro.props;
 const pageUrl = `${SITE_URL}${offer.href}`;
 const placement = (spot: string) => bookingUrl(`${offer.slug}-${spot}`);
 ---
@@ -50,7 +28,7 @@ const placement = (spot: string) => bookingUrl(`${offer.slug}-${spot}`);
   imageAlt={p.imageAlt}
   bodyClass="ai-page"
   structuredData={[
-    breadcrumbList([{ name: 'Home', url: `${SITE_URL}/` }, { name: offer.name, url: pageUrl }]),
+    breadcrumbList([{ name: l.breadcrumbHome, url: `${SITE_URL}/` }, { name: offer.name, url: pageUrl }]),
     serviceNode({ id: `${pageUrl}#service`, name: offer.name, description: p.description, url: pageUrl }),
   ]}
 >
@@ -61,19 +39,19 @@ const placement = (spot: string) => bookingUrl(`${offer.slug}-${spot}`);
         <p class="ai-eyebrow">{offer.name}</p>
         <h1>{p.headline} <em>{p.emphasis}</em></h1>
         <p class="ai-deck">{p.deck}</p>
-        <p class="ai-offer-facts"><strong>{offer.price}</strong><span>{offer.duration}</span>{p.guarantee && <span>Worth the fee or your money back</span>}</p>
+        <p class="ai-offer-facts"><strong>{offer.price}</strong><span>{offer.duration}</span>{p.guarantee && <span>{l.heroGuarantee}</span>}</p>
         <div class="ai-actions">
           <a class="ai-button" href={placement('hero')}>{CTA_LABEL} <span aria-hidden="true">↗</span></a>
-          <a class="ai-text-link" href="#what-you-get">See what you get <span aria-hidden="true">↓</span></a>
+          <a class="ai-text-link" href="#what-you-get">{l.seeWhatYouGet} <span aria-hidden="true">↓</span></a>
         </div>
-        <p class="ai-small">Start with a free 30-minute conversation. You work directly with me.</p>
-        <ul class="ai-independence" aria-label="Independent advice">
-          <li>No software to sell.</li><li>No commissions or referral fees.</li><li>No requirement that the answer be a purchase.</li>
+        <p class="ai-small">{l.heroSmall}</p>
+        <ul class="ai-independence" aria-label={l.independenceLabel}>
+          {l.independence.map(item => <li>{item}</li>)}
         </ul>
       </header>
 
       <section class="ai-section" aria-labelledby="symptoms-title">
-        <p class="ai-eyebrow">Sound familiar?</p>
+        <p class="ai-eyebrow">{l.symptomsEyebrow}</p>
         <h2 id="symptoms-title">{p.symptomsTitle}</h2>
         <div class="ai-opportunities">
           {p.symptoms.map(([label, title, detail]) => <article><p class="ai-eyebrow">{label}</p><h3>{title}</h3><p>{detail}</p></article>)}
@@ -82,7 +60,7 @@ const placement = (spot: string) => bookingUrl(`${offer.slug}-${spot}`);
       </section>
 
       <section class="ai-section" id="what-you-get" aria-labelledby="output-title">
-        <p class="ai-eyebrow">What you get</p>
+        <p class="ai-eyebrow">{l.outputEyebrow}</p>
         <h2 id="output-title">{p.outputTitle}</h2>
         <p class="ai-section-intro">{p.outputIntro}</p>
         <div class="ai-delivery-list">
@@ -91,47 +69,47 @@ const placement = (spot: string) => bookingUrl(`${offer.slug}-${spot}`);
       </section>
 
       <section class="ai-section" aria-labelledby="process-title">
-        <p class="ai-eyebrow">The engagement</p>
-        <h2 id="process-title">{offer.duration}.<br />A clear path from question to answer.</h2>
+        <p class="ai-eyebrow">{l.processEyebrow}</p>
+        <h2 id="process-title">{offer.duration}.<br />{l.processSubtitle}</h2>
         <ol class="ai-process">{p.steps.map(([title, detail], i) => <li><span class="ai-number">0{i + 1}</span><div><h3>{title}</h3><p>{detail}</p></div></li>)}</ol>
         <p class="ai-section-note">{p.processNote}</p>
       </section>
 
       {p.proof && (
         <section class="ai-section ai-proof" aria-labelledby="proof-title">
-          <p class="ai-eyebrow">From the work</p>
+          <p class="ai-eyebrow">{l.proofEyebrow}</p>
           <h2 id="proof-title">{p.proof.title}</h2>
           <p class="ai-proof-lead">{p.proof.lead}</p>
-          <div class="ai-proof-numbers"><p><strong>$2.45M+</strong><span>Projected five-year ERP license + implementation path</span></p><span class="ai-proof-arrow" aria-hidden="true">→</span><p><strong>~$50K</strong><span>Estimated full implementation of the alternative I designed</span></p></div>
+          <div class="ai-proof-numbers"><p><strong>{l.proofMetrics[0].value}</strong><span>{l.proofMetrics[0].label}</span></p><span class="ai-proof-arrow" aria-hidden="true">→</span><p><strong>{l.proofMetrics[1].value}</strong><span>{l.proofMetrics[1].label}</span></p></div>
           <p>{p.proof.body}</p>
           {p.proof.small && <p class="ai-small">{p.proof.small}</p>}
-          <a class="ai-text-link" href="/case-studies/erp-second-opinion/">Read the full ERP case ↗</a>
+          <a class="ai-text-link" href={l.proofHref}>{l.proofLinkLabel}</a>
         </section>
       )}
 
       <section class="ai-section" id="fit" aria-labelledby="fit-title">
-        <p class="ai-eyebrow">Is this for you?</p>
-        <h2 id="fit-title">Who this is for, and who it isn’t.</h2>
-        <div class="ai-fit-grid"><div><h3>Probably a good fit</h3><ul>{p.fit.map(item => <li>{item}</li>)}</ul></div><div><h3>Probably not the next step</h3><ul>{p.notFit.map(item => <li>{item}</li>)}</ul></div></div>
+        <p class="ai-eyebrow">{l.fitEyebrow}</p>
+        <h2 id="fit-title">{l.fitTitle}</h2>
+        <div class="ai-fit-grid"><div><h3>{l.fitLabel}</h3><ul>{p.fit.map(item => <li>{item}</li>)}</ul></div><div><h3>{l.notFitLabel}</h3><ul>{p.notFit.map(item => <li>{item}</li>)}</ul></div></div>
       </section>
 
       <section class="ai-offer" aria-labelledby="offer-title">
         <div><p class="ai-eyebrow">{offer.name}</p><h2 id="offer-title">{offer.price}.<br />{offer.duration}.</h2><p>{offer.oneLiner}</p></div>
-        <div class="ai-offer-action"><a class="ai-button" href={placement('offer')}>{CTA_LABEL} ↗</a><p class="ai-small">Free 30-minute introduction.<br />Scope agreed before paid work begins.</p></div>
-        <div class="ai-offer-boundary"><strong>You keep the findings. You choose what happens next.</strong><p>No software purchase, implementation contract, or continuing engagement is required. If the first conversation shows this would not help, I’ll tell you.</p></div>
+        <div class="ai-offer-action"><a class="ai-button" href={placement('offer')}>{CTA_LABEL} ↗</a><p class="ai-small">{l.offerSmall[0]}<br />{l.offerSmall[1]}</p></div>
+        <div class="ai-offer-boundary"><strong>{l.boundaryTitle}</strong><p>{l.boundaryText}</p></div>
       </section>
 
       {p.guarantee && (
         <section class="ai-guarantee" aria-labelledby="guarantee-title">
-          <p class="ai-eyebrow">The guarantee</p>
-          <h2 id="guarantee-title">Worth the fee, or your money back.</h2>
+          <p class="ai-eyebrow">{l.guaranteeEyebrow}</p>
+          <h2 id="guarantee-title">{l.guaranteeTitle}</h2>
           <p>{p.guarantee}</p>
         </section>
       )}
 
-      <section class="ai-section ai-faq" aria-labelledby="faq-title"><p class="ai-eyebrow">Before we talk</p><h2 id="faq-title">A few practical questions.</h2>{p.faqs.map(([question, answer]) => <details><summary>{question}<span class="ai-toggle" aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</section>
+      <section class="ai-section ai-faq" aria-labelledby="faq-title"><p class="ai-eyebrow">{l.faqEyebrow}</p><h2 id="faq-title">{l.faqTitle}</h2>{p.faqs.map(([question, answer]) => <details><summary>{question}<span class="ai-toggle" aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</section>
 
-      <section class="ai-close" aria-labelledby="close-title"><p class="ai-eyebrow">Let’s talk</p><h2 id="close-title">{p.closeTitle}</h2><p>{p.closeText}</p><a class="ai-button" href={placement('closing')}>{CTA_LABEL} ↗</a><p class="ai-small">A free 30-minute conversation with Danny McGiffin.</p></section>
+      <section class="ai-close" aria-labelledby="close-title"><p class="ai-eyebrow">{l.closeEyebrow}</p><h2 id="close-title">{p.closeTitle}</h2><p>{p.closeText}</p><a class="ai-button" href={placement('closing')}>{CTA_LABEL} ↗</a><p class="ai-small">{l.closeSmall}</p></section>
     </div>
   </main>
   <SiteFooter />

@@ -3,7 +3,7 @@
 The existing Astro marketing site, evolved under the approved September 17 audit.
 Newsreader + Geist, forest green + bone, and the existing static-page infrastructure.
 Positioning: Independent Tech Advisor. Four offers — Tech Audit, Second Opinion,
-AI Opportunity, Data Connection — defined once in `src/offers.ts`. One call to action,
+AI Opportunity, Data Connection — defined once in `src/lib/content/offers.ts`. One call to action,
 “Schedule Our First Chat”, links to Cal with a `src=` placement tag.
 
 ## Development
@@ -21,14 +21,16 @@ The restored hosting configuration and analytics integration remain in place.
 
 ## Structure
 
-- `src/pages/` — homepage, About, Contact, regional page, writing and research
+- `src/pages/` — homepage, Work (`/work/`), offers (`/offers/<slug>/`), About, Contact, regional page, writing and research
+- `src/lib/content/` — typed content modules; every page and component reads its copy from here
+- `src/lib/sections/home/` — one component per homepage section: Identity, SelectedWork, Testimonial, Writing, NextStep
 - `src/components/` — shared navigation, advisor sidebar/footer, page intro, and section components
 - `src/styles/global.css` — global foundations, design tokens, and shared advisor sidebar/footer rules
 - `src/styles/pages/` and `src/styles/components/` — route and component rules, imported only where used
 - `src/site.ts`, `src/lib/schema.ts` — shared identity and structured data
 - `src/content/writing/` — existing MDX essays; stable URLs and RSS
 - `src/data/substack-posts.json` — published Substack articles listed on `/writing/`
-- `src/case-studies.ts` — case studies rendered at `/case-studies/<slug>/`
+- `src/lib/content/work.ts` — case studies rendered at `/work/<slug>/`; `[TODO: …]` marks unfilled slots
 - `scripts/og-images.py` — renders the share images in `public/og/` (needs rsvg-convert)
 - `public/_redirects` — retired and renamed routes; mirrors Astro redirects
 - `docs/APPROVED_AUDIT_2026-09-17.md` — approved scope

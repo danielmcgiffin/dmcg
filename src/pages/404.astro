@@ -3,13 +3,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import PageIntro from '../components/PageIntro.astro';
+import { notFound } from '../lib/content/not-found';
 ---
-<BaseLayout title="Page Not Found | Danny McGiffin" description="This page is not here. Find Danny’s work, writing, or contact details." noindex>
+<BaseLayout title={notFound.title} description={notFound.description} noindex>
   <SiteHeader />
   <main id="main-content">
-    <PageIntro eyebrow="404" deck="You can find my work on the homepage, or get in touch.">
-      This page<br /><em>isn’t here.</em>
-      <a slot="after" class="button" href="/">Return home</a>
+    <PageIntro eyebrow={notFound.eyebrow} deck={notFound.deck}>
+      <Fragment set:html={notFound.headingHtml} />
+      <a slot="after" class="button" href="/">{notFound.homeLabel}</a>
     </PageIntro>
   </main>
   <SiteFooter />

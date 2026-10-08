@@ -6,18 +6,18 @@ He is vendor-neutral. He does not sell software or receive commissions, referral
 
 ## Services
 
-- Tech Audit ($5,000 fixed fee, 10 business days): what your software and subscriptions actually cost, how to make the most of what you have, and where to focus next. https://dannymcgiffin.com/tech-audit/
-- Second Opinion (from $2,500, fixed quote, 5 business days): an independent decision on a major system purchase or troubled implementation: proceed, proceed with changes, or stop. https://dannymcgiffin.com/second-opinion/
-- AI Opportunity ($5,000 fixed fee, 10 business days): a ranked map of where AI is worth pursuing, what needs more evidence, and what to leave alone. https://dannymcgiffin.com/ai-opportunity/
-- Data Connection (from $7,500, fixed quote, typically 3–6 weeks): connect the systems a business already has so the numbers line up, without buying a new platform. https://dannymcgiffin.com/data-connection/
+- Tech Audit ($5,000 fixed fee, 10 business days): what your software and subscriptions actually cost, how to make the most of what you have, and where to focus next. https://dannymcgiffin.com/offers/tech-audit/
+- Second Opinion (from $2,500, fixed quote, 5 business days): an independent decision on a major system purchase or troubled implementation: proceed, proceed with changes, or stop. https://dannymcgiffin.com/offers/second-opinion/
+- AI Opportunity ($5,000 fixed fee, 10 business days): a ranked map of where AI is worth pursuing, what needs more evidence, and what to leave alone. https://dannymcgiffin.com/offers/ai-opportunity/
+- Data Connection (from $7,500, fixed quote, typically 3–6 weeks): connect the systems a business already has so the numbers line up, without buying a new platform. https://dannymcgiffin.com/offers/data-connection/
 
 Tech Audit, Second Opinion, and AI Opportunity carry a money-back guarantee described on each page. Every engagement starts with a free 30-minute introduction.
 
 ## Site
 
 - Home: https://dannymcgiffin.com/
-- Case studies: https://dannymcgiffin.com/case-studies/
-- ERP case study: https://dannymcgiffin.com/case-studies/erp-second-opinion/
+- Case studies: https://dannymcgiffin.com/work/
+- ERP case study: https://dannymcgiffin.com/work/erp-decision/
 - About: https://dannymcgiffin.com/about/
 - Northern Virginia: https://dannymcgiffin.com/northern-virginia-ai-workflow-automation/
 - Writing: https://dannymcgiffin.com/writing/

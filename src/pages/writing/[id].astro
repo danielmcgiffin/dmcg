@@ -6,6 +6,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleNextStep from '../../components/ArticleNextStep.astro';
 import { articleNode } from '../../lib/schema';
 import { SITE_URL } from '../../site';
+import { articleLabels } from '../../lib/content/writing';
 
 export async function getStaticPaths() {
 	const entries = await getCollection('writing', ({ data }) => !data.draft);
@@ -20,7 +21,7 @@ import '../../styles/pages/writing-article.css';
 ---
 
 <BaseLayout
-	title={`${entry.data.title} | Danny McGiffin`}
+	title={`${entry.data.title}${articleLabels.titleSuffix}`}
 	description={entry.data.description}
 	ogType="article"
 	publishedAt={entry.data.publishedAt}
@@ -36,10 +37,10 @@ import '../../styles/pages/writing-article.css';
 		<article>
 			<header class="article-hero section-dark">
 				<div class="shell">
-					<a class="eyebrow" href="/writing/">← Writing/</a>
+					<a class="eyebrow" href="/writing/">{articleLabels.back}</a>
 					<h1 class="display">{entry.data.title}</h1>
 					<p>{entry.data.description}</p>
-					<p class="article-byline">By <a href="/about/">Danny McGiffin</a> · <time datetime={entry.data.publishedAt.toISOString()}>{entry.data.publishedAt.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' })}</time></p>
+					<p class="article-byline">{articleLabels.byline} <a href="/about/">{articleLabels.author}</a>{articleLabels.bylineSeparator}<time datetime={entry.data.publishedAt.toISOString()}>{entry.data.publishedAt.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' })}</time></p>
 				</div>
 			</header>
 			<div class="prose shell"><Content /></div>

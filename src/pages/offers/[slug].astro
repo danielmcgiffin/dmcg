@@ -1,0 +1,14 @@
+---
+import OfferPage from '../../components/OfferPage.astro';
+import AiOpportunityPage from '../../components/AiOpportunityPage.astro';
+import { offerPages, offers, type Offer } from '../../lib/content/offers';
+
+export function getStaticPaths() {
+  return offers.map(offer => ({ params: { slug: offer.slug }, props: { offer } }));
+}
+
+const { offer } = Astro.props as { offer: Offer };
+---
+{offer.slug === 'ai-opportunity'
+  ? <AiOpportunityPage offer={offer} />
+  : <OfferPage offer={offer} content={offerPages[offer.slug]} />}

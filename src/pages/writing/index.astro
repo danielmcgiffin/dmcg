@@ -4,28 +4,28 @@ import SiteFooter from '../../components/SiteFooter.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { subscribeUrl } from '../../config';
-import articles from '../../data/substack-posts.json';
+import { fieldNotes as articles, formatNoteDate, writingIndex } from '../../lib/content/writing';
 
 import '../../styles/pages/writing-index.css';
 ---
 
-<BaseLayout title="Writing | Danny McGiffin" description="Built that Way: essays by Danny McGiffin on business technology, decisions, and how work actually gets done. Read and subscribe on Substack." pageType="CollectionPage">
+<BaseLayout title={writingIndex.title} description={writingIndex.description} pageType="CollectionPage">
 	<SiteHeader />
 	<main id="main-content">
 		<header class="writing-hero section-dark">
 			<div class="shell">
-				<h1 class="sr-only">Writing — Built that Way by Danny McGiffin</h1>
+				<h1 class="sr-only">{writingIndex.heading}</h1>
 				<a class="writing-publication" href={subscribeUrl('writing-index')} data-subscribe-link data-cta-placement="writing-index">
-					<img src="/built-that-way-square.jpg" width="800" height="800" alt="Built that Way by Danny McGiffin. Read and subscribe at dannymcgiffin.substack.com." fetchpriority="high" />
+					<img src="/built-that-way-square.jpg" width="800" height="800" alt={writingIndex.publicationAlt} fetchpriority="high" />
 				</a>
 			</div>
 		</header>
-		<section class="writing-index section-light shell" aria-label="Substack articles">
+		<section class="writing-index section-light shell" aria-label={writingIndex.listLabel}>
 			{articles.map((article, index) => (
 				<a href={article.href}>
 					<span class="index">{String(index + 1).padStart(2, '0')}</span>
 					<div><h2>{article.title}</h2></div>
-					<time datetime={article.publishedAt}>{new Date(`${article.publishedAt}T00:00:00Z`).toLocaleDateString('en-US', { timeZone: 'UTC', month: 'short', day: 'numeric', year: 'numeric' })}</time>
+					<time datetime={article.publishedAt}>{formatNoteDate(article.publishedAt)}</time>
 					<span class="round-arrow" aria-hidden="true"><ArrowUpRight /></span>
 				</a>
 			))}

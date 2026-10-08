@@ -1,0 +1,12 @@
+---
+import type { Testimonial } from '../../content/testimonials';
+
+interface Props { testimonial?: Testimonial; }
+const { testimonial } = Astro.props;
+---
+{testimonial && (
+  <figure class="consulting-testimonial">
+    <blockquote><p>{testimonial.quote}</p></blockquote>
+    <figcaption><strong>{testimonial.name}</strong>{testimonial.role && <span>{testimonial.role}</span>}{testimonial.context && <span>{testimonial.context}</span>}</figcaption>
+  </figure>
+)}

@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import { work, workHref, workDetailLabels as l, workIndex, type WorkEntry } from '../../lib/content/work';
+import { testimonial } from '../../lib/content/testimonials';
+import { offer } from '../../lib/content/offers';
+import { chrome } from '../../lib/content/navigation';
+import { bookingUrl, CTA_LABEL } from '../../config';
+import { breadcrumbList } from '../../lib/schema';
+import { SITE_URL } from '../../site';
+import '../../styles/pages/case-study.css';
+
+export function getStaticPaths() {
+  return work.map(entry => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+
+const { entry } = Astro.props as { entry: WorkEntry };
+const pageUrl = `${SITE_URL}${workHref(entry.slug)}`;
+const related = entry.related && offer(entry.related);
+const quote = entry.testimonial && testimonial(entry.testimonial);
+const sections = [
+  [l.context, entry.context],
+  [l.problem, entry.problem],
+  [l.found, entry.found],
+  [l.decision, entry.decision],
+  [l.outcome, entry.outcome],
+] as const;
+---
+<BaseLayout
+  title={`${entry.title}${l.titleSuffix}`}
+  description={entry.description}
+  image={entry.ogImage}
+  imageAlt={l.imageAlt(entry.title)}
+  ogType="article"
+  structuredData={breadcrumbList([{ name: chrome.breadcrumbHome, url: `${SITE_URL}/` }, { name: workIndex.breadcrumb, url: `${SITE_URL}/work/` }, { name: entry.title, url: pageUrl }])}
+>
+  <SiteHeader bookingPlacement={`case-${entry.slug}-navigation`} />
+  <main id="main-content">
+    <PageIntro eyebrow={entry.client ? `${l.eyebrow}${l.eyebrowSeparator}${entry.client}` : l.eyebrow} title={`${entry.title}.`} deck={entry.summary} />
+    <article class="prose service-prose shell case-detail">
+      {(entry.client || entry.role) && (
+        <div class="case-facts" aria-label={l.summaryLabel}>
+          {entry.client && <p><strong>{l.client}</strong><span>{entry.client}</span></p>}
+          {entry.role && <p><strong>{l.role}</strong><span>{entry.role}</span></p>}
+        </div>
+      )}
+      {sections.map(([heading, paragraphs]) => paragraphs && paragraphs.length > 0 && (
+        <>
+          <h2>{heading}</h2>
+          {paragraphs.map(text => <p>{text}</p>)}
+        </>
+      ))}
+      {entry.metrics.length > 0 && (
+        <div class="case-facts">
+          {entry.metrics.map(metric => <p><strong>{metric.value}</strong><span>{metric.label}</span></p>)}
+        </div>
+      )}
+      {quote && (
+        <figure>
+          <blockquote><p>{quote.quote}</p></blockquote>
+          <figcaption><strong>{quote.name}</strong>{quote.role && <span> {quote.role}</span>}{quote.context && <span> {quote.context}</span>}</figcaption>
+        </figure>
+      )}
+      {entry.note && <p class="case-note">{entry.note}</p>}
+      {entry.principle && <p class="case-principle">{entry.principle}</p>}
+
+      <div class="case-next">
+        <h2>{l.nextTitle}</h2>
+        <p>{l.nextText}</p>
+        <p>
+          <a href={bookingUrl(`case-${entry.slug}`)}>{CTA_LABEL} ↗</a>
+          {related ? <a href={related.href}>{l.relatedLink(related.name)}</a> : <a href="/work/">{l.moreLink}</a>}
+        </p>
+      </div>
+    </article>
+  </main>
+  <SiteFooter />
+</BaseLayout>

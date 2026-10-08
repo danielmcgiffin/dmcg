@@ -1,6 +1,7 @@
 ---
+import { chrome } from '../lib/content/navigation';
 ---
 <footer class="site-footer">
-  <span>© {new Date().getFullYear()} Danny McGiffin</span>
-  <a href="/elsewhere/">Elsewhere ↗</a>
+  <span>{chrome.copyright(new Date().getFullYear())}</span>
+  <a href={chrome.footerLink.href}>{chrome.footerLink.label}</a>
 </footer>

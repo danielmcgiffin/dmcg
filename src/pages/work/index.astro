@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import ClosingCta from '../../components/ClosingCta.astro';
+import { work, workHref, workIndex } from '../../lib/content/work';
+import { chrome } from '../../lib/content/navigation';
+import { breadcrumbList } from '../../lib/schema';
+import { SITE_URL } from '../../site';
+import '../../styles/pages/case-study.css';
+---
+<BaseLayout
+  title={workIndex.title}
+  description={workIndex.description}
+  image="/og/case-studies.png"
+  imageAlt={workIndex.imageAlt}
+  pageType="CollectionPage"
+  structuredData={breadcrumbList([{ name: chrome.breadcrumbHome, url: `${SITE_URL}/` }, { name: workIndex.breadcrumb, url: `${SITE_URL}/work/` }])}
+>
+  <SiteHeader bookingPlacement="case-studies-navigation" />
+  <main id="main-content">
+    <PageIntro eyebrow={workIndex.eyebrow} title={workIndex.heading} deck={workIndex.deck} />
+    <div class="shell case-index">
+      {work.map(entry => (
+        <a href={workHref(entry.slug)}>
+          {entry.client && <small>{entry.client}</small>}
+          <h2>{entry.title}</h2>
+          <p>{entry.summary}</p>
+          <span>{workIndex.cardLinkLabel}</span>
+        </a>
+      ))}
+    </div>
+    <ClosingCta placement="case-studies-closing" />
+  </main>
+  <SiteFooter />
+</BaseLayout>
