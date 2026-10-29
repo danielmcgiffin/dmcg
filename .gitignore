@@ -35,3 +35,13 @@ prospecting/lead-agent/*.db
 prospecting/lead-agent/*.db-shm
 prospecting/lead-agent/*.db-wal
 prospecting/lead-agent/__pycache__/
+
+# Local WordPress runtime (database, uploads, generated configuration)
+/wordpress/site/
+
+# Local WordPress snapshots and generated migration manifests
+/wordpress/backups/
+/wordpress/import-report.json
+
+# The published snapshot intentionally includes WordPress modules under js/dist/.
+!/wordpress/static/**

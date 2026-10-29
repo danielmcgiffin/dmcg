@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "@wp-playground/cli": "3.1.61"
+  },
+  "name": "dmcg-ollie-preview",
+  "private": true,
+  "scripts": {
+    "dev": "node start.mjs",
+    "setup": "node start.mjs --setup",
+    "content:build": "node build-content.mjs && node revise-positioning.mjs",
+    "content:import": "node import-content.mjs",
+    "content:refine": "node final-refinements.mjs",
+    "static:export": "node export-static.mjs",
+    "static:check": "node validate-static.mjs",
+    "static:deploy": "node validate-static.mjs && wrangler deploy --config ../wrangler.jsonc"
+  },
+  "devDependencies": {
+    "wrangler": "4.155.0"
+  }
+}

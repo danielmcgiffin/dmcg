@@ -1,9 +1,10 @@
 {
-	"$schema": "./node_modules/wrangler/config-schema.json",
+	"$schema": "./wordpress/node_modules/wrangler/config-schema.json",
 	"name": "dmcg",
 	"compatibility_date": "2026-08-10",
 	"assets": {
-		"directory": "./dist"
+		"directory": "./wordpress/static",
+		"not_found_handling": "404-page"
 	},
 	"observability": {
 		"enabled": true

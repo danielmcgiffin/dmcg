@@ -1,0 +1,30 @@
+{
+  "site": "dmcg",
+  "source": "WordPress/Ollie",
+  "manifestSha256": "76447a690fc969d23a84e7df4cc814523e99596cb5583acb2ca46770ac94a6a6",
+  "exportedAt": "2026-10-29T15:54:37.084Z",
+  "routes": [
+    "/about/",
+    "/contact/",
+    "/elsewhere/",
+    "/",
+    "/offers/ai-opportunity/",
+    "/offers/data-connection/",
+    "/offers/second-opinion/",
+    "/offers/tech-audit/",
+    "/still-on-tools/",
+    "/work/64m-deployment/",
+    "/work/erp-decision/",
+    "/work/growth/",
+    "/work/",
+    "/work/navy-improper-payments/",
+    "/work/negotiation-policy/",
+    "/work/operating-model/",
+    "/writing/",
+    "/writing/the-300000-lesson/",
+    "/writing/why-your-ai-initiative-is-a-failure/",
+    "/writing/your-company-keeps-books-on-the-money-and-nothing-else/",
+    "/writing/your-vendor-already-told-you-what-it-doesnt-do/",
+    "/offers/"
+  ]
+}

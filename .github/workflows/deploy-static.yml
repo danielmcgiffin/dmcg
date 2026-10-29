@@ -1,0 +1,36 @@
+name: Deploy WordPress static site
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dmcg-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Validate the published snapshot
+        run: node wordpress/validate-static.mjs
+      - name: Record existing deployment for rollback
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 038f386f26a1a9bef9eb2d50e7f8c218
+          wranglerVersion: '4.155.0'
+          command: deployments list --name dmcg
+      - name: Deploy the validated WordPress export
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 038f386f26a1a9bef9eb2d50e7f8c218
+          wranglerVersion: '4.155.0'
+          command: deploy --config wrangler.jsonc

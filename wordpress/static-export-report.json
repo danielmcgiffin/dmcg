@@ -1,0 +1,126 @@
+{
+  "pages": [
+    {
+      "route": "/about/",
+      "title": "About",
+      "sha256": "2060a2951aa22f98b66a9a06fba59db587872d310eafef6ce635cf7418b979d7"
+    },
+    {
+      "route": "/contact/",
+      "title": "Contact",
+      "sha256": "e2490d7188d1c999c6ed1b54811eb8bfe7fb3dfcade683b889817635390670f1"
+    },
+    {
+      "route": "/elsewhere/",
+      "title": "Elsewhere",
+      "sha256": "2493cbce8b2398a876eab03477a647165317a6eba13e56c95973d00c7bfc1d26"
+    },
+    {
+      "route": "/",
+      "title": "Home",
+      "sha256": "141cd067357aa345d78ca03958092884a02f14c265f2b7c189582332e88c47b8"
+    },
+    {
+      "route": "/offers/ai-opportunity/",
+      "title": "Figure out what AI is actually worth doing in your business.",
+      "sha256": "39512d1d8a637af5067b680e172dbe9b3e73021e85fac3ae0361593a088fa79a"
+    },
+    {
+      "route": "/offers/data-connection/",
+      "title": "Connect what you have without buying a new system.",
+      "sha256": "2eaf361024c85e25d9bfeb3df00bad7583fd8390659283860f9af88afe3eb27b"
+    },
+    {
+      "route": "/offers/second-opinion/",
+      "title": "Before you commit, get an independent call.",
+      "sha256": "2e4680a5e6d7cfcda9f389d40c75b24b4942bded63c409a1cb78c7658539d000"
+    },
+    {
+      "route": "/offers/tech-audit/",
+      "title": "Find out what your technology actually costs, and what it’s worth.",
+      "sha256": "3d376db1e31560cbe67afb3aec65ce13fccfdc0ca6f7a9e62fe539312c584bd3"
+    },
+    {
+      "route": "/still-on-tools/",
+      "title": "You’re not late.You’re still on tools.",
+      "sha256": "5ed24b657ee8d91520b6f51103a6e151e3a63e7f7d87aa90306a4fc78eaca21c"
+    },
+    {
+      "route": "/work/64m-deployment/",
+      "title": "Leading a $64M technology deployment",
+      "sha256": "760a47486022772b065146ba4e50a23bb8e917f6d4ef384cd0742bce6900e694"
+    },
+    {
+      "route": "/work/erp-decision/",
+      "title": "The ERP we decided not to implement",
+      "sha256": "54390bb4ecedff95c642cb304954348cf2c046c4aa293fb76cf44dbc523560f3"
+    },
+    {
+      "route": "/work/growth/",
+      "title": "Building the company underneath 10× growth",
+      "sha256": "ec3ef7948c21154106de9e9c9b864f369e7203541b072d07fe9b33570ab96024"
+    },
+    {
+      "route": "/work/",
+      "title": "Work",
+      "sha256": "1a4d57191578e37ac24b253b5e878458136ac830acf56aee1afd4a4de19a623f"
+    },
+    {
+      "route": "/work/navy-improper-payments/",
+      "title": "Making improper payments measurable and controllable",
+      "sha256": "61bdcfefe5aec28f3d8a6dd9015e3d56a1e79f5bb861df21cb2a3caf5535a5f0"
+    },
+    {
+      "route": "/work/negotiation-policy/",
+      "title": "A simpler answer to a contracting problem",
+      "sha256": "f77fef06519fc2f4a73c66044aa13c556743fe524e67c3fa913a83b3211974ce"
+    },
+    {
+      "route": "/work/operating-model/",
+      "title": "Redesigning an operating model that made collaboration irrational",
+      "sha256": "a0cac3687d531ef9d4f25db090bdbe26cef1c221b71311c4901ec8b79c25a81d"
+    },
+    {
+      "route": "/writing/",
+      "title": "Writing",
+      "sha256": "0f1fa7d2289a8d440799fc9dd229861e5416b2a6b402f7d0ceda98600a640a5b"
+    },
+    {
+      "route": "/writing/the-300000-lesson/",
+      "title": "The $300,000 Lesson",
+      "sha256": "7c30164a570cf7f324f8705aad9f1b5f277959a391a69ce602cfc30b9f485852"
+    },
+    {
+      "route": "/writing/why-your-ai-initiative-is-a-failure/",
+      "title": "Why Your AI Initiative Is Stalling",
+      "sha256": "9726e7489eee248155c265079acbe9dd1e4acfba2bafb0014217fa3c9533174e"
+    },
+    {
+      "route": "/writing/your-company-keeps-books-on-the-money-and-nothing-else/",
+      "title": "Your Company Keeps Books on the Money—and Nothing Else",
+      "sha256": "045784d7ef6cca6fc47c07497392f57f8f4606464712d27859ae435e6a79bb64"
+    },
+    {
+      "route": "/writing/your-vendor-already-told-you-what-it-doesnt-do/",
+      "title": "Your Vendor Already Told You What It Doesn’t Do",
+      "sha256": "4f7f1247155f24007da8d4fc0e1f25c09d93a814e7ba4a32b289f0d9bdbd8e8c"
+    },
+    {
+      "route": "/offers/",
+      "title": "Services",
+      "sha256": "38d16d3725156f2743656fd84d44d51d8a5447ec45720d511c6e3c2d10c1b6c8"
+    }
+  ],
+  "assets": [
+    "/favicon.svg",
+    "/wp-content/themes/ollie/assets/fonts/mona-sans/Mona-Sans.woff2",
+    "/wp-content/themes/ollie/style.css",
+    "/wp-content/uploads/dmcg/built-that-way-square.jpg",
+    "/wp-content/uploads/dmcg/headshot.jpg",
+    "/wp-includes/blocks/navigation/style.min.css",
+    "/wp-includes/js/dist/script-modules/block-library/navigation/view.min.js",
+    "/wp-includes/js/dist/script-modules/interactivity/index.min.js"
+  ],
+  "publicOrigin": "https://dannymcgiffin.com",
+  "manifestSha256": "76447a690fc969d23a84e7df4cc814523e99596cb5583acb2ca46770ac94a6a6"
+}

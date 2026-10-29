@@ -1,9 +1,13 @@
 # Danny McGiffin
 
+Production publishes the reviewed WordPress/Ollie design as static files on the existing Cloudflare Worker. There is no public WordPress server or editor. The original Astro source below is preserved for reference.
+
+The reviewed content is `wordpress/content.json`; the deployable snapshot is `wordpress/static/`. See [static publication instructions](wordpress/README.md#static-publication-on-cloudflare). `node wordpress/validate-static.mjs` checks the snapshot. Publish through the manual **Deploy WordPress static site** GitHub Actions workflow, which uses the existing Cloudflare secret. The scheduled Substack job can update source data but cannot deploy the old Astro site.
+
 A small, static Astro site for an independent business & technology advisor based outside Washington, DC.
 The homepage introduces Danny, shows client testimony and selected work, and invites a conversation.
 
-## Run locally
+## Run the preserved Astro app locally
 
 Node.js 24 and npm. `package-lock.json` is the only JavaScript lockfile.
 
@@ -67,3 +71,7 @@ With `CLOUDFLARE_API_TOKEN`, the workflow can deploy; without it, it only commit
 `archive/`, `working/`, and older dated reports in `docs/` preserve prior iterations and artwork.
 They are outside the active app. The current brief is `SITE_BRIEF.md`; design rules are in `DESIGN_LANG.md`.
 Do not restore retired positioning, layouts, or instructions from old reports.
+
+## WordPress overhaul preview
+
+Ollie is set up separately in [wordpress/](wordpress/README.md). Start it with `npm run dev --prefix wordpress`. Existing Astro source and copy remain in place; a verified pre-overhaul snapshot is in [archive/site-2026-10-29-pre-ollie/](archive/site-2026-10-29-pre-ollie/README.md).
