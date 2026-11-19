@@ -1,5 +1,16 @@
 # Danny McGiffin
 
+## Temporary offline deployment
+
+The manual **Temporarily take site offline** workflow deploys `wrangler.offline.jsonc`
+to the existing `dmcg` Worker. Every path returns HTTP 503 with a plain text
+unavailability response; the public workers.dev endpoint and preview URLs are disabled.
+Site source and the static export remain intact. The workflow logs the previous
+deployment version before replacing it.
+
+To restore the website after explicit authorization, run the manual **Deploy WordPress
+static site** workflow, then verify the live `release.json` and page content.
+
 Production publishes the reviewed WordPress/Ollie design as static files on the existing Cloudflare Worker. There is no public WordPress server or editor. The original Astro source below is preserved for reference.
 
 The reviewed content is `wordpress/content.json`; the deployable snapshot is `wordpress/static/`. See [static publication instructions](wordpress/README.md#static-publication-on-cloudflare). `node wordpress/validate-static.mjs` checks the snapshot. Publish through the manual **Deploy WordPress static site** GitHub Actions workflow, which uses the existing Cloudflare secret. The scheduled Substack job can update source data but cannot deploy the old Astro site.
